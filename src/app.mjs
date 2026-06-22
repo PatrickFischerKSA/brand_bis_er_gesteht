@@ -768,7 +768,7 @@ function renderTeacherEntryPage({ lessonId, entryId } = {}) {
                       ${assignment?.task ? `<p><strong>Auftrag:</strong> ${assignment.task}</p>` : ""}
                       ${assignment?.questionTasks?.length ? `
                         <ul class="small-list">
-                          ${assignment.questionTasks.map((questionTask) => `<li>${questionTask.prompt}</li>`).join("")}
+                          ${assignment.questionTasks.map((questionTask) => `<li>${escapeHtml(questionTask.prompt || questionTask)}</li>`).join("")}
                         </ul>
                       ` : ""}
                       <div class="row">

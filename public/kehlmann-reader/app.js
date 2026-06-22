@@ -185,12 +185,36 @@ function transferTasksFor(entry = currentEntry(), theory = currentTheory()) {
 }
 
 function resourceQuestionTasksFor(assignment) {
-  return assignment?.questionTasks || assignment?.questions?.map((question) => buildTask(question, {
+  const questions = assignment?.questionTasks || assignment?.questions || [];
+  return questions.map((question, index) => {
+    const prompt = taskPrompt(question);
+    const builtTask = buildTask(prompt, {
+      context: `${assignment.summary} ${assignment.task}`,
+      relatedTheoryIds: [assignment.resourceId],
+      kind: "resource",
+      taskTitle: assignment.title
+    });
+    return {
+      ...builtTask,
+      ...(typeof question === "object" ? question : {}),
+      prompt,
+      modelAnswer: (typeof question === "object" ? question.modelAnswer : "") || assignment.answerGuides?.[index] || builtTask.modelAnswer
+    };
+  });
+}
+
+function resourceMainTaskFor(assignment) {
+  const builtTask = buildTask(assignment.task, {
     context: `${assignment.summary} ${assignment.task}`,
     relatedTheoryIds: [assignment.resourceId],
     kind: "resource",
     taskTitle: assignment.title
-  })) || [];
+  });
+  return {
+    ...builtTask,
+    ...(assignment.taskCard || {}),
+    modelAnswer: assignment.taskCard?.modelAnswer || assignment.taskGuide || builtTask.modelAnswer
+  };
 }
 
 function uniqueTheoryIds(primary = [], extra = []) {
@@ -1458,14 +1482,7 @@ function renderResourceAssignmentsPanel() {
                 <strong>Arbeitsauftrag schriftlich beantworten</strong>
               </div>
               ${renderTaskField({
-                task: assignment.taskCard || buildTask(task, {
-                  context: `${summary} ${resource.summary}`,
-                  relatedTheoryIds: [assignment.resourceId],
-                  keyIdeas: resource.keyIdeas,
-                  writingFrame: resource.writingFrame,
-                  kind: "resource",
-                  taskTitle: title
-                }),
+                task: resourceMainTaskFor({ ...assignment, resource, title, summary, task }),
                 value: response.taskResponse,
                 dataset: { "resource-id": resource.id, "resource-field": "taskResponse" },
                 label: title
@@ -2065,14 +2082,7 @@ function taskForInputElement(element) {
     }
 
     if (element.dataset.resourceField === "taskResponse") {
-      return assignment.taskCard || buildTask(assignment.task, {
-        context: `${assignment.summary} ${assignment.resource.summary}`,
-        relatedTheoryIds: [assignment.resourceId],
-        keyIdeas: assignment.resource.keyIdeas,
-        writingFrame: assignment.resource.writingFrame,
-        kind: "resource",
-        taskTitle: assignment.title
-      });
+      return resourceMainTaskFor(assignment);
     }
 
     if (element.dataset.resourceField === "questionAnswers") {

@@ -1811,6 +1811,12 @@ export const lessonSets = [
           "Welche biografische oder historische Information macht Heidis Abgabe verständlicher?",
           "Wie verändert diese Information deinen Blick auf Dete?",
           "Welche Romanformulierung zeigt, dass Heidi zunächst über sie verfügt wird?"
+        ],
+        "taskGuide": "Eine tragfähige Antwort zeigt Dete nicht einfach als herzlos, sondern als Figur zwischen Erwerbsdruck, Familienpflicht und Abwehr von Verantwortung. Entscheidend ist, dass Heidi als Kind weitergereicht wird, während Erwachsene über ihren Aufenthaltsort entscheiden.",
+        "answerGuides": [
+          "Wichtig ist die soziale Lage: Dete sucht Arbeit in Frankfurt und gibt die Verantwortung an den Großvater zurück. Dadurch wird Heidis Abgabe als ökonomisch und familiär bedingte Verschiebung lesbar.",
+          "Dete erscheint dadurch ambivalent. Sie handelt eigennützig, aber nicht aus bloßer Bosheit; sie nutzt eine Möglichkeit zum sozialen Aufstieg und blendet Heidis Perspektive aus.",
+          "Aussagekräftig ist, dass Dete sagt, das Kind müsse beim Großvater bleiben. Die Formulierung zeigt, dass Heidi nicht selbst entscheidet, sondern als Zuständigkeit zwischen Erwachsenen verschoben wird."
         ]
       },
       {
@@ -1822,6 +1828,12 @@ export const lessonSets = [
           "Welche Sinneseindrücke prägen Heidis Ankunft?",
           "Wie unterscheidet sich die Alp vom sozialen Druck im Tal?",
           "Welche konkrete Textstelle zeigt Heidis körperliche oder seelische Entlastung?"
+        ],
+        "taskGuide": "Die Antwort sollte zeigen, dass die Alp nicht Kulisse ist. Luft, Licht, Weite, Tiere und Bewegung eröffnen Heidi einen Erfahrungsraum, der dem Gerede und der sozialen Kontrolle im Tal entgegengesetzt ist.",
+        "answerGuides": [
+          "Prägend sind Wärme, Duft, Licht, Höhe, Bewegung und der Kontakt zu den Geißen. Diese Eindrücke machen die Alp körperlich erfahrbar.",
+          "Im Tal wird über Heidi gesprochen und über sie entschieden; auf der Alp kann sie schauen, laufen und reagieren. Der Raum gibt ihr Handlungsspielraum zurück.",
+          "Geeignet ist eine Stelle, in der Heidi sich von Kleidern befreit, mit Peter und den Geißen geht oder auf die Höhe reagiert. Entscheidend ist die Verbindung von Körperentlastung und neuer Freiheit."
         ]
       }
     ]
@@ -1856,6 +1868,12 @@ export const lessonSets = [
           "Welche Regeln lernt Heidi nicht aus einem Buch, sondern aus der Situation?",
           "Wie korrigiert Heidi Peters Verhalten gegenüber den Tieren?",
           "Was leistet die Natur in dieser Lektion pädagogisch?"
+        ],
+        "taskGuide": "Eine gute Antwort arbeitet heraus, dass Lernen hier praktisch, situativ und körpernah geschieht. Heidi lernt an Gelände, Tieren und Beziehungen; zugleich wirkt sie selbst erzieherisch auf Peter ein.",
+        "answerGuides": [
+          "Heidi lernt Rücksicht auf Tiere, Orientierung im Gelände, gemeinsames Essen und Grenzen im Umgang mit Gefahr. Diese Regeln entstehen aus Erfahrung, nicht aus Unterricht.",
+          "Sie widerspricht Peter, wenn er grob mit den Geißen umgeht, und nimmt die Tiere als empfindsame Wesen wahr. Dadurch begrenzt sie seine Härte.",
+          "Die Natur stiftet Erfahrungen, fordert Verantwortung und macht Folgen unmittelbar sichtbar. Sie ist deshalb ein pädagogischer Raum, nicht bloß eine schöne Umgebung."
         ]
       },
       {
@@ -1867,6 +1885,12 @@ export const lessonSets = [
           "Wie verändert Heidi die Atmosphäre beim Großvater?",
           "Worin bleibt Peter eigenständig oder widerständig?",
           "Welche Rolle spielt Heidis Direktheit im Umgang mit beiden?"
+        ],
+        "taskGuide": "Die Antwort sollte Heidi als Beziehungskraft beschreiben: Sie plant keine Erziehung, verändert aber durch Vertrauen, Neugier und Direktheit die sozialen Abstände zwischen den Figuren.",
+        "answerGuides": [
+          "Beim Großvater löst Heidi Verschlossenheit, Misstrauen und Härte teilweise auf. Ihre Unbefangenheit ermöglicht Nähe, ohne dass der Großvater sofort grundsätzlich verändert wäre.",
+          "Peter bleibt eigenständig, weil er seine Gewohnheiten, Eifersucht und grobe Direktheit behält. Heidi überformt ihn nicht vollständig.",
+          "Heidis Direktheit vermeidet taktisches Verhalten. Gerade weil sie offen fragt, vertraut und widerspricht, geraten Großvater und Peter in Bewegung."
         ]
       }
     ]
@@ -1901,6 +1925,12 @@ export const lessonSets = [
           "Welche religiösen Wörter oder Motive fallen in der Szene auf?",
           "Wie reagiert Heidi auf die Großmutter?",
           "Wo wird Religion zur sozialen Erwartung an den Großvater?"
+        ],
+        "taskGuide": "Die Antwort sollte Religion doppelt lesen: als Trost und als soziale Norm. Bei der Großmutter wirkt sie fürsorglich, beim Großvater wird sie auch zur Forderung nach Rückkehr in die Gemeinschaft.",
+        "answerGuides": [
+          "Auffällig sind Motive wie Gottvertrauen, Gebet, Trost, Sünde, Buße oder kirchliche Gemeinschaft. Sie verbinden private Not mit moralischer Ordnung.",
+          "Heidi reagiert aufmerksam und mitleidig. Sie nimmt die Bedürftigkeit der Großmutter ernst und verbindet Zuhören mit konkreter Fürsorge.",
+          "Beim Großvater erscheint Religion dort als Erwartung, wo Pfarrer, Dorf oder Großmutter seine Rückkehr, Versöhnung oder Verantwortung einfordern."
         ]
       },
       {
@@ -1912,6 +1942,12 @@ export const lessonSets = [
           "Welche Verantwortung wird an wen abgegeben?",
           "Wie begründet Dete ihr Handeln?",
           "Welche Textstelle macht sichtbar, dass Heidi selbst kaum gefragt wird?"
+        ],
+        "taskGuide": "Eine präzise Antwort zeigt, wie der Roman Zuständigkeit verhandelt: Dete gibt Verantwortung ab, der Großvater soll sie übernehmen, und Heidi bleibt in dieser Ordnung zunächst Objekt der Entscheidung.",
+        "answerGuides": [
+          "Dete gibt die Sorge für Heidi an den Großvater ab; zugleich verweist sie auf dessen Verwandtschaftspflicht. Verantwortung wird als Last weitergereicht.",
+          "Dete begründet ihr Handeln mit der Arbeitsmöglichkeit in Frankfurt und damit, dass der Großvater nun seinen Teil tun müsse. Das klingt praktisch, aber auch abwehrend.",
+          "Geeignet sind Formulierungen, in denen Dete sagt, Heidi müsse dort bleiben, oder in denen Erwachsene über sie sprechen, während Heidi selbst kaum zu Wort kommt."
         ]
       }
     ]
@@ -1946,6 +1982,12 @@ export const lessonSets = [
           "Welche Regel wirkt für Heidi besonders fremd?",
           "Wie wird der Innenraum im Vergleich zur Alp beschrieben?",
           "Welche Wirkung hat Frau Rottenmeiers Ordnung auf Heidi?"
+        ],
+        "taskGuide": "Die Antwort sollte Frankfurt als Gegenraum zur Alp beschreiben: Enge, Hausordnung, Aufsicht und soziale Etikette begrenzen Heidis Bewegung und verändern ihre Sprache und ihr Verhalten.",
+        "answerGuides": [
+          "Besonders fremd wirken Regeln zu Sitzen, Sprechen, Essen, Lernen oder Gehorsam. Entscheidend ist, dass Heidi diese Regeln nicht aus ihrer bisherigen Erfahrung ableiten kann.",
+          "Der Innenraum erscheint geschlossen, kontrolliert und sozial codiert; die Alp ist weit, beweglich und sinnlich erfahrbar. Der Kontrast ist räumlich und pädagogisch.",
+          "Frau Rottenmeiers Ordnung beschämt und diszipliniert Heidi. Sie macht aus Heidis Lebendigkeit ein Problem und verstärkt ihre Fremdheit."
         ]
       },
       {
@@ -1957,6 +1999,12 @@ export const lessonSets = [
           "Welche körperlichen Signale zeigen Heidis Unbehagen?",
           "Wie hängt Heidis Gesundheit mit Raum und Bewegung zusammen?",
           "Warum ist Krankheit hier mehr als ein medizinisches Problem?"
+        ],
+        "taskGuide": "Eine gute Antwort erklärt Heidis Körper als Anzeige eines unpassenden Lebensraums. Krankheit ist im Roman nicht nur medizinisch, sondern Ausdruck von Heimweh, Enge und Beziehungslosigkeit.",
+        "answerGuides": [
+          "Signale sind Müdigkeit, Schlafwandeln, Appetitlosigkeit, Traurigkeit, Unruhe oder körperliche Schwäche. Sie zeigen, dass Heidi sich nicht einfach anpasst.",
+          "Heidis Gesundheit hängt an Bewegung, Luft, Natur und vertrauten Beziehungen. Wenn diese fehlen, wird ihr Körper zum Ort der Störung.",
+          "Krankheit verweist auf eine falsche soziale und räumliche Ordnung. Der medizinische Befund führt deshalb zu einer Lebensentscheidung: Heidi muss zurück auf die Alp."
         ]
       }
     ]
@@ -1991,6 +2039,12 @@ export const lessonSets = [
           "Welche Regel versteht Heidi anders als die Erwachsenen?",
           "Wie wird Komik aus räumlicher oder sozialer Fremdheit erzeugt?",
           "Was verrät die Szene über Frankfurts Erziehungsideal?"
+        ],
+        "taskGuide": "Die Antwort sollte eine komische Szene als Regelkonflikt deuten. Der Witz entsteht nicht zufällig, sondern aus Heidis wörtlichem, alpinem oder kindlichem Verständnis einer städtischen Ordnung.",
+        "answerGuides": [
+          "Heidi versteht Anrede, Benehmen, Besitz, Essen oder Dienstbotenregeln anders als die Erwachsenen. Gerade diese Verschiebung erzeugt den Konflikt.",
+          "Komik entsteht, weil Heidi die sozialen Codes des Hauses nicht kennt und Räume oder Gegenstände anders nutzt, als Frankfurt es erwartet.",
+          "Frankfurt erscheint als Erziehungsideal der Kontrolle, Höflichkeit und Hierarchie. Die komische Szene macht dieses Ideal zugleich sichtbar und fragwürdig."
         ]
       },
       {
@@ -2002,6 +2056,12 @@ export const lessonSets = [
           "Welche Wörter oder Anreden markieren soziale Distanz?",
           "Wie reagiert die Erzählstimme auf Heidis Missverstehen?",
           "Wo kippt Komik in Kritik an der Umgebung?"
+        ],
+        "taskGuide": "Eine starke Antwort arbeitet am Wortlaut: Namen, Anreden und Dialoge zeigen, wer Macht besitzt. Heidis Missverstehen ist komisch, legt aber zugleich die Künstlichkeit der Frankfurter Ordnung frei.",
+        "answerGuides": [
+          "Anreden wie Fräulein, Herr, Dienerrollen oder formelle Namen markieren Abstand. Auch Korrekturen an Heidis Sprache können soziale Distanz zeigen.",
+          "Die Erzählstimme lässt Heidis Missverstehen oft verständlich wirken und entlarvt dadurch eher die Umgebung als das Kind. Der Humor bleibt nicht neutral.",
+          "Komik kippt in Kritik, wenn Heidis Fehler die Starrheit, Kälte oder Unverhältnismäßigkeit der Hausordnung sichtbar machen."
         ]
       }
     ]
@@ -2036,6 +2096,12 @@ export const lessonSets = [
           "Welche Raumdetails machen Heidis Heimweh sichtbar?",
           "Wie unterscheidet sich Heidis Sehnsucht von bloßer Unzufriedenheit?",
           "Welche Textstelle verbindet Frankfurt direkt mit der Alp?"
+        ],
+        "taskGuide": "Die Antwort sollte Heimweh als Raumkonflikt deuten: Fenster, Zimmer, geschlossene Wege und Erinnerungsbilder zeigen, dass Heidi nicht nur etwas vermisst, sondern aus ihrem Lebensraum herausgelöst ist.",
+        "answerGuides": [
+          "Fenster, Treppen, Zimmer, geschlossene Türen oder fehlende Aussicht können Heidis Heimweh sichtbar machen. Räume wirken wie Hindernisse.",
+          "Heidis Sehnsucht ist tiefer als schlechte Laune: Sie betrifft Körper, Schlaf, Sprache und Lebensvertrauen. Sie verliert einen Teil ihrer selbst.",
+          "Geeignet sind Stellen, in denen Heidi nach Bergen, Himmel, Geißen, Großvater oder dem Dörfli fragt oder Frankfurt mit fehlender Aussicht kontrastiert wird."
         ]
       },
       {
@@ -2047,6 +2113,12 @@ export const lessonSets = [
           "Welche Symptome werden beobachtet?",
           "Wie deutet der Doktor Heidis Zustand?",
           "Warum führt die Diagnose zur Heimkehr statt zu strengerer Erziehung?"
+        ],
+        "taskGuide": "Die Antwort sollte die Spukepisode als verdichtetes Zeichen lesen: Was als Geistererscheinung beginnt, wird zur Diagnose von Heimweh, Überforderung und falscher Umgebung.",
+        "answerGuides": [
+          "Beobachtet werden Schlafwandeln, nächtliches Umhergehen, Blässe, Unruhe oder Schwäche. Das scheinbar Unheimliche hat körperliche Zeichen.",
+          "Der Doktor deutet Heidis Zustand als Heimweh und seelische Belastung, nicht als Ungehorsam. Damit verschiebt er die Bewertung der Symptome.",
+          "Die Diagnose zeigt, dass mehr Disziplin das Problem verschärfen würde. Heilung bedeutet Rückkehr in den passenden Lebensraum."
         ]
       }
     ]
@@ -2081,6 +2153,12 @@ export const lessonSets = [
           "Welche religiöse Vorstellung gibt Heidi weiter?",
           "Warum wirkt ihre Rede auf den Doktor anders als eine Unterrichtsantwort?",
           "Welche Grenze hat diese Form von Trost?"
+        ],
+        "taskGuide": "Eine gute Antwort zeigt, dass Heidi religiöse Sprache in Beziehung übersetzt. Sie wiederholt nicht bloß Gelerntes, sondern spricht aus eigener Erfahrung von Verlust, Hoffnung und Vertrauen.",
+        "answerGuides": [
+          "Heidi gibt die Vorstellung weiter, dass Vertrauen, Gebet oder göttliche Führung auch in Trauer tragen können. Entscheidend ist der Bezug zur konkreten Not des Doktors.",
+          "Ihre Rede wirkt anders, weil sie nicht prüfungsartig spricht, sondern persönlich Anteil nimmt. Der Doktor hört eine Beziehungsgeste, keine Lektion.",
+          "Die Grenze liegt darin, dass religiöser Trost Verlust nicht aufhebt. Er kann deuten und begleiten, aber die Trauer des Doktors nicht einfach beseitigen."
         ]
       },
       {
@@ -2092,6 +2170,12 @@ export const lessonSets = [
           "Welche Zeichen von Erschöpfung oder Trauer werden sichtbar?",
           "Wie reagiert Heidi auf den leidenden Erwachsenen?",
           "Welche Rolle spielt die Alp als möglicher Heilraum?"
+        ],
+        "taskGuide": "Die Antwort sollte Heidis Krankheit und die Trauer des Doktors parallel lesen: Beide Zustände werden körperlich sichtbar, beide brauchen Beziehung und einen Raum, der nicht nur verwaltet, sondern heilt.",
+        "answerGuides": [
+          "Sichtbar werden Müdigkeit, Rückzug, Niedergeschlagenheit, körperliche Schwäche oder fehlende Lebensfreude. Trauer erscheint nicht nur innerlich.",
+          "Heidi reagiert mit Nähe, Aufmerksamkeit und Sprache. Sie sieht den Doktor nicht als Autorität, sondern als trauernden Menschen.",
+          "Die Alp wirkt als Heilraum, weil sie Bewegung, Luft, Beziehung und Einfachheit verbindet. Sie ersetzt Medizin nicht vollständig, erweitert aber den Heilungsbegriff."
         ]
       }
     ]
@@ -2126,6 +2210,12 @@ export const lessonSets = [
           "Was kann Schule leisten, was die Alp nicht leistet?",
           "Was lernt Heidi außerhalb der Schule weiterhin besser?",
           "Wie verändert Bildung die Beziehungen zwischen Heidi, Peter und Klara?"
+        ],
+        "taskGuide": "Die Antwort sollte Schule und Alp nicht gegeneinander ausspielen. Lesenlernen erweitert Heidis Handlungsmöglichkeiten; Erfahrungslernen bleibt aber für Beziehung, Naturwahrnehmung und Verantwortung zentral.",
+        "answerGuides": [
+          "Schule vermittelt Lesen, Schrift, religiöse Texte und Zugang zu fremden Lebenswelten. Sie gibt Heidi Ausdrucksmöglichkeiten, die Natur allein nicht bietet.",
+          "Außerhalb der Schule lernt Heidi weiterhin Beziehung, Fürsorge, Tierverhalten, Gelände und situatives Handeln besser. Dieses Wissen ist körperlich und praktisch.",
+          "Bildung verändert Beziehungen, weil Heidi lesen, trösten, vermitteln und Klara oder Peter anders begegnen kann. Zugleich entstehen neue Ungleichheiten und Eifersucht."
         ]
       },
       {
@@ -2137,6 +2227,12 @@ export const lessonSets = [
           "Wodurch fühlt Peter sich zurückgesetzt?",
           "Wie verhält sich Heidi zwischen Peter und Klara?",
           "Welche Beziehung wird durch die geplante Reise gestärkt oder gefährdet?"
+        ],
+        "taskGuide": "Eine starke Antwort nimmt Peters Eifersucht ernst, ohne sie zu entschuldigen. Klara erweitert Heidis Welt; Peter erlebt diese Erweiterung als Verlust von Nähe und Exklusivität.",
+        "answerGuides": [
+          "Peter fühlt sich zurückgesetzt, weil Heidi Aufmerksamkeit, Zeit und Zuneigung mit Klara teilt. Auch soziale Unterschiede zwischen ihm und den Frankfurter Gästen spielen mit.",
+          "Heidi versucht nicht strategisch zu vermitteln, sondern bleibt beiden zugewandt. Gerade diese Offenheit kann Peters Unsicherheit aber verstärken.",
+          "Die Reise stärkt Heidis und Klaras Freundschaft, gefährdet aber Peters vertraute Stellung. Die Beziehungskonstellation wird dadurch instabiler."
         ]
       }
     ]
@@ -2172,6 +2268,12 @@ export const lessonSets = [
           "Welche Pflegehandlungen werden konkret gezeigt?",
           "Wie verändert die Alp Klaras Bewegungsmöglichkeiten?",
           "Wo bleibt die Darstellung problematisch oder idealisierend?"
+        ],
+        "taskGuide": "Die Antwort sollte Klaras Veränderung nicht als bloßes Wunder lesen. Der Roman baut Bedingungen auf: Pflege, Übung, Ermutigung, Naturraum und soziale Zuwendung.",
+        "answerGuides": [
+          "Konkret gezeigt werden Tragen, Stützen, Üben, sorgfältige Ernährung, Ruhe, Begleitung und Ermutigung. Pflege ist im Roman praktisch und beziehungsnah.",
+          "Die Alp eröffnet Klara neue Bewegungsreize: Wege, Luft, Tiere, Höhen und gemeinsames Tun. Bewegung wird weniger häuslich kontrolliert als in Frankfurt.",
+          "Problematisch bleibt, dass Behinderung stark auf Heilung und Überwindung hin erzählt wird. Die Darstellung kann idealisieren, weil soziale und medizinische Komplexität verkürzt wird."
         ]
       },
       {
@@ -2183,6 +2285,12 @@ export const lessonSets = [
           "Welche Bilder von Alp und Heilung nutzt der Film?",
           "Wo zeigt der Film eine Spannung zwischen Idylle und Problemgeschichte?",
           "Welche Beobachtung aus dem Film verändert deinen Blick auf Klara?"
+        ],
+        "taskGuide": "Eine sorgfältige Antwort nutzt den Film nicht als Dekoration, sondern als Gegenlektüre: Die vertraute Heidi-Idylle wird auf Projektionen, Vermarktung und verdrängte Konflikte hin befragt.",
+        "answerGuides": [
+          "Der Film arbeitet mit Bildern von Bergen, Natur, Kindheit, Heimat oder Heilung. Diese Bilder können den Roman bestätigen, aber auch vereinfachen.",
+          "Spannung entsteht dort, wo die schöne Alp zugleich als kulturelle Projektionsfläche, Problemgeschichte oder vermarktetes Bild erscheint. Idylle wird dadurch fragwürdig.",
+          "Für Klara kann der Film den Blick darauf schärfen, dass Heilung nicht nur privat-glücklich erzählt wird, sondern Teil eines mächtigen Heidi-Bildes geworden ist."
         ]
       }
     ]
@@ -2219,6 +2327,12 @@ export const lessonSets = [
           "Welche Motive führen zu Peters Tat?",
           "Wie verändert das Geständnis die Situation?",
           "Welche Form von Wiedergutmachung bietet der Schluss an?"
+        ],
+        "taskGuide": "Die Antwort sollte Peters Schuld weder verharmlosen noch dämonisieren. Seine Tat entsteht aus Eifersucht und sozialer Kränkung; der Schluss ordnet sie durch Geständnis, Vergebung und materielle Entlastung ein.",
+        "answerGuides": [
+          "Motive sind Eifersucht, Angst vor Bedeutungsverlust, soziale Unterlegenheit und Wut auf Klaras Rollstuhl als Zeichen der Konkurrenz.",
+          "Das Geständnis macht die verborgene Schuld öffentlich und ermöglicht eine neue Ordnung. Peter wird nicht nur Täter, sondern wieder Teil der Gemeinschaft.",
+          "Wiedergutmachung entsteht durch Vergebung, Einsicht und die finanzielle Regelung. Der Schluss entschärft Schuld sozial, statt sie nur strafend zu behandeln."
         ]
       },
       {
@@ -2230,6 +2344,12 @@ export const lessonSets = [
           "Welche Eigenschaften machen Heidi leicht popularisierbar?",
           "Welche Konflikte des Romans verschwinden in idealisierten Bildern?",
           "Wie verändert Popularisierung den Blick auf Schuld und Schluss?"
+        ],
+        "taskGuide": "Eine gute Antwort vergleicht Roman und Bildtradition genau: Heidi wird als Naturkind, Schweizer Ikone und Heilsfigur wiedererkennbar, während Ambivalenzen des Romans oft geglättet werden.",
+        "answerGuides": [
+          "Popularisierbar sind Heidis Kindlichkeit, Naturverbundenheit, Fröhlichkeit, Schweizer Alpenkulisse und klare Wiedererkennbarkeit.",
+          "Oft verschwinden Armut, Weggabe, Krankheit, religiöser Druck, Peters Schuld und soziale Abhängigkeiten. Übrig bleibt eine harmlose Idylle.",
+          "Popularisierung kann Schuld und Schluss versöhnlicher wirken lassen, als sie im Roman angelegt sind. Konflikte werden zu einem beruhigenden Heidi-Bild geglättet."
         ]
       },
       {
@@ -2241,6 +2361,12 @@ export const lessonSets = [
           "Welche Forschungs- oder Dossierperspektive war für deine Deutung am ergiebigsten?",
           "Welche Romanstelle stützt deine Gesamtthese am stärksten?",
           "Welche Vereinfachung über Heidi würdest du nach der Einheit zurückweisen?"
+        ],
+        "taskGuide": "Die Antwort sollte eine echte Gesamtthese formulieren und nicht nur Themen aufzählen. Entscheidend ist, eine Spannung des Romans zu wählen und mit einer starken Textstelle sowie einer Materialperspektive zu begründen.",
+        "answerGuides": [
+          "Ergiebig ist die Perspektive, die die eigene These am besten schärft, etwa Naturpädagogik, Körper und Gesundheit, Religion, Stadt-Land-Kontrast oder Popularisierung.",
+          "Die stärkste Romanstelle sollte nicht nur passen, sondern die Spannung bündeln: etwa Heidis Weggabe, der Frankfurter Spuk, Klaras Alpaufenthalt oder Peters Geständnis.",
+          "Zurückweisen lässt sich die Vereinfachung, Heidi sei nur eine harmlose Idylle. Der Roman verhandelt auch Armut, Kontrolle, Krankheit, Schuld und soziale Ordnung."
         ]
       },
       {
@@ -2252,6 +2378,12 @@ export const lessonSets = [
           "Welche Heidi-Erwartung nutzt der Trailer aus?",
           "Welche Bild- oder Tonentscheidung verändert die Romanwirkung am stärksten?",
           "Was lernst du dadurch über Popularisierung und Verfremdung?"
+        ],
+        "taskGuide": "Eine genaue Antwort beschreibt den Trailer als produktive Störung: Er nutzt vertraute Heidi-Signale und verschiebt sie durch Horrorästhetik, Musik, Schnitt oder KI-Bildlogik in ein fremdes Genre.",
+        "answerGuides": [
+          "Der Trailer nutzt die Erwartung von Unschuld, Alp-Idylle, Kindheit, Natur und Heimat. Gerade weil diese Erwartungen vertraut sind, kann er sie ins Unheimliche kippen.",
+          "Stark wirken etwa düstere Musik, harte Schnitte, verzerrte Gesichter, Schatten, Tempo oder KI-Glätte. Die Romanwirkung verschiebt sich von Trost zu Bedrohung.",
+          "Man lernt, dass Popularisierung Figuren aus ihrem Ursprung lösen kann. Verfremdung macht sichtbar, welche Bildformeln Heidi stabilisieren und wie leicht sie umcodiert werden."
         ]
       }
     ]
