@@ -366,7 +366,7 @@ function instructionForTask(prompt, { signalWords = [], relatedTheoryIds = [], k
   const opening = kind === "transfer"
     ? "Beziehe Passage und Deutungslinse ausdrücklich aufeinander."
     : kind === "resource"
-      ? "Nutze die Ressource als Leselinse und bleibe eng am Romanausschnitt."
+      ? "Nutze das Material als Leselinse und bleibe eng am Romanausschnitt."
       : operator.action;
 
   return `Antworte in ${operator.sentenceCount} Sätzen. ${opening}. ${evidencePart} ${theoryPart}`;
@@ -812,9 +812,9 @@ const rawReaderModules = [
         "passageLabel": "Leitfrage 6",
         "pageHint": "Volltext im linken Lesefenster",
         "pageNumber": 6,
-        "context": "Wer ist Geissenpeter! Charakterisieren Sie ihn! Welche Aufgaben erledigt er? Warum arbeitet er so viel?",
+        "context": "Wer ist Geißenpeter? Charakterisieren Sie ihn. Welche Aufgaben erledigt er? Warum arbeitet er so viel?",
         "signalWords": [
-          "Geissenpeter",
+          "Geißenpeter",
           "Peter"
         ],
         "relatedTheoryIds": [
@@ -822,7 +822,7 @@ const rawReaderModules = [
           "sprache-erzaehlen"
         ],
         "prompts": [
-          "Wer ist Geissenpeter! Charakterisieren Sie ihn! Welche Aufgaben erledigt er? Warum arbeitet er so viel?"
+          "Wer ist Geißenpeter? Charakterisieren Sie ihn. Welche Aufgaben erledigt er? Warum arbeitet er so viel?"
         ],
         "focusTasks": []
       },
@@ -852,10 +852,10 @@ const rawReaderModules = [
         "passageLabel": "Leitfrage 8",
         "pageHint": "Volltext im linken Lesefenster",
         "pageNumber": 8,
-        "context": "Wie wird die Natur beschrieben? Wie geht Geissenpeter mit den Tieren um? Wo setzt ihm Heidi Grenzen? Wie gehen die beiden miteinander um? Beschreiben Sie den Konversationston!",
+        "context": "Wie wird die Natur beschrieben? Wie geht Geißenpeter mit den Tieren um? Wo setzt ihm Heidi Grenzen? Wie gehen die beiden miteinander um? Beschreiben Sie den Gesprächston.",
         "signalWords": [
           "Heidi",
-          "Geissenpeter",
+          "Geißenpeter",
           "Peter"
         ],
         "relatedTheoryIds": [
@@ -863,7 +863,7 @@ const rawReaderModules = [
           "sprache-erzaehlen"
         ],
         "prompts": [
-          "Wie wird die Natur beschrieben? Wie geht Geissenpeter mit den Tieren um? Wo setzt ihm Heidi Grenzen? Wie gehen die beiden miteinander um? Beschreiben Sie den Konversationston!"
+          "Wie wird die Natur beschrieben? Wie geht Geißenpeter mit den Tieren um? Wo setzt ihm Heidi Grenzen? Wie gehen die beiden miteinander um? Beschreiben Sie den Gesprächston."
         ],
         "focusTasks": []
       },
@@ -873,9 +873,9 @@ const rawReaderModules = [
         "passageLabel": "Leitfrage 9",
         "pageHint": "Volltext im linken Lesefenster",
         "pageNumber": 9,
-        "context": "Was hat es zu bedeuten, dass Geissenpeter behauptet, die Berge hätten keine Namen?",
+        "context": "Was hat es zu bedeuten, dass Geißenpeter behauptet, die Berge hätten keine Namen?",
         "signalWords": [
-          "Geissenpeter",
+          "Geißenpeter",
           "Peter"
         ],
         "relatedTheoryIds": [
@@ -883,7 +883,7 @@ const rawReaderModules = [
           "sprache-erzaehlen"
         ],
         "prompts": [
-          "Was hat es zu bedeuten, dass Geissenpeter behauptet, die Berge hätten keine Namen?"
+          "Was hat es zu bedeuten, dass Geißenpeter behauptet, die Berge hätten keine Namen?"
         ],
         "focusTasks": []
       },
@@ -893,10 +893,10 @@ const rawReaderModules = [
         "passageLabel": "Leitfrage 10",
         "pageHint": "Volltext im linken Lesefenster",
         "pageNumber": 10,
-        "context": "Wie spricht Almöhi den Geissenpeter an? Was hat es mit dem militärischen Unterton auf sich?",
+        "context": "Wie spricht Almöhi Geißenpeter an? Was hat es mit dem militärischen Unterton auf sich?",
         "signalWords": [
           "Almöhi",
-          "Geissenpeter",
+          "Geißenpeter",
           "Peter"
         ],
         "relatedTheoryIds": [
@@ -904,7 +904,7 @@ const rawReaderModules = [
           "sprache-erzaehlen"
         ],
         "prompts": [
-          "Wie spricht Almöhi den Geissenpeter an? Was hat es mit dem militärischen Unterton auf sich?"
+          "Wie spricht Almöhi Geißenpeter an? Was hat es mit dem militärischen Unterton auf sich?"
         ],
         "focusTasks": []
       }
@@ -921,9 +921,9 @@ const rawReaderModules = [
         "passageLabel": "Leitfrage 11",
         "pageHint": "Volltext im linken Lesefenster",
         "pageNumber": 11,
-        "context": "Interpretieren Sie die Formulierung «am Griffel nagen»! Inwiefern beschreibt dies Geissenpeters Verhältnis zur Schule?",
+        "context": "Interpretieren Sie die Formulierung «am Griffel nagen». Inwiefern beschreibt sie Geißenpeters Verhältnis zur Schule?",
         "signalWords": [
-          "Geissenpeter",
+          "Geißenpeter",
           "Peter"
         ],
         "relatedTheoryIds": [
@@ -931,7 +931,7 @@ const rawReaderModules = [
           "figuren-beziehungen"
         ],
         "prompts": [
-          "Interpretieren Sie die Formulierung «am Griffel nagen»! Inwiefern beschreibt dies Geissenpeters Verhältnis zur Schule?"
+          "Interpretieren Sie die Formulierung «am Griffel nagen». Inwiefern beschreibt sie Geißenpeters Verhältnis zur Schule?"
         ],
         "focusTasks": []
       },
@@ -941,18 +941,18 @@ const rawReaderModules = [
         "passageLabel": "Leitfrage 12",
         "pageHint": "Volltext im linken Lesefenster",
         "pageNumber": 12,
-        "context": "Wie erlebt Heidi den Winter? Wie verläuft der Besuch bei der Grossmutter? Was tut Almöhi? Inwiefern ist diese Entwicklung aussergewöhnlich?",
+        "context": "Wie erlebt Heidi den Winter? Wie verläuft der Besuch bei der Großmutter? Was tut Almöhi? Inwiefern ist diese Entwicklung außergewöhnlich?",
         "signalWords": [
           "Heidi",
           "Almöhi",
-          "Grossmutter"
+          "Großmutter"
         ],
         "relatedTheoryIds": [
           "religion",
           "figuren-beziehungen"
         ],
         "prompts": [
-          "Wie erlebt Heidi den Winter? Wie verläuft der Besuch bei der Grossmutter? Was tut Almöhi? Inwiefern ist diese Entwicklung aussergewöhnlich?"
+          "Wie erlebt Heidi den Winter? Wie verläuft der Besuch bei der Großmutter? Was tut Almöhi? Inwiefern ist diese Entwicklung außergewöhnlich?"
         ],
         "focusTasks": []
       },
@@ -962,17 +962,17 @@ const rawReaderModules = [
         "passageLabel": "Leitfrage 13",
         "pageHint": "Volltext im linken Lesefenster",
         "pageNumber": 13,
-        "context": "Beschreiben Sie die Beziehung zwischen Heidi und der Grossmutter!",
+        "context": "Beschreiben Sie die Beziehung zwischen Heidi und der Großmutter.",
         "signalWords": [
           "Heidi",
-          "Grossmutter"
+          "Großmutter"
         ],
         "relatedTheoryIds": [
           "religion",
           "figuren-beziehungen"
         ],
         "prompts": [
-          "Beschreiben Sie die Beziehung zwischen Heidi und der Grossmutter!"
+          "Beschreiben Sie die Beziehung zwischen Heidi und der Großmutter."
         ],
         "focusTasks": []
       },
@@ -1263,7 +1263,7 @@ const rawReaderModules = [
         "passageLabel": "Leitfrage 27",
         "pageHint": "Volltext im linken Lesefenster",
         "pageNumber": 27,
-        "context": "Wie reagiert Herr Sesemann auf die Missstimmung in seinem Haus? Wer ergreift für wen Partei? Wie äussert sich Fräulein Rottenmeier? Welchen Bericht erstattet der Kandidat? Was berichtet Klara?",
+        "context": "Wie reagiert Herr Sesemann auf die Missstimmung in seinem Haus? Wer ergreift für wen Partei? Wie äußert sich Fräulein Rottenmeier? Welchen Bericht erstattet der Kandidat? Was berichtet Klara?",
         "signalWords": [
           "Rottenmeier",
           "Sesemann",
@@ -1274,7 +1274,7 @@ const rawReaderModules = [
           "koerper-gesundheit"
         ],
         "prompts": [
-          "Wie reagiert Herr Sesemann auf die Missstimmung in seinem Haus? Wer ergreift für wen Partei? Wie äussert sich Fräulein Rottenmeier? Welchen Bericht erstattet der Kandidat? Was berichtet Klara?"
+          "Wie reagiert Herr Sesemann auf die Missstimmung in seinem Haus? Wer ergreift für wen Partei? Wie äußert sich Fräulein Rottenmeier? Welchen Bericht erstattet der Kandidat? Was berichtet Klara?"
         ],
         "focusTasks": []
       },
@@ -1284,7 +1284,7 @@ const rawReaderModules = [
         "passageLabel": "Leitfrage 28",
         "pageHint": "Volltext im linken Lesefenster",
         "pageNumber": 28,
-        "context": "Schildern Sie die Ankunft der Grossmama! Wie versteht sich Heidi mit ihr? Wie schafft es diese, Heidis Vertrauen zu gewinnen? Kommentieren Sie die Gespräche über Religion! Erläutern Sie Heidis Zweifel an Gott! Wie lernt Heidi doch noch lesen?",
+        "context": "Schildern Sie die Ankunft der Großmama. Wie versteht sich Heidi mit ihr? Wie schafft sie es, Heidis Vertrauen zu gewinnen? Kommentieren Sie die Gespräche über Religion. Erläutern Sie Heidis Zweifel an Gott. Wie lernt Heidi doch noch lesen?",
         "signalWords": [
           "Heidi"
         ],
@@ -1293,7 +1293,7 @@ const rawReaderModules = [
           "koerper-gesundheit"
         ],
         "prompts": [
-          "Schildern Sie die Ankunft der Grossmama! Wie versteht sich Heidi mit ihr? Wie schafft es diese, Heidis Vertrauen zu gewinnen? Kommentieren Sie die Gespräche über Religion! Erläutern Sie Heidis Zweifel an Gott! Wie lernt Heidi doch noch lesen?"
+          "Schildern Sie die Ankunft der Großmama. Wie versteht sich Heidi mit ihr? Wie schafft sie es, Heidis Vertrauen zu gewinnen? Kommentieren Sie die Gespräche über Religion. Erläutern Sie Heidis Zweifel an Gott. Wie lernt Heidi doch noch lesen?"
         ],
         "focusTasks": []
       },
@@ -1480,7 +1480,7 @@ const rawReaderModules = [
         "passageLabel": "Leitfrage 37",
         "pageHint": "Volltext im linken Lesefenster",
         "pageNumber": 37,
-        "context": "Beschreiben Sie das Wiedersehen mit dem Doktor und die Beziehung zu Heidi! Interpretieren Sie die Geschenke von Klara und der Grossmama!",
+        "context": "Beschreiben Sie das Wiedersehen mit dem Doktor und seine Beziehung zu Heidi. Interpretieren Sie die Geschenke von Klara und der Großmama.",
         "signalWords": [
           "Heidi",
           "Klara",
@@ -1491,7 +1491,7 @@ const rawReaderModules = [
           "figuren-beziehungen"
         ],
         "prompts": [
-          "Beschreiben Sie das Wiedersehen mit dem Doktor und die Beziehung zu Heidi! Interpretieren Sie die Geschenke von Klara und der Grossmama!"
+          "Beschreiben Sie das Wiedersehen mit dem Doktor und seine Beziehung zu Heidi. Interpretieren Sie die Geschenke von Klara und der Großmama."
         ],
         "focusTasks": []
       },
@@ -1501,10 +1501,10 @@ const rawReaderModules = [
         "passageLabel": "Leitfrage 38",
         "pageHint": "Volltext im linken Lesefenster",
         "pageNumber": 38,
-        "context": "Wie schafft es Heidi, den Doktor seine Trauer etwas vergessen zu lassen? Interpretieren Sie das Gedicht und dessen religiöses Programm! Wie halten sie Geissenpeter bei Laune?",
+        "context": "Wie schafft es Heidi, den Doktor seine Trauer etwas vergessen zu lassen? Interpretieren Sie das Gedicht und dessen religiöses Programm. Wie halten Heidi und der Doktor Geißenpeter bei Laune?",
         "signalWords": [
           "Heidi",
-          "Geissenpeter",
+          "Geißenpeter",
           "Doktor",
           "Peter"
         ],
@@ -1513,7 +1513,7 @@ const rawReaderModules = [
           "figuren-beziehungen"
         ],
         "prompts": [
-          "Wie schafft es Heidi, den Doktor seine Trauer etwas vergessen zu lassen? Interpretieren Sie das Gedicht und dessen religiöses Programm! Wie halten sie Geissenpeter bei Laune?"
+          "Wie schafft es Heidi, den Doktor seine Trauer etwas vergessen zu lassen? Interpretieren Sie das Gedicht und dessen religiöses Programm. Wie halten Heidi und der Doktor Geißenpeter bei Laune?"
         ],
         "focusTasks": []
       },
@@ -1543,11 +1543,11 @@ const rawReaderModules = [
         "passageLabel": "Leitfrage 40",
         "pageHint": "Volltext im linken Lesefenster",
         "pageNumber": 40,
-        "context": "Inwiefern löst der Almöhi im Winter sein Versprechen ein? Wo wohnt er mit Heidi? Wie verläuft ihre Schulkarriere? Welchen Eindruck übt das auf Geissenpeter aus?",
+        "context": "Inwiefern löst Almöhi im Winter sein Versprechen ein? Wo wohnt er mit Heidi? Wie verläuft Heidis Schulweg? Welchen Eindruck macht das auf Geißenpeter?",
         "signalWords": [
           "Heidi",
           "Almöhi",
-          "Geissenpeter",
+          "Geißenpeter",
           "Peter"
         ],
         "relatedTheoryIds": [
@@ -1555,7 +1555,7 @@ const rawReaderModules = [
           "figuren-beziehungen"
         ],
         "prompts": [
-          "Inwiefern löst der Almöhi im Winter sein Versprechen ein? Wo wohnt er mit Heidi? Wie verläuft ihre Schulkarriere? Welchen Eindruck übt das auf Geissenpeter aus?"
+          "Inwiefern löst Almöhi im Winter sein Versprechen ein? Wo wohnt er mit Heidi? Wie verläuft Heidis Schulweg? Welchen Eindruck macht das auf Geißenpeter?"
         ],
         "focusTasks": []
       }
@@ -1612,9 +1612,9 @@ const rawReaderModules = [
         "passageLabel": "Leitfrage 43",
         "pageHint": "Volltext im linken Lesefenster",
         "pageNumber": 43,
-        "context": "Erklären Sie Geissenpeters unwirsche Reaktion auf die Ankunft der Gäste aus Frankfurt! Inwiefern fühlt er sich von den fremden Gästen bedroht?",
+        "context": "Erklären Sie Geißenpeters unwirsche Reaktion auf die Ankunft der Gäste aus Frankfurt. Inwiefern fühlt er sich von den fremden Gästen bedroht?",
         "signalWords": [
-          "Geissenpeter",
+          "Geißenpeter",
           "Frankfurt",
           "Peter"
         ],
@@ -1623,7 +1623,7 @@ const rawReaderModules = [
           "stadt-land"
         ],
         "prompts": [
-          "Erklären Sie Geissenpeters unwirsche Reaktion auf die Ankunft der Gäste aus Frankfurt! Inwiefern fühlt er sich von den fremden Gästen bedroht?"
+          "Erklären Sie Geißenpeters unwirsche Reaktion auf die Ankunft der Gäste aus Frankfurt. Inwiefern fühlt er sich von den fremden Gästen bedroht?"
         ],
         "focusTasks": []
       },
@@ -1653,9 +1653,9 @@ const rawReaderModules = [
         "passageLabel": "Leitfrage 45",
         "pageHint": "Volltext im linken Lesefenster",
         "pageNumber": 45,
-        "context": "Wie reflektiert Klara ihre körperliche Behinderung? Wie kommt es dazu, dass Klara auf der Alp zu übernachten? Wie verbringen die beiden Freundinnen die Zeit auf der Alp? Wie kommunizieren die beiden mit der Grossmutter, welche nach Bad Ragaz zurückgekehrt ist? Welche Fortschritte macht Klara?",
+        "context": "Wie reflektiert Klara ihre körperliche Behinderung? Wie kommt es dazu, dass Klara auf der Alp übernachtet? Wie verbringen die beiden Freundinnen die Zeit auf der Alp? Wie kommunizieren sie mit der Großmutter, die nach Bad Ragaz zurückgekehrt ist? Welche Fortschritte macht Klara?",
         "signalWords": [
-          "Grossmutter",
+          "Großmutter",
           "Klara"
         ],
         "relatedTheoryIds": [
@@ -1663,7 +1663,7 @@ const rawReaderModules = [
           "stadt-land"
         ],
         "prompts": [
-          "Wie reflektiert Klara ihre körperliche Behinderung? Wie kommt es dazu, dass Klara auf der Alp zu übernachten? Wie verbringen die beiden Freundinnen die Zeit auf der Alp? Wie kommunizieren die beiden mit der Grossmutter, welche nach Bad Ragaz zurückgekehrt ist? Welche Fortschritte macht Klara?"
+          "Wie reflektiert Klara ihre körperliche Behinderung? Wie kommt es dazu, dass Klara auf der Alp übernachtet? Wie verbringen die beiden Freundinnen die Zeit auf der Alp? Wie kommunizieren sie mit der Großmutter, die nach Bad Ragaz zurückgekehrt ist? Welche Fortschritte macht Klara?"
         ],
         "focusTasks": []
       }
@@ -1758,7 +1758,7 @@ const rawReaderModules = [
         "passageLabel": "Leitfrage 50",
         "pageHint": "Volltext im linken Lesefenster",
         "pageNumber": 50,
-        "context": "Warum kriegt Peter am Ende noch Geld von Sesemann? Welche Regelung trifft dieser? Warum lehnt Almöhi eine Entschädigung ab? Was will er stattdessen für Heidi? Was wünscht sich Heidi? Kommentieren Sie das Gespräch zwischen den beiden Grossmüttern!",
+        "context": "Warum bekommt Peter am Ende noch Geld von Herrn Sesemann? Welche Regelung trifft Sesemann? Warum lehnt Almöhi eine Entschädigung ab? Was will er stattdessen für Heidi? Was wünscht sich Heidi? Kommentieren Sie das Gespräch zwischen den beiden Großmüttern.",
         "signalWords": [
           "Heidi",
           "Almöhi",
@@ -1770,7 +1770,7 @@ const rawReaderModules = [
           "religion"
         ],
         "prompts": [
-          "Warum kriegt Peter am Ende noch Geld von Sesemann? Welche Regelung trifft dieser? Warum lehnt Almöhi eine Entschädigung ab? Was will er stattdessen für Heidi? Was wünscht sich Heidi? Kommentieren Sie das Gespräch zwischen den beiden Grossmüttern!"
+          "Warum bekommt Peter am Ende noch Geld von Herrn Sesemann? Welche Regelung trifft Sesemann? Warum lehnt Almöhi eine Entschädigung ab? Was will er stattdessen für Heidi? Was wünscht sich Heidi? Kommentieren Sie das Gespräch zwischen den beiden Großmüttern."
         ],
         "focusTasks": []
       }
@@ -1804,17 +1804,25 @@ export const lessonSets = [
     "resourceAssignments": [
       {
         "resourceId": "archiv-biografie",
-        "title": "Material: archiv biografie",
-        "summary": "Nutze diese Ressource als gezielte Leselinse zur aktuellen Leitfrage.",
-        "task": "Formuliere eine Beobachtung am Roman und führe sie mit der Ressource zu einer Deutung weiter.",
-        "questionTasks": []
+        "title": "Archiv und Biografie: Dete, Herkunft, Vormundschaft",
+        "summary": "Das Archivmaterial hilft, Heidis Ausgangslage nicht als Märchenanfang, sondern als soziale Verschiebung zu lesen.",
+        "task": "Erkläre, wie Dete im ersten Kapitel zwischen Fürsorge, Eigennutz und sozialem Druck positioniert wird. Belege deine Deutung an der Übergabe Heidis.",
+        "questionTasks": [
+          "Welche biografische oder historische Information macht Heidis Abgabe verständlicher?",
+          "Wie verändert diese Information deinen Blick auf Dete?",
+          "Welche Romanformulierung zeigt, dass Heidi zunächst über sie verfügt wird?"
+        ]
       },
       {
         "resourceId": "natur-paedagogik",
-        "title": "Material: natur paedagogik",
-        "summary": "Nutze diese Ressource als gezielte Leselinse zur aktuellen Leitfrage.",
-        "task": "Formuliere eine Beobachtung am Roman und führe sie mit der Ressource zu einer Deutung weiter.",
-        "questionTasks": []
+        "title": "Naturpädagogik: Ankunft auf der Alp",
+        "summary": "Das Naturdossier zeigt, dass die Alp von Beginn an ein Erfahrungsraum ist, der Heidis Wahrnehmung und Verhalten verändert.",
+        "task": "Untersuche Heidis erste Reaktion auf die Alp: Welche Naturdetails wirken nicht nur dekorativ, sondern eröffnen eine neue Lebensform?",
+        "questionTasks": [
+          "Welche Sinneseindrücke prägen Heidis Ankunft?",
+          "Wie unterscheidet sich die Alp vom sozialen Druck im Tal?",
+          "Welche konkrete Textstelle zeigt Heidis körperliche oder seelische Entlastung?"
+        ]
       }
     ]
   },
@@ -1841,17 +1849,25 @@ export const lessonSets = [
     "resourceAssignments": [
       {
         "resourceId": "natur-paedagogik",
-        "title": "Material: natur paedagogik",
-        "summary": "Nutze diese Ressource als gezielte Leselinse zur aktuellen Leitfrage.",
-        "task": "Formuliere eine Beobachtung am Roman und führe sie mit der Ressource zu einer Deutung weiter.",
-        "questionTasks": []
+        "title": "Naturpädagogik: Lernen mit Tieren und Gelände",
+        "summary": "Das Material macht sichtbar, dass Lernen auf der Alp über Beobachtung, Bewegung, Verantwortung und Grenzen geschieht.",
+        "task": "Vergleiche Peters Umgang mit den Geißen mit Heidis Blick auf Tiere und Landschaft. Zeige, welches Erziehungsmodell daraus entsteht.",
+        "questionTasks": [
+          "Welche Regeln lernt Heidi nicht aus einem Buch, sondern aus der Situation?",
+          "Wie korrigiert Heidi Peters Verhalten gegenüber den Tieren?",
+          "Was leistet die Natur in dieser Lektion pädagogisch?"
+        ]
       },
       {
         "resourceId": "figuren-beziehungen",
-        "title": "Material: figuren beziehungen",
-        "summary": "Nutze diese Ressource als gezielte Leselinse zur aktuellen Leitfrage.",
-        "task": "Formuliere eine Beobachtung am Roman und führe sie mit der Ressource zu einer Deutung weiter.",
-        "questionTasks": []
+        "title": "Figurenbeziehungen: Großvater, Peter, Heidi",
+        "summary": "Die Beziehungskonstellation zeigt, wie Heidi zwischen dem verschlossenen Großvater und dem eigensinnigen Peter vermittelt.",
+        "task": "Beschreibe, wie Heidi Beziehungen stiftet, ohne sie bewusst zu planen. Arbeite mit je einem Textsignal zu Großvater und Peter.",
+        "questionTasks": [
+          "Wie verändert Heidi die Atmosphäre beim Großvater?",
+          "Worin bleibt Peter eigenständig oder widerständig?",
+          "Welche Rolle spielt Heidis Direktheit im Umgang mit beiden?"
+        ]
       }
     ]
   },
@@ -1878,17 +1894,25 @@ export const lessonSets = [
     "resourceAssignments": [
       {
         "resourceId": "religion",
-        "title": "Material: religion",
-        "summary": "Nutze diese Ressource als gezielte Leselinse zur aktuellen Leitfrage.",
-        "task": "Formuliere eine Beobachtung am Roman und führe sie mit der Ressource zu einer Deutung weiter.",
-        "questionTasks": []
+        "title": "Religion und Fürsorge: Großmutter und Pfarrer",
+        "summary": "Das Religionsdossier hilft zu unterscheiden, wo der Roman Trost, Pflicht, Schuld und Gottvertrauen miteinander verbindet.",
+        "task": "Untersuche, wie religiöse Sprache im Umfeld der Großmutter wirkt: Tröstet sie, ordnet sie, fordert sie oder setzt sie unter Druck?",
+        "questionTasks": [
+          "Welche religiösen Wörter oder Motive fallen in der Szene auf?",
+          "Wie reagiert Heidi auf die Großmutter?",
+          "Wo wird Religion zur sozialen Erwartung an den Großvater?"
+        ]
       },
       {
         "resourceId": "archiv-biografie",
-        "title": "Material: archiv biografie",
-        "summary": "Nutze diese Ressource als gezielte Leselinse zur aktuellen Leitfrage.",
-        "task": "Formuliere eine Beobachtung am Roman und führe sie mit der Ressource zu einer Deutung weiter.",
-        "questionTasks": []
+        "title": "Archiv und Biografie: Weggeben, Behalten, Verantworten",
+        "summary": "Das Archivmaterial öffnet den Blick auf Familienordnung, Vormundschaft und die Frage, wer für ein Kind zuständig ist.",
+        "task": "Zeige, wie der Roman Heidis Weggang vorbereitet: Welche Interessen, Pflichten und Ausweichbewegungen treffen aufeinander?",
+        "questionTasks": [
+          "Welche Verantwortung wird an wen abgegeben?",
+          "Wie begründet Dete ihr Handeln?",
+          "Welche Textstelle macht sichtbar, dass Heidi selbst kaum gefragt wird?"
+        ]
       }
     ]
   },
@@ -1915,17 +1939,25 @@ export const lessonSets = [
     "resourceAssignments": [
       {
         "resourceId": "stadt-land",
-        "title": "Material: stadt land",
-        "summary": "Nutze diese Ressource als gezielte Leselinse zur aktuellen Leitfrage.",
-        "task": "Formuliere eine Beobachtung am Roman und führe sie mit der Ressource zu einer Deutung weiter.",
-        "questionTasks": []
+        "title": "Stadt und Land: Frankfurt als Gegenwelt",
+        "summary": "Das Stadt-Land-Dossier zeigt Frankfurt nicht nur als Ort, sondern als Ordnungssystem aus Räumen, Regeln und Blicken.",
+        "task": "Analysiere, wie Frankfurt Heidis Bewegungen und Sprache verändert. Arbeite mit einem Raumdetail und einer Verhaltensregel.",
+        "questionTasks": [
+          "Welche Regel wirkt für Heidi besonders fremd?",
+          "Wie wird der Innenraum im Vergleich zur Alp beschrieben?",
+          "Welche Wirkung hat Frau Rottenmeiers Ordnung auf Heidi?"
+        ]
       },
       {
         "resourceId": "koerper-gesundheit",
-        "title": "Material: koerper gesundheit",
-        "summary": "Nutze diese Ressource als gezielte Leselinse zur aktuellen Leitfrage.",
-        "task": "Formuliere eine Beobachtung am Roman und führe sie mit der Ressource zu einer Deutung weiter.",
-        "questionTasks": []
+        "title": "Körper und Gesundheit: Eingesperrte Bewegung",
+        "summary": "Das Gesundheitsmaterial macht sichtbar, dass Heidis Anpassungsprobleme körperlich lesbar werden.",
+        "task": "Erkläre, wie der Roman Heidis Körper als Reaktionsfläche auf die Frankfurter Ordnung nutzt.",
+        "questionTasks": [
+          "Welche körperlichen Signale zeigen Heidis Unbehagen?",
+          "Wie hängt Heidis Gesundheit mit Raum und Bewegung zusammen?",
+          "Warum ist Krankheit hier mehr als ein medizinisches Problem?"
+        ]
       }
     ]
   },
@@ -1952,17 +1984,25 @@ export const lessonSets = [
     "resourceAssignments": [
       {
         "resourceId": "stadt-land",
-        "title": "Material: stadt land",
-        "summary": "Nutze diese Ressource als gezielte Leselinse zur aktuellen Leitfrage.",
-        "task": "Formuliere eine Beobachtung am Roman und führe sie mit der Ressource zu einer Deutung weiter.",
-        "questionTasks": []
+        "title": "Stadt und Land: Missverständnisse in Frankfurt",
+        "summary": "Das Stadt-Land-Material hilft, die komischen Szenen als Zusammenstoß verschiedener Lebensordnungen zu lesen.",
+        "task": "Deute eine komische Szene nicht nur als lustigen Zwischenfall, sondern als Hinweis auf unvereinbare Regeln.",
+        "questionTasks": [
+          "Welche Regel versteht Heidi anders als die Erwachsenen?",
+          "Wie wird Komik aus räumlicher oder sozialer Fremdheit erzeugt?",
+          "Was verrät die Szene über Frankfurts Erziehungsideal?"
+        ]
       },
       {
         "resourceId": "sprache-erzaehlen",
-        "title": "Material: sprache erzaehlen",
-        "summary": "Nutze diese Ressource als gezielte Leselinse zur aktuellen Leitfrage.",
-        "task": "Formuliere eine Beobachtung am Roman und führe sie mit der Ressource zu einer Deutung weiter.",
-        "questionTasks": []
+        "title": "Sprache und Erzählen: Komik des Missverstehens",
+        "summary": "Das Sprachmaterial lenkt den Blick auf Dialogführung, Benennungen und die Erzählweise komischer Eskalationen.",
+        "task": "Untersuche, wie Sprache Missverständnisse produziert oder verschärft. Belege deine Antwort an einem Dialogmoment.",
+        "questionTasks": [
+          "Welche Wörter oder Anreden markieren soziale Distanz?",
+          "Wie reagiert die Erzählstimme auf Heidis Missverstehen?",
+          "Wo kippt Komik in Kritik an der Umgebung?"
+        ]
       }
     ]
   },
@@ -1989,17 +2029,25 @@ export const lessonSets = [
     "resourceAssignments": [
       {
         "resourceId": "stadt-land",
-        "title": "Material: stadt land",
-        "summary": "Nutze diese Ressource als gezielte Leselinse zur aktuellen Leitfrage.",
-        "task": "Formuliere eine Beobachtung am Roman und führe sie mit der Ressource zu einer Deutung weiter.",
-        "questionTasks": []
+        "title": "Stadt und Land: Heimweh als Raumkonflikt",
+        "summary": "Das Material zeigt Heimweh als Folge räumlicher Entwurzelung und nicht als bloße Laune.",
+        "task": "Zeige, wie der Roman Heidis Heimweh über Fenster, Wege, Zimmer und Erinnerungen erzählt.",
+        "questionTasks": [
+          "Welche Raumdetails machen Heidis Heimweh sichtbar?",
+          "Wie unterscheidet sich Heidis Sehnsucht von bloßer Unzufriedenheit?",
+          "Welche Textstelle verbindet Frankfurt direkt mit der Alp?"
+        ]
       },
       {
         "resourceId": "koerper-gesundheit",
-        "title": "Material: koerper gesundheit",
-        "summary": "Nutze diese Ressource als gezielte Leselinse zur aktuellen Leitfrage.",
-        "task": "Formuliere eine Beobachtung am Roman und führe sie mit der Ressource zu einer Deutung weiter.",
-        "questionTasks": []
+        "title": "Körper und Gesundheit: Spuk, Schlaf, Diagnose",
+        "summary": "Das Gesundheitsmaterial macht verständlich, warum der Spuk medizinisch, psychisch und sozial gelesen werden kann.",
+        "task": "Deute die Spukepisode als Körpersprache: Was kann Heidi nicht sagen, was ihr Körper aber sichtbar macht?",
+        "questionTasks": [
+          "Welche Symptome werden beobachtet?",
+          "Wie deutet der Doktor Heidis Zustand?",
+          "Warum führt die Diagnose zur Heimkehr statt zu strengerer Erziehung?"
+        ]
       }
     ]
   },
@@ -2026,17 +2074,25 @@ export const lessonSets = [
     "resourceAssignments": [
       {
         "resourceId": "religion",
-        "title": "Material: religion",
-        "summary": "Nutze diese Ressource als gezielte Leselinse zur aktuellen Leitfrage.",
-        "task": "Formuliere eine Beobachtung am Roman und führe sie mit der Ressource zu einer Deutung weiter.",
-        "questionTasks": []
+        "title": "Religion und Trost: Gelerntes anwenden",
+        "summary": "Das Religionsdossier zeigt, wie Heidi religiöse Sprache nicht nur übernimmt, sondern im Umgang mit Trauer praktisch einsetzt.",
+        "task": "Untersuche, wie Heidi Trost spendet: Wiederholt sie Gelerntes oder verändert sie es durch ihre Beziehung zum Doktor?",
+        "questionTasks": [
+          "Welche religiöse Vorstellung gibt Heidi weiter?",
+          "Warum wirkt ihre Rede auf den Doktor anders als eine Unterrichtsantwort?",
+          "Welche Grenze hat diese Form von Trost?"
+        ]
       },
       {
         "resourceId": "koerper-gesundheit",
-        "title": "Material: koerper gesundheit",
-        "summary": "Nutze diese Ressource als gezielte Leselinse zur aktuellen Leitfrage.",
-        "task": "Formuliere eine Beobachtung am Roman und führe sie mit der Ressource zu einer Deutung weiter.",
-        "questionTasks": []
+        "title": "Körper und Gesundheit: Trauer, Müdigkeit, Genesung",
+        "summary": "Das Gesundheitsmaterial hilft, seelische Belastung und körperliche Zeichen zusammenzulesen.",
+        "task": "Vergleiche Heidis frühere Krankheit mit der Trauer des Doktors: Wie verbindet der Roman Körper, Verlust und Heilung?",
+        "questionTasks": [
+          "Welche Zeichen von Erschöpfung oder Trauer werden sichtbar?",
+          "Wie reagiert Heidi auf den leidenden Erwachsenen?",
+          "Welche Rolle spielt die Alp als möglicher Heilraum?"
+        ]
       }
     ]
   },
@@ -2063,17 +2119,25 @@ export const lessonSets = [
     "resourceAssignments": [
       {
         "resourceId": "natur-paedagogik",
-        "title": "Material: natur paedagogik",
-        "summary": "Nutze diese Ressource als gezielte Leselinse zur aktuellen Leitfrage.",
-        "task": "Formuliere eine Beobachtung am Roman und führe sie mit der Ressource zu einer Deutung weiter.",
-        "questionTasks": []
+        "title": "Naturpädagogik: Lesenlernen und Erfahrungslernen",
+        "summary": "Das Material hilft, schulisches Lernen und Lernen durch Erfahrung nicht gegeneinander auszuspielen, sondern zu vergleichen.",
+        "task": "Erkläre, wie Lesenlernen, Naturerfahrung und soziale Verantwortung in dieser Lektion zusammenkommen.",
+        "questionTasks": [
+          "Was kann Schule leisten, was die Alp nicht leistet?",
+          "Was lernt Heidi außerhalb der Schule weiterhin besser?",
+          "Wie verändert Bildung die Beziehungen zwischen Heidi, Peter und Klara?"
+        ]
       },
       {
         "resourceId": "figuren-beziehungen",
-        "title": "Material: figuren beziehungen",
-        "summary": "Nutze diese Ressource als gezielte Leselinse zur aktuellen Leitfrage.",
-        "task": "Formuliere eine Beobachtung am Roman und führe sie mit der Ressource zu einer Deutung weiter.",
-        "questionTasks": []
+        "title": "Figurenbeziehungen: Freundschaft, Eifersucht, Besuch",
+        "summary": "Die Figurenkonstellation zeigt, wie Klaras Reise Peters Stellung bedroht und Heidis Beziehungen erweitert.",
+        "task": "Untersuche Peters Eifersucht nicht als bloße Bosheit, sondern als Reaktion auf veränderte Näheverhältnisse.",
+        "questionTasks": [
+          "Wodurch fühlt Peter sich zurückgesetzt?",
+          "Wie verhält sich Heidi zwischen Peter und Klara?",
+          "Welche Beziehung wird durch die geplante Reise gestärkt oder gefährdet?"
+        ]
       }
     ]
   },
@@ -2101,17 +2165,25 @@ export const lessonSets = [
     "resourceAssignments": [
       {
         "resourceId": "koerper-gesundheit",
-        "title": "Material: koerper gesundheit",
-        "summary": "Nutze diese Ressource als gezielte Leselinse zur aktuellen Leitfrage.",
-        "task": "Formuliere eine Beobachtung am Roman und führe sie mit der Ressource zu einer Deutung weiter.",
-        "questionTasks": []
+        "title": "Körper und Gesundheit: Pflege, Bewegung, Behinderung",
+        "summary": "Das Gesundheitsmaterial hilft, Klaras Aufenthalt nicht als Wunder, sondern als Zusammenspiel von Pflege, Umgebung und Beziehung zu untersuchen.",
+        "task": "Analysiere Klaras Veränderung auf der Alp: Welche körperlichen, räumlichen und sozialen Bedingungen werden dafür aufgebaut?",
+        "questionTasks": [
+          "Welche Pflegehandlungen werden konkret gezeigt?",
+          "Wie verändert die Alp Klaras Bewegungsmöglichkeiten?",
+          "Wo bleibt die Darstellung problematisch oder idealisierend?"
+        ]
       },
       {
         "resourceId": "film-alptraum",
-        "title": "Material: film alptraum",
-        "summary": "Nutze diese Ressource als gezielte Leselinse zur aktuellen Leitfrage.",
-        "task": "Formuliere eine Beobachtung am Roman und führe sie mit der Ressource zu einer Deutung weiter.",
-        "questionTasks": []
+        "title": "Filmwerkstatt: Heidis Alptraum",
+        "summary": "Der Dokumentarfilm erweitert die Romanlektüre, indem er Heidi als kulturelles Bild, Projektionsfläche und Konfliktfigur befragt.",
+        "task": "Vergleiche eine Szene mit Klara auf der Alp mit einem Beobachtungsauftrag aus dem Film: Welche Heidi-Vorstellung wird bestätigt, welche irritiert?",
+        "questionTasks": [
+          "Welche Bilder von Alp und Heilung nutzt der Film?",
+          "Wo zeigt der Film eine Spannung zwischen Idylle und Problemgeschichte?",
+          "Welche Beobachtung aus dem Film verändert deinen Blick auf Klara?"
+        ]
       }
     ]
   },
@@ -2140,31 +2212,43 @@ export const lessonSets = [
     "resourceAssignments": [
       {
         "resourceId": "schuld-ordnung",
-        "title": "Material: schuld ordnung",
-        "summary": "Nutze diese Ressource als gezielte Leselinse zur aktuellen Leitfrage.",
-        "task": "Formuliere eine Beobachtung am Roman und führe sie mit der Ressource zu einer Deutung weiter.",
-        "questionTasks": []
+        "title": "Schuld und Ordnung: Peters Geständnis",
+        "summary": "Das Material hilft, Peters Schuld zwischen moralischer Verfehlung, sozialer Kränkung und Wiedergutmachung zu lesen.",
+        "task": "Untersuche, wie der Roman Peters Tat bewertet: Wird Schuld bestraft, verstanden, entschärft oder sozial eingehegt?",
+        "questionTasks": [
+          "Welche Motive führen zu Peters Tat?",
+          "Wie verändert das Geständnis die Situation?",
+          "Welche Form von Wiedergutmachung bietet der Schluss an?"
+        ]
       },
       {
         "resourceId": "bilder-popularisierung",
-        "title": "Material: bilder popularisierung",
-        "summary": "Nutze diese Ressource als gezielte Leselinse zur aktuellen Leitfrage.",
-        "task": "Formuliere eine Beobachtung am Roman und führe sie mit der Ressource zu einer Deutung weiter.",
-        "questionTasks": []
+        "title": "Bildgeschichte und Popularisierung: Heidi als Ikone",
+        "summary": "Das Bildmaterial zeigt, wie Heidi nach dem Roman zu einem wiedererkennbaren Zeichen für Kindheit, Schweiz, Natur und Heimat wurde.",
+        "task": "Vergleiche den Romanschluss mit einem späteren Heidi-Bild: Was wird vereinfacht, verstärkt oder ausgeblendet?",
+        "questionTasks": [
+          "Welche Eigenschaften machen Heidi leicht popularisierbar?",
+          "Welche Konflikte des Romans verschwinden in idealisierten Bildern?",
+          "Wie verändert Popularisierung den Blick auf Schuld und Schluss?"
+        ]
       },
       {
         "resourceId": "studienkompass",
-        "title": "Material: studienkompass",
-        "summary": "Nutze diese Ressource als gezielte Leselinse zur aktuellen Leitfrage.",
-        "task": "Formuliere eine Beobachtung am Roman und führe sie mit der Ressource zu einer Deutung weiter.",
-        "questionTasks": []
+        "title": "Studienkompass: Forschungsperspektiven bündeln",
+        "summary": "Der Studienkompass hilft, einzelne Beobachtungen am Ende der Einheit in eine begründete Gesamtdeutung zu überführen.",
+        "task": "Formuliere eine abschließende These: Welche Spannung trägt den Roman am stärksten – Natur und Stadt, Religion und Fürsorge, Krankheit und Heilung oder Schuld und Ordnung?",
+        "questionTasks": [
+          "Welche Forschungs- oder Dossierperspektive war für deine Deutung am ergiebigsten?",
+          "Welche Romanstelle stützt deine Gesamtthese am stärksten?",
+          "Welche Vereinfachung über Heidi würdest du nach der Einheit zurückweisen?"
+        ]
       },
       {
         "resourceId": "ki-trailer",
         "title": "Medienvergleich: KI-Horror-Trailer als produktive Störung",
         "summary": "Der Trailer wird gegen den Schluss der Einheit eingesetzt, um Heidi als globale, manipulierbare Bildikone zu untersuchen.",
         "task": "Wähle eine Romanstelle aus dem Schluss oder aus der Alp-Handlung und vergleiche sie mit dem KI-Trailer: Welche Bedeutungsverschiebung entsteht durch Horrorbild, Musik, Schnitt und KI-Ästhetik?",
-        "questions": [
+        "questionTasks": [
           "Welche Heidi-Erwartung nutzt der Trailer aus?",
           "Welche Bild- oder Tonentscheidung verändert die Romanwirkung am stärksten?",
           "Was lernst du dadurch über Popularisierung und Verfremdung?"

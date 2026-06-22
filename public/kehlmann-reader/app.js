@@ -791,7 +791,7 @@ function documentationStatusForAssignment(assignment, lesson = currentLesson()) 
   const checks = [
     { label: "Arbeitsauftrag schriftlich beantworten", complete: Boolean(trimmed(response.taskResponse)) },
     ...questionTasks.map((task, index) => ({
-      label: `Ressourcenfrage ${index + 1}: ${taskPrompt(task)}`,
+      label: `Materialfrage ${index + 1}: ${taskPrompt(task)}`,
       complete: Boolean(trimmed(response.questionAnswers[index]))
     }))
   ];
@@ -1398,7 +1398,7 @@ function renderResourceAssignmentsPanel() {
     <article class="panel resource-assignment-panel">
       <div class="panel-head">
         <div>
-          <div class="eyebrow">Ressourcen-Aufträge</div>
+          <div class="eyebrow">Materialaufträge</div>
           <h2>Podcast, Dossiers, Sekundärtexte und Theorie als Arbeitsstationen</h2>
         </div>
       </div>
@@ -1431,7 +1431,7 @@ function renderResourceAssignmentsPanel() {
               <strong data-doc-summary="resource">${escapeHtml(`Dokumentationsstand: ${documentation.completed}/${documentation.total}`)}</strong>
               <p data-doc-missing="resource">${documentation.missing.length
                 ? escapeHtml(`Noch offen: ${documentation.missing.join(" · ")}`)
-                : "Der Ressourcen-Auftrag ist vollständig schriftlich dokumentiert."
+                : "Der Materialauftrag ist vollständig schriftlich dokumentiert."
               }</p>
             </div>
 
@@ -1442,13 +1442,13 @@ function renderResourceAssignmentsPanel() {
 
             <div class="theory-grid">
               <div class="theory-card">
-                <strong>Verbindliche Ressourcenfragen</strong>
+                <strong>Verbindliche Materialfragen</strong>
                 <div class="question-task-list">
-                  ${questionTasks.map((questionTask, index) => renderTaskPreview(questionTask, index, "Ressourcenfrage")).join("")}
+                  ${questionTasks.map((questionTask, index) => renderTaskPreview(questionTask, index, "Materialfrage")).join("")}
                 </div>
               </div>
               <div class="theory-card">
-                <strong>Warum diese Ressource hier wichtig ist</strong>
+                <strong>Warum dieses Material hier wichtig ist</strong>
                 <p>${escapeHtml(resource.summary)}</p>
               </div>
             </div>
@@ -1481,7 +1481,7 @@ function renderResourceAssignmentsPanel() {
                 task: questionTask,
                 value: response.questionAnswers[index],
                 dataset: { "resource-id": resource.id, "resource-field": "questionAnswers", index },
-                label: responseLabel("Ressourcenfrage", index, taskPrompt(questionTask))
+                label: responseLabel("Materialfrage", index, taskPrompt(questionTask))
               })).join("")}
             </section>
 
@@ -2014,7 +2014,7 @@ function updateLiveDocumentation() {
     if (missing) {
       missing.textContent = documentation.missing.length
         ? `Noch offen: ${documentation.missing.join(" · ")}`
-        : "Der Ressourcen-Auftrag ist vollständig schriftlich dokumentiert.";
+        : "Der Materialauftrag ist vollständig schriftlich dokumentiert.";
     }
 
     if (box) {
