@@ -76,7 +76,11 @@ function normalizeCode(value = "") {
 }
 
 function normalizeName(value = "") {
-  return String(value).trim().replace(/\s+/g, " ");
+  return String(value)
+    .normalize("NFC")
+    .replace(/[\u0000-\u001f\u007f]/g, "")
+    .trim()
+    .replace(/\s+/g, " ");
 }
 
 function makeId(prefix) {
@@ -276,14 +280,8 @@ function resolveClassroomForMode(store, mode) {
 
   if (!eligible.length) {
     throw new Error(mode === "seb"
-      ? "Aktuell ist keine Klasse fuer die SEB-Version freigeschaltet."
-      : "Aktuell ist keine Klasse fuer die offene Version freigeschaltet.");
-  }
-
-  if (eligible.length > 1) {
-    throw new Error(mode === "seb"
-      ? "Fuer die vereinfachte Anmeldung darf nur eine Klasse gleichzeitig fuer SEB freigeschaltet sein."
-      : "Fuer die vereinfachte Anmeldung darf nur eine Klasse gleichzeitig fuer die offene Version freigeschaltet sein.");
+      ? "Aktuell ist keine Klasse für die SEB-Version freigeschaltet."
+      : "Aktuell ist keine Klasse für die offene Version freigeschaltet.");
   }
 
   return eligible[0];

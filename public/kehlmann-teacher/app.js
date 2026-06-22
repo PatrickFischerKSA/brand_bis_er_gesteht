@@ -114,7 +114,7 @@ function renderTeacherGuide(classroom) {
       <div class="panel-head">
         <div>
           <div class="eyebrow">Betriebsprotokoll</div>
-          <h2>Kuerzel und SEB sauber starten</h2>
+          <h2>Namen, Kürzel und SEB sauber starten</h2>
         </div>
       </div>
       <div class="protocol-banner">
@@ -128,7 +128,7 @@ function renderTeacherGuide(classroom) {
         </div>
         <div class="protocol-chip">
           <span>Offene Anmeldung</span>
-          <strong>Nur Kuerzel</strong>
+          <strong>Name oder Kürzel</strong>
         </div>
         <div class="protocol-chip">
           <span>Aktive Lerngruppe</span>
@@ -142,11 +142,11 @@ function renderTeacherGuide(classroom) {
         </div>
         <div class="instruction-card">
           <strong>2. Freigabe eindeutig halten</strong>
-          <p>Aktuell ausgewählt ist: <strong>${escapeHtml(classroomName)}</strong>. Fuer die vereinfachte Anmeldung sollte pro Modus immer nur eine Lerngruppe gleichzeitig freigeschaltet sein.</p>
+          <p>Aktuell ausgewählt ist: <strong>${escapeHtml(classroomName)}</strong>. Für die vereinfachte Anmeldung wird automatisch die zuletzt aktualisierte freigegebene Lerngruppe genutzt.</p>
         </div>
         <div class="instruction-card">
           <strong>3. Offene Anmeldung klären</strong>
-          <p>Fuer die offene Version braucht es kein zusaetzliches Unterrichtspasswort mehr. Lernende melden sich nur mit einem klaren Namen oder Kuerzel an.</p>
+          <p>Für die offene Version braucht es kein zusätzliches Unterrichtspasswort mehr. Lernende melden sich mit einem klaren Namen oder Kürzel an.</p>
         </div>
         <div class="instruction-card">
           <strong>4. Freigaben setzen</strong>
@@ -154,15 +154,15 @@ function renderTeacherGuide(classroom) {
         </div>
         <div class="instruction-card">
           <strong>5. Offene Version starten</strong>
-          <p>Schueler*innen oeffnen <em>${escapeHtml(config.openUrl || "/open")}</em>, tragen Namen oder Kuerzel ein und klicken auf <em>Freischalten</em>.</p>
+          <p>Schüler*innen öffnen <em>${escapeHtml(config.openUrl || "/open")}</em>, tragen Namen oder Kürzel ein und klicken auf <em>Freischalten</em>.</p>
         </div>
         <div class="instruction-card">
           <strong>6. SEB-Protokoll vor dem Unterricht</strong>
-          <p>1. Aktive SEB-Lektion waehlen. 2. <em>Einstellungen speichern</em>. 3. Safe Exam Browser auf einem Testgeraet starten. 4. <em>${escapeHtml(config.sebUrl || "/seb")}</em> oeffnen. 5. Mit Testnamen anmelden. 6. Pruefen, ob genau die erwartete Lektion erscheint.</p>
+          <p>1. Aktive SEB-Lektion wählen. 2. <em>Einstellungen speichern</em>. 3. Safe Exam Browser auf einem Testgerät starten. 4. <em>${escapeHtml(config.sebUrl || "/seb")}</em> öffnen. 5. Mit Testnamen anmelden. 6. Prüfen, ob genau die erwartete Lektion erscheint.</p>
         </div>
         <div class="instruction-card">
           <strong>7. Schüler-Registrierung im SEB</strong>
-          <p>Im Safe Exam Browser oeffnen Schueler*innen <em>${escapeHtml(config.sebUrl || "/seb")}</em>, tragen nur Namen oder Kuerzel ein und klicken auf <em>Starten</em>.</p>
+          <p>Im Safe Exam Browser öffnen Schüler*innen <em>${escapeHtml(config.sebUrl || "/seb")}</em>, tragen Namen oder Kürzel ein und klicken auf <em>Starten</em>.</p>
         </div>
         <div class="instruction-card">
           <strong>8. Minutiöse Endkontrolle</strong>
@@ -170,7 +170,7 @@ function renderTeacherGuide(classroom) {
         </div>
         <div class="instruction-card">
           <strong>9. Wenn etwas schiefgeht</strong>
-          <p>Falls die Anmeldung scheitert, pruefe zuerst die Schreibweise des Kuerzels und ob nicht mehrere Lerngruppen gleichzeitig fuer denselben Modus freigeschaltet sind. Oeffnet sich <em>/seb</em> nicht, kontrolliere den Safe Exam Browser und ${config.hasSebConfigKeyHash ? "die hinterlegte SEB-Konfiguration." : "die SEB-Umgebung."}</p>
+          <p>Falls die Anmeldung scheitert, prüfe zuerst, ob mindestens eine Lerngruppe für den gewählten Modus freigeschaltet ist. Öffnet sich <em>/seb</em> nicht, kontrolliere den Safe Exam Browser und ${config.hasSebConfigKeyHash ? "die hinterlegte SEB-Konfiguration." : "die SEB-Umgebung."}</p>
         </div>
       </div>
     </article>
@@ -205,7 +205,7 @@ function render() {
         <div>
           <div class="eyebrow">Lehrer*innen-Dashboard</div>
           <h1>Lerngruppen, Fortschritt und Peer Review</h1>
-          <p>Hier steuerst du Lerngruppen, das aktive SEB-Arbeitsset, Peer-Review-Zuweisungen und den Lernstand der einzelnen Schueler*innen fuer die Heidi-Einheit.</p>
+          <p>Hier steuerst du Lerngruppen, das aktive SEB-Arbeitsset, Peer-Review-Zuweisungen und den Lernstand der einzelnen Schüler*innen für die Heidi-Einheit.</p>
         </div>
         <div class="hero-actions">
           <a class="button secondary" href="${escapeHtml(config.teacherEntryUrl || "/teacher-entry")}">Lehrer*inneneingang</a>
@@ -374,7 +374,7 @@ document.addEventListener("submit", async (event) => {
         ? previousSelectedClassId
         : (previousSelectedClassId || state.overview.classes[0]?.id || null);
       state.notice = createdClassroom
-        ? `Lerngruppe ${createdClassroom.name} erstellt. Die aktuelle Ansicht bleibt auf der bisher gewaehlten Lektion und Lerngruppe.`
+        ? `Lerngruppe ${createdClassroom.name} erstellt. Die aktuelle Ansicht bleibt auf der bisher gewählten Lektion und Lerngruppe.`
         : "Lerngruppe erstellt.";
       state.error = "";
       event.target.reset();

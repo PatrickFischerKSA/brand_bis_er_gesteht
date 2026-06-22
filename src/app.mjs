@@ -22,6 +22,8 @@ const readerAssetDir = path.join(publicDir, "reader/assets");
 const OPEN_COOKIE = "kehlmann_open_access";
 const STUDENT_COOKIE = "kehlmann_reader_student";
 const CLASS_COOKIE = "kehlmann_reader_class";
+const NAME_COOKIE = "kehlmann_reader_name";
+const MODE_COOKIE = "kehlmann_reader_mode";
 const TEACHER_COOKIE = "kehlmann_teacher_access";
 const SEB_CONFIG_KEY_HASH = process.env.SEB_CONFIG_KEY_HASH || process.env.KEHLMANN_SEB_CONFIG_KEY_HASH || "";
 const READER_PDF_SOURCE = "/reader/assets/heidi-volltext.html";
@@ -616,7 +618,7 @@ function renderTeacherEntryPage({ lessonId, entryId } = {}) {
 
         <section class="panel">
           <div class="eyebrow">Betriebsprotokoll</div>
-          <h2>Kuerzel und SEB sauber starten</h2>
+          <h2>Namen, Kürzel und SEB sauber starten</h2>
           <div class="meta-grid">
             <div class="meta-card">
               <strong>Offene Version</strong>
@@ -628,7 +630,7 @@ function renderTeacherEntryPage({ lessonId, entryId } = {}) {
             </div>
             <div class="meta-card">
               <strong>Offene Anmeldung</strong>
-              <p>Nur Name oder Kuerzel</p>
+              <p>Name oder Kürzel</p>
             </div>
             <div class="meta-card">
               <strong>SEB-Konfiguration</strong>
@@ -641,12 +643,12 @@ function renderTeacherEntryPage({ lessonId, entryId } = {}) {
               <span>Im Lehrer*innen-Dashboard eine neue Lerngruppe anlegen und genau eine offene bzw. eine SEB-Freigabe aktiv lassen.</span>
             </article>
             <article class="resource-nav-card">
-              <strong>2. Freigabe pruefen</strong>
-              <span>Vor dem Einsatz sicherstellen, dass pro Modus nur eine Lerngruppe freigeschaltet ist, damit die Anmeldung eindeutig zugeordnet werden kann.</span>
+              <strong>2. Freigabe prüfen</strong>
+              <span>Vor dem Einsatz sicherstellen, dass mindestens eine Lerngruppe freigeschaltet ist. Bei mehreren Freigaben nutzt die Anmeldung automatisch die zuletzt aktualisierte Lerngruppe.</span>
             </article>
             <article class="resource-nav-card">
               <strong>3. Offene Version</strong>
-              <span>Schueler*innen oeffnen <em>${config.openUrl}</em> und melden sich nur mit Namen oder Kuerzel an.</span>
+              <span>Schüler*innen öffnen <em>${config.openUrl}</em> und melden sich mit Namen oder Kürzel an.</span>
             </article>
             <article class="resource-nav-card">
               <strong>4. SEB-Version</strong>
@@ -654,7 +656,7 @@ function renderTeacherEntryPage({ lessonId, entryId } = {}) {
             </article>
             <article class="resource-nav-card">
               <strong>5. SEB-Anmeldung</strong>
-              <span>Schueler*innen oeffnen im Safe Exam Browser <em>${config.sebUrl}</em> und melden sich nur mit Namen oder Kuerzel an.</span>
+              <span>Schüler*innen öffnen im Safe Exam Browser <em>${config.sebUrl}</em> und melden sich mit Namen oder Kürzel an.</span>
             </article>
             <article class="resource-nav-card">
               <strong>6. Endkontrolle</strong>
@@ -818,19 +820,19 @@ function renderStudentAccessPage({ mode, lessonId, errorText = "" }) {
           <h1>${heading}</h1>
           <p>
             ${isOpen
-              ? "Diese Version ist fuer Unterricht, Hausaufgaben oder gemeinsame Analysephasen gedacht und wird nur ueber Namen oder Kuerzel freigeschaltet."
-              : "Diese Version laeuft nur im Safe Exam Browser. Fuer die Zuordnung zur freigegebenen Lerngruppe gibst du nur Namen oder Kuerzel an."}
+              ? "Diese Version ist für Unterricht, Hausaufgaben oder gemeinsame Analysephasen gedacht und wird über Namen oder Kürzel freigeschaltet."
+              : "Diese Version läuft nur im Safe Exam Browser. Für die Zuordnung zur freigegebenen Lerngruppe gibst du Namen oder Kürzel an."}
           </p>
           <div class="notice">
             <strong>So funktioniert die Anmeldung:</strong>
-            <br>1. Deinen Namen oder ein eindeutiges Kuerzel eintragen.
+            <br>1. Deinen Namen oder ein eindeutiges Kürzel eintragen.
             <br>2. Auf ${isOpen ? "Freischalten" : "Starten"} klicken und dann direkt in der zugewiesenen Lektion arbeiten.
           </div>
           ${lesson ? `<div class="notice"><strong>Vorgewählte Lektion:</strong> ${lesson.title}<br>${lesson.sebPrompt}</div>` : ""}
           ${errorText ? `<div class="notice"><strong>Hinweis:</strong> ${errorText}</div>` : ""}
           <form method="post" action="${formAction}" class="form-grid">
             <input type="hidden" name="lessonId" value="${lessonId || ""}">
-            <label for="displayName">Name / Kuerzel</label>
+            <label for="displayName">Name / Kürzel</label>
             <input id="displayName" name="displayName" type="text" autocomplete="name" placeholder="z. B. Nora S.">
             <div class="row">
               <button type="submit">${isOpen ? "Freischalten" : "Starten"}</button>
@@ -855,7 +857,7 @@ function renderSebBlockedPage() {
             Diese Fassung akzeptiert nur Anfragen aus Safe Exam Browser.
             ${SEB_CONFIG_KEY_HASH ? " Zusätzlich ist serverseitig ein bestimmter SEB-Konfigurationsschlüssel hinterlegt." : ""}
           </div>
-          <p>Starte das Tool direkt im konfigurierten SEB-Fenster oder nutze alternativ die offene Version nur mit Kuerzel.</p>
+          <p>Starte das Tool direkt im konfigurierten SEB-Fenster oder nutze alternativ die offene Version mit Namen oder Kürzel.</p>
           <div class="row">
             <a class="button secondary" href="/open">Offene Version</a>
             <a class="button secondary" href="/">Zur Übersicht</a>
@@ -937,14 +939,18 @@ function clearStudentCookies(response) {
   response.append("Set-Cookie", `${OPEN_COOKIE}=; HttpOnly; Path=/; Max-Age=0; SameSite=Lax`);
   response.append("Set-Cookie", `${STUDENT_COOKIE}=; HttpOnly; Path=/; Max-Age=0; SameSite=Lax`);
   response.append("Set-Cookie", `${CLASS_COOKIE}=; HttpOnly; Path=/; Max-Age=0; SameSite=Lax`);
+  response.append("Set-Cookie", `${NAME_COOKIE}=; HttpOnly; Path=/; Max-Age=0; SameSite=Lax`);
+  response.append("Set-Cookie", `${MODE_COOKIE}=; HttpOnly; Path=/; Max-Age=0; SameSite=Lax`);
 }
 
-function setStudentCookies(response, classroom, student, includeOpenAccess = false) {
+function setStudentCookies(response, classroom, student, includeOpenAccess = false, mode = "open") {
   if (includeOpenAccess) {
     response.append("Set-Cookie", `${OPEN_COOKIE}=1; HttpOnly; Path=/; Max-Age=28800; SameSite=Lax`);
   }
-  response.append("Set-Cookie", `${STUDENT_COOKIE}=${student.id}; HttpOnly; Path=/; Max-Age=28800; SameSite=Lax`);
-  response.append("Set-Cookie", `${CLASS_COOKIE}=${classroom.id}; HttpOnly; Path=/; Max-Age=28800; SameSite=Lax`);
+  response.append("Set-Cookie", `${STUDENT_COOKIE}=${encodeURIComponent(student.id)}; HttpOnly; Path=/; Max-Age=28800; SameSite=Lax`);
+  response.append("Set-Cookie", `${CLASS_COOKIE}=${encodeURIComponent(classroom.id)}; HttpOnly; Path=/; Max-Age=28800; SameSite=Lax`);
+  response.append("Set-Cookie", `${NAME_COOKIE}=${encodeURIComponent(student.displayName)}; HttpOnly; Path=/; Max-Age=28800; SameSite=Lax`);
+  response.append("Set-Cookie", `${MODE_COOKIE}=${encodeURIComponent(mode)}; HttpOnly; Path=/; Max-Age=28800; SameSite=Lax`);
 }
 
 function hasTeacherAccess(request) {
@@ -958,14 +964,31 @@ function lessonRedirect(mode, lessonId) {
   return `/${mode}/lesson/${lessonId}`;
 }
 
-async function hasValidStudentSession(request) {
-  const studentId = getCookies(request)[STUDENT_COOKIE];
-  if (!studentId) {
+async function ensureValidStudentSession(request, response, mode, lessonId = "") {
+  const cookies = getCookies(request);
+  const studentId = cookies[STUDENT_COOKIE];
+
+  if (studentId) {
+    const store = await readReaderStore();
+    if (buildReaderBootstrap(store, studentId)) {
+      return true;
+    }
+  }
+
+  if (!cookies[NAME_COOKIE]) {
     return false;
   }
 
-  const store = await readReaderStore();
-  return Boolean(buildReaderBootstrap(store, studentId));
+  const access = await updateReaderStore(async (store) => (
+    createOrResumeStudent(store, {
+      displayName: cookies[NAME_COOKIE],
+      mode,
+      lessonId
+    })
+  ));
+
+  setStudentCookies(response, access.classroom, access.student, mode === "open", mode);
+  return true;
 }
 
 export function createApp() {
@@ -1002,7 +1025,7 @@ export function createApp() {
         })
       ));
 
-      setStudentCookies(response, access.classroom, access.student, true);
+      setStudentCookies(response, access.classroom, access.student, true, "open");
       response.redirect(303, lessonRedirect("open", lessonId));
     } catch (error) {
       response.status(401).send(renderStudentAccessPage({
@@ -1025,7 +1048,7 @@ export function createApp() {
         })
       ));
 
-      setStudentCookies(response, access.classroom, access.student, false);
+      setStudentCookies(response, access.classroom, access.student, false, "seb");
       response.redirect(303, lessonRedirect("seb", lessonId));
     } catch (error) {
       response.status(401).send(renderStudentAccessPage({
@@ -1057,7 +1080,7 @@ export function createApp() {
       return;
     }
 
-    if (!(await hasValidStudentSession(request))) {
+    if (!(await ensureValidStudentSession(request, response, "open"))) {
       clearStudentCookies(response);
       response.redirect(303, "/open");
       return;
@@ -1072,7 +1095,7 @@ export function createApp() {
       return;
     }
 
-    if (!(await hasValidStudentSession(request))) {
+    if (!(await ensureValidStudentSession(request, response, "open", request.params.lessonId))) {
       clearStudentCookies(response);
       response.redirect(303, `/open/lesson/${encodeURIComponent(request.params.lessonId)}`);
       return;
@@ -1092,7 +1115,7 @@ export function createApp() {
       return;
     }
 
-    if (!(await hasValidStudentSession(request))) {
+    if (!(await ensureValidStudentSession(request, response, "seb"))) {
       clearStudentCookies(response);
       response.redirect(303, "/seb");
       return;
@@ -1112,7 +1135,7 @@ export function createApp() {
       return;
     }
 
-    if (!(await hasValidStudentSession(request))) {
+    if (!(await ensureValidStudentSession(request, response, "seb", request.params.lessonId))) {
       clearStudentCookies(response);
       response.redirect(303, `/seb/lesson/${encodeURIComponent(request.params.lessonId)}`);
       return;

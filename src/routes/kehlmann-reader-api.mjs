@@ -4,6 +4,7 @@ import {
   buildReaderBootstrap,
   buildTeacherOverview,
   createClassroom,
+  createOrResumeStudent,
   readReaderStore,
   regenerateClassroomCode,
   savePeerReview,
@@ -16,8 +17,23 @@ import { parseCookies } from "../services/access.mjs";
 export const kehlmannReaderApiRouter = Router();
 
 const STUDENT_COOKIE = "kehlmann_reader_student";
-function getStudentId(request) {
-  return parseCookies(request.headers.cookie || "")[STUDENT_COOKIE] || null;
+const CLASS_COOKIE = "kehlmann_reader_class";
+const NAME_COOKIE = "kehlmann_reader_name";
+const MODE_COOKIE = "kehlmann_reader_mode";
+
+function cookieOptions() {
+  return "HttpOnly; Path=/; Max-Age=28800; SameSite=Lax";
+}
+
+function setSessionCookies(response, classroom, student, mode) {
+  response.append("Set-Cookie", `${STUDENT_COOKIE}=${encodeURIComponent(student.id)}; ${cookieOptions()}`);
+  response.append("Set-Cookie", `${CLASS_COOKIE}=${encodeURIComponent(classroom.id)}; ${cookieOptions()}`);
+  response.append("Set-Cookie", `${NAME_COOKIE}=${encodeURIComponent(student.displayName)}; ${cookieOptions()}`);
+  response.append("Set-Cookie", `${MODE_COOKIE}=${encodeURIComponent(mode || "open")}; ${cookieOptions()}`);
+}
+
+function getCookies(request) {
+  return parseCookies(request.headers.cookie || "");
 }
 
 function hasTeacherAccess(request) {
@@ -28,13 +44,41 @@ function badRequest(response, message, status = 400) {
   response.status(status).json({ error: message });
 }
 
-kehlmannReaderApiRouter.get("/bootstrap", async (request, response) => {
+async function ensureReaderSession(request, response, options = {}) {
   const store = await readReaderStore();
-  const studentId = getStudentId(request);
+  const cookies = getCookies(request);
+  const studentId = cookies[STUDENT_COOKIE] || "";
+
+  if (studentId && buildReaderBootstrap(store, studentId)) {
+    return studentId;
+  }
+
+  const displayName = cookies[NAME_COOKIE] || "";
+  if (!displayName) {
+    return null;
+  }
+
+  const mode = options.mode || cookies[MODE_COOKIE] || "open";
+  const lessonId = options.lessonId || "";
+  const access = await updateReaderStore(async (nextStore) => (
+    createOrResumeStudent(nextStore, {
+      displayName,
+      mode,
+      lessonId
+    })
+  ));
+
+  setSessionCookies(response, access.classroom, access.student, mode);
+  return access.student.id;
+}
+
+kehlmannReaderApiRouter.get("/bootstrap", async (request, response) => {
+  const studentId = await ensureReaderSession(request, response);
   if (!studentId) {
     return badRequest(response, "Reader-Sitzung fehlt.", 401);
   }
 
+  const store = await readReaderStore();
   const bootstrap = buildReaderBootstrap(store, studentId);
   if (!bootstrap) {
     return badRequest(response, "Reader-Sitzung nicht gefunden.", 401);
@@ -44,7 +88,10 @@ kehlmannReaderApiRouter.get("/bootstrap", async (request, response) => {
 });
 
 kehlmannReaderApiRouter.post("/progress", async (request, response) => {
-  const studentId = getStudentId(request);
+  const studentId = await ensureReaderSession(request, response, {
+    mode: request.body?.mode || "open",
+    lessonId: request.body?.lessonId || ""
+  });
   if (!studentId) {
     return badRequest(response, "Reader-Sitzung fehlt.", 401);
   }
@@ -62,7 +109,7 @@ kehlmannReaderApiRouter.post("/progress", async (request, response) => {
 });
 
 kehlmannReaderApiRouter.post("/reviews/:reviewId", async (request, response) => {
-  const studentId = getStudentId(request);
+  const studentId = await ensureReaderSession(request, response);
   if (!studentId) {
     return badRequest(response, "Reader-Sitzung fehlt.", 401);
   }
@@ -80,7 +127,10 @@ kehlmannReaderApiRouter.post("/reviews/:reviewId", async (request, response) => 
 });
 
 kehlmannReaderApiRouter.post("/seb-feedback", async (request, response) => {
-  const studentId = getStudentId(request);
+  const studentId = await ensureReaderSession(request, response, {
+    mode: request.body?.mode || "seb",
+    lessonId: request.body?.lessonId || ""
+  });
   if (!studentId) {
     return badRequest(response, "Reader-Sitzung fehlt.", 401);
   }

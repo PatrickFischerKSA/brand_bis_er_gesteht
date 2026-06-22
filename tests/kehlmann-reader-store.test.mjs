@@ -86,15 +86,34 @@ test("student registration reuses same learner and stores progress in selected l
   assert.equal(student.progress.lessonProgress.some((lesson) => lesson.id === "lektion-06"), true);
 });
 
-test("student registration without class code rejects multiple open classes", () => {
+test("student registration without class code uses newest open class when several are active", () => {
   const store = emptyStore();
-  createClassroom(store, { name: "Klasse 10E" });
-  createClassroom(store, { name: "Klasse 10F" });
+  const olderClassroom = createClassroom(store, { name: "Klasse 10E" });
+  const newerClassroom = createClassroom(store, { name: "Klasse 10F" });
+  olderClassroom.updatedAt = "2026-01-01T00:00:00.000Z";
+  newerClassroom.updatedAt = "2026-01-02T00:00:00.000Z";
 
-  assert.throws(() => {
-    createOrResumeStudent(store, {
-      displayName: "Nora S.",
-      mode: "open"
-    });
-  }, /nur eine Klasse gleichzeitig fuer die offene Version/i);
+  const access = createOrResumeStudent(store, {
+    displayName: "Nora S.",
+    mode: "open"
+  });
+
+  assert.equal(access.classroom.id, newerClassroom.id);
+});
+
+test("student registration accepts full names with umlauts and whitespace", () => {
+  const store = emptyStore();
+  createClassroom(store, { name: "Klasse 10G" });
+
+  const first = createOrResumeStudent(store, {
+    displayName: "  Zoë   Müller-Schäfer  ",
+    mode: "open"
+  });
+  const second = createOrResumeStudent(store, {
+    displayName: "Zoë Müller-Schäfer",
+    mode: "open"
+  });
+
+  assert.equal(first.student.id, second.student.id);
+  assert.equal(first.student.displayName, "Zoë Müller-Schäfer");
 });
