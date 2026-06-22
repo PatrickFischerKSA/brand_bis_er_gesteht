@@ -1,0 +1,16 @@
+services:
+  - type: web
+    name: heidi-spyri
+    runtime: node
+    plan: free
+    buildCommand: npm ci
+    startCommand: npm start
+    healthCheckPath: /
+    autoDeploy: true
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: HOST
+        value: 0.0.0.0
+      - key: SEB_CONFIG_KEY_HASH
+        sync: false

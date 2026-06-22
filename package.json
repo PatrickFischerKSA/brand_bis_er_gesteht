@@ -1,0 +1,18 @@
+{
+  "name": "heidi_spyri",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Digitale Lerneinheit zu Johanna Spyris Heidi mit integriertem Volltext, Registrierung, Lehrer*innen-Dashboard, SEB-Modus und differenziertem Feedback.",
+  "scripts": {
+    "start": "node server.mjs",
+    "dev": "node --watch server.mjs",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "express": "^4.19.2"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}
