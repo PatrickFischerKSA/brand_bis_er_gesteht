@@ -47,9 +47,10 @@ const defaultActiveLessonId = () => defaultLessonIds()[0];
 const defaultPeerReviewLessonId = () => lessonCatalog().find((lesson) => lesson.id === "lesson-09-der-fall-vor-gericht")?.id || defaultLessonIds()[0];
 
 let inMemoryReaderStore = null;
+let supabaseStoreDisabledReason = "";
 
 function hasSupabaseStore() {
-  return Boolean(supabaseUrl && supabaseKey);
+  return Boolean(supabaseUrl && supabaseKey && !supabaseStoreDisabledReason);
 }
 
 function supabaseEndpoint(query = "") {
@@ -193,30 +194,57 @@ async function writeSupabaseStore(nextStore) {
   }
 }
 
+async function readFileStoreOrDefault() {
+  try {
+    await ensureReaderStoreFile();
+    const raw = await fs.readFile(readerStorePath, "utf8");
+    return normalizeReaderStore(JSON.parse(raw));
+  } catch (error) {
+    console.warn(`Lokaler Reader-Fallback wird im Speicher gestartet: ${error.message}`);
+    return normalizeReaderStore(defaultReaderStore());
+  }
+}
+
+async function writeFileStoreOrMemory(nextStore) {
+  try {
+    await fs.writeFile(readerStorePath, `${JSON.stringify(nextStore, null, 2)}\n`);
+  } catch (error) {
+    console.warn(`Lokaler Reader-Fallback bleibt nur im Speicher: ${error.message}`);
+  }
+}
+
 export async function readReaderStore() {
   if (inMemoryReaderStore) {
     return structuredClone(inMemoryReaderStore);
   }
 
   if (hasSupabaseStore()) {
-    inMemoryReaderStore = await readSupabaseStore();
-    return structuredClone(inMemoryReaderStore);
+    try {
+      inMemoryReaderStore = await readSupabaseStore();
+      return structuredClone(inMemoryReaderStore);
+    } catch (error) {
+      supabaseStoreDisabledReason = error.message;
+      console.warn(`Supabase Reader Store deaktiviert, Fallback aktiv: ${error.message}`);
+    }
   }
 
-  await ensureReaderStoreFile();
-  const raw = await fs.readFile(readerStorePath, "utf8");
-  inMemoryReaderStore = normalizeReaderStore(JSON.parse(raw));
+  inMemoryReaderStore = await readFileStoreOrDefault();
   return structuredClone(inMemoryReaderStore);
 }
 
 export async function writeReaderStore(nextStore) {
   inMemoryReaderStore = structuredClone(nextStore);
   if (hasSupabaseStore()) {
-    await writeSupabaseStore(nextStore);
+    try {
+      await writeSupabaseStore(nextStore);
+    } catch (error) {
+      supabaseStoreDisabledReason = error.message;
+      console.warn(`Supabase Reader Store konnte nicht schreiben, Fallback aktiv: ${error.message}`);
+    }
     return structuredClone(inMemoryReaderStore);
   }
 
-  await fs.writeFile(readerStorePath, `${JSON.stringify(nextStore, null, 2)}\n`);
+  await writeFileStoreOrMemory(nextStore);
   return structuredClone(inMemoryReaderStore);
 }
 
