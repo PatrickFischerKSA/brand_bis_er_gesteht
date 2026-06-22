@@ -1573,7 +1573,7 @@ function renderPeerReviewPanel() {
             <h2>Derzeit keine Zuweisungen</h2>
           </div>
         </div>
-        <div class="empty-box">Sobald weitere Schüler*innen in dieser Klasse arbeiten oder die Lehrkraft Peer Review aktiviert, erscheinen hier deine Review-Aufträge.</div>
+        <div class="empty-box">Sobald weitere Schüler*innen arbeiten oder Peer Review aktiviert ist, erscheinen hier deine Review-Aufträge.</div>
       </section>
     `;
   }
@@ -1681,8 +1681,8 @@ function renderTopStatus() {
   return `
     <section class="status-strip">
       <div class="status-card">
-        <span class="eyebrow">Klasse</span>
-        <strong>${escapeHtml(state.classroom?.name || "-")}</strong>
+        <span class="eyebrow">Parcours</span>
+        <strong>Alle Lektionen</strong>
       </div>
       <div class="status-card">
         <span class="eyebrow">Bearbeitung</span>

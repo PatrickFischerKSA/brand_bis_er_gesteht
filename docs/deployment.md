@@ -1,13 +1,13 @@
 # Gratis-Deployment
 
-## Schlauere stabile Gratis-Loesung
+## Schlauere stabile Gratis-Lösung
 
 Die beste kostenlose Architektur ist:
 
-1. **Vercel Hobby** fuer Hosting und Serverless Express
-2. **Supabase Free** fuer die Lernstaende
+1. **Vercel Hobby** für Hosting und Serverless Express
+2. **Supabase Free** für die Lernstände
 
-Warum: Vercel hostet die App sehr bequem aus GitHub. Supabase speichert die Klassendaten in Postgres, statt sie in ein fluechtiges Dateisystem zu schreiben.
+Warum: Vercel hostet die App sehr bequem aus GitHub. Supabase speichert Lernstände, Namen, Antworten und Peer Reviews in Postgres, statt sie in ein flüchtiges Dateisystem zu schreiben.
 
 ## Vercel einrichten
 
@@ -37,8 +37,8 @@ Vorgehen:
 ## Supabase einrichten
 
 1. Supabase-Projekt erstellen.
-2. SQL Editor oeffnen.
-3. Inhalt von `sql/supabase-reader-store.sql` ausfuehren.
+2. SQL Editor öffnen.
+3. Inhalt von `sql/supabase-reader-store.sql` ausführen.
 4. In Vercel diese Werte setzen:
    - `SUPABASE_URL`: Project URL
    - `SUPABASE_SERVICE_ROLE_KEY`: Service role key
@@ -51,23 +51,23 @@ Ohne Supabase-Variablen nutzt die App weiterhin:
 
 `data/kehlmann-reader-store.json`
 
-Das ist fuer lokale Entwicklung und Render-Testbetrieb praktisch.
+Das ist für lokale Entwicklung und Render-Testbetrieb praktisch.
 
 ## Render Free als einfache Alternative
 
-`render.yaml` bleibt vorhanden. Render Free funktioniert, aber die lokalen Laufzeitdaten sind fluechtig:
+`render.yaml` bleibt vorhanden. Render Free funktioniert, aber die lokalen Laufzeitdaten sind flüchtig:
 
-- Free Web Services schlafen nach Inaktivitaet ein.
-- Lokale Dateiaenderungen gehen bei Neustart, Redeploy oder Spin-down verloren.
-- Persistent Disks gibt es fuer Free Web Services nicht.
+- Free Web Services schlafen nach Inaktivität ein.
+- Lokale Dateiänderungen gehen bei Neustart, Redeploy oder Spin-down verloren.
+- Persistent Disks gibt es für Free Web Services nicht.
 
-Darum ist Render Free okay fuer kurze Tests, aber Vercel + Supabase ist die bessere Gratis-Variante, wenn Lernstaende stabiler bleiben sollen.
+Darum ist Render Free okay für kurze Tests, aber Vercel + Supabase ist die bessere Gratis-Variante, wenn Lernstände stabiler bleiben sollen.
 
-## Grenzen der Gratis-Loesung
+## Grenzen der Gratis-Lösung
 
-Auch Supabase Free ist keine perfekte Archivloesung:
+Auch Supabase Free ist keine perfekte Archivlösung:
 
-- Projekte koennen bei Inaktivitaet pausiert werden.
+- Projekte können bei Inaktivität pausiert werden.
 - Free-Projekte haben keine herunterladbaren Backups.
 
-Fuer Unterrichtssequenzen ist das deutlich besser als ein fluechtiges Dateisystem. Fuer dauerhaftes Archivieren waere spaeter ein bezahlter Storage-Plan oder regelmaessiger Export sinnvoll.
+Für Unterrichtssequenzen ist das deutlich besser als ein flüchtiges Dateisystem. Für dauerhaftes Archivieren wäre später ein bezahlter Storage-Plan oder regelmäßiger Export sinnvoll.

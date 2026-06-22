@@ -91,8 +91,8 @@ function makeId(prefix) {
 
 function defaultClassroom(timestamp) {
   return {
-    id: "reader-class-9a",
-    name: "Heidi 10A",
+    id: "reader-class-default",
+    name: "Heidi Lernende",
     code: "HEID-10A",
     lessonIds: defaultLessonIds(),
     activeSebLessonId: defaultActiveLessonId(),
@@ -122,11 +122,9 @@ function defaultReaderStore() {
 
 function normalizeClassroom(classroom) {
   const validLessonIds = new Set(defaultLessonIds());
-  const normalizedLessonIds = Array.isArray(classroom.lessonIds)
-    ? classroom.lessonIds.filter((lessonId) => validLessonIds.has(lessonId))
-    : [];
-
-  classroom.lessonIds = normalizedLessonIds.length ? normalizedLessonIds : defaultLessonIds();
+  classroom.lessonIds = defaultLessonIds();
+  classroom.allowOpen = true;
+  classroom.allowSeb = true;
 
   if (!validLessonIds.has(classroom.activeSebLessonId)) {
     classroom.activeSebLessonId = defaultActiveLessonId();
@@ -145,6 +143,9 @@ function normalizeClassroom(classroom) {
 
 function normalizeReaderStore(store) {
   store.classes = (store.classes || []).map((classroom) => normalizeClassroom(classroom));
+  if (!store.classes.length) {
+    store.classes = [defaultClassroom(now())];
+  }
   store.students = Array.isArray(store.students) ? store.students : [];
   store.work = Array.isArray(store.work) ? store.work : [];
   store.reviews = Array.isArray(store.reviews) ? store.reviews : [];
@@ -276,12 +277,14 @@ function eligibleClassroomsForMode(store, mode) {
 }
 
 function resolveClassroomForMode(store, mode) {
+  if (!store.classes.length) {
+    store.classes.push(defaultClassroom(now()));
+  }
+
   const eligible = eligibleClassroomsForMode(store, mode);
 
   if (!eligible.length) {
-    throw new Error(mode === "seb"
-      ? "Aktuell ist keine Klasse für die SEB-Version freigeschaltet."
-      : "Aktuell ist keine Klasse für die offene Version freigeschaltet.");
+    return normalizeClassroom(store.classes[0]);
   }
 
   return eligible[0];
@@ -532,17 +535,9 @@ export function createOrResumeStudent(store, { classCode, displayName, mode, les
     throw new Error("Klasse nicht gefunden.");
   }
 
-  if (mode === "open" && classroom.allowOpen === false) {
-    throw new Error("Diese Klasse ist aktuell nicht für die offene Version freigeschaltet.");
-  }
-
-  if (mode === "seb" && classroom.allowSeb === false) {
-    throw new Error("Diese Klasse ist aktuell nicht für die SEB-Version freigeschaltet.");
-  }
-
   const safeName = normalizeName(displayName);
   if (!safeName || safeName.length < 2) {
-    throw new Error("Bitte gib einen klaren Namen oder ein Namenskürzel an.");
+    throw new Error("Bitte gib deinen Namen ein.");
   }
 
   let student = store.students.find((entry) => (

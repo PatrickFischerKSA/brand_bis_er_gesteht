@@ -504,7 +504,7 @@ function renderLandingPage() {
           <h1>Heidi</h1>
           <p>
             Autonome Lese- und Lernumgebung mit integriertem Volltext, offener Anmeldung,
-            Lehrer*innen-Dashboard, Lerngruppensteuerung, Peer Review und direktem
+            Lehrer*innen-Dashboard, Peer Review und direktem
             Arbeitsfeedback. Die Einheit verbindet die Romanlektüre mit Archivfragen,
             Religion, Naturpädagogik, Stadt-Land-Kontrast, Bildgeschichte, Forschung und
             dem Dokumentarfilm <em>Heidis Alptraum</em> als interpretatorischer Erweiterung.
@@ -607,7 +607,7 @@ function renderTeacherEntryPage({ lessonId, entryId } = {}) {
           <h1>Steueransicht für Unterricht und Prüfung</h1>
           <p>
             Diese Übersicht zeigt alle Lektionen, Leitfragen, Materialien und Arbeitsaufträge direkt,
-            ohne dass zuerst ein Schülerzugang freigeschaltet werden muss.
+            als vollständigen Parcours für die Unterrichtsarbeit.
           </p>
           <div class="row">
             <a class="button" href="/">Zur Startseite</a>
@@ -618,7 +618,7 @@ function renderTeacherEntryPage({ lessonId, entryId } = {}) {
 
         <section class="panel">
           <div class="eyebrow">Betriebsprotokoll</div>
-          <h2>Namen, Kürzel und SEB sauber starten</h2>
+          <h2>Namen eintragen, alle Lektionen bearbeiten</h2>
           <div class="meta-grid">
             <div class="meta-card">
               <strong>Offene Version</strong>
@@ -629,38 +629,26 @@ function renderTeacherEntryPage({ lessonId, entryId } = {}) {
               <p>${config.sebUrl}</p>
             </div>
             <div class="meta-card">
-              <strong>Offene Anmeldung</strong>
-              <p>Name oder Kürzel</p>
-            </div>
-            <div class="meta-card">
-              <strong>SEB-Konfiguration</strong>
-              <p>${config.hasSebConfigKeyHash ? "Serverseitig zusätzlich an einen SEB-Konfigurationsschlüssel gebunden." : "Keine zusätzliche SEB-Konfigurationsbindung aktiv."}</p>
+              <strong>Anmeldung</strong>
+              <p>Nur Name. Danach ist der vollständige Parcours geöffnet.</p>
             </div>
           </div>
           <div class="teacher-entry-resource-list">
             <article class="resource-nav-card">
-              <strong>1. Lerngruppe anlegen</strong>
-              <span>Im Lehrer*innen-Dashboard eine neue Lerngruppe anlegen und genau eine offene bzw. eine SEB-Freigabe aktiv lassen.</span>
+              <strong>1. Öffnen</strong>
+              <span>Schüler*innen öffnen <em>${config.openUrl}</em> und tragen ihren Namen ein.</span>
             </article>
             <article class="resource-nav-card">
-              <strong>2. Freigabe prüfen</strong>
-              <span>Vor dem Einsatz sicherstellen, dass mindestens eine Lerngruppe freigeschaltet ist. Bei mehreren Freigaben nutzt die Anmeldung automatisch die zuletzt aktualisierte Lerngruppe.</span>
+              <strong>2. Arbeiten</strong>
+              <span>Alle Lektionen sind verfügbar und sollen im Verlauf absolviert werden.</span>
             </article>
             <article class="resource-nav-card">
-              <strong>3. Offene Version</strong>
-              <span>Schüler*innen öffnen <em>${config.openUrl}</em> und melden sich mit Namen oder Kürzel an.</span>
+              <strong>3. Kontrollieren</strong>
+              <span>Im Dashboard siehst du Fortschritt, Textanker, Theoriebezüge und Peer Reviews.</span>
             </article>
             <article class="resource-nav-card">
-              <strong>4. SEB-Version</strong>
-              <span>Im Dashboard die aktive SEB-Lektion setzen, speichern und dann auf einem Testgerät <em>${config.sebUrl}</em> im Safe Exam Browser prüfen.</span>
-            </article>
-            <article class="resource-nav-card">
-              <strong>5. SEB-Anmeldung</strong>
-              <span>Schüler*innen öffnen im Safe Exam Browser <em>${config.sebUrl}</em> und melden sich mit Namen oder Kürzel an.</span>
-            </article>
-            <article class="resource-nav-card">
-              <strong>6. Endkontrolle</strong>
-              <span>Immer selbst testen: richtige Lerngruppe freigegeben, offene Version funktioniert, SEB zeigt die richtige Lektion.</span>
+              <strong>4. SEB optional</strong>
+              <span>Falls nötig, öffnen Schüler*innen <em>${config.sebUrl}</em> im Safe Exam Browser und tragen ebenfalls nur ihren Namen ein.</span>
             </article>
           </div>
         </section>
@@ -805,10 +793,9 @@ function renderTeacherEntryPage({ lessonId, entryId } = {}) {
 
 function renderStudentAccessPage({ mode, lessonId, errorText = "" }) {
   const isOpen = mode === "open";
-  const lesson = lessonMeta(lessonId);
   const formAction = isOpen ? "/auth/open" : "/auth/seb";
-  const title = isOpen ? "Heidi entsperren" : "SEB-Version öffnen";
-  const heading = isOpen ? "Roman-Reader entsperren" : "SEB-Reader starten";
+  const title = isOpen ? "Heidi öffnen" : "SEB-Version öffnen";
+  const heading = isOpen ? "Roman-Reader öffnen" : "SEB-Reader starten";
 
   return renderShellPage({
     title,
@@ -820,22 +807,22 @@ function renderStudentAccessPage({ mode, lessonId, errorText = "" }) {
           <h1>${heading}</h1>
           <p>
             ${isOpen
-              ? "Diese Version ist für Unterricht, Hausaufgaben oder gemeinsame Analysephasen gedacht und wird über Namen oder Kürzel freigeschaltet."
-              : "Diese Version läuft nur im Safe Exam Browser. Für die Zuordnung zur freigegebenen Lerngruppe gibst du Namen oder Kürzel an."}
+              ? "Gib deinen Namen ein und arbeite dann durch alle Lektionen der Heidi-Lernumgebung."
+              : "Diese Version läuft nur im Safe Exam Browser. Gib deinen Namen ein und arbeite durch alle Lektionen."}
           </p>
           <div class="notice">
             <strong>So funktioniert die Anmeldung:</strong>
-            <br>1. Deinen Namen oder ein eindeutiges Kürzel eintragen.
-            <br>2. Auf ${isOpen ? "Freischalten" : "Starten"} klicken und dann direkt in der zugewiesenen Lektion arbeiten.
+            <br>1. Namen eintragen.
+            <br>2. Auf ${isOpen ? "Öffnen" : "Starten"} klicken.
+            <br>3. Alle Lektionen bearbeiten.
           </div>
-          ${lesson ? `<div class="notice"><strong>Vorgewählte Lektion:</strong> ${lesson.title}<br>${lesson.sebPrompt}</div>` : ""}
           ${errorText ? `<div class="notice"><strong>Hinweis:</strong> ${errorText}</div>` : ""}
           <form method="post" action="${formAction}" class="form-grid">
             <input type="hidden" name="lessonId" value="${lessonId || ""}">
-            <label for="displayName">Name / Kürzel</label>
-            <input id="displayName" name="displayName" type="text" autocomplete="name" placeholder="z. B. Nora S.">
+            <label for="displayName">Name</label>
+            <input id="displayName" name="displayName" type="text" autocomplete="name" placeholder="z. B. Nora Steiner">
             <div class="row">
-              <button type="submit">${isOpen ? "Freischalten" : "Starten"}</button>
+              <button type="submit">${isOpen ? "Öffnen" : "Starten"}</button>
               <a class="button secondary" href="/">Zur Übersicht</a>
             </div>
           </form>
@@ -857,7 +844,7 @@ function renderSebBlockedPage() {
             Diese Fassung akzeptiert nur Anfragen aus Safe Exam Browser.
             ${SEB_CONFIG_KEY_HASH ? " Zusätzlich ist serverseitig ein bestimmter SEB-Konfigurationsschlüssel hinterlegt." : ""}
           </div>
-          <p>Starte das Tool direkt im konfigurierten SEB-Fenster oder nutze alternativ die offene Version mit Namen oder Kürzel.</p>
+          <p>Starte das Tool direkt im konfigurierten SEB-Fenster oder nutze alternativ die offene Version mit Namen.</p>
           <div class="row">
             <a class="button secondary" href="/open">Offene Version</a>
             <a class="button secondary" href="/">Zur Übersicht</a>

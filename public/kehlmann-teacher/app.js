@@ -4,9 +4,7 @@ const config = window.KEHLMANN_TEACHER_CONFIG || {};
 const state = {
   loading: true,
   error: "",
-  overview: null,
-  selectedClassId: null,
-  notice: ""
+  overview: null
 };
 
 function escapeHtml(value) {
@@ -17,13 +15,11 @@ function escapeHtml(value) {
     .replaceAll('"', "&quot;");
 }
 
-async function request(url, options = {}) {
+async function request(url) {
   const response = await fetch(url, {
     credentials: "same-origin",
-    ...options,
     headers: {
-      "Content-Type": "application/json",
-      ...(options.headers || {})
+      "Content-Type": "application/json"
     }
   });
 
@@ -35,35 +31,44 @@ async function request(url, options = {}) {
   return response.json();
 }
 
-function currentClassroom() {
-  return state.overview?.classes.find((entry) => entry.id === state.selectedClassId) || state.overview?.classes[0] || null;
+function classroom() {
+  return state.overview?.classes[0] || null;
 }
 
-function renderLessonOptions(classroom, key) {
-  return state.overview.lessons.map((lesson) => `
-    <option value="${lesson.id}" ${lesson.id === classroom[key] ? "selected" : ""}>
-      ${escapeHtml(lesson.title)}
-    </option>
-  `).join("");
+function students() {
+  return (state.overview?.classes || [])
+    .flatMap((entry) => entry.students || [])
+    .sort((left, right) => right.progress.percent - left.progress.percent);
 }
 
-function renderClassCards() {
-  return state.overview.classes.map((classroom) => `
-    <button class="class-card ${classroom.id === state.selectedClassId ? "is-active" : ""}" data-action="select-class" data-class-id="${classroom.id}">
-      <div class="eyebrow">${escapeHtml(classroom.name)}</div>
-      <h2>${escapeHtml(`${classroom.studentCount} Lernende`)}</h2>
-      <p>${escapeHtml(`${classroom.studentCount} Lernende · Ø ${classroom.averageProgress}% Fortschritt`)}</p>
-      <p>${escapeHtml(`Peer Review: ${classroom.peerReviewSummary.completedReviews}/${classroom.peerReviewSummary.totalAssignments}`)}</p>
-    </button>
-  `).join("");
-}
-
-function renderStudents(classroom) {
-  if (!classroom.students.length) {
-    return '<div class="empty">Noch keine Lernenden in dieser Klasse angemeldet.</div>';
+function averageProgress() {
+  const entries = students();
+  if (!entries.length) {
+    return 0;
   }
 
-  return classroom.students.map((student) => `
+  return Math.round(entries.reduce((sum, student) => sum + student.progress.percent, 0) / entries.length);
+}
+
+function renderLessonLinks() {
+  return state.overview.lessons.map((lesson) => `
+    <article class="lesson-link-card">
+      <h3>${escapeHtml(lesson.title)}</h3>
+      <p>${escapeHtml(lesson.summary)}</p>
+      <div class="lesson-actions">
+        <a class="button secondary" href="/open/lesson/${lesson.id}" target="_blank" rel="noreferrer">Öffnen</a>
+      </div>
+    </article>
+  `).join("");
+}
+
+function renderStudents() {
+  const entries = students();
+  if (!entries.length) {
+    return '<div class="empty">Noch keine Lernenden angemeldet.</div>';
+  }
+
+  return entries.map((student) => `
     <article class="student-card">
       <div class="student-head">
         <div>
@@ -76,11 +81,11 @@ function renderStudents(classroom) {
         <span>${escapeHtml(`${student.progress.completedEntries}/${student.progress.totalEntries} Passagen`)}</span>
         <span>${escapeHtml(`${student.progress.theoryEntries} Theoriebezüge`)}</span>
         <span>${escapeHtml(`${student.progress.evidenceEntries} Textanker`)}</span>
-        <span>${escapeHtml(`Letzter Modus: ${student.lastMode}`)}</span>
+        <span>${escapeHtml(`Modus: ${student.lastMode}`)}</span>
       </div>
       <div class="student-metrics">
-        <span>${escapeHtml(`zugewiesen: ${student.peerReview.completedAssignedCount}/${student.peerReview.assignedCount}`)}</span>
-        <span>${escapeHtml(`erhalten: ${student.peerReview.receivedCompletedCount}/${student.peerReview.receivedCount}`)}</span>
+        <span>${escapeHtml(`Reviews geschrieben: ${student.peerReview.completedAssignedCount}/${student.peerReview.assignedCount}`)}</span>
+        <span>${escapeHtml(`Reviews erhalten: ${student.peerReview.receivedCompletedCount}/${student.peerReview.receivedCount}`)}</span>
       </div>
       <div class="lesson-progress-list">
         ${student.progress.lessonProgress.map((lesson) => `
@@ -94,96 +99,31 @@ function renderStudents(classroom) {
   `).join("");
 }
 
-function renderLessonLinks() {
-  return state.overview.lessons.map((lesson) => `
-    <article class="lesson-link-card">
-      <h3>${escapeHtml(lesson.title)}</h3>
-      <p>${escapeHtml(lesson.summary)}</p>
-      <div class="lesson-actions">
-        <a class="button secondary" href="/open/lesson/${lesson.id}" target="_blank" rel="noreferrer">Offen</a>
-        <a class="button secondary" href="/seb/lesson/${lesson.id}" target="_blank" rel="noreferrer">SEB</a>
-      </div>
-    </article>
-  `).join("");
-}
-
-function renderTeacherGuide(classroom) {
-  const classroomName = classroom?.name || "noch keine Lerngruppe";
+function renderGuide() {
   return `
     <article class="panel">
       <div class="panel-head">
         <div>
-          <div class="eyebrow">Betriebsprotokoll</div>
-          <h2>Namen, Kürzel und SEB sauber starten</h2>
-        </div>
-      </div>
-      <div class="protocol-banner">
-        <div class="protocol-chip">
-          <span>Offene Version</span>
-          <strong>${escapeHtml(config.openUrl || "/open")}</strong>
-        </div>
-        <div class="protocol-chip">
-          <span>SEB-Version</span>
-          <strong>${escapeHtml(config.sebUrl || "/seb")}</strong>
-        </div>
-        <div class="protocol-chip">
-          <span>Offene Anmeldung</span>
-          <strong>Name oder Kürzel</strong>
-        </div>
-        <div class="protocol-chip">
-          <span>Aktive Lerngruppe</span>
-          <strong>${escapeHtml(classroomName)}</strong>
+          <div class="eyebrow">Betrieb</div>
+          <h2>Nur Namen, alle Lektionen</h2>
         </div>
       </div>
       <div class="instruction-grid">
         <div class="instruction-card">
-          <strong>1. Lerngruppe anlegen</strong>
-          <p>Trage unter <em>Neue Lerngruppe anlegen</em> einen eindeutigen Namen ein, zum Beispiel <em>Klasse 10B Deutsch</em>, und klicke auf <em>Lerngruppe erstellen</em>.</p>
+          <strong>1. Öffnen</strong>
+          <p>Lernende öffnen <em>${escapeHtml(config.openUrl || "/open")}</em>, tragen ihren Namen ein und starten.</p>
         </div>
         <div class="instruction-card">
-          <strong>2. Freigabe eindeutig halten</strong>
-          <p>Aktuell ausgewählt ist: <strong>${escapeHtml(classroomName)}</strong>. Für die vereinfachte Anmeldung wird automatisch die zuletzt aktualisierte freigegebene Lerngruppe genutzt.</p>
+          <strong>2. Arbeiten</strong>
+          <p>Alle Lektionen sind zugänglich und sollen bearbeitet werden.</p>
         </div>
         <div class="instruction-card">
-          <strong>3. Offene Anmeldung klären</strong>
-          <p>Für die offene Version braucht es kein zusätzliches Unterrichtspasswort mehr. Lernende melden sich mit einem klaren Namen oder Kürzel an.</p>
-        </div>
-        <div class="instruction-card">
-          <strong>4. Freigaben setzen</strong>
-          <p>Lege fest, ob die offene Version und/oder die SEB-Version aktiv sind. Wähle zusätzlich die aktuelle SEB-Lektion und die Review-Lektion aus. Erst nach <em>Einstellungen speichern</em> gilt die Auswahl für diese Klasse.</p>
-        </div>
-        <div class="instruction-card">
-          <strong>5. Offene Version starten</strong>
-          <p>Schüler*innen öffnen <em>${escapeHtml(config.openUrl || "/open")}</em>, tragen Namen oder Kürzel ein und klicken auf <em>Freischalten</em>.</p>
-        </div>
-        <div class="instruction-card">
-          <strong>6. SEB-Protokoll vor dem Unterricht</strong>
-          <p>1. Aktive SEB-Lektion wählen. 2. <em>Einstellungen speichern</em>. 3. Safe Exam Browser auf einem Testgerät starten. 4. <em>${escapeHtml(config.sebUrl || "/seb")}</em> öffnen. 5. Mit Testnamen anmelden. 6. Prüfen, ob genau die erwartete Lektion erscheint.</p>
-        </div>
-        <div class="instruction-card">
-          <strong>7. Schüler-Registrierung im SEB</strong>
-          <p>Im Safe Exam Browser öffnen Schüler*innen <em>${escapeHtml(config.sebUrl || "/seb")}</em>, tragen Namen oder Kürzel ein und klicken auf <em>Starten</em>.</p>
-        </div>
-        <div class="instruction-card">
-          <strong>8. Minutiöse Endkontrolle</strong>
-          <p>Vor Unterrichtsbeginn immer einmal selbst durchspielen: richtige Lerngruppe freigegeben, offene Version getestet, SEB getestet, richtige Lektion sichtbar. Erst dann an die Lerngruppe ausgeben.</p>
-        </div>
-        <div class="instruction-card">
-          <strong>9. Wenn etwas schiefgeht</strong>
-          <p>Falls die Anmeldung scheitert, prüfe zuerst, ob mindestens eine Lerngruppe für den gewählten Modus freigeschaltet ist. Öffnet sich <em>/seb</em> nicht, kontrolliere den Safe Exam Browser und ${config.hasSebConfigKeyHash ? "die hinterlegte SEB-Konfiguration." : "die SEB-Umgebung."}</p>
+          <strong>3. Beobachten</strong>
+          <p>Dieses Dashboard zeigt Fortschritt, Textanker, Theoriebezüge und Peer-Review-Stand.</p>
         </div>
       </div>
     </article>
   `;
-}
-
-function renderCriteriaHelp() {
-  return state.overview.reviewCriteria.map((criterion) => `
-    <div class="criterion-help">
-      <strong>${escapeHtml(criterion.label)}</strong>
-      <p>${escapeHtml(criterion.prompt)}</p>
-    </div>
-  `).join("");
 }
 
 function render() {
@@ -197,125 +137,65 @@ function render() {
     return;
   }
 
-  const classroom = currentClassroom();
+  const reviewSummary = (state.overview?.classes || []).reduce((summary, entry) => ({
+    totalAssignments: summary.totalAssignments + (entry.peerReviewSummary?.totalAssignments || 0),
+    completedReviews: summary.completedReviews + (entry.peerReviewSummary?.completedReviews || 0),
+    pendingReviews: summary.pendingReviews + (entry.peerReviewSummary?.pendingReviews || 0)
+  }), { totalAssignments: 0, completedReviews: 0, pendingReviews: 0 });
 
   app.innerHTML = `
     <main class="teacher-shell">
       <section class="hero panel">
         <div>
           <div class="eyebrow">Lehrer*innen-Dashboard</div>
-          <h1>Lerngruppen, Fortschritt und Peer Review</h1>
-          <p>Hier steuerst du Lerngruppen, das aktive SEB-Arbeitsset, Peer-Review-Zuweisungen und den Lernstand der einzelnen Schüler*innen für die Heidi-Einheit.</p>
+          <h1>Heidi Lernstand</h1>
+          <p>Namen genügen; alle Lektionen sind Teil des Parcours.</p>
         </div>
         <div class="hero-actions">
           <a class="button secondary" href="${escapeHtml(config.teacherEntryUrl || "/teacher-entry")}">Lehrer*inneneingang</a>
-          <a class="button secondary" href="/auth/teacher/logout">Abmelden</a>
+          <a class="button secondary" href="${escapeHtml(config.openUrl || "/open")}">Reader öffnen</a>
           <a class="button secondary" href="/">Startseite</a>
         </div>
       </section>
 
-      <section class="class-grid">
-        ${renderClassCards()}
-      </section>
-
-      <section class="dashboard-grid">
-        <article class="panel">
-          <div class="panel-head">
-            <div>
-              <div class="eyebrow">Klassensteuerung</div>
-              <h2>${escapeHtml(classroom?.name || "Klasse")}</h2>
-            </div>
-          </div>
-          ${classroom ? `
-            <form id="class-settings-form" class="form-grid">
-              <input type="hidden" name="classId" value="${classroom.id}">
-              <label>
-                Klassenname
-                <input type="text" name="name" value="${escapeHtml(classroom.name)}">
-              </label>
-              <label>
-                Aktive SEB-Lektion
-                <select name="activeSebLessonId">
-                  ${renderLessonOptions(classroom, "activeSebLessonId")}
-                </select>
-              </label>
-              <label class="toggle">
-                <input type="checkbox" name="allowOpen" ${classroom.allowOpen ? "checked" : ""}>
-                Offene Version freigeben
-              </label>
-              <label class="toggle">
-                <input type="checkbox" name="allowSeb" ${classroom.allowSeb ? "checked" : ""}>
-                SEB-Version freigeben
-              </label>
-              <div class="review-settings-box">
-                <div class="eyebrow">Peer Review</div>
-                <label class="toggle">
-                  <input type="checkbox" name="peerReviewEnabled" ${classroom.peerReviewEnabled ? "checked" : ""}>
-                  Peer Review in der offenen Version aktivieren
-                </label>
-                <label>
-                  Review-Lektion
-                  <select name="peerReviewLessonId">
-                    ${renderLessonOptions(classroom, "peerReviewLessonId")}
-                  </select>
-                </label>
-                <label>
-                  Anzahl Reviews pro Person
-                  <input type="number" min="0" max="5" name="requiredPeerReviews" value="${escapeHtml(classroom.requiredPeerReviews)}">
-                </label>
-                <label>
-                  Review-Hinweise
-                  <textarea name="peerReviewInstructions" rows="5">${escapeHtml(classroom.peerReviewInstructions || "")}</textarea>
-                </label>
-                <div class="metrics-row">
-                  <span class="badge">${escapeHtml(`zugewiesen: ${classroom.peerReviewSummary.totalAssignments}`)}</span>
-                  <span class="badge">${escapeHtml(`abgeschlossen: ${classroom.peerReviewSummary.completedReviews}`)}</span>
-                  <span class="badge">${escapeHtml(`offen: ${classroom.peerReviewSummary.pendingReviews}`)}</span>
-                </div>
-              </div>
-              <div class="row">
-                <button type="submit">Einstellungen speichern</button>
-              </div>
-            </form>
-          ` : ""}
-          ${state.notice ? `<div class="notice-box success top-gap">${escapeHtml(state.notice)}</div>` : ""}
-          ${state.error ? `<div class="notice-box error top-gap">${escapeHtml(state.error)}</div>` : ""}
-          <form id="create-class-form" class="form-grid top-gap">
-            <label>
-              Neue Lerngruppe anlegen
-              <input type="text" name="name" placeholder="z. B. Klasse 10B">
-            </label>
-            <button type="submit">Lerngruppe erstellen</button>
-          </form>
+      <section class="status-strip">
+        <article class="status-card">
+          <div class="eyebrow">Lernende</div>
+          <strong>${escapeHtml(students().length)}</strong>
         </article>
-
-        <article class="panel">
-          <div class="panel-head">
-            <div>
-              <div class="eyebrow">Review-Rubrik und Lektionslinks</div>
-              <h2>Arbeitsrahmen</h2>
-            </div>
-          </div>
-          <div class="criteria-help-grid">
-            ${renderCriteriaHelp()}
-          </div>
-          <div class="lesson-link-grid top-gap">
-            ${renderLessonLinks()}
-          </div>
+        <article class="status-card">
+          <div class="eyebrow">Durchschnitt</div>
+          <strong>${escapeHtml(`${averageProgress()}%`)}</strong>
+        </article>
+        <article class="status-card">
+          <div class="eyebrow">Reviews</div>
+          <strong>${escapeHtml(`${reviewSummary.completedReviews}/${reviewSummary.totalAssignments}`)}</strong>
         </article>
       </section>
 
-      ${renderTeacherGuide(classroom)}
+      ${renderGuide()}
 
       <section class="panel">
         <div class="panel-head">
           <div>
-            <div class="eyebrow">Lernstand und Review-Fortschritt</div>
-            <h2>${escapeHtml(classroom?.name || "Klasse")}</h2>
+            <div class="eyebrow">Lektionsübersicht</div>
+            <h2>Alle Lektionen</h2>
+          </div>
+        </div>
+        <div class="lesson-link-grid">
+          ${renderLessonLinks()}
+        </div>
+      </section>
+
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <div class="eyebrow">Fortschritt</div>
+            <h2>Lernende</h2>
           </div>
         </div>
         <div class="student-grid">
-          ${classroom ? renderStudents(classroom) : '<div class="empty">Keine Klasse ausgewählt.</div>'}
+          ${renderStudents()}
         </div>
       </section>
     </main>
@@ -328,7 +208,6 @@ async function loadOverview() {
 
   try {
     state.overview = await request("/reader-api/teacher/bootstrap");
-    state.selectedClassId = state.selectedClassId || state.overview.classes[0]?.id || null;
     state.loading = false;
     state.error = "";
     render();
@@ -338,82 +217,5 @@ async function loadOverview() {
     render();
   }
 }
-
-document.addEventListener("click", async (event) => {
-  const target = event.target.closest("[data-action]");
-  if (!target) {
-    return;
-  }
-
-  const action = target.dataset.action;
-
-  if (action === "select-class") {
-    state.selectedClassId = target.dataset.classId;
-    state.notice = "";
-    render();
-  }
-
-});
-
-document.addEventListener("submit", async (event) => {
-  if (event.target.id === "create-class-form") {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const previousSelectedClassId = state.selectedClassId;
-
-    try {
-      state.overview = await request("/reader-api/teacher/classes", {
-        method: "POST",
-        body: JSON.stringify({
-          name: formData.get("name")
-        })
-      });
-      const createdClassroom = state.overview.classes.at(-1) || null;
-      const selectedClassStillExists = state.overview.classes.some((entry) => entry.id === previousSelectedClassId);
-      state.selectedClassId = selectedClassStillExists
-        ? previousSelectedClassId
-        : (previousSelectedClassId || state.overview.classes[0]?.id || null);
-      state.notice = createdClassroom
-        ? `Lerngruppe ${createdClassroom.name} erstellt. Die aktuelle Ansicht bleibt auf der bisher gewählten Lektion und Lerngruppe.`
-        : "Lerngruppe erstellt.";
-      state.error = "";
-      event.target.reset();
-      render();
-    } catch (error) {
-      state.error = error.message;
-      state.notice = "";
-      render();
-    }
-  }
-
-  if (event.target.id === "class-settings-form") {
-    event.preventDefault();
-    const formData = new FormData(event.target);
-    const classId = formData.get("classId");
-
-    try {
-      state.overview = await request(`/reader-api/teacher/classes/${classId}`, {
-        method: "PATCH",
-        body: JSON.stringify({
-          name: formData.get("name"),
-          activeSebLessonId: formData.get("activeSebLessonId"),
-          allowOpen: formData.get("allowOpen") === "on",
-          allowSeb: formData.get("allowSeb") === "on",
-          peerReviewEnabled: formData.get("peerReviewEnabled") === "on",
-          peerReviewLessonId: formData.get("peerReviewLessonId"),
-          requiredPeerReviews: Number(formData.get("requiredPeerReviews") || 0),
-          peerReviewInstructions: formData.get("peerReviewInstructions")
-        })
-      });
-      state.notice = "Lerngruppen-Einstellungen wurden gespeichert.";
-      state.error = "";
-      render();
-    } catch (error) {
-      state.error = error.message;
-      state.notice = "";
-      render();
-    }
-  }
-});
 
 loadOverview();
