@@ -38,6 +38,17 @@ body {
     linear-gradient(180deg, rgba(226, 219, 205, 0.56) 0%, rgba(213, 205, 191, 0.54) 100%);
 }
 
+.site-background-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: blur(5px) saturate(0.92) contrast(1.12) brightness(0.72);
+  transform: scale(1.03);
+  opacity: 1;
+}
+
 .site-background::before {
   content: "";
   position: absolute;
@@ -47,7 +58,7 @@ body {
     url("/reader/assets/heidi-alp-background.png") 54% 14% / 116% auto no-repeat;
   filter: blur(6px) saturate(0.92) contrast(1.12) brightness(0.76);
   transform: scale(1.02);
-  opacity: 0.98;
+  opacity: 0.28;
 }
 
 .site-background::after {
@@ -59,6 +70,26 @@ body {
     radial-gradient(circle at 54% 18%, rgba(255, 248, 238, 0.01), rgba(255, 248, 238, 0.01) 14%, rgba(255, 248, 238, 0.1) 42%, rgba(214, 206, 192, 0.18) 100%),
     radial-gradient(circle at 22% 18%, rgba(180, 92, 57, 0.06), transparent 0 18%),
     radial-gradient(circle at 82% 14%, rgba(49, 67, 53, 0.12), transparent 0 20%);
+}
+
+.background-video-toggle {
+  position: fixed;
+  right: 18px;
+  bottom: 18px;
+  z-index: 10;
+  border: 1px solid rgba(255, 255, 255, 0.36);
+  border-radius: 999px;
+  padding: 10px 14px;
+  color: #fffaf0;
+  background: rgba(23, 33, 25, 0.78);
+  box-shadow: 0 12px 34px rgba(20, 28, 23, 0.22);
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+}
+
+.background-video-toggle:hover,
+.background-video-toggle:focus-visible {
+  background: rgba(23, 33, 25, 0.9);
 }
 
 .teacher-shell {

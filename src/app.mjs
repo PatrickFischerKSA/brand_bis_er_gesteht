@@ -17,6 +17,7 @@ const __dirname = path.dirname(__filename);
 const publicDir = path.resolve(__dirname, "../public");
 const readerDir = path.join(publicDir, "kehlmann-reader");
 const teacherDir = path.join(publicDir, "kehlmann-teacher");
+const jsDir = path.join(publicDir, "js");
 const readerAssetDir = path.join(publicDir, "reader/assets");
 const OPEN_COOKIE = "kehlmann_open_access";
 const STUDENT_COOKIE = "kehlmann_reader_student";
@@ -25,6 +26,7 @@ const TEACHER_COOKIE = "kehlmann_teacher_access";
 const SEB_CONFIG_KEY_HASH = process.env.SEB_CONFIG_KEY_HASH || process.env.KEHLMANN_SEB_CONFIG_KEY_HASH || "";
 const READER_PDF_SOURCE = "/reader/assets/heidi-volltext.html";
 const BACKGROUND_IMAGE = "/reader/assets/heidi-alp-background.png";
+const BACKGROUND_VIDEO = "/reader/assets/heidi-background.mp4";
 const ASSET_VERSION = process.env.RENDER_GIT_COMMIT || String(Date.now());
 
 function teacherRuntimeConfig() {
@@ -79,6 +81,16 @@ function renderShellPage({ title, body, bodyClass = "" }) {
             background:
               linear-gradient(180deg, rgba(226, 219, 205, 0.56) 0%, rgba(213, 205, 191, 0.54) 100%);
           }
+          .site-background-video {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: blur(5px) saturate(0.92) contrast(1.12) brightness(0.72);
+            transform: scale(1.03);
+            opacity: 1;
+          }
           .site-background::before {
             content: "";
             position: absolute;
@@ -88,7 +100,7 @@ function renderShellPage({ title, body, bodyClass = "" }) {
               url("${assetUrl(BACKGROUND_IMAGE)}") 54% 14% / 116% auto no-repeat;
             filter: blur(6px) saturate(0.94) contrast(1.14) brightness(0.74);
             transform: scale(1.02);
-            opacity: 1;
+            opacity: 0.28;
           }
           .site-background::after {
             content: "";
@@ -99,6 +111,24 @@ function renderShellPage({ title, body, bodyClass = "" }) {
               radial-gradient(circle at 54% 18%, rgba(255, 248, 238, 0.01), rgba(255, 248, 238, 0.01) 14%, rgba(255, 248, 238, 0.12) 42%, rgba(214, 206, 192, 0.22) 100%),
               radial-gradient(circle at 22% 18%, rgba(180, 92, 57, 0.08), transparent 0 18%),
               radial-gradient(circle at 80% 14%, rgba(49, 67, 53, 0.12), transparent 0 20%);
+          }
+          .background-video-toggle {
+            position: fixed;
+            right: 18px;
+            bottom: 18px;
+            z-index: 10;
+            border: 1px solid rgba(255,255,255,0.36);
+            border-radius: 999px;
+            padding: 10px 14px;
+            color: #fffaf0;
+            background: rgba(23, 33, 25, 0.78);
+            box-shadow: 0 12px 34px rgba(20, 28, 23, 0.22);
+            backdrop-filter: blur(12px);
+            cursor: pointer;
+          }
+          .background-video-toggle:hover,
+          .background-video-toggle:focus-visible {
+            background: rgba(23, 33, 25, 0.9);
           }
           .page {
             max-width: 1120px;
@@ -428,8 +458,14 @@ function renderShellPage({ title, body, bodyClass = "" }) {
         </style>
       </head>
       <body class="${bodyClass}">
-        <div class="site-background" aria-hidden="true"></div>
+        <div class="site-background" aria-hidden="true">
+          <video class="site-background-video" data-background-video autoplay muted loop playsinline poster="${assetUrl(BACKGROUND_IMAGE)}">
+            <source src="${assetUrl(BACKGROUND_VIDEO)}" type="video/mp4">
+          </video>
+        </div>
+        <button class="background-video-toggle" type="button" data-background-video-toggle>Video stoppen</button>
         ${body}
+        <script src="${assetUrl("/js/background-video.js")}"></script>
       </body>
     </html>
   `;
@@ -829,10 +865,16 @@ function renderTeacherPage() {
         <link rel="stylesheet" href="${assetUrl("/kehlmann-teacher/styles.css")}">
       </head>
       <body>
-        <div class="site-background" aria-hidden="true"></div>
+        <div class="site-background" aria-hidden="true">
+          <video class="site-background-video" data-background-video autoplay muted loop playsinline poster="${assetUrl(BACKGROUND_IMAGE)}">
+            <source src="${assetUrl(BACKGROUND_VIDEO)}" type="video/mp4">
+          </video>
+        </div>
+        <button class="background-video-toggle" type="button" data-background-video-toggle>Video stoppen</button>
         <script>
           window.KEHLMANN_TEACHER_CONFIG = ${JSON.stringify(config)};
         </script>
+        <script src="${assetUrl("/js/background-video.js")}"></script>
         <script type="module" src="${assetUrl("/kehlmann-teacher/app.js")}"></script>
       </body>
     </html>
@@ -851,12 +893,18 @@ function renderReaderPage(mode, lessonId) {
         <link rel="stylesheet" href="${assetUrl("/reader/styles.css")}">
       </head>
       <body>
-        <div class="site-background" aria-hidden="true"></div>
+        <div class="site-background" aria-hidden="true">
+          <video class="site-background-video" data-background-video autoplay muted loop playsinline poster="${assetUrl(BACKGROUND_IMAGE)}">
+            <source src="${assetUrl(BACKGROUND_VIDEO)}" type="video/mp4">
+          </video>
+        </div>
+        <button class="background-video-toggle" type="button" data-background-video-toggle>Video stoppen</button>
         <script>
           window.KEHLMANN_READER_MODE = "${mode}";
           window.KEHLMANN_READER_MODE_LABEL = "${modeLabel}";
           window.KEHLMANN_READER_CONFIG = ${JSON.stringify({ forcedLessonId: lessonId || null })};
         </script>
+        <script src="${assetUrl("/js/background-video.js")}"></script>
         <script type="module" src="${assetUrl("/reader/app.js")}"></script>
       </body>
     </html>
@@ -918,6 +966,7 @@ export function createApp() {
   app.use(express.urlencoded({ extended: false }));
   app.use(express.json({ limit: "1mb" }));
   app.use("/reader-api", kehlmannReaderApiRouter);
+  app.use("/js", express.static(jsDir));
   app.use("/reader/assets", express.static(readerAssetDir));
   app.use("/reader", express.static(readerDir));
   app.use("/kehlmann-teacher", express.static(teacherDir));
