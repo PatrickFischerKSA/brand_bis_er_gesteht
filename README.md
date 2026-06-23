@@ -1,38 +1,26 @@
-# heidi_spyri
+# brand_bis_er_gesteht
 
-Interaktive Lese- und Lernumgebung zu Johanna Spyris *Heidi*.
+Interaktive Lese- und Lerneinheit zu Christine Brands *Bis er gesteht* als literarische Spurensicherung.
 
 ## Enthalten
 
-- integrierter Volltext als lokale HTML-Ressource
-- 50 Leitfragen aus dem Word-Dokument mit Sofortfeedback
+- integriertes PDF als lokale Reader-Ressource
+- sechs Fallphasen mit Fokusfragen, Sofortfeedback und Parcours-Export
+- Detektiv-Rahmen: Spuren sichern, Tathergang rekonstruieren, Motive prüfen, Prozess führen
+- Urteilswerkstatt mit konkurrierenden Urteilsvarianten auf derselben Aktenbasis
+- reales Urteil des Bezirksgerichts Horgen als zentrale Gerichtsakte
+- Rechtsprechungsressourcen zu StGB, StPO, Bundesgericht und Zürcher Entscheidsuche
+- Vertiefung zu Verteidigungsrechten, EMRK, psychiatrischer Exploration, Schuldfähigkeit und Massnahmenindikation
+- Materialstationen zu Fallrekonstruktion, True-Crime-Ethik, Erzähltechnik, Verhör, Sprache und Raum
+- Autorinnenstation zu Christine Brands Website
+- Podcaststation zu *Unter Verdacht - Der Zwillingsmord von Horgen (2/3)*
+- Craft-Ressourcen als externer Materialpool
+- Kartenstation zum angegebenen Google-Maps-Ortspunkt
+- Dropbox-Hörbuchordner als Hörstation
 - offene Anmeldung nur mit Name
 - Lehrer*innen-Dashboard ohne Passwortlogik
-- didaktisierte Dossiers zu Archiv, Religion, Natur, Stadt-Land, Bildgeschichte, Forschung und Film
-- Filmwerkstatt zu Anita Hugis *Heidis Alptraum* als interpretatorische Erweiterung
-- GitHub- und Render-fähige Express-App
-
-## Gratis-Hosting
-
-Empfohlen: **Vercel Hobby + Supabase Free**.
-
-Das ist stabiler als reines Render Free, weil Lernstände dann in Supabase/Postgres liegen und nicht im flüchtigen Dateisystem eines Free-Webservices.
-
-- `vercel.json` für Vercel Serverless Express
-- `api/index.mjs` als Vercel-Entry
-- `sql/supabase-reader-store.sql` für die Store-Tabelle
-- Supabase wird automatisch genutzt, wenn `SUPABASE_URL` und `SUPABASE_SERVICE_ROLE_KEY` gesetzt sind
-- ohne Supabase bleibt der lokale Datei-Store als Fallback aktiv
-
-Render Free bleibt als einfache Alternative vorbereitet:
-
-- `render.yaml` nutzt `plan: free`
-- Build: `npm ci`
-- Start: `npm start`
-- Healthcheck: `/`
-- keine Lehrer*innen-Passwortlogik
-
-Einschränkung: Auch Supabase Free kann bei längerer Inaktivität pausieren und ist keine perfekte Archivlösung. Für Unterrichtssequenzen ist es aber deutlich stabiler als lokales Speichern auf Render Free.
+- GitHub-, Vercel- und Render-fähige Express-App
+- empfohlener Gratisbetrieb: Vercel Hobby + GitHub-Dateistore für persistente Lernstände ohne schlafenden Server
 
 ## Start
 
@@ -42,7 +30,7 @@ npm test
 npm start
 ```
 
-Standardmässig läuft die App unter <http://127.0.0.1:3018>.
+Standardmässig läuft die App unter <http://127.0.0.1:3024>.
 
 ## Zugänge
 
@@ -50,6 +38,6 @@ Standardmässig läuft die App unter <http://127.0.0.1:3018>.
 - `/teacher-entry` Lehrendenüberblick
 - `/teacher` Dashboard
 
-Die grosse Open-Access-Studie wurde nicht als 523-MB-Originaldatei eingebettet, sondern als Studienkompass und Dossiers didaktisiert.
+Die Einheit arbeitet bewusst mit einer True-Crime- und Prozessethik: genaue Analyse, keine Ausschmückung realer Gewalt, klare Trennung von Textbeobachtung, Indiz, Zusatzmaterial, Vermutung und Urteil.
 
-Deployment-Schritte stehen in [docs/deployment.md](docs/deployment.md).
+Für Deployment ohne schlafenden Server siehe [docs/deployment.md](docs/deployment.md).

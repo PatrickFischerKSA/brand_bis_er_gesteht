@@ -2,53 +2,53 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { buildParcoursMarkdown } from "../public/kehlmann-reader/export.js";
 
-test("parcours export renders Heidi headings and answers", () => {
+test("parcours export renders Brand headings and answers", () => {
   const markdown = buildParcoursMarkdown({
     modeLabel: "Offene Version",
-    classroomName: "Heidi 10A",
+    classroomName: "Brand 10A",
     studentName: "Mira S.",
     complete: false,
     completedEntries: 1,
-    totalEntries: 24,
+    totalEntries: 18,
     lessons: [
       {
-        title: "Lektion 12 · Fallpoetik, Nachwort, moderne Lektüre",
-        summary: "Das Nachwort bündelt Realfall, Fallpoetik und Heidis Widerstand gegen einfache Erklärungen.",
-        reviewFocus: "Arbeite an Realfallbezug, Fallpoetik und offener Erkenntnisform.",
-        pageRange: "S. 108-123",
+        title: "Geständnis und Wahrheit",
+        summary: "Das Geständnis wird als Zielpunkt, Kipppunkt und nicht als Ende aller Fragen gelesen.",
+        reviewFocus: "Titel, Spannung, Aussage und Beweis differenziert zusammendenken.",
+        pageRange: "S. 160-180",
         entries: [
           {
-            title: "Patriarchatskritik ohne Monokausalität",
-            moduleTitle: "Epilog, Symbiose und moderne Fallpoetik",
-            pageHint: "Volltext: Spuk- und Heimwehkapitel",
-            passageLabel: "Fallpoetik gegen einfache Antworten",
-            context: "Die Passage verbindet Gesellschaftskritik mit einer bewussten Offenhaltung des Falls.",
+            title: "Geständnis und Wahrheit",
+            moduleTitle: "Bis er gesteht",
+            pageHint: "PDF: S. 160",
+            passageLabel: "Wahrheitsanspruch",
+            context: "Ein Geständnis kann aufklären, aber es ersetzt nicht automatisch die kritische Prüfung von Motiven, Aussagen und Beweisen.",
             prompts: [
-              "Wie verbindet das Nachwort Gesellschaftskritik mit Warnungen vor einfachen Erklärungen?"
+              "Warum ist ein Geständnis erzählerisch stark, aber analytisch nicht das Ende aller Fragen?"
             ],
             answers: {
-              observation: "Das Nachwort markiert die Gefahr monokausaler Lesarten.",
-              evidence: "Patriarchatskritik, monokausale Lesart, schrecklich unsicher",
-              interpretation: "Gerade dadurch bleibt der Text offen für widersprüchliche Zusammenhänge.",
-              theory: "Mit dem Dossier zu Schuld und Zusammenhang gelesen wird die Unsicherheit zur Stärke der Fallpoetik.",
-              revision: "Noch deutlicher an Heimweh, Fenster und Hausordnung binden."
+              observation: "Das Geständnis klärt eine Version, beendet aber nicht die Prüfung aller Details.",
+              evidence: "Wahrheit, Aussage, Motiv, Beweis",
+              interpretation: "Gerade dadurch bleibt kriminalistische Wahrheit an Sprache und Indizien gebunden.",
+              theory: "Mit dem Dossier zu Verhör und Geständnis gelesen wird der Kipppunkt vorbereitet.",
+              revision: "Noch genauer an Frage, Widerspruch und Beweis koppeln."
             },
-            signalWords: ["Patriarchatskritik", "monokausale Lesart", "schrecklich unsicher"],
-            writingFrame: "Gerade diese Offenheit ist produktiv, weil ...",
+            signalWords: ["Wahrheit", "Aussage", "Motiv", "Beweis"],
+            writingFrame: "Ein Geständnis ist analytisch nicht das Ende, weil ...",
             theorySections: [
               {
-                title: "Dossier: Schuld, Zusammenhang und Erkenntniskritik",
-                sourceTitle: "Lokales Dossier zum Epilog und zu Heidis Fallpoetik",
+                title: "Dossier: Verhör, Widerspruch und Geständnis",
+                sourceTitle: "Lokales Dossier: Verhör und Geständnis",
                 guidingQuestions: [
                   {
-                    prompt: "Wie unterläuft deine Passage einfache Schuldzuschreibungen?",
-                    answer: "Sie verschiebt die Deutung auf Zusammenhänge und verweigert eine monokausale Erklärung."
+                    prompt: "Welche Frage verschiebt die Gesprächslage?",
+                    answer: "Sie greift ein Detail auf, das die bisherige Version nicht mehr stabil erklären kann."
                   }
                 ],
                 transferQuestions: [
                   {
-                    prompt: "Wie macht der Text Zusammenhang wichtiger als eindeutige Verurteilung?",
-                    answer: "Die Passage zeigt, dass gesellschaftliche Macht und individuelle Verantwortung nicht sauber getrennt werden."
+                    prompt: "Wie macht der Text ein Geständnis möglich?",
+                    answer: "Die Passage verbindet Druck, Widerspruch und die Prüfung einer Aussage."
                   }
                 ]
               }
@@ -57,15 +57,15 @@ test("parcours export renders Heidi headings and answers", () => {
         ],
         resources: [
           {
-            title: "Abschlussauftrag: Den Fall ohne Vereinfachung lesen",
-            sourceTitle: "Lokales Dossier zum Epilog und zu Heidis Fallpoetik",
-            summary: "Das Dossier dient als Vergleichsfolie für eine Gesamtsicht auf Tat, Milieu und Nachwort.",
-            task: "Nutze das Dossier zu Schuld und Zusammenhang, um deine Gesamtsicht auf den Text zu schärfen.",
-            taskResponse: "Tragfähig ist vor allem eine Lesart, die Gewalt, Milieu und Prozess zusammendenkt, ohne die Schuldfrage künstlich zu glätten.",
+            title: "Nach dem Geständnis",
+            sourceTitle: "Lokales Dossier: True-Crime-Ethik",
+            summary: "Auch Aufklärung verlangt verantwortliches Erzählen.",
+            task: "Prüfe, welche ethischen Fragen nach dem Geständnis offen bleiben.",
+            taskResponse: "Tragfähig ist eine Lesart, die Aufklärung, Angehörige und öffentliche Erinnerung zusammendenkt.",
             questions: [
               {
-                prompt: "Welche Erklärung überzeugt dich am ehesten?",
-                answer: "Am ehesten überzeugt eine Deutung, die Beziehung, Milieu, Gewalt und öffentliche Zuschreibung miteinander verknüpft."
+                prompt: "Was bleibt für Angehörige offen?",
+                answer: "Ein Geständnis beantwortet nicht automatisch Trauer, Erinnerung und öffentliche Verantwortung."
               }
             ]
           }
@@ -74,8 +74,8 @@ test("parcours export renders Heidi headings and answers", () => {
     ]
   });
 
-  assert.match(markdown, /# Heidi - Parcoursdokumentation/);
-  assert.match(markdown, /Lektion 12 · Fallpoetik, Nachwort, moderne Lektüre/);
-  assert.match(markdown, /Wie verbindet das Nachwort Gesellschaftskritik mit Warnungen vor einfachen Erklärungen\?/);
-  assert.match(markdown, /Abschlussauftrag: Den Fall ohne Vereinfachung lesen/);
+  assert.match(markdown, /# Bis er gesteht - Parcoursdokumentation/);
+  assert.match(markdown, /Geständnis und Wahrheit/);
+  assert.match(markdown, /Warum ist ein Geständnis erzählerisch stark/);
+  assert.match(markdown, /Nach dem Geständnis/);
 });

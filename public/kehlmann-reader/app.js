@@ -5,7 +5,7 @@ const mode = window.KEHLMANN_READER_MODE || "open";
 const modeLabel = window.KEHLMANN_READER_MODE_LABEL || "Offene Version";
 const config = window.KEHLMANN_READER_CONFIG || {};
 const app = document.body;
-const AUDIOBOOK_URL = "/reader/assets/heidi-hoerbuch.mp3";
+const AUDIOBOOK_URL = "https://www.dropbox.com/scl/fo/467llo67rclpn002zrbpw/AAHU6ZP-t97_2N8GIRiz3xU?rlkey=lcw7jj6yctljum7g2bbodb6x0&st=o5up4o4p&dl=0";
 
 const reviewLevels = [
   { value: "stark", label: "stark" },
@@ -42,16 +42,14 @@ let feedbackTimer = null;
 let sebFeedbackRequestId = 0;
 const entryIndex = new Map();
 const semanticGroups = {
-  heidi: ["heidi", "kind", "mädchen", "maedchen", "waise"],
-  almoehi: ["almöhi", "almoehi", "grossvater", "grossvater", "öhi", "oehi"],
-  peter: ["geissenpeter", "geissenpeter", "peter", "ziegen", "geissen", "weide"],
-  klara: ["klara", "rollstuhl", "sesemann", "frankfurt", "freundin"],
-  dete: ["dete", "tante", "dienst", "familie", "tobias"],
-  natur: ["alp", "alm", "berge", "natur", "luft", "sonne", "weide", "dörfli", "doerfli"],
-  stadt: ["stadt", "frankfurt", "fenster", "hausordnung", "benimmregel", "rottenmeier", "tinette", "sebastian"],
-  religion: ["gott", "gebet", "pfarrer", "grossmama", "grossmama", "grossmutter", "vertrauen", "zweifel"],
-  koerper: ["körper", "koerper", "krank", "gesund", "heimweh", "schlaf", "essen", "laufen", "medizin", "doktor"],
-  sprache: ["wort", "formulierung", "begriff", "satz", "bild", "dialog", "ton", "erzählen", "erzaehlen"],
+  fall: ["fall", "tat", "tatort", "notruf", "einbruch", "spur", "indiz", "beweis"],
+  zeit: ["zeit", "uhrzeit", "chronologie", "timeline", "nacht", "dezember", "schlafenszeit"],
+  raum: ["raum", "ort", "haus", "fenster", "treppenhaus", "karte", "ahornweg", "rollladen"],
+  sprache: ["wort", "formulierung", "begriff", "satz", "dialog", "ton", "wiederholung", "aussage"],
+  verhoer: ["verhör", "verhoer", "frage", "antwort", "druck", "widerspruch", "geständnis", "gestaendnis"],
+  ethik: ["ethik", "opfer", "angehörige", "angehoerige", "respekt", "true crime", "verantwortung"],
+  recht: ["recht", "gericht", "prozess", "urteil", "anklage", "verteidigung", "stgb", "stpo"],
+  indizien: ["indiz", "indizien", "beweis", "beweiswürdigung", "zweifel", "akte", "aktenstück"],
   ambivalenz: ["zugleich", "gleichzeitig", "widerspruch", "ambivalenz", "offen", "unsicher"]
 };
 const semanticLookup = new Map(
@@ -334,7 +332,7 @@ function responseMask(task) {
   }
 
   return [
-    "Beobachtung: Heidi zeigt hier, dass ...",
+    "Beobachtung: Die Passage zeigt hier, dass ...",
     "Textsignal: Das erkennt man an \"...\".",
     closing
   ];
@@ -1229,24 +1227,24 @@ function renderNotebook(entry) {
 
       <form id="note-form" class="note-grid">
         <label>
-          Beobachtung
-          <textarea name="observation" placeholder="Was fällt an Raum, Figur, Sprache oder Stimmung auf?">${escapeHtml(note.observation)}</textarea>
+          Spur / Beobachtung
+          <textarea name="observation" placeholder="Welche Spur fällt an Raum, Aussage, Sprache, Zeit oder Verhalten auf?">${escapeHtml(note.observation)}</textarea>
         </label>
         <label>
-          Signalwörter / Wortlaut
-          <textarea name="evidence" placeholder="Kurze Wortgruppen aus dem integrierten Volltext">${escapeHtml(note.evidence)}</textarea>
+          Aktenstück / Wortlaut
+          <textarea name="evidence" placeholder="Kurze Wortgruppen aus PDF, Hörspur, Podcast oder Materialstation">${escapeHtml(note.evidence)}</textarea>
         </label>
         <label>
-          Deutung
-          <textarea name="interpretation" placeholder="Was zeigt diese Stelle? Welche Wirkung entsteht?">${escapeHtml(note.interpretation)}</textarea>
+          Indizienwert
+          <textarea name="interpretation" placeholder="Was zeigt diese Spur? Belastend, entlastend oder mehrdeutig?">${escapeHtml(note.interpretation)}</textarea>
         </label>
         <label>
-          Theoriebezug
-          <textarea name="theory" placeholder="Verbinde die Passage mit Milieu, Briefdynamik, Körper/Gewalt, Prozess oder Zusammenhang.">${escapeHtml(note.theory)}</textarea>
+          Rechts- oder Materialbezug
+          <textarea name="theory" placeholder="Verbinde die Spur mit Fallrekonstruktion, Motiv, Rechtsprechung, Indizienprozess oder Urteilswerkstatt.">${escapeHtml(note.theory)}</textarea>
         </label>
         <label>
-          Revision / nächster Schritt
-          <textarea name="revision" placeholder="Was würdest du nach Feedback oder erneuter Lektüre noch schärfen?">${escapeHtml(note.revision)}</textarea>
+          Gegenhypothese / nächster Schritt
+          <textarea name="revision" placeholder="Welche Gegenhypothese bleibt möglich? Was müsste die Akte noch klären?">${escapeHtml(note.revision)}</textarea>
         </label>
       </form>
 
@@ -1405,7 +1403,7 @@ function renderPdfPanel(entry, module) {
       </div>
 
       <div class="pdf-frame-wrap">
-        <iframe class="pdf-frame" src="${pdfUrlForEntry(entry)}" title="Heidi Volltext"></iframe>
+        <iframe class="pdf-frame" src="${pdfUrlForEntry(entry)}" title="Bis er gesteht PDF"></iframe>
       </div>
     </article>
   `;
@@ -1886,15 +1884,12 @@ function renderAudiobookPanel() {
     <section class="panel audiobook-panel">
       <div class="panel-head">
         <div>
-          <div class="eyebrow">Hörbuch</div>
-          <h2>Heidis Lehr- und Wanderjahre hören</h2>
+          <div class="eyebrow">Hörspur</div>
+          <h2>Bis er gesteht hören</h2>
         </div>
-        <a class="button audiobook" href="${AUDIOBOOK_URL}" target="_blank" rel="noreferrer">Hörbuch in neuem Tab öffnen</a>
+        <a class="button audiobook" href="${AUDIOBOOK_URL}" target="_blank" rel="noreferrer">Hörbuchordner öffnen</a>
       </div>
-      <p>Nutze das Hörbuch produktiv: Höre eine Passage, stoppe an einer auffälligen Stelle und sichere danach Beobachtung, Textanker und Deutung im Reader.</p>
-      <audio class="audiobook-player" controls preload="none">
-        <source src="${AUDIOBOOK_URL}" type="audio/mpeg">
-      </audio>
+      <p>Nutze das Hörbuch als Hörspur: Öffne den Dropbox-Ordner, stoppe an einer auffälligen Stelle und sichere danach Beobachtung, Textanker, Indizienwert und mögliche Gegenhypothese.</p>
     </section>
   `;
 }
@@ -1919,16 +1914,16 @@ function render() {
     <main class="reader-shell">
       <section class="hero">
         <div>
-          <div class="eyebrow">Johanna Spyri · Heidi · ${escapeHtml(modeLabel)}</div>
-          <h1>Interaktive Lese- und Lernumgebung</h1>
+          <div class="eyebrow">Christine Brand · Bis er gesteht · ${escapeHtml(modeLabel)}</div>
+          <h1>Literarische Spurensicherung</h1>
           <p>
             ${mode === "seb"
-              ? "Diese SEB-Fassung führt dich durch selbstständig bearbeitbare Lektionen mit integriertem Volltext, sofortigem Arbeitsfeedback, Forschungsdossiers und Filmwerkstatt."
-              : "Die Einheit ist als autonomer Lernparcours gebaut. Nach dem Hörbuch wählst du alle Romanmodule und Vertiefungsmodule direkt in der Übersicht; die Fokusaufträge stehen als eigener Arbeitsblock vor Volltext, Materialarbeit, Überarbeitung und Peer Review."}
+              ? "Diese SEB-Fassung führt dich als Detektiv*in durch Fallakte, Tatort, Vernehmung, Prozessvorbereitung und Urteil."
+              : "Du arbeitest als Detektiv*in: Du sicherst Textspuren, rekonstruierst Tathergang und Motive, prüfst Akten und führst den Fall am Ende in den Gerichtssaal mit mehreren möglichen Urteilsvarianten."}
           </p>
         </div>
         <div class="hero-actions">
-          <a class="button audiobook" href="#hoerbuch">Hörbuch starten</a>
+          <a class="button audiobook" href="#hoerbuch">Hörspur starten</a>
           <span class="status-badge">${escapeHtml(modeLabel)}</span>
           <span class="status-badge">${lessonSets.length} Lektionen</span>
           <span class="status-badge">${escapeHtml(lesson.reviewFocus)}</span>

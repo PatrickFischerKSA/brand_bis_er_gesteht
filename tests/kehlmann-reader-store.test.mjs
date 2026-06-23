@@ -17,17 +17,17 @@ function emptyStore() {
   };
 }
 
-test("createClassroom generates a HEID code and all current lesson ids", () => {
+test("createClassroom generates a class code and all current lesson ids", () => {
   const store = emptyStore();
   const classroom = createClassroom(store, { name: "Klasse 10B" });
 
   assert.equal(store.classes.length, 1);
   assert.equal(classroom.name, "Klasse 10B");
   assert.match(classroom.code, /^HEID-[A-Z0-9]{6}$/);
-  assert.equal(classroom.lessonIds.length, 10);
+  assert.equal(classroom.lessonIds.length, 6);
   assert.ok(classroom.lessonIds.includes("lektion-01"));
   assert.ok(classroom.lessonIds.includes("lektion-05"));
-  assert.ok(classroom.lessonIds.includes("lektion-10"));
+  assert.ok(classroom.lessonIds.includes("lektion-06"));
 });
 
 test("regenerateClassroomCode replaces the existing class code", () => {
@@ -65,15 +65,15 @@ test("student registration reuses same learner and stores progress in selected l
     mode: "open",
     lessonId: "lektion-06",
     moduleId: "modul-06",
-    entryId: "frage-30",
-    theoryId: "stadt-land",
+    entryId: "frage-16",
+    theoryId: "true-crime-ethik",
     notes: {
-      "frage-30": {
-        observation: "Die Spukgeschichte zeigt, dass Heidis Heimweh nicht als Ungehorsam, sondern als körperliche Krise sichtbar wird.",
-        evidence: "spukhaften Vorgänge, Doktor, Heimweh",
-        interpretation: "Dadurch wird Frankfurt als Raum lesbar, der Heidi krank macht, obwohl alle Regeln äusserlich ordentlich erscheinen.",
-        theory: "Mit dem Dossier zu Stadt und Heimweh gelesen verbindet die Szene Hausordnung, Medizin und kindliche Sehnsucht.",
-        revision: "Noch genauer am Fenster- und Hausmotiv schärfen."
+      "frage-16": {
+        observation: "Die Gesamtthese verbindet Textwirkung, Fallrekonstruktion und Verantwortung.",
+        evidence: "These, Beleg, Deutung, Verantwortung",
+        interpretation: "Dadurch wird die True-Crime-Erzählung nicht nur spannend, sondern als reflektierte Darstellungsform lesbar.",
+        theory: "Mit der Ethik-Linse gelesen bleiben Opferperspektive und öffentliche Erinnerung zentral.",
+        revision: "Noch genauer an einer Textstelle belegen."
       }
     }
   });
@@ -133,30 +133,30 @@ test("teacher overview exposes saved passage and material answers", () => {
     lessonId: "lektion-01",
     moduleId: "modul-01",
     entryId: "frage-01",
-    theoryId: "spyris-werk-lesarten",
+    theoryId: "fall-rekonstruktion",
     notes: {
       "frage-01": {
-        observation: "Dete bringt Heidi auf die Alp und verhandelt Verantwortung mit dem Grossvater.",
-        evidence: "Detes Weggang, Arbeit in Frankfurt, Grossvater als Verwandter",
-        interpretation: "Die Szene zeigt Heidi als Kind, über dessen Zukunft Erwachsene entscheiden.",
-        theory: "Das Spyri-Dossier macht sichtbar, dass Familie, Arbeit und weibliche Erwerbswege zusammenspielen.",
-        revision: "Die Textstelle zum Arbeitsargument genauer belegen.",
+        observation: "Der Notruf erzeugt Nähe, aber seine Informationen bleiben prüfbedürftig.",
+        evidence: "Polizeinotruf, beide Kinder, tot, Fenster",
+        interpretation: "Die Szene zeigt, dass Schock und erste Version nicht automatisch Wahrheit bedeuten.",
+        theory: "Das Fallrekonstruktions-Dossier hilft, gesicherte Angaben, Behauptungen und offene Fragen zu trennen.",
+        revision: "Die Zeitangaben noch genauer ordnen.",
         focusAnswers: [
-          "Dete handelt praktisch, aber auch rücksichtslos gegenüber Heidi."
+          "Der Notruf wirkt unmittelbar, bleibt aber durch Wiederholung und Raumdetails verdächtig offen."
         ],
         theoryResponses: {
-          "spyris-werk-lesarten": {
-            guidingAnswers: ["Biografisch geht es um Arbeit, Fürsorge und weibliche Handlungsspielräume."],
-            transferAnswers: ["Die Lesart erklärt Dete nicht als reine Gegenspielerin."]
+          "fall-rekonstruktion": {
+            guidingAnswers: ["Gesichert sind einzelne Zeit- und Raumangaben; behauptet wird die Einbruchsversion."],
+            transferAnswers: ["Die Lesart trennt Notrufschock von kriminalistischer Prüfung."]
           }
         }
       },
-      "lesson-resource::lektion-01::spyris-werk-lesarten": {
-        taskResponse: "Der Roman übersetzt gesellschaftliche Fragen in eine Kindergeschichte.",
+      "lesson-resource::lektion-01::fall-rekonstruktion": {
+        taskResponse: "Die Mikro-Timeline trennt Uhrzeiten, behauptete Abläufe und offene Lücken.",
         questionAnswers: [
-          "Heidi ist literarische Figur, aber an Spyris Erfahrungsräume anschliessbar.",
-          "Detes Erwerbsarbeit zeigt ökonomischen Druck.",
-          "Politisch sichtbar werden Fürsorge, Armut und soziale Ordnung."
+          "Ausdrücklich genannt sind Datum, Uhrzeit des Notrufs und die Schlafenszeit.",
+          "Nur behauptet werden Einbruch, geraubtes Geld und der genaue Ablauf.",
+          "Die Lücke zwischen Schlafenszeit und Notruf erzeugt die stärkste Spannung."
         ]
       }
     }
@@ -166,14 +166,14 @@ test("teacher overview exposes saved passage and material answers", () => {
   const student = overview.classes[0].students.find((entry) => entry.displayName === "Anna Müller");
   const lesson = student.workDetail.find((entry) => entry.id === "lektion-01");
   const passage = lesson.entries.find((entry) => entry.id === "frage-01");
-  const material = lesson.materials.find((entry) => entry.resourceId === "spyris-werk-lesarten");
+  const material = lesson.materials.find((entry) => entry.resourceId === "fall-rekonstruktion");
 
   assert.equal(student.displayName, "Anna Müller");
-  assert.equal(passage.answers.interpretation, "Die Szene zeigt Heidi als Kind, über dessen Zukunft Erwachsene entscheiden.");
-  assert.equal(passage.focusAnswers[0].answer, "Dete handelt praktisch, aber auch rücksichtslos gegenüber Heidi.");
-  assert.equal(passage.theoryResponses[0].guidingAnswers[0], "Biografisch geht es um Arbeit, Fürsorge und weibliche Handlungsspielräume.");
-  assert.equal(material.taskResponse, "Der Roman übersetzt gesellschaftliche Fragen in eine Kindergeschichte.");
+  assert.equal(passage.answers.interpretation, "Die Szene zeigt, dass Schock und erste Version nicht automatisch Wahrheit bedeuten.");
+  assert.equal(passage.focusAnswers[0].answer, "Der Notruf wirkt unmittelbar, bleibt aber durch Wiederholung und Raumdetails verdächtig offen.");
+  assert.equal(passage.theoryResponses[0].guidingAnswers[0], "Gesichert sind einzelne Zeit- und Raumangaben; behauptet wird die Einbruchsversion.");
+  assert.equal(material.taskResponse, "Die Mikro-Timeline trennt Uhrzeiten, behauptete Abläufe und offene Lücken.");
   assert.equal(material.questions.length, 3);
-  assert.match(material.questions[0].expected, /Heidi/);
-  assert.equal(overview.materials.some((entry) => entry.id === "spyris-werk-lesarten"), true);
+  assert.match(material.questions[0].expected, /Datum|Uhrzeit|Schlafenszeit/);
+  assert.equal(overview.materials.some((entry) => entry.id === "fall-rekonstruktion"), true);
 });

@@ -1,9 +1,9 @@
 {
-  "name": "heidi_spyri",
+  "name": "brand_bis_er_gesteht",
   "version": "0.1.0",
   "private": true,
   "type": "module",
-  "description": "Digitale Lerneinheit zu Johanna Spyris Heidi mit integriertem Volltext, Registrierung, Lehrer*innen-Dashboard, SEB-Modus und differenziertem Feedback.",
+  "description": "Digitale Lerneinheit zu Christine Brands Bis er gesteht mit integriertem PDF, Registrierung, Lehrer*innen-Dashboard, SEB-Modus und differenziertem Feedback.",
   "scripts": {
     "start": "node server.mjs",
     "dev": "node --watch server.mjs",

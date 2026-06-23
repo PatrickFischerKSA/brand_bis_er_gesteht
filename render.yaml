@@ -1,6 +1,6 @@
 services:
   - type: web
-    name: heidi-spyri
+    name: brand-bis-er-gesteht
     runtime: node
     plan: free
     buildCommand: npm ci

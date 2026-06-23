@@ -1,6 +1,6 @@
 const app = document.body;
 const config = window.KEHLMANN_TEACHER_CONFIG || {};
-const AUDIOBOOK_URL = "/reader/assets/heidi-hoerbuch.mp3";
+const AUDIOBOOK_URL = "https://www.dropbox.com/scl/fo/467llo67rclpn002zrbpw/AAHU6ZP-t97_2N8GIRiz3xU?rlkey=lcw7jj6yctljum7g2bbodb6x0&st=o5up4o4p&dl=0";
 
 const state = {
   loading: true,
@@ -274,11 +274,11 @@ function render() {
       <section class="hero panel">
         <div>
           <div class="eyebrow">Lehrer*innen-Dashboard</div>
-          <h1>Heidi Lernstand</h1>
+          <h1>Bis er gesteht Lernstand</h1>
           <p>Namen genügen; alle Lektionen sind Teil des Parcours.</p>
         </div>
         <div class="hero-actions">
-          <a class="button audiobook" href="${AUDIOBOOK_URL}" target="_blank" rel="noreferrer">Hörbuch starten</a>
+          <a class="button audiobook" href="${AUDIOBOOK_URL}" target="_blank" rel="noreferrer">Hörbuchordner öffnen</a>
           <a class="button secondary" href="${escapeHtml(config.teacherEntryUrl || "/teacher-entry")}">Lehrer*inneneingang</a>
           <a class="button secondary" href="${escapeHtml(config.openUrl || "/open")}">Reader öffnen</a>
           <a class="button secondary" href="/">Startseite</a>

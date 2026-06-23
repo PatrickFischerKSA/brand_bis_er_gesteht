@@ -29,7 +29,7 @@ export function buildParcoursMarkdown({
   lessons
 }) {
   const lines = [
-    "# Heidi - Parcoursdokumentation",
+    "# Bis er gesteht - Parcoursdokumentation",
     "",
     `Modus: ${modeLabel}`,
     `Klasse: ${classroomName || "-"}`,

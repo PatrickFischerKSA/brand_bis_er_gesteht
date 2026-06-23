@@ -2,7 +2,7 @@
 
 ## Ziel
 
-Dieses Repo liefert eine einzelne, abgeschlossene Unterrichtseinheit zu Johanna Spyris *Heidi*. Es ist für GitHub, Vercel und Render vorbereitet.
+Dieses Repo liefert eine einzelne, abgeschlossene Unterrichtseinheit zu Christine Brands *Bis er gesteht*. Es ist für GitHub, Vercel und Render vorbereitet.
 
 ## Laufzeitmodell
 
@@ -19,7 +19,7 @@ Dieses Repo liefert eine einzelne, abgeschlossene Unterrichtseinheit zu Johanna 
 - `src/services/kehlmann-reader-store.mjs`: Persistenz, Supabase-Adapter und automatische Hintergrundgruppe
 - `src/services/kehlmann-reader-progress.mjs`: Lektions- und Fortschrittsauswertung
 - `src/services/kehlmann-reader-feedback.mjs`: differenzierte Feedbackdiagnostik
-- `public/kehlmann-reader/data.js`: Heidi-Lektionen, Leitfragen, Dossiers und Medienaufgaben
+- `public/kehlmann-reader/data.js`: Brand-Lektionen, Leitfragen, Dossiers und Medienaufgaben
 
 ## Zugangslogik
 

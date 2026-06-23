@@ -26,9 +26,9 @@ const NAME_COOKIE = "kehlmann_reader_name";
 const MODE_COOKIE = "kehlmann_reader_mode";
 const TEACHER_COOKIE = "kehlmann_teacher_access";
 const SEB_CONFIG_KEY_HASH = process.env.SEB_CONFIG_KEY_HASH || process.env.KEHLMANN_SEB_CONFIG_KEY_HASH || "";
-const READER_PDF_SOURCE = "/reader/assets/heidi-volltext.html";
-const BACKGROUND_VIDEO = "/reader/assets/heidi-background.mp4";
-const AUDIOBOOK_URL = "/reader/assets/heidi-hoerbuch.mp3";
+const READER_PDF_SOURCE = "/reader/assets/brand-bis-er-gesteht.pdf";
+const BACKGROUND_VIDEO = "/reader/assets/brand-background.mp4";
+const AUDIOBOOK_URL = "https://www.dropbox.com/scl/fo/467llo67rclpn002zrbpw/AAHU6ZP-t97_2N8GIRiz3xU?rlkey=lcw7jj6yctljum7g2bbodb6x0&st=o5up4o4p&dl=0";
 const ASSET_VERSION = process.env.RENDER_GIT_COMMIT || String(Date.now());
 
 function teacherRuntimeConfig() {
@@ -520,33 +520,32 @@ function lessonMeta(lessonId) {
 function renderLandingPage() {
   const lessons = getLessonSetsWithCounts();
   return renderShellPage({
-    title: "Heidi Lernumgebung",
+    title: "Bis er gesteht · Literarische Spurensicherung",
     body: `
       <main class="page">
         <section class="panel">
-          <div class="eyebrow">Johanna Spyri</div>
-          <h1>Heidi</h1>
+          <div class="eyebrow">Christine Brand</div>
+          <h1>Literarische Spurensicherung</h1>
           <p>
-            Autonome Lese- und Lernumgebung mit integriertem Volltext, offener Anmeldung,
+            Autonome Detektiv- und Prozesseinheit zu <em>Bis er gesteht</em> mit integriertem PDF, offener Anmeldung,
             Lehrer*innen-Dashboard, Peer Review und direktem
-            Arbeitsfeedback. Die Einheit verbindet die Romanlektüre mit Archivfragen,
-            Religion, Naturpädagogik, Stadt-Land-Kontrast, Bildgeschichte, Forschung und
-            dem Dokumentarfilm <em>Heidis Alptraum</em> als interpretatorischer Erweiterung.
+            Arbeitsfeedback. Die Lesenden sichern Spuren, rekonstruieren Tathergang und Motive,
+            prüfen Gerichtsakten, nutzen Rechtsprechungsressourcen und entwickeln am Ende konkurrierende Urteile.
           </p>
           <div class="row">
             <a class="button" href="/open">Offene Version</a>
-            <a class="button audiobook" href="${AUDIOBOOK_URL}" target="_blank" rel="noreferrer">Hörbuch starten</a>
+            <a class="button audiobook" href="${AUDIOBOOK_URL}" target="_blank" rel="noreferrer">Hörbuchordner öffnen</a>
             <a class="button secondary" href="/teacher-entry">Lehrer*inneneingang</a>
             <a class="button secondary" href="/teacher">Lehrer*innen-Dashboard</a>
           </div>
           <div class="audiobook-callout">
-            <strong>Hörbuch zur Romanlektüre</strong>
-            <p>Das vollständige Hörbuch ist als Arbeitsfassung integriert und kann parallel zum Volltext genutzt werden.</p>
-            <a class="button audiobook" href="${AUDIOBOOK_URL}" target="_blank" rel="noreferrer">Hörbuch öffnen</a>
+            <strong>Hörspur zur Fallakte</strong>
+            <p>Der Dropbox-Hörbuchordner kann parallel zum PDF genutzt werden, besonders für Dialog, Vernehmung, Motive und Wirkung von Pausen.</p>
+            <a class="button audiobook" href="${AUDIOBOOK_URL}" target="_blank" rel="noreferrer">Hörbuchordner öffnen</a>
           </div>
         </section>
         <section class="panel">
-          <div class="eyebrow">Autonome Lernpfade</div>
+          <div class="eyebrow">Fallphasen</div>
           <ul class="small-list">
             ${lessons.map((lesson) => `<li><strong>${lesson.title}:</strong> ${lesson.summary}</li>`).join("")}
           </ul>
@@ -627,7 +626,7 @@ function renderTeacherEntryPage({ lessonId, entryId } = {}) {
     : "";
 
   return renderShellPage({
-    title: "Lehrer*inneneingang · Heidi",
+    title: "Lehrer*inneneingang · Bis er gesteht",
     bodyClass: "teacher-entry-page",
     body: `
       <main class="page">
@@ -770,7 +769,7 @@ function renderTeacherEntryPage({ lessonId, entryId } = {}) {
             </div>
 
             <div class="iframe-shell">
-              <iframe src="${pdfUrl}" title="Heidi Volltext"></iframe>
+              <iframe src="${pdfUrl}" title="Bis er gesteht PDF"></iframe>
             </div>
 
             ${lessonResources.length ? `
@@ -814,8 +813,8 @@ function renderTeacherEntryPage({ lessonId, entryId } = {}) {
 function renderStudentAccessPage({ mode, lessonId, errorText = "" }) {
   const isOpen = mode === "open";
   const formAction = isOpen ? "/auth/open" : "/auth/seb";
-  const title = isOpen ? "Heidi öffnen" : "SEB-Version öffnen";
-  const heading = isOpen ? "Roman-Reader öffnen" : "SEB-Reader starten";
+  const title = isOpen ? "Bis er gesteht öffnen" : "SEB-Version öffnen";
+  const heading = isOpen ? "Fallakte öffnen" : "SEB-Fallakte starten";
 
   return renderShellPage({
     title,
@@ -827,8 +826,8 @@ function renderStudentAccessPage({ mode, lessonId, errorText = "" }) {
           <h1>${heading}</h1>
           <p>
             ${isOpen
-              ? "Gib deinen Namen ein und arbeite dann durch alle Lektionen der Heidi-Lernumgebung."
-              : "Diese Version läuft nur im Safe Exam Browser. Gib deinen Namen ein und arbeite durch alle Lektionen."}
+              ? "Gib deinen Namen ein und arbeite als Detektiv*in durch Spurensicherung, Ermittlungsakte, Prozess und Urteil."
+              : "Diese Version läuft nur im Safe Exam Browser. Gib deinen Namen ein und arbeite durch Spurensicherung, Prozess und Urteil."}
           </p>
           <div class="notice">
             <strong>So funktioniert die Anmeldung:</strong>
@@ -837,9 +836,9 @@ function renderStudentAccessPage({ mode, lessonId, errorText = "" }) {
             <br>3. Alle Lektionen bearbeiten.
           </div>
           <div class="audiobook-callout">
-            <strong>Hörbuch bereithalten</strong>
-            <p>Du kannst den Roman zusätzlich hören und Textstellen danach im Reader schriftlich sichern.</p>
-            <a class="button audiobook" href="${AUDIOBOOK_URL}" target="_blank" rel="noreferrer">Hörbuch starten</a>
+            <strong>Hörspur bereithalten</strong>
+            <p>Du kannst den Fall zusätzlich hören und Textstellen danach als Spur, Indiz oder Gegenhypothese sichern.</p>
+            <a class="button audiobook" href="${AUDIOBOOK_URL}" target="_blank" rel="noreferrer">Hörbuchordner öffnen</a>
           </div>
           ${errorText ? `<div class="notice"><strong>Hinweis:</strong> ${errorText}</div>` : ""}
           <form method="post" action="${formAction}" class="form-grid">
@@ -888,7 +887,7 @@ function renderTeacherPage() {
       <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Lehrer*innen-Dashboard · Heidi Lernumgebung</title>
+        <title>Lehrer*innen-Dashboard · Bis er gesteht</title>
         <link rel="stylesheet" href="${assetUrl("/kehlmann-teacher/styles.css")}">
       </head>
       <body>
@@ -916,7 +915,7 @@ function renderReaderPage(mode, lessonId) {
       <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>Heidi Lernumgebung</title>
+        <title>Bis er gesteht Lernumgebung</title>
         <link rel="stylesheet" href="${assetUrl("/reader/styles.css")}">
       </head>
       <body>

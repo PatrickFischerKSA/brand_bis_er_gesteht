@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 360" role="img" aria-label="Christine Brand Materialkarte">
+  <rect width="640" height="360" fill="#f5efe4"/>
+  <rect x="36" y="36" width="568" height="288" rx="8" fill="#241f1c"/>
+  <circle cx="145" cy="140" r="58" fill="#b99978"/>
+  <path d="M84 268c24-54 96-78 142-32 11 11 18 22 23 32" fill="#b99978"/>
+  <text x="280" y="132" fill="#f5efe4" font-family="Georgia, serif" font-size="38" font-weight="700">Christine Brand</text>
+  <text x="280" y="180" fill="#d8cbbc" font-family="Avenir Next, Arial, sans-serif" font-size="22">Lektüre- und Lernumgebung</text>
+  <text x="280" y="228" fill="#d8cbbc" font-family="Avenir Next, Arial, sans-serif" font-size="18">Fallrekonstruktion · Verhör · True-Crime-Ethik</text>
+</svg>

@@ -12,7 +12,13 @@ const readerStorePath = path.join(dataDir, "kehlmann-reader-store.json");
 const supabaseUrl = process.env.SUPABASE_URL || "";
 const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY || process.env.SUPABASE_ANON_KEY || "";
 const supabaseTable = process.env.SUPABASE_STORE_TABLE || "reader_store";
-const supabaseStoreId = process.env.SUPABASE_STORE_ID || "heidi_spyri";
+const supabaseStoreId = process.env.SUPABASE_STORE_ID || "brand_bis_er_gesteht";
+const githubStoreToken = process.env.GITHUB_STORE_TOKEN || "";
+const githubStoreRepo = process.env.GITHUB_STORE_REPO || "";
+const githubStoreBranch = process.env.GITHUB_STORE_BRANCH || "main";
+const githubStorePath = process.env.GITHUB_STORE_PATH || "data/brand-bis-er-gesteht-reader-store.json";
+const githubStoreCommitterName = process.env.GITHUB_STORE_COMMITTER_NAME || "Brand Reader Store";
+const githubStoreCommitterEmail = process.env.GITHUB_STORE_COMMITTER_EMAIL || "brand-reader-store@users.noreply.github.com";
 
 const defaultPeerReviewCriteria = [
   {
@@ -49,6 +55,16 @@ const defaultPeerReviewLessonId = () => lessonCatalog().find((lesson) => lesson.
 
 let inMemoryReaderStore = null;
 let supabaseStoreDisabledReason = "";
+let githubStoreDisabledReason = "";
+
+function githubRepoParts() {
+  const [owner, repo] = githubStoreRepo.split("/");
+  return owner && repo ? { owner, repo } : null;
+}
+
+function hasGitHubStore() {
+  return Boolean(githubStoreToken && githubRepoParts() && !githubStoreDisabledReason);
+}
 
 function hasSupabaseStore() {
   return Boolean(supabaseUrl && supabaseKey && !supabaseStoreDisabledReason);
@@ -57,6 +73,20 @@ function hasSupabaseStore() {
 function supabaseEndpoint(query = "") {
   const base = supabaseUrl.replace(/\/+$/, "");
   return `${base}/rest/v1/${encodeURIComponent(supabaseTable)}${query}`;
+}
+
+function githubContentsEndpoint() {
+  const parts = githubRepoParts();
+  return `https://api.github.com/repos/${encodeURIComponent(parts.owner)}/${encodeURIComponent(parts.repo)}/contents/${githubStorePath.split("/").map(encodeURIComponent).join("/")}`;
+}
+
+function githubHeaders() {
+  return {
+    Authorization: `Bearer ${githubStoreToken}`,
+    Accept: "application/vnd.github+json",
+    "Content-Type": "application/json",
+    "X-GitHub-Api-Version": "2022-11-28"
+  };
 }
 
 function supabaseHeaders(extra = {}) {
@@ -93,7 +123,7 @@ function makeId(prefix) {
 function defaultClassroom(timestamp) {
   return {
     id: "reader-class-default",
-    name: "Heidi Lernende",
+    name: "Bis er gesteht Lernende",
     code: "HEID-10A",
     lessonIds: defaultLessonIds(),
     activeSebLessonId: defaultActiveLessonId(),
@@ -200,6 +230,69 @@ async function writeSupabaseStore(nextStore) {
   }
 }
 
+function decodeBase64Json(content = "") {
+  return JSON.parse(Buffer.from(content.replace(/\s/g, ""), "base64").toString("utf8"));
+}
+
+function encodeBase64Json(payload) {
+  return Buffer.from(`${JSON.stringify(payload, null, 2)}\n`, "utf8").toString("base64");
+}
+
+async function readGitHubStoreWithSha() {
+  const response = await fetch(`${githubContentsEndpoint()}?ref=${encodeURIComponent(githubStoreBranch)}`, {
+    headers: githubHeaders()
+  });
+
+  if (response.status === 404) {
+    const initialStore = defaultReaderStore();
+    const created = await writeGitHubStoreWithSha(initialStore, null, "Initialisiere Brand Reader Store");
+    return { store: normalizeReaderStore(initialStore), sha: created.sha };
+  }
+
+  if (!response.ok) {
+    throw new Error(`GitHub Store konnte nicht gelesen werden (${response.status}).`);
+  }
+
+  const payload = await response.json();
+  return {
+    store: normalizeReaderStore(decodeBase64Json(payload.content || "")),
+    sha: payload.sha || null
+  };
+}
+
+async function writeGitHubStoreWithSha(nextStore, sha, message = "Aktualisiere Brand Reader Store") {
+  const body = {
+    message,
+    content: encodeBase64Json(nextStore),
+    branch: githubStoreBranch,
+    committer: {
+      name: githubStoreCommitterName,
+      email: githubStoreCommitterEmail
+    }
+  };
+
+  if (sha) {
+    body.sha = sha;
+  }
+
+  const response = await fetch(githubContentsEndpoint(), {
+    method: "PUT",
+    headers: githubHeaders(),
+    body: JSON.stringify(body)
+  });
+
+  if (!response.ok) {
+    const payload = await response.json().catch(() => ({}));
+    const detail = payload.message ? `: ${payload.message}` : "";
+    throw new Error(`GitHub Store konnte nicht geschrieben werden (${response.status})${detail}`);
+  }
+
+  const payload = await response.json();
+  return {
+    sha: payload.content?.sha || null
+  };
+}
+
 async function readFileStoreOrDefault() {
   try {
     await ensureReaderStoreFile();
@@ -220,6 +313,17 @@ async function writeFileStoreOrMemory(nextStore) {
 }
 
 export async function readReaderStore() {
+  if (hasGitHubStore()) {
+    try {
+      const { store } = await readGitHubStoreWithSha();
+      inMemoryReaderStore = structuredClone(store);
+      return structuredClone(inMemoryReaderStore);
+    } catch (error) {
+      githubStoreDisabledReason = error.message;
+      console.warn(`GitHub Reader Store deaktiviert, Fallback aktiv: ${error.message}`);
+    }
+  }
+
   if (inMemoryReaderStore) {
     return structuredClone(inMemoryReaderStore);
   }
@@ -240,6 +344,17 @@ export async function readReaderStore() {
 
 export async function writeReaderStore(nextStore) {
   inMemoryReaderStore = structuredClone(nextStore);
+  if (hasGitHubStore()) {
+    try {
+      const { sha } = await readGitHubStoreWithSha();
+      await writeGitHubStoreWithSha(nextStore, sha);
+    } catch (error) {
+      githubStoreDisabledReason = error.message;
+      console.warn(`GitHub Reader Store konnte nicht schreiben, Fallback aktiv: ${error.message}`);
+    }
+    return structuredClone(inMemoryReaderStore);
+  }
+
   if (hasSupabaseStore()) {
     try {
       await writeSupabaseStore(nextStore);
@@ -255,6 +370,27 @@ export async function writeReaderStore(nextStore) {
 }
 
 export async function updateReaderStore(mutator) {
+  if (hasGitHubStore()) {
+    let lastError = null;
+    for (let attempt = 1; attempt <= 3; attempt += 1) {
+      try {
+        const { store, sha } = await readGitHubStoreWithSha();
+        const result = await mutator(store);
+        const writeResult = await writeGitHubStoreWithSha(store, sha);
+        inMemoryReaderStore = structuredClone(store);
+        return result;
+      } catch (error) {
+        lastError = error;
+        if (!/409|sha|conflict/i.test(error.message) || attempt === 3) {
+          break;
+        }
+      }
+    }
+
+    githubStoreDisabledReason = lastError?.message || "Unbekannter GitHub-Fehler";
+    console.warn(`GitHub Reader Store Update fehlgeschlagen, Fallback aktiv: ${githubStoreDisabledReason}`);
+  }
+
   const store = await readReaderStore();
   const result = await mutator(store);
   await writeReaderStore(store);
