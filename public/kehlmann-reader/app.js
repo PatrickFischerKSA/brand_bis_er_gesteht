@@ -993,6 +993,69 @@ function renderLessonRail() {
   }).join("");
 }
 
+function renderCoreModuleNavigation() {
+  return availableLessons().map((lesson, index) => {
+    const progress = state.progress?.lessonProgress?.find((entry) => entry.id === lesson.id);
+    const entryCount = Array.isArray(lesson.entryIds) ? lesson.entryIds.length : lesson.moduleIds.length;
+    const progressLabel = progress
+      ? `${progress.completedEntries}/${progress.totalEntries} Passagen`
+      : `${entryCount} Passagen`;
+    const disabled = mode === "seb" || config.forcedLessonId;
+    return `
+      <button class="top-module-card ${lesson.id === state.lessonId ? "is-active" : ""}" data-action="select-lesson" data-lesson-id="${lesson.id}" ${disabled ? "disabled" : ""}>
+        <span class="module-card-kicker">${escapeHtml(`Romanmodul ${index + 1}`)}</span>
+        <strong>${escapeHtml(lesson.title)}</strong>
+        <span>${escapeHtml(lesson.summary)}</span>
+        <small>${escapeHtml(`${progressLabel} · ${pageRangeForLesson(lesson)}`)}</small>
+      </button>
+    `;
+  }).join("");
+}
+
+function renderDeepeningModuleNavigation(module, entry) {
+  return theoryOptionsFor(module, entry).map((resource) => `
+    <button class="deepening-module-card ${resource.id === state.theoryId ? "is-active" : ""}" data-action="select-theory" data-theory-id="${resource.id}">
+      <span class="module-card-kicker">Vertiefungsmodul</span>
+      <strong>${escapeHtml(resource.shortTitle)}</strong>
+      <span>${escapeHtml(resource.sourceTitle)}</span>
+    </button>
+  `).join("");
+}
+
+function renderTopModuleNavigation(module, entry) {
+  return `
+    <section class="panel module-overview-panel" aria-label="Modulübersicht">
+      <div class="panel-head">
+        <div>
+          <div class="eyebrow">Navigation</div>
+          <h2>Alle Module im Überblick</h2>
+        </div>
+        <span class="status-badge">${escapeHtml(`${availableLessons().length} Romanmodule · ${theoryOptionsFor(module, entry).length} Vertiefungen zur Passage`)}</span>
+      </div>
+
+      <div class="module-overview-group">
+        <div class="module-overview-copy">
+          <strong>Inhalt sichern und systematisch lesen</strong>
+          <p>Diese Romanmodule führen chronologisch durch die Handlung. Jedes Modul verbindet Inhaltsverständnis, Figurenkonstellation, Motivarbeit und Textbelege.</p>
+        </div>
+        <div class="module-overview-grid core-modules">
+          ${renderCoreModuleNavigation()}
+        </div>
+      </div>
+
+      <div class="module-overview-group">
+        <div class="module-overview-copy">
+          <strong>Vertiefen und deuten</strong>
+          <p>Diese Vertiefungsmodule öffnen die aktuelle Passage auf Biografie, Gesellschaft, Religion, Naturpädagogik, Film, Bildgeschichte und Forschung.</p>
+        </div>
+        <div class="module-overview-grid deepening-modules">
+          ${renderDeepeningModuleNavigation(module, entry)}
+        </div>
+      </div>
+    </section>
+  `;
+}
+
 function renderTheorySelector(module, entry) {
   return theoryOptionsFor(module, entry).map((resource) => `
     <button class="theory-pill ${resource.id === state.theoryId ? "is-active" : ""}" data-action="select-theory" data-theory-id="${resource.id}">
@@ -1086,6 +1149,37 @@ function renderFocusQuestions(entry) {
     dataset: { "note-array": "focusAnswers", index },
     label: responseLabel("Fokusauftrag", index, taskPrompt(task))
   })).join("");
+}
+
+function renderFocusPreview(entry) {
+  return `
+    <div class="question-task-list compact">
+      ${focusTasksFor(entry).map((task, index) => `
+        <article class="question-task-card compact">
+          <strong>${escapeHtml(`Fokusauftrag ${index + 1}`)}</strong>
+          <p>${escapeHtml(taskPrompt(task))}</p>
+        </article>
+      `).join("")}
+    </div>
+  `;
+}
+
+function renderFocusWorkPanel(entry) {
+  return `
+    <section class="panel focus-work-panel">
+      <div class="panel-head">
+        <div>
+          <div class="eyebrow">Arbeitsaufträge zur aktuellen Passage</div>
+          <h2>Fokusaufträge schriftlich bearbeiten</h2>
+        </div>
+        <span class="status-badge" data-doc-count="focus">${escapeHtml(`${focusAnswersFor(entry).filter((value) => trimmed(value)).length}/${focusTasksFor(entry).length}`)}</span>
+      </div>
+      <p class="focus-work-intro">${escapeHtml(`Aktuelle Passage: ${entry.passageLabel}. Bearbeite diese Aufträge nicht nebenbei, sondern als eigenen Schritt vor Notizbuch, Materialarbeit und Überarbeitung.`)}</p>
+      <div class="focus-work-grid">
+        ${renderFocusQuestions(entry)}
+      </div>
+    </section>
+  `;
 }
 
 function renderNotebookFeedbackMarkup(note, module, entry) {
@@ -1830,7 +1924,7 @@ function render() {
           <p>
             ${mode === "seb"
               ? "Diese SEB-Fassung führt dich durch selbstständig bearbeitbare Lektionen mit integriertem Volltext, sofortigem Arbeitsfeedback, Forschungsdossiers und Filmwerkstatt."
-              : "Die Einheit ist als autonomer Lernparcours gebaut. Links steuerst du Lektionen und Linsen, in der Mitte arbeitest du direkt im Volltext, rechts verbindest du Textbeobachtung, Forschung, Film, Überarbeitung und Peer Review."}
+              : "Die Einheit ist als autonomer Lernparcours gebaut. Nach dem Hörbuch wählst du alle Romanmodule und Vertiefungsmodule direkt in der Übersicht; die Fokusaufträge stehen als eigener Arbeitsblock vor Volltext, Materialarbeit, Überarbeitung und Peer Review."}
           </p>
         </div>
         <div class="hero-actions">
@@ -1844,34 +1938,31 @@ function render() {
 
       <div id="hoerbuch">${renderAudiobookPanel()}</div>
 
+      ${renderTopModuleNavigation(module, entry)}
+
       <div data-top-status-slot>${renderTopStatus()}</div>
 
       ${state.error ? `<section class="panel"><p>${escapeHtml(state.error)}</p></section>` : ""}
+
+      ${renderFocusWorkPanel(entry)}
 
       <section class="layout">
         <aside class="panel sidebar">
           <div class="panel-head">
             <div>
               <div class="eyebrow">${escapeHtml(starterPrompt.title)}</div>
-              <h2>Lernpfad</h2>
+              <h2>Aktuelle Orientierung</h2>
             </div>
           </div>
           <ul class="prompt-list">${renderPromptList()}</ul>
 
-          <section class="lesson-box">
-            <div class="eyebrow">Lernstationen</div>
-            <div class="lesson-list">
-              ${renderLessonRail()}
-            </div>
-            <div class="sidebar-task">
-              <strong>${escapeHtml(lesson.title)}</strong>
-              <p>${escapeHtml(mode === "seb" ? lesson.sebPrompt : lesson.summary)}</p>
-              <p>${escapeHtml(`Seitenkorridor: ${pageRangeForLesson(lesson)} · ${entriesForLesson(lesson).length} Passagen`)}</p>
-            </div>
-          </section>
+          <div class="sidebar-task">
+            <strong>${escapeHtml(lesson.title)}</strong>
+            <p>${escapeHtml(mode === "seb" ? lesson.sebPrompt : lesson.summary)}</p>
+            <p>${escapeHtml(`Seitenkorridor: ${pageRangeForLesson(lesson)} · ${entriesForLesson(lesson).length} Passagen`)}</p>
+          </div>
 
           <div data-progress-slot>${renderProgressBox()}</div>
-          <div class="module-list">${renderSidebar()}</div>
 
           <div class="sidebar-task">
             <strong>${escapeHtml(module.title)}</strong>
@@ -1905,10 +1996,10 @@ function render() {
               <div class="signal-grid">${renderSignalWords(entry)}</div>
               <div class="prompt-box">
                 <div class="section-head">
-                  <strong>Verbindliche Fokusaufträge</strong>
-                  <span class="status-badge" data-doc-count="focus">${escapeHtml(`${focusAnswersFor(entry).filter((value) => trimmed(value)).length}/${focusTasksFor(entry).length}`)}</span>
+                  <strong>Fokus der Passage</strong>
+                  <span class="status-badge">${escapeHtml(`${focusTasksFor(entry).length} Aufträge`)}</span>
                 </div>
-                ${renderFocusQuestions(entry)}
+                ${renderFocusPreview(entry)}
               </div>
               <div class="writing-frame-box">
                 <strong>Satzstarter</strong>

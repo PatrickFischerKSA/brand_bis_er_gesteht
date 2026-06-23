@@ -13,6 +13,7 @@
 
 * {
   box-sizing: border-box;
+  min-width: 0;
 }
 
 html,
@@ -213,9 +214,109 @@ button {
   accent-color: var(--accent);
 }
 
+.module-overview-panel {
+  display: grid;
+  gap: 22px;
+}
+
+.module-overview-group {
+  display: grid;
+  gap: 14px;
+}
+
+.module-overview-copy {
+  display: grid;
+  gap: 6px;
+  max-width: 980px;
+}
+
+.module-overview-copy strong {
+  font-size: 1.08rem;
+  color: var(--forest);
+}
+
+.module-overview-copy p,
+.focus-work-intro {
+  margin: 0;
+}
+
+.module-overview-grid {
+  display: grid;
+  gap: 12px;
+}
+
+.core-modules {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+.deepening-modules {
+  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
+}
+
+.top-module-card,
+.deepening-module-card {
+  display: grid;
+  gap: 8px;
+  min-height: 162px;
+  align-content: start;
+  text-align: left;
+  border-radius: 22px;
+  padding: 16px;
+  border: 1px solid rgba(49, 67, 53, 0.14);
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text);
+}
+
+.deepening-module-card {
+  min-height: 126px;
+  background: rgba(49, 67, 53, 0.07);
+}
+
+.top-module-card strong,
+.deepening-module-card strong {
+  color: var(--forest);
+  font-size: 1.02rem;
+}
+
+.top-module-card span,
+.top-module-card small,
+.deepening-module-card span {
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.module-card-kicker {
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.74rem;
+  color: var(--accent) !important;
+}
+
+.top-module-card.is-active,
+.deepening-module-card.is-active {
+  border-color: rgba(180, 92, 57, 0.46);
+  background: rgba(180, 92, 57, 0.13);
+  box-shadow: 0 16px 34px rgba(49, 67, 53, 0.12);
+}
+
+.top-module-card:disabled {
+  cursor: default;
+}
+
+.focus-work-panel {
+  border-color: rgba(180, 92, 57, 0.34);
+  background: rgba(255, 250, 240, 0.72);
+}
+
+.focus-work-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  gap: 14px;
+}
+
 .layout {
   display: grid;
-  grid-template-columns: minmax(270px, 0.34fr) minmax(560px, 0.88fr) minmax(390px, 0.58fr);
+  grid-template-columns: minmax(520px, 0.92fr) minmax(560px, 1.08fr);
   gap: 18px;
   align-items: start;
 }
@@ -226,6 +327,19 @@ button {
   display: grid;
   gap: 18px;
   align-self: start;
+}
+
+.sidebar {
+  grid-column: 1 / -1;
+  grid-template-columns: minmax(260px, 0.8fr) minmax(260px, 1fr) minmax(240px, 0.7fr) minmax(280px, 1fr);
+}
+
+.sidebar > .panel-head {
+  margin-bottom: 0;
+}
+
+.sidebar .prompt-list {
+  margin-top: 0;
 }
 
 .panel {
@@ -651,6 +765,10 @@ textarea {
   gap: 12px;
 }
 
+.question-task-list.compact {
+  gap: 10px;
+}
+
 .question-task-card,
 .question-answer-block {
   display: grid;
@@ -660,6 +778,16 @@ textarea {
   padding: 16px;
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(12px);
+}
+
+.question-task-card.compact {
+  gap: 6px;
+  padding: 12px 14px;
+  background: rgba(255, 255, 255, 0.16);
+}
+
+.question-task-card.compact p {
+  margin: 0;
 }
 
 .question-answer-label {
@@ -849,11 +977,11 @@ textarea {
 
 @media (max-width: 1480px) {
   .layout {
-    grid-template-columns: minmax(250px, 0.36fr) minmax(0, 1fr);
+    grid-template-columns: minmax(460px, 0.95fr) minmax(460px, 1.05fr);
   }
 
-  .content-column {
-    grid-column: 1 / -1;
+  .sidebar {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .status-strip {
@@ -863,6 +991,8 @@ textarea {
 
 @media (max-width: 1040px) {
   .layout,
+  .sidebar,
+  .focus-work-grid,
   .theory-grid,
   .feedback-columns,
   .status-strip,
@@ -883,5 +1013,42 @@ textarea {
   .pdf-frame,
   .pdf-frame-wrap {
     min-height: 68vh;
+  }
+}
+
+@media (max-width: 640px) {
+  .reader-shell {
+    padding: 10px;
+    gap: 12px;
+  }
+
+  .hero,
+  .panel {
+    border-radius: 22px;
+    padding: 16px;
+  }
+
+  .core-modules,
+  .deepening-modules,
+  .focus-work-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .top-module-card,
+  .deepening-module-card,
+  .question-answer-block,
+  .question-task-card {
+    border-radius: 18px;
+    padding: 14px;
+  }
+
+  .answer-mask {
+    padding: 10px;
+  }
+
+  textarea {
+    min-height: 140px;
+    border-radius: 14px;
+    padding: 12px;
   }
 }
