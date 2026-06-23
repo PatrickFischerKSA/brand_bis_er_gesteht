@@ -65,13 +65,13 @@ function renderShellPage({ title, body, bodyClass = "" }) {
         <style>
           :root {
             --bg: #f3efe7;
-            --surface: rgba(255,255,255,0.055);
-            --border: rgba(255,255,255,0.24);
+            --surface: rgba(255,255,255,0.018);
+            --border: rgba(255,255,255,0.18);
             --text: #172119;
             --muted: #46514a;
             --accent: #376d73;
             --forest: #314335;
-            --shadow: 0 18px 54px rgba(16, 24, 20, 0.12);
+            --shadow: 0 10px 28px rgba(16, 24, 20, 0.07);
           }
           * { box-sizing: border-box; }
           body {
@@ -97,8 +97,8 @@ function renderShellPage({ title, body, bodyClass = "" }) {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: blur(3px) saturate(1.02) contrast(1.06) brightness(0.82);
-            transform: scale(1.03);
+            filter: blur(1px) saturate(1.08) contrast(1.02) brightness(0.98);
+            transform: scale(1.005);
             opacity: 1;
           }
           .site-background::before {
@@ -106,18 +106,17 @@ function renderShellPage({ title, body, bodyClass = "" }) {
             position: absolute;
             inset: -24px;
             background:
-              linear-gradient(180deg, rgba(56, 50, 45, 0.08) 0%, rgba(34, 31, 28, 0.12) 100%);
-            filter: blur(5px) saturate(1) contrast(1.08) brightness(0.88);
-            transform: scale(1.02);
-            opacity: 0.16;
+              linear-gradient(180deg, rgba(56, 50, 45, 0) 0%, rgba(34, 31, 28, 0) 100%);
+            filter: none;
+            transform: none;
+            opacity: 0;
           }
           .site-background::after {
             content: "";
             position: absolute;
             inset: 0;
             background:
-              linear-gradient(90deg, rgba(247, 240, 230, 0.11) 0%, rgba(247, 240, 230, 0.03) 24%, rgba(38, 34, 31, 0.06) 70%, rgba(24, 28, 25, 0.12) 100%),
-              radial-gradient(circle at 54% 18%, rgba(255, 248, 238, 0), rgba(255, 248, 238, 0) 18%, rgba(255, 248, 238, 0.05) 46%, rgba(214, 206, 192, 0.1) 100%);
+              linear-gradient(90deg, rgba(247, 240, 230, 0.025) 0%, rgba(247, 240, 230, 0) 28%, rgba(24, 28, 25, 0.025) 100%);
           }
           .background-video-toggle {
             position: fixed;
@@ -152,9 +151,9 @@ function renderShellPage({ title, body, bodyClass = "" }) {
             border-radius: 28px;
             box-shadow: var(--shadow);
             padding: 24px;
-            backdrop-filter: blur(22px) saturate(1.28);
-            -webkit-backdrop-filter: blur(22px) saturate(1.28);
-            box-shadow: inset 0 1px 0 rgba(255,255,255,0.26), var(--shadow);
+            backdrop-filter: blur(6px) saturate(1.04);
+            -webkit-backdrop-filter: blur(6px) saturate(1.04);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.16), var(--shadow);
           }
           body.login-page .page {
             min-height: 100vh;
@@ -162,16 +161,16 @@ function renderShellPage({ title, body, bodyClass = "" }) {
           }
           body.login-page .panel {
             max-width: 980px;
-            background: rgba(246, 248, 242, 0.16);
-            border-color: rgba(255,255,255,0.28);
+            background: rgba(246, 248, 242, 0.035);
+            border-color: rgba(255,255,255,0.2);
           }
           body.login-page h1 {
             font-size: clamp(3rem, 7vw, 5.2rem);
           }
           body.login-page .notice {
-            background: rgba(238, 228, 216, 0.18);
-            backdrop-filter: blur(18px) saturate(1.22);
-            -webkit-backdrop-filter: blur(18px) saturate(1.22);
+            background: rgba(238, 228, 216, 0.04);
+            backdrop-filter: blur(6px) saturate(1.04);
+            -webkit-backdrop-filter: blur(6px) saturate(1.04);
           }
           body.teacher-entry-page {
             background: #edf0ea;
