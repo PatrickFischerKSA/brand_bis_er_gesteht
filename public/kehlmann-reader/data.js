@@ -277,16 +277,16 @@ export const theoryResources = [
   },
   {
     id: "ort-raum",
-    title: "Kartenstation: Ahornweg, Haus, Obersee",
+    title: "Kartenstation: Ortsakte Horgen und Obersee",
     shortTitle: "Karte",
-    sourceTitle: "Google-Maps-Ortspunkt und Raumlektüre",
+    sourceTitle: "Google-Maps-Ortsakte ohne API",
     mediaType: "html",
     openUrl: "/reader/assets/brand-karte.html",
     embedUrl: "/reader/assets/brand-karte.html",
-    summary: "Der Kartenpunkt bei 47.2382168, 8.8054038 verortet die Lektüre räumlich. Haus, Fenster, Treppenhaus, Quartier und See werden als Bedeutungsräume gelesen.",
-    keyIdeas: ["Ort", "Haus", "Fenster", "Karte"],
-    questions: ["Wie verändert eine räumliche Vorstellung den Einstieg?", "Welche Räume sind im Text geschützt, geöffnet oder verdächtig?"],
-    transferPrompts: ["Verbinde ein Raumdetail aus der Passage mit der Karte.", "Erkläre, warum Nähe zur realen Geografie die Lektüre intensiver, aber auch heikler macht."],
+    summary: "Die Ortsakte verortet den angegebenen Kartenpunkt bei 47.2382168, 8.8054038 und ordnet weitere Lokalitäten zu: literarischer Tat-/Wohnraum, Bahnhof Rapperswil, Seedamm, Seeufer, Bezirksgericht Horgen und die Achse Horgen - Rapperswil.",
+    keyIdeas: ["Ort", "Obersee", "Horgen", "Karte"],
+    questions: ["Wie verändert eine räumliche Vorstellung den Einstieg?", "Welche Lokalität stützt eine Spur, eine Gegenhypothese oder ein Prozessargument?"],
+    transferPrompts: ["Verbinde ein Raumdetail aus der Passage mit einer Lokalität der Ortsakte.", "Erkläre, warum Nähe zur realen Geografie die Lektüre intensiver, aber auch heikler macht."],
     writingFrame: "Räumlich gelesen zeigt die Passage, dass ...",
     externalLinks: [
       {
