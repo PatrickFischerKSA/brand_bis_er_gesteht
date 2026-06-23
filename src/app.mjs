@@ -69,7 +69,7 @@ function renderShellPage({ title, body, bodyClass = "" }) {
             --border: rgba(255,255,255,0.24);
             --text: #172119;
             --muted: #46514a;
-            --accent: #b45c39;
+            --accent: #376d73;
             --forest: #314335;
             --shadow: 0 18px 54px rgba(16, 24, 20, 0.12);
           }
@@ -186,7 +186,7 @@ function renderShellPage({ title, body, bodyClass = "" }) {
           body.teacher-entry-page .site-background::after {
             background:
               linear-gradient(180deg, rgba(241, 244, 238, 0.42) 0%, rgba(229, 234, 225, 0.4) 100%),
-              radial-gradient(circle at 18% 20%, rgba(180, 92, 57, 0.05), transparent 0 16%);
+              radial-gradient(circle at 18% 20%, rgba(55, 109, 115, 0.05), transparent 0 16%);
           }
           body.teacher-entry-page .page {
             max-width: 1320px;
@@ -245,16 +245,16 @@ function renderShellPage({ title, body, bodyClass = "" }) {
             color: var(--forest);
           }
           .button.audiobook {
-            background: #b45c39;
+            background: #376d73;
             color: #fffaf0;
-            box-shadow: 0 12px 30px rgba(180, 92, 57, 0.22);
+            box-shadow: 0 12px 30px rgba(55, 109, 115, 0.22);
           }
           .audiobook-callout {
             margin-top: 16px;
             padding: 16px;
             border-radius: 22px;
-            border: 1px solid rgba(180, 92, 57, 0.28);
-            background: rgba(180, 92, 57, 0.12);
+            border: 1px solid rgba(55, 109, 115, 0.28);
+            background: rgba(55, 109, 115, 0.12);
             display: grid;
             gap: 12px;
           }
@@ -280,14 +280,14 @@ function renderShellPage({ title, body, bodyClass = "" }) {
           .notice {
             border-left: 4px solid var(--accent);
             padding: 14px;
-            background: rgba(180,92,57,0.09);
+            background: rgba(55,109,115,0.09);
             border-radius: 0 14px 14px 0;
-            color: #62463d;
+            color: #28454a;
           }
           body.teacher-entry-page .notice {
             border-left-width: 5px;
             border-radius: 8px;
-            background: #efe3d8;
+            background: #e2ecec;
           }
           .form-grid {
             display: grid;
@@ -353,8 +353,8 @@ function renderShellPage({ title, body, bodyClass = "" }) {
           .lesson-nav-card.is-active,
           .passage-nav-card.is-active,
           .resource-nav-card.is-active {
-            border-color: rgba(180, 92, 57, 0.45);
-            background: rgba(180, 92, 57, 0.14);
+            border-color: rgba(55, 109, 115, 0.45);
+            background: rgba(55, 109, 115, 0.14);
           }
           body.teacher-entry-page .lesson-nav-card.is-active,
           body.teacher-entry-page .passage-nav-card.is-active,
@@ -424,7 +424,7 @@ function renderShellPage({ title, body, bodyClass = "" }) {
             border-left: 4px solid var(--accent);
             padding: 12px 14px;
             border-radius: 0 16px 16px 0;
-            background: rgba(180,92,57,0.08);
+            background: rgba(55,109,115,0.08);
           }
           body.teacher-entry-page .compact-task-list {
             gap: 8px;
@@ -484,7 +484,7 @@ function renderShellPage({ title, body, bodyClass = "" }) {
             border-left: 4px solid var(--accent);
             padding: 12px 14px;
             border-radius: 0 14px 14px 0;
-            background: rgba(180,92,57,0.09);
+            background: rgba(55,109,115,0.09);
           }
           @media (max-width: 960px) {
             .teacher-entry-layout {

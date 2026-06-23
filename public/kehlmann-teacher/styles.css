@@ -4,7 +4,7 @@
   --border: rgba(255, 255, 255, 0.24);
   --text: #223027;
   --muted: #66736b;
-  --accent: #b45c39;
+  --accent: #376d73;
   --forest: #314335;
   --shadow: 0 18px 54px rgba(16, 24, 20, 0.12);
 }
@@ -195,7 +195,7 @@ button {
 .button.audiobook {
   background: var(--accent);
   color: #fffaf0;
-  box-shadow: 0 12px 30px rgba(180, 92, 57, 0.22);
+  box-shadow: 0 12px 30px rgba(55, 109, 115, 0.22);
 }
 
 .class-grid,
@@ -233,8 +233,8 @@ button {
 }
 
 .class-card.is-active {
-  border-color: rgba(180, 92, 57, 0.42);
-  background: rgba(180, 92, 57, 0.14);
+  border-color: rgba(55, 109, 115, 0.42);
+  background: rgba(55, 109, 115, 0.14);
 }
 
 .panel-head {
@@ -335,7 +335,7 @@ textarea {
 }
 
 .notice-box.error {
-  background: rgba(180, 92, 57, 0.05);
+  background: rgba(55, 109, 115, 0.05);
 }
 
 .student-head {
@@ -389,8 +389,8 @@ textarea {
 
 .material-pill:hover,
 .material-pill:focus-visible {
-  border-color: rgba(180, 92, 57, 0.42);
-  background: rgba(180, 92, 57, 0.08);
+  border-color: rgba(55, 109, 115, 0.42);
+  background: rgba(55, 109, 115, 0.08);
 }
 
 .material-pill small {
