@@ -65,13 +65,13 @@ function renderShellPage({ title, body, bodyClass = "" }) {
         <style>
           :root {
             --bg: #f3efe7;
-            --surface: rgba(255,255,255,0.12);
-            --border: rgba(48,66,55,0.16);
+            --surface: rgba(255,255,255,0.055);
+            --border: rgba(255,255,255,0.24);
             --text: #172119;
             --muted: #46514a;
             --accent: #b45c39;
             --forest: #314335;
-            --shadow: 0 20px 60px rgba(30, 42, 36, 0.12);
+            --shadow: 0 18px 54px rgba(16, 24, 20, 0.12);
           }
           * { box-sizing: border-box; }
           body {
@@ -97,7 +97,7 @@ function renderShellPage({ title, body, bodyClass = "" }) {
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: blur(5px) saturate(0.92) contrast(1.12) brightness(0.72);
+            filter: blur(3px) saturate(1.02) contrast(1.06) brightness(0.82);
             transform: scale(1.03);
             opacity: 1;
           }
@@ -106,20 +106,18 @@ function renderShellPage({ title, body, bodyClass = "" }) {
             position: absolute;
             inset: -24px;
             background:
-              linear-gradient(180deg, rgba(56, 50, 45, 0.18) 0%, rgba(34, 31, 28, 0.24) 100%);
-            filter: blur(6px) saturate(0.94) contrast(1.14) brightness(0.74);
+              linear-gradient(180deg, rgba(56, 50, 45, 0.08) 0%, rgba(34, 31, 28, 0.12) 100%);
+            filter: blur(5px) saturate(1) contrast(1.08) brightness(0.88);
             transform: scale(1.02);
-            opacity: 0.28;
+            opacity: 0.16;
           }
           .site-background::after {
             content: "";
             position: absolute;
             inset: 0;
             background:
-              linear-gradient(90deg, rgba(247, 240, 230, 0.24) 0%, rgba(247, 240, 230, 0.08) 24%, rgba(38, 34, 31, 0.12) 70%, rgba(24, 28, 25, 0.24) 100%),
-              radial-gradient(circle at 54% 18%, rgba(255, 248, 238, 0.01), rgba(255, 248, 238, 0.01) 14%, rgba(255, 248, 238, 0.12) 42%, rgba(214, 206, 192, 0.22) 100%),
-              radial-gradient(circle at 22% 18%, rgba(180, 92, 57, 0.08), transparent 0 18%),
-              radial-gradient(circle at 80% 14%, rgba(49, 67, 53, 0.12), transparent 0 20%);
+              linear-gradient(90deg, rgba(247, 240, 230, 0.11) 0%, rgba(247, 240, 230, 0.03) 24%, rgba(38, 34, 31, 0.06) 70%, rgba(24, 28, 25, 0.12) 100%),
+              radial-gradient(circle at 54% 18%, rgba(255, 248, 238, 0), rgba(255, 248, 238, 0) 18%, rgba(255, 248, 238, 0.05) 46%, rgba(214, 206, 192, 0.1) 100%);
           }
           .background-video-toggle {
             position: fixed;
@@ -154,7 +152,9 @@ function renderShellPage({ title, body, bodyClass = "" }) {
             border-radius: 28px;
             box-shadow: var(--shadow);
             padding: 24px;
-            backdrop-filter: blur(14px);
+            backdrop-filter: blur(22px) saturate(1.28);
+            -webkit-backdrop-filter: blur(22px) saturate(1.28);
+            box-shadow: inset 0 1px 0 rgba(255,255,255,0.26), var(--shadow);
           }
           body.login-page .page {
             min-height: 100vh;
@@ -162,14 +162,16 @@ function renderShellPage({ title, body, bodyClass = "" }) {
           }
           body.login-page .panel {
             max-width: 980px;
-            background: rgba(246, 248, 242, 0.88);
-            border-color: rgba(49, 67, 53, 0.2);
+            background: rgba(246, 248, 242, 0.16);
+            border-color: rgba(255,255,255,0.28);
           }
           body.login-page h1 {
             font-size: clamp(3rem, 7vw, 5.2rem);
           }
           body.login-page .notice {
-            background: rgba(238, 228, 216, 0.9);
+            background: rgba(238, 228, 216, 0.18);
+            backdrop-filter: blur(18px) saturate(1.22);
+            -webkit-backdrop-filter: blur(18px) saturate(1.22);
           }
           body.teacher-entry-page {
             background: #edf0ea;
