@@ -422,6 +422,13 @@ button {
   text-align: left;
 }
 
+.passage-card {
+  display: grid;
+  grid-template-columns: minmax(135px, 0.46fr) minmax(112px, 0.34fr) minmax(0, 1fr);
+  width: 100%;
+  align-items: start;
+}
+
 .theory-pill,
 .lesson-pill,
 .review-pill {
@@ -476,9 +483,30 @@ button {
 }
 
 .passage-card small {
+  grid-column: 2;
+  grid-row: 2;
   color: var(--forest);
   font-size: 0.82rem;
   font-weight: 600;
+  line-height: 1.35;
+}
+
+.passage-card strong {
+  grid-column: 2;
+  grid-row: 1;
+  line-height: 1.25;
+}
+
+.passage-card > span:not(.passage-page) {
+  grid-column: 3;
+  grid-row: 1 / span 2;
+  line-height: 1.55;
+}
+
+.passage-page {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+  line-height: 1.45;
 }
 
 .scene-panel,
@@ -1050,5 +1078,17 @@ textarea {
     min-height: 140px;
     border-radius: 14px;
     padding: 12px;
+  }
+
+  .passage-card {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .passage-page,
+  .passage-card strong,
+  .passage-card small,
+  .passage-card > span:not(.passage-page) {
+    grid-column: 1;
+    grid-row: auto;
   }
 }
