@@ -15,7 +15,6 @@ Interaktive Lese- und Lerneinheit zu Christine Brands *Bis er gesteht* als liter
 - Autorinnenstation zu Christine Brands Website
 - Podcaststation zu *Unter Verdacht - Der Zwillingsmord von Horgen (2/3)*
 - Craft-Ressourcen als externer Materialpool
-- Kartenstation zum angegebenen Google-Maps-Ortspunkt
 - Dropbox-Hörbuchordner als Hörstation
 - offene Anmeldung nur mit Name
 - Lehrer*innen-Dashboard ohne Passwortlogik

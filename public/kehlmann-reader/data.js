@@ -25,10 +25,6 @@ const theoryProfiles = {
     label: "Verhör und Geständnis",
     aliases: ["verhör", "verhoer", "geständnis", "gestaendnis", "druck", "frage", "aussage", "widerspruch", "strategie"]
   },
-  "ort-raum": {
-    label: "Ort und Raum",
-    aliases: ["ort", "raum", "ahornweg", "haus", "wohnung", "fenster", "treppenhaus", "küche", "bad", "schlafzimmer", "keller", "spital", "karte"]
-  },
   "sprache-beweis": {
     label: "Sprache und Beweis",
     aliases: ["sprache", "beweis", "signalwort", "formulierung", "wiederholung", "modalität", "detail", "indiz"]
@@ -276,26 +272,6 @@ export const theoryResources = [
     writingFrame: "Im Verhör wird sichtbar, dass ..."
   },
   {
-    id: "ort-raum",
-    title: "Kartenstation: Orte im Text",
-    shortTitle: "Karte",
-    sourceTitle: "Google-Maps-Ortsakte nur mit Textorten",
-    mediaType: "html",
-    openUrl: "/reader/assets/brand-karte.html",
-    embedUrl: "/reader/assets/brand-karte.html",
-    summary: "Die Ortsakte verortet nur Orte und Raumbegriffe aus dem Romantext: Ahornweg 8, Haus, Wohnung, Fenster, Treppenhaus, Küche, Bad, Schlafzimmer, Keller, Polizei/Notruf, Spital und Universitätsspital Zürich. Der Kartenpunkt 47.2382168, 8.8054038 dient als räumlicher Einstieg.",
-    keyIdeas: ["Ahornweg", "Haus", "Wohnung", "Karte"],
-    questions: ["Wie verändert eine räumliche Vorstellung den Einstieg?", "Welche Ortsnennung stützt eine Spur, eine Gegenhypothese oder ein Prozessargument?"],
-    transferPrompts: ["Verbinde ein Raumdetail aus der Passage mit einer Ortsnennung der Ortsakte.", "Erkläre, warum Nähe zur realen Geografie die Lektüre intensiver, aber auch heikler macht."],
-    writingFrame: "Räumlich gelesen zeigt die Passage, dass ...",
-    externalLinks: [
-      {
-        label: "Google Maps: Ortsbezug",
-        url: "https://www.google.com/maps/@47.2382168,8.8054038,2790m/data=!3m1!1e3?entry=ttu"
-      }
-    ]
-  },
-  {
     id: "sprache-beweis",
     title: "Dossier: Sprache, Wiederholung und Beweiswert",
     shortTitle: "Sprache",
@@ -531,10 +507,10 @@ const rawReaderModules = [
         pageNumber: 5,
         context: "Schon im Notruf werden Haustür, Treppenhaus, Fenster und Rollläden wichtig. Räume erscheinen als Schutzräume und mögliche Tatorte.",
         signalWords: ["Haustür", "Treppenhaus", "Rollladen", "Fenster"],
-        relatedTheoryIds: ["ort-raum", "fall-rekonstruktion"],
+        relatedTheoryIds: ["fall-rekonstruktion"],
         prompts: [
           "Welche Räume werden im Einstieg genannt und welche Funktion erhalten sie?",
-          "Verbinde ein Raumdetail mit der Kartenstation: Wie hilft räumliche Orientierung beim genauen Lesen?"
+          "Prüfe, wie ein Raumdetail den behaupteten Tatablauf stützt oder irritiert."
         ]
       }
     ]
@@ -543,7 +519,7 @@ const rawReaderModules = [
     id: "modul-02",
     title: "Spurensicherung II: Tatort und Versionen",
     summary: "Fenster, Rollläden, Geld und Einbruchserzählung werden als mögliche Spuren, Täuschungen und Aktennotizen geprüft.",
-    relatedTheoryIds: ["fall-rekonstruktion", "ort-raum", "sprache-beweis", "indizienprozess"],
+    relatedTheoryIds: ["fall-rekonstruktion", "sprache-beweis", "indizienprozess"],
     entries: [
       {
         id: "frage-04",
@@ -590,7 +566,7 @@ const rawReaderModules = [
     id: "modul-03",
     title: "Ermittlungsakte: Tathergang und Hypothesen",
     summary: "Die Teams ordnen Informationen, bauen eine Zeitleiste, prüfen Hypothesen und führen Zusatzmaterial als Aktenbeilage.",
-    relatedTheoryIds: ["fall-rekonstruktion", "material-craft", "ort-raum", "autorinnenkontext", "indizienprozess"],
+    relatedTheoryIds: ["fall-rekonstruktion", "material-craft", "autorinnenkontext", "indizienprozess"],
     entries: [
       {
         id: "frage-07",
@@ -616,19 +592,6 @@ const rawReaderModules = [
         prompts: [
           "Wähle einen Craft-Impuls und formuliere daraus eine überprüfbare Leitfrage an den Text.",
           "Wo besteht die Gefahr, dass Kontextwissen die genaue Textlektüre ersetzt?"
-        ]
-      },
-      {
-        id: "frage-09",
-        title: "Ort als Deutungshilfe",
-        passageLabel: "Karte und Haus",
-        pageNumber: 5,
-        context: "Die Karte verortet den Fall im Raum; der Text verengt diesen Raum auf Haus, Fenster und Treppenhaus.",
-        signalWords: ["Ort", "Karte", "Haus", "Treppenhaus"],
-        relatedTheoryIds: ["ort-raum"],
-        prompts: [
-          "Wie verändert die konkrete Verortung auf der Karte deine Vorstellung vom Fall?",
-          "Prüfe, warum reale Nähe zur Geografie die Lektüre zugleich anschaulicher und ethisch heikler macht."
         ]
       }
     ]
@@ -731,7 +694,7 @@ const rawReaderModules = [
     id: "modul-06",
     title: "Gerichtssaal: Plädoyer, Urteil, Minderheitsvotum",
     summary: "Die Schlusslektion führt in den Prozess: Die Teams formulieren Plädoyers und begründen unterschiedliche Urteilsvarianten auf derselben Aktenbasis.",
-    relatedTheoryIds: ["true-crime-ethik", "material-craft", "hoerbuch", "ort-raum", "autorinnenkontext", "crime-podcast", "rechtsprechung", "gerichtsurteil", "verteidigung-gutachten", "urteilswerkstatt", "indizienprozess"],
+    relatedTheoryIds: ["true-crime-ethik", "material-craft", "hoerbuch", "autorinnenkontext", "crime-podcast", "rechtsprechung", "gerichtsurteil", "verteidigung-gutachten", "urteilswerkstatt", "indizienprozess"],
     entries: [
       {
         id: "frage-16",
@@ -751,11 +714,11 @@ const rawReaderModules = [
         title: "Aktenprodukt",
         passageLabel: "Plädoyer und Urteil",
         pageNumber: 210,
-        context: "Die Teams erstellen aus Karte, Craft-Impuls, Hörstation, Podcast, Rechtsprechungsstation und Textanalyse ein eigenes Aktenprodukt.",
-        signalWords: ["Karte", "Craft", "Hörbuch", "Podcast", "Textanalyse"],
-        relatedTheoryIds: ["material-craft", "ort-raum", "hoerbuch", "autorinnenkontext", "crime-podcast", "rechtsprechung", "urteilswerkstatt"],
+        context: "Die Teams erstellen aus Craft-Impuls, Hörstation, Podcast, Rechtsprechungsstation und Textanalyse ein eigenes Aktenprodukt.",
+        signalWords: ["Craft", "Hörbuch", "Podcast", "Textanalyse"],
+        relatedTheoryIds: ["material-craft", "hoerbuch", "autorinnenkontext", "crime-podcast", "rechtsprechung", "urteilswerkstatt"],
         prompts: [
-          "Entwirf ein Aktenprodukt, das Textbeleg, Ortsbezug, Autorinnenkontext, Rechtsprechung und einen Materialimpuls sinnvoll verbindet.",
+          "Entwirf ein Aktenprodukt, das Textbeleg, Autorinnenkontext, Rechtsprechung und einen Materialimpuls sinnvoll verbindet.",
           "Welche Entscheidung triffst du, damit dein Plädoyer nicht sensationsorientiert wirkt?"
         ]
       },
@@ -809,13 +772,6 @@ export const lessonSets = [
         questionTasks: ["Welche Zeitangaben sind ausdrücklich genannt?", "Welche Abläufe werden nur behauptet?", "Welche Lücke erzeugt die stärkste Spannung?"],
         taskGuide: "Eine starke Antwort trennt die Uhrzeit des Notrufs, die Schlafenszeit, den behaupteten Einbruch und die ungesicherte Tatzeit.",
         answerGuides: ["Genannt sind etwa Datum, Uhrzeit des Notrufs und Schlafenszeit.", "Behauptet werden Einbruch, geraubtes Geld und Todeszeitnähe.", "Die stärkste Lücke liegt zwischen Zubettgehen, Entdeckung und tatsächlichem Tatablauf."]
-      },
-      {
-        resourceId: "ort-raum",
-        title: "Kartenanker",
-        summary: "Der Google-Maps-Punkt wird mit den Raumdetails der ersten Seiten verbunden.",
-        task: "Verbinde den Kartenpunkt mit einem Textdetail zu Haus, Fenster oder Treppenhaus.",
-        questionTasks: ["Welche Räume nennt der Einstieg?", "Was macht das Fenster als Raumgrenze wichtig?", "Warum muss reale Verortung respektvoll bleiben?"]
       }
     ]
   },
@@ -848,12 +804,12 @@ export const lessonSets = [
   {
     id: "lektion-03",
     title: "Ermittlungsakte: Tathergang, Motiv, Kontext",
-    summary: "Craft-Material, Karte, Autorinnenkontext und Timeline werden zu textnahen Ermittlungsfragen verbunden.",
+    summary: "Craft-Material, Autorinnenkontext und Timeline werden zu textnahen Ermittlungsfragen verbunden.",
     moduleIds: ["modul-03"],
-    entryIds: ["frage-07", "frage-08", "frage-09"],
+    entryIds: ["frage-07", "frage-08"],
     reviewFocus: "Zusatzmaterial soll eine Spur schärfen, nicht die Textbeobachtung ersetzen.",
-    sebPrompt: "Nutze Karte, Materialpool und Autorinnenkontext, um eine belegbare Ermittlungs-Hypothese zu entwickeln.",
-    recommendedTheoryIds: ["material-craft", "ort-raum", "fall-rekonstruktion", "autorinnenkontext", "indizienprozess"],
+    sebPrompt: "Nutze Materialpool und Autorinnenkontext, um eine belegbare Ermittlungs-Hypothese zu entwickeln.",
+    recommendedTheoryIds: ["material-craft", "fall-rekonstruktion", "autorinnenkontext", "indizienprozess"],
     resourceAssignments: [
       {
         resourceId: "material-craft",
@@ -861,13 +817,6 @@ export const lessonSets = [
         summary: "Die Craft-Sammlung wird in konkrete Leseaufträge übersetzt.",
         task: "Wähle einen Craft-Impuls und mache daraus eine Leitfrage mit Textbezug.",
         questionTasks: ["Welcher Impuls ist ergiebig?", "Welche Textstelle passt dazu?", "Welche Vermutung bleibt offen?"]
-      },
-      {
-        resourceId: "ort-raum",
-        title: "Raumskizze",
-        summary: "Karte und Text werden in eine einfache Raumskizze überführt.",
-        task: "Skizziere die Räume des Einstiegs und notiere, welche Grenze jeweils überschritten wird.",
-        questionTasks: ["Welche Orte sind innen, welche aussen?", "Welche Grenze ist zentral?", "Wie verstärkt die Karte den Realitätsbezug?"]
       },
       {
         resourceId: "autorinnenkontext",
@@ -993,17 +942,17 @@ export const lessonSets = [
   {
     id: "lektion-06",
     title: "Gerichtssaal: Plädoyer und Urteil",
-    summary: "Eine eigene, belegte Prozessanalyse verbindet Text, Karte, Hörbuch, Podcast, Rechtsprechung und Materialpool.",
+    summary: "Eine eigene, belegte Prozessanalyse verbindet Text, Hörbuch, Podcast, Rechtsprechung und Materialpool.",
     moduleIds: ["modul-06"],
     entryIds: ["frage-16", "frage-17", "frage-18"],
     reviewFocus: "Aus Einzelspuren eine verantwortliche Beweiswürdigung und ein begründetes Urteil entwickeln.",
     sebPrompt: "Bündle Textanalyse, Materialkritik, Rechtsprechung und ethische Reflexion in einem Plädoyer oder Urteil.",
-    recommendedTheoryIds: ["true-crime-ethik", "material-craft", "ort-raum", "hoerbuch", "autorinnenkontext", "crime-podcast", "rechtsprechung", "gerichtsurteil", "verteidigung-gutachten", "indizienprozess", "urteilswerkstatt"],
+    recommendedTheoryIds: ["true-crime-ethik", "material-craft", "hoerbuch", "autorinnenkontext", "crime-podcast", "rechtsprechung", "gerichtsurteil", "verteidigung-gutachten", "indizienprozess", "urteilswerkstatt"],
     resourceAssignments: [
       {
         resourceId: "material-craft",
         title: "Akten-Baustein",
-        summary: "Das Abschlussprodukt verbindet eine Textstelle mit Karte, Hörstation, Podcast, Autorinnenwebsite oder Craft-Impuls.",
+        summary: "Das Abschlussprodukt verbindet eine Textstelle mit Hörstation, Podcast, Autorinnenwebsite oder Craft-Impuls.",
         task: "Erstelle einen Portfolio-Baustein mit These, Textbeleg, Materialbezug und ethischer Reflexion.",
         questionTasks: ["Was ist deine These?", "Welcher Textbeleg trägt sie?", "Welche externe Ressource nutzt du und warum?", "Wie nutzt du Material, ohne es auszuschlachten?"]
       },
