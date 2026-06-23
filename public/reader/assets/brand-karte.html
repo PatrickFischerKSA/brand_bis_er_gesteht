@@ -3,14 +3,13 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Kartenstation: Ortsakte</title>
+  <title>Kartenstation: Orte im Text</title>
   <style>
     :root {
       --text: #18251f;
       --muted: #4f5d56;
       --line: rgba(255, 255, 255, 0.32);
       --glass: rgba(255, 255, 255, 0.12);
-      --glass-strong: rgba(255, 255, 255, 0.18);
       --accent: #376d73;
       --forest: #314335;
     }
@@ -25,7 +24,7 @@
         #e9efed;
       line-height: 1.65;
     }
-    h1, h2, h3 {
+    h1, h2 {
       font-family: Georgia, serif;
       line-height: 1.08;
       margin: 0 0 10px;
@@ -145,101 +144,90 @@
   <main class="shell">
     <section class="hero">
       <div class="kicker">Ortsakte</div>
-      <h1>Kartenstation: Horgen, Obersee und literarischer Tatort</h1>
-      <p>Die Karte verortet die Spurensicherung räumlich. Der angegebene Ausgangspunkt liegt bei <strong>47.2382168, 8.8054038</strong>. Die weiteren Lokalitäten sind Deutungs- und Kontextorte: Sie helfen, Text, Fallakte, Podcast, Gerichtsakte und Bewegung im Raum zusammenzulesen.</p>
-      <p><strong>Wichtig:</strong> Keine Privatadresse rekonstruieren. Gearbeitet wird mit öffentlichen Ortsmarken, Gerichtsorten und literarischen Raumfunktionen.</p>
+      <h1>Kartenstation: Orte, die im Text vorkommen</h1>
+      <p>Diese Station arbeitet nur mit Orten und Raumbegriffen aus dem Romantext. Der angegebene Kartenpunkt <strong>47.2382168, 8.8054038</strong> dient zur Verortung des im Notruf genannten Ahornwegs. Alles Weitere wird als Text- und Raumspur gelesen, nicht als Ergänzung durch beliebige Kontextorte.</p>
+      <p><strong>Kontrolliert aus dem PDF:</strong> Ahornweg, Haus, Wohnung, Fenster, Treppenhaus, Küche, Bad, Schlafzimmer, Keller, Polizei/Notruf, Spital und Universitätsspital Zürich. Nicht aufgenommen werden Orte, die im Romantext nicht vorkommen.</p>
     </section>
 
     <section class="map-grid" aria-label="Interaktive Ortskarte">
       <div class="location-list">
         <article class="location-card">
-          <strong>1. Ausgangspunkt der Lektüre</strong>
-          <small>47.2382168, 8.8054038 · Rapperswil-Jona / Obersee-Raum</small>
-          <p>Startpunkt für die räumliche Orientierung: Nähe, Blickachsen, Quartierstruktur und Seeufer werden als Ermittlungsraum gelesen.</p>
+          <strong>1. Ahornweg 8</strong>
+          <small>Notruf-Ort: "Ahornweg 8" · Kartenpunkt 47.2382168, 8.8054038</small>
+          <p>Der Notruf setzt den Fall räumlich: Der Ort wird sofort zur Fallakte, bevor die Lesenden überhaupt wissen, was geschehen ist.</p>
           <div class="button-row">
-            <a class="button" target="mapframe" href="https://maps.google.com/maps?q=47.2382168,8.8054038&z=15&output=embed">In Karte zeigen</a>
+            <a class="button" target="mapframe" href="https://maps.google.com/maps?q=47.2382168,8.8054038&z=17&output=embed">In Karte zeigen</a>
             <a class="button secondary" target="_blank" rel="noreferrer" href="https://www.google.com/maps/@47.2382168,8.8054038,2790m/data=!3m1!1e3?entry=ttu">Google Maps öffnen</a>
           </div>
         </article>
 
         <article class="location-card">
-          <strong>2. Tat-/Wohnraum als literarische Zone</strong>
-          <small>Quartier um den Kartenpunkt · Haus, Fenster, Schwelle, Treppenhaus</small>
-          <p>Nicht die Adresse zählt, sondern die Raumlogik: innen/aussen, geschützt/ausgeliefert, sichtbar/verborgen.</p>
+          <strong>2. Haus und Wohnung</strong>
+          <small>Tatort als Innenraum · wiederkehrende Textorte</small>
+          <p>Haus und Wohnung sind keine neutralen Kulissen. Sie bestimmen, was geschützt, sichtbar, kontrollierbar oder verletzlich erscheint.</p>
           <div class="button-row">
-            <a class="button" target="mapframe" href="https://maps.google.com/maps?q=47.2382168,8.8054038&z=17&output=embed">Zone zeigen</a>
-            <a class="button secondary" target="_blank" rel="noreferrer" href="https://www.google.com/maps/search/?api=1&query=47.2382168,8.8054038">Extern öffnen</a>
+            <a class="button" target="mapframe" href="https://maps.google.com/maps?q=47.2382168,8.8054038&z=18&output=embed">Tatort-Zone zeigen</a>
+            <a class="button secondary" href="#raumauftrag">Textauftrag nutzen</a>
           </div>
         </article>
 
         <article class="location-card">
-          <strong>3. Rapperswil Bahnhof</strong>
-          <small>Mobilität, Ankunft, Wegrekonstruktion</small>
-          <p>Der Bahnhof steht als öffentlicher Bewegungsraum: Wer kann wann wohin gelangen? Welche Wege wirken plausibel?</p>
+          <strong>3. Fenster, Treppenhaus und Schwelle</strong>
+          <small>Grenzräume: innen/aussen, offen/geschlossen, sichtbar/verborgen</small>
+          <p>Diese Raumdetails sind für die Spurensicherung zentral, weil sie Versionen stützen oder brüchig machen können.</p>
           <div class="button-row">
-            <a class="button" target="mapframe" href="https://maps.google.com/maps?q=Bahnhof+Rapperswil&z=15&output=embed">In Karte zeigen</a>
-            <a class="button secondary" target="_blank" rel="noreferrer" href="https://www.google.com/maps/search/?api=1&query=Bahnhof+Rapperswil">Extern öffnen</a>
+            <a class="button" target="mapframe" href="https://maps.google.com/maps?q=47.2382168,8.8054038&z=18&output=embed">Umgebung zeigen</a>
+            <a class="button secondary" href="#spurenauftrag">Spurenauftrag nutzen</a>
           </div>
         </article>
 
         <article class="location-card">
-          <strong>4. Seedamm und Seeufer</strong>
-          <small>Übergang, Grenze, Beobachtung, Distanz</small>
-          <p>Der See- und Übergangsraum hilft, Nähe und Distanz zu lesen: Was trennt, was verbindet, was macht Spuren sichtbar?</p>
+          <strong>4. Küche, Bad, Schlafzimmer, Keller</strong>
+          <small>Innenräume als Beweis- und Deutungsräume</small>
+          <p>Die Innenräume werden nicht zusätzlich kartiert. Sie werden am Text rekonstruiert: Wer beschreibt sie? Welche Details fehlen? Welche Details wirken zu genau?</p>
           <div class="button-row">
-            <a class="button" target="mapframe" href="https://maps.google.com/maps?q=Seedamm+Rapperswil+Hurden&z=14&output=embed">In Karte zeigen</a>
-            <a class="button secondary" target="_blank" rel="noreferrer" href="https://www.google.com/maps/search/?api=1&query=Seedamm+Rapperswil+Hurden">Extern öffnen</a>
+            <a class="button" href="#prozessauftrag">Prozessauftrag nutzen</a>
           </div>
         </article>
 
         <article class="location-card">
-          <strong>5. Bezirksgericht Horgen</strong>
-          <small>Gerichtsort der realen Vergleichsakte</small>
-          <p>Hier wird der Fall rechtlich lesbar: Aus Erzählung, Indizien, Gutachten und Anträgen wird ein Urteil.</p>
+          <strong>5. Universitätsspital Zürich</strong>
+          <small>Im Text erwähnter Spitalort</small>
+          <p>Das Universitätsspital Zürich erscheint als Ortsnennung in einer Aussage. Prüfe, ob der Ort als belegte Realität, Ausrede, Ablenkung oder Widerspruch funktioniert.</p>
           <div class="button-row">
-            <a class="button" target="mapframe" href="https://maps.google.com/maps?q=Bezirksgericht+Horgen&z=15&output=embed">In Karte zeigen</a>
-            <a class="button secondary" target="_blank" rel="noreferrer" href="https://www.google.com/maps/search/?api=1&query=Bezirksgericht+Horgen">Extern öffnen</a>
-          </div>
-        </article>
-
-        <article class="location-card">
-          <strong>6. Achse Horgen - Rapperswil</strong>
-          <small>Zürichsee als Fall- und Medienraum</small>
-          <p>Die Achse verbindet literarische Spur, True-Crime-Kontext, Gerichtsort und Öffentlichkeit.</p>
-          <div class="button-row">
-            <a class="button" target="mapframe" href="https://maps.google.com/maps?q=Horgen+Rapperswil+Z%C3%BCrichsee&z=11&output=embed">In Karte zeigen</a>
-            <a class="button secondary" target="_blank" rel="noreferrer" href="https://www.google.com/maps/search/?api=1&query=Horgen+Rapperswil+Z%C3%BCrichsee">Extern öffnen</a>
+            <a class="button" target="mapframe" href="https://maps.google.com/maps?q=Universit%C3%A4tsspital+Z%C3%BCrich&z=15&output=embed">In Karte zeigen</a>
+            <a class="button secondary" target="_blank" rel="noreferrer" href="https://www.google.com/maps/search/?api=1&query=Universit%C3%A4tsspital+Z%C3%BCrich">Extern öffnen</a>
           </div>
         </article>
       </div>
 
       <div class="map">
-        <iframe name="mapframe" title="Ortsakte Horgen und Obersee" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=47.2382168,8.8054038&z=15&output=embed"></iframe>
+        <iframe name="mapframe" title="Kartenstation Orte im Text" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=47.2382168,8.8054038&z=17&output=embed"></iframe>
       </div>
     </section>
 
     <section class="evidence-grid">
-      <article class="box">
+      <article class="box" id="raumauftrag">
         <h2>Raumauftrag</h2>
         <ul>
-          <li>Welche Orte schützen?</li>
-          <li>Welche Orte setzen aus?</li>
-          <li>Welche Grenzen werden überschritten?</li>
+          <li>Welche Textorte sind Innenräume?</li>
+          <li>Welche Textorte sind Grenzräume?</li>
+          <li>Welche Ortsnennung kommt als Aussage, welche als beobachtbare Spur vor?</li>
         </ul>
       </article>
-      <article class="box">
+      <article class="box" id="spurenauftrag">
         <h2>Spurenauftrag</h2>
         <ul>
-          <li>Ordne Textstellen einer Lokalität zu.</li>
-          <li>Unterscheide Beobachtung, Vermutung und Beleg.</li>
-          <li>Notiere, was die Karte nicht beweisen kann.</li>
+          <li>Ordne jeder Ortsnennung eine Textstelle zu.</li>
+          <li>Unterscheide Raumdetail, Behauptung und überprüfbare Spur.</li>
+          <li>Markiere, wo die Karte nichts beweisen kann.</li>
         </ul>
       </article>
-      <article class="box">
+      <article class="box" id="prozessauftrag">
         <h2>Prozessauftrag</h2>
         <ul>
-          <li>Welche Wege sind plausibel?</li>
-          <li>Welche Ortsdeutung stützt Anklage oder Verteidigung?</li>
+          <li>Welche Ortsdetails stützen die Anklageversion?</li>
+          <li>Welche Ortsdetails kann die Verteidigung anders lesen?</li>
           <li>Wo bleibt vernünftiger Zweifel?</li>
         </ul>
       </article>

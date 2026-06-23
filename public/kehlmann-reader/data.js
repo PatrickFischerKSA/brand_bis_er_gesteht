@@ -27,7 +27,7 @@ const theoryProfiles = {
   },
   "ort-raum": {
     label: "Ort und Raum",
-    aliases: ["ort", "raum", "ahornweg", "haus", "fenster", "treppenhaus", "karte", "rapperswil", "jona", "obersee"]
+    aliases: ["ort", "raum", "ahornweg", "haus", "wohnung", "fenster", "treppenhaus", "küche", "bad", "schlafzimmer", "keller", "spital", "karte"]
   },
   "sprache-beweis": {
     label: "Sprache und Beweis",
@@ -277,16 +277,16 @@ export const theoryResources = [
   },
   {
     id: "ort-raum",
-    title: "Kartenstation: Ortsakte Horgen und Obersee",
+    title: "Kartenstation: Orte im Text",
     shortTitle: "Karte",
-    sourceTitle: "Google-Maps-Ortsakte ohne API",
+    sourceTitle: "Google-Maps-Ortsakte nur mit Textorten",
     mediaType: "html",
     openUrl: "/reader/assets/brand-karte.html",
     embedUrl: "/reader/assets/brand-karte.html",
-    summary: "Die Ortsakte verortet den angegebenen Kartenpunkt bei 47.2382168, 8.8054038 und ordnet weitere Lokalitäten zu: literarischer Tat-/Wohnraum, Bahnhof Rapperswil, Seedamm, Seeufer, Bezirksgericht Horgen und die Achse Horgen - Rapperswil.",
-    keyIdeas: ["Ort", "Obersee", "Horgen", "Karte"],
-    questions: ["Wie verändert eine räumliche Vorstellung den Einstieg?", "Welche Lokalität stützt eine Spur, eine Gegenhypothese oder ein Prozessargument?"],
-    transferPrompts: ["Verbinde ein Raumdetail aus der Passage mit einer Lokalität der Ortsakte.", "Erkläre, warum Nähe zur realen Geografie die Lektüre intensiver, aber auch heikler macht."],
+    summary: "Die Ortsakte verortet nur Orte und Raumbegriffe aus dem Romantext: Ahornweg 8, Haus, Wohnung, Fenster, Treppenhaus, Küche, Bad, Schlafzimmer, Keller, Polizei/Notruf, Spital und Universitätsspital Zürich. Der Kartenpunkt 47.2382168, 8.8054038 dient als räumlicher Einstieg.",
+    keyIdeas: ["Ahornweg", "Haus", "Wohnung", "Karte"],
+    questions: ["Wie verändert eine räumliche Vorstellung den Einstieg?", "Welche Ortsnennung stützt eine Spur, eine Gegenhypothese oder ein Prozessargument?"],
+    transferPrompts: ["Verbinde ein Raumdetail aus der Passage mit einer Ortsnennung der Ortsakte.", "Erkläre, warum Nähe zur realen Geografie die Lektüre intensiver, aber auch heikler macht."],
     writingFrame: "Räumlich gelesen zeigt die Passage, dass ...",
     externalLinks: [
       {
