@@ -616,7 +616,7 @@ button {
 
 .layout {
   display: grid;
-  grid-template-columns: minmax(520px, 0.92fr) minmax(560px, 1.08fr);
+  grid-template-columns: minmax(0, 1fr);
   gap: 18px;
   align-items: start;
 }
@@ -1179,10 +1179,37 @@ textarea {
 
 .case-note-head {
   display: grid;
-  gap: 8px;
+  grid-template-columns: minmax(160px, 0.26fr) minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
   padding: 14px 16px;
-  border-bottom: 2px solid rgba(49, 67, 53, 0.28);
   background: rgba(255, 255, 255, 0.42);
+  cursor: pointer;
+  list-style: none;
+}
+
+.case-note-head::-webkit-details-marker {
+  display: none;
+}
+
+.case-note-head::after {
+  content: "+";
+  width: 30px;
+  height: 30px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 999px;
+  border: 1px solid rgba(49, 67, 53, 0.18);
+  color: var(--forest);
+  font-weight: 800;
+}
+
+.case-note-field[open] > .case-note-head {
+  border-bottom: 2px solid rgba(49, 67, 53, 0.28);
+}
+
+.case-note-field[open] > .case-note-head::after {
+  content: "-";
 }
 
 .case-note-head span {
@@ -1213,6 +1240,35 @@ textarea {
   border-radius: 0;
   border: 1px solid rgba(49, 67, 53, 0.24);
   background: rgba(255, 255, 255, 0.86);
+}
+
+.inline-drawer {
+  border: 1px solid rgba(49, 67, 53, 0.14);
+  background: rgba(255, 255, 255, 0.42);
+}
+
+.inline-drawer > summary {
+  padding: 14px 16px;
+  cursor: pointer;
+  color: var(--forest);
+  font-weight: 800;
+  list-style: none;
+}
+
+.inline-drawer > summary::-webkit-details-marker {
+  display: none;
+}
+
+.inline-drawer > summary::after {
+  content: " +";
+}
+
+.inline-drawer[open] > summary {
+  border-bottom: 1px solid rgba(49, 67, 53, 0.14);
+}
+
+.inline-drawer[open] > summary::after {
+  content: " -";
 }
 
 .case-note-body textarea::placeholder {
@@ -1343,7 +1399,7 @@ textarea {
 
 @media (max-width: 1480px) {
   .layout {
-    grid-template-columns: minmax(460px, 0.95fr) minmax(460px, 1.05fr);
+    grid-template-columns: minmax(0, 1fr);
   }
 
   .status-strip {

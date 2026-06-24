@@ -372,18 +372,19 @@ function renderTaskField({ task, value, dataset, label }) {
   const inputLabel = String(label || "");
   const prompt = taskPrompt(task);
   const instruction = responsePlaceholder(prompt);
+  const openAttribute = trimmed(value) ? " open" : "";
 
   return `
-    <article class="case-note-field">
-      <div class="case-note-head">
+    <details class="case-note-field"${openAttribute}>
+      <summary class="case-note-head">
         <span>${escapeHtml(inputLabel)}</span>
         <strong>${escapeHtml(prompt)}</strong>
-      </div>
+      </summary>
       <label class="case-note-body">
         <span>Aktenvermerk</span>
         <textarea ${dataAttributes} aria-label="${escapeHtml(inputLabel)}" placeholder="${escapeHtml(instruction)}">${escapeHtml(value || "")}</textarea>
       </label>
-    </article>
+    </details>
   `;
 }
 
@@ -1550,9 +1551,12 @@ function renderPdfPanel(entry, module) {
         ${renderPassageNavigator(lesson)}
       </div>
 
-      <div class="pdf-frame-wrap">
-        <iframe class="pdf-frame" src="${pdfUrlForEntry(entry)}" title="Bis er gesteht PDF"></iframe>
-      </div>
+      <details class="inline-drawer">
+        <summary>PDF-Ansicht öffnen</summary>
+        <div class="pdf-frame-wrap">
+          <iframe class="pdf-frame" src="${pdfUrlForEntry(entry)}" title="Bis er gesteht PDF"></iframe>
+        </div>
+      </details>
     </article>
   `;
 }
@@ -1641,14 +1645,10 @@ function renderTheoryPanel(module, entry) {
         </section>
       </div>
 
-      <div class="writing-frame-box case-note-rule">
-        <strong>Formulierung für den Aktenvermerk</strong>
-        <p>${escapeHtml(theory.writingFrame)}</p>
-      </div>
-
-      <div class="video-card">
+      <details class="inline-drawer">
+        <summary>Dossieransicht öffnen</summary>
         ${mediaMarkup}
-      </div>
+      </details>
     </article>
   `;
 }
@@ -1734,14 +1734,15 @@ function renderResourceAssignmentsPanel() {
               })).join("")}
             </section>
 
-            <div class="video-card">
+            <details class="inline-drawer">
+              <summary>Materialansicht öffnen</summary>
               ${resource.mediaType === "pdf"
                 ? `<div class="pdf-frame-wrap"><iframe class="pdf-frame" src="${escapeHtml(resource.embedUrl)}#page=1&zoom=page-width" title="${escapeHtml(resource.title)}"></iframe></div>`
                 : resource.mediaType === "html"
                   ? `<div class="pdf-frame-wrap"><iframe class="pdf-frame" src="${escapeHtml(resource.embedUrl)}" title="${escapeHtml(resource.title)}"></iframe></div>`
                   : `<div class="video-wrap"><video class="theory-video" controls preload="metadata"><source src="${escapeHtml(resource.embedUrl)}" type="video/mp4"></video></div>`
               }
-            </div>
+            </details>
           </section>
         `;
         }).join("")}
