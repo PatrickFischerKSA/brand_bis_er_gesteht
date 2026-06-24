@@ -1159,18 +1159,42 @@ function renderChoosePathPanel(lesson = currentLesson()) {
   const targetEntry = selected?.entryId ? entryIndex.get(selected.entryId)?.entry : null;
   const targetTheory = selected?.theoryId ? theoryResources.find((resource) => resource.id === selected.theoryId) : null;
   const targetResource = selected?.resourceId ? theoryResources.find((resource) => resource.id === selected.resourceId) : null;
+  const lessonIndex = lessonSets.findIndex((item) => item.id === lesson.id) + 1;
+  const selectedIndex = Math.max(0, choices.findIndex((choice) => choice.id === selected?.id));
+  const businessNumber = `BRAND-${String(Math.max(lessonIndex, 1)).padStart(2, "0")}-${String(selectedIndex + 1).padStart(2, "0")}`;
 
   return `
     <section class="panel choose-path-panel">
-      <div class="panel-head">
+      <div class="protocol-header">
         <div>
-          <div class="eyebrow">${escapeHtml(pathGuide.title)}</div>
-          <h2>Einsatzauftrag wählen</h2>
+          <div class="protocol-agency">Zürcher Polizeien · Dokumentenablage</div>
+          <h2>${escapeHtml(pathGuide.title)}</h2>
+          <p>${escapeHtml(pathGuide.subtitle)}</p>
         </div>
-        <span class="status-badge">${escapeHtml(selected?.title || "Auftrag wählen")}</span>
+        <div class="protocol-download-badge">
+          <span>Dokumentstatus</span>
+          <strong>${escapeHtml(selected?.title || "Auftrag wählen")}</strong>
+        </div>
       </div>
-      <p class="path-lead">${escapeHtml(lesson.pathBriefing || pathGuide.instruction)}</p>
-      <p class="path-rule">${escapeHtml(pathGuide.warning)}</p>
+
+      <div class="protocol-meta-grid">
+        <div><span>Geschäfts-Nr.</span><strong>${escapeHtml(businessNumber)}</strong></div>
+        <div><span>Lage</span><strong>${escapeHtml(lesson.title)}</strong></div>
+        <div><span>Bearbeitung</span><strong>${escapeHtml(state.student?.displayName || "Offene Version")}</strong></div>
+        <div><span>Frist</span><strong>bis Ende Lektion prüfen</strong></div>
+      </div>
+
+      <div class="protocol-form-line" aria-hidden="true"></div>
+
+      <div class="protocol-notice">
+        <strong>Lagevermerk</strong>
+        <p>${escapeHtml(lesson.pathBriefing || pathGuide.instruction)}</p>
+      </div>
+      <div class="protocol-notice protocol-notice--rule">
+        <strong>Dienstregel</strong>
+        <p>${escapeHtml(pathGuide.warning)}</p>
+      </div>
+
       <ol class="protocol-steps" aria-label="Bedienung des Ermittlungsprotokolls">
         <li><span>1</span><strong>Auftrag wählen</strong><em>Eine der drei Karten anklicken.</em></li>
         <li><span>2</span><strong>Fundstelle öffnen</strong><em>Die genannte PDF-Passage oder Ressource prüfen.</em></li>
@@ -1190,10 +1214,16 @@ function renderChoosePathPanel(lesson = currentLesson()) {
 
       ${selected ? `
         <article class="path-guidance-card">
-          <div>
-            <div class="eyebrow">Aktueller Auftrag</div>
-            <h3>${escapeHtml(selected.title)}</h3>
-            <p>${escapeHtml(selected.role)}</p>
+          <div class="protocol-record-head">
+            <div>
+              <div class="eyebrow">Aktueller Auftrag</div>
+              <h3>${escapeHtml(selected.title)}</h3>
+              <p>${escapeHtml(selected.role)}</p>
+            </div>
+            <div class="protocol-record-number">
+              <span>Blatt</span>
+              <strong>${escapeHtml(businessNumber)}</strong>
+            </div>
           </div>
           <div class="path-guidance-grid">
             <div>
