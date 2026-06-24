@@ -1165,9 +1165,9 @@ function renderChoosePathPanel(lesson = currentLesson()) {
       <div class="panel-head">
         <div>
           <div class="eyebrow">${escapeHtml(pathGuide.title)}</div>
-          <h2>Wähle deinen Ermittlungsweg</h2>
+          <h2>Welche Spur verfolgst du zuerst?</h2>
         </div>
-        <span class="status-badge">${escapeHtml(selected?.title || "Pfad wählen")}</span>
+        <span class="status-badge">${escapeHtml(selected?.title || "Spur wählen")}</span>
       </div>
       <p class="path-lead">${escapeHtml(lesson.pathBriefing || pathGuide.instruction)}</p>
       <p class="path-rule">${escapeHtml(pathGuide.warning)}</p>
@@ -1175,7 +1175,7 @@ function renderChoosePathPanel(lesson = currentLesson()) {
       <div class="path-choice-grid">
         ${choices.map((choice) => `
           <button class="path-choice-card ${choice.id === selected?.id ? "is-active" : ""}" data-action="select-path" data-path-id="${escapeHtml(choice.id)}">
-            <span class="module-card-kicker">${escapeHtml(choice.title.split(":")[0] || "Pfad")}</span>
+            <span class="module-card-kicker">${escapeHtml(choice.title.split(":")[0] || "Spur")}</span>
             <strong>${escapeHtml(choice.title.includes(":") ? choice.title.split(":").slice(1).join(":").trim() : choice.title)}</strong>
             <span>${escapeHtml(choice.chooseIf)}</span>
           </button>
@@ -1185,26 +1185,26 @@ function renderChoosePathPanel(lesson = currentLesson()) {
       ${selected ? `
         <article class="path-guidance-card">
           <div>
-            <div class="eyebrow">Aktiver Pfad</div>
+            <div class="eyebrow">Aktuelle Spur</div>
             <h3>${escapeHtml(selected.title)}</h3>
             <p>${escapeHtml(selected.role)}</p>
           </div>
           <div class="path-guidance-grid">
             <div>
-              <strong>Vorgehen</strong>
+              <strong>Puzzelschritte</strong>
               <p>${escapeHtml(selected.method)}</p>
             </div>
             <div>
-              <strong>Nächster Schritt</strong>
+              <strong>Jetzt sichern</strong>
               <p>${escapeHtml(selected.nextStep)}</p>
               <p class="path-target-line">${escapeHtml([
                 targetEntry ? `Passage: ${targetEntry.passageLabel}` : "",
-                targetTheory ? `Linse: ${targetTheory.shortTitle}` : "",
+                targetTheory ? `Werkzeug: ${targetTheory.shortTitle}` : "",
                 targetResource && targetResource.id !== targetTheory?.id ? `Material: ${targetResource.shortTitle}` : ""
               ].filter(Boolean).join(" · "))}</p>
             </div>
             <div>
-              <strong>Schreibbewegung</strong>
+              <strong>Aktennotiz</strong>
               <p>${escapeHtml(selected.writingMove)}</p>
             </div>
           </div>
@@ -2083,7 +2083,7 @@ function render() {
 
           ${currentPathChoice(lesson) ? `
             <div class="sidebar-task path-sidebar-task">
-              <strong>${escapeHtml("Gewählter Pfad")}</strong>
+              <strong>${escapeHtml("Aktuelle Spur")}</strong>
               <p>${escapeHtml(currentPathChoice(lesson).title)}</p>
               <p>${escapeHtml(currentPathChoice(lesson).nextStep)}</p>
             </div>

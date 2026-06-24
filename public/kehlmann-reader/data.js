@@ -754,73 +754,73 @@ export const readerModules = rawReaderModules.map((module) => ({
 }));
 
 export const pathGuide = {
-  title: "Choose your path",
-  subtitle: "Du wählst keine Abkürzung, sondern eine begründete Lektürestrategie.",
-  instruction: "Entscheide dich zu Beginn jeder Lektion für einen Pfad. Folge ihm zuerst konsequent: Lies die vorgeschlagene Passage, nutze die passende Linse und beantworte die Fokusfragen aus dieser Perspektive. Wechsle den Pfad erst, wenn du eine Spur gesichert, einen Zweifel formuliert oder eine Gegenhypothese benannt hast.",
-  warning: "Jeder Pfad ist vorläufig. Gute Ermittlungslektüre heisst: eine Richtung wählen, sauber belegen, dann die eigene Spur wieder gegenprüfen."
+  title: "Choose your path: Spurenpuzzle",
+  subtitle: "Du legst ein Puzzleteil an, prüfst seine Kanten und suchst danach das nächste passende Stück.",
+  instruction: "Entscheide dich zu Beginn jeder Lektion für eine konkrete Spur. Sichere zuerst die Textinformationen: Wer sagt was? Wann? Wo? Mit welchem Detail? Erst danach formulierst du eine Motivfrage, einen Widerspruch oder eine Gegenhypothese.",
+  warning: "Keine Spur beweist allein den Fall. Jede Aktennotiz muss zwischen Fakt, Behauptung, Hinweis, Motivspur und offener Lücke unterscheiden."
 };
 
 export const lessonSets = [
   {
     id: "lektion-01",
     title: "Fallakte öffnen: Der Notruf",
-    summary: "Die Detektiv*innen sichern erste Spuren: Unmittelbarkeit, Schock, Versionen und sprachliche Auffälligkeiten.",
+    summary: "Die Detektiv*innen sichern die ersten Daten: 25. Dezember, 3:31 Uhr, Ahornweg 8, zwei tote Kinder, Einbruchsversion, Fenster, Geld, Körperhinweise.",
     moduleIds: ["modul-01"],
     entryIds: ["frage-01", "frage-02", "frage-03"],
     reviewFocus: "Textnah zwischen gesicherter Information, behaupteter Version, Indiz und sprachlicher Wirkung unterscheiden.",
-    sebPrompt: "Sichere den Notruf präzise am Text und nutze mindestens eine Spurensicherungs-Linse.",
-    pathBriefing: "Der Einstieg zwingt zu einer ersten Entscheidung: Liest du den Notruf als Protokoll eines Schocks, als sprachlich kontrollierte Version oder als Tatortspur? Wähle einen Pfad und halte fest, welche Information dadurch sichtbar wird und welche noch unsicher bleibt.",
+    sebPrompt: "Sichere den Notruf präzise: Wer ruft an, was wird behauptet, was ist beobachtet, welche Tatzeit fehlt?",
+    pathBriefing: "Am Anfang liegen nur Notrufdaten vor: 25. Dezember, 3:31 Uhr, Bernhard Scherrer, Ahornweg 8, zwei tote Kinder, behaupteter Einbruch, Fenster, Geld. Wähle zuerst, welches Puzzleteil du sicherst: Zeit, Körperhinweise oder Tatortversion.",
     pathChoices: [
       {
         id: "notruf-protokoll",
-        title: "Pfad A: Protokoll des Augenblicks",
-        role: "Du liest wie eine Protokollantin: Was wird tatsächlich gesagt, in welcher Reihenfolge, mit welchen Auslassungen?",
-        chooseIf: "Wähle diesen Pfad, wenn du zuerst die Chronologie sichern willst.",
-        method: "Markiere Zeitangaben, Wiederholungen und eindeutige Aussagen. Trenne Satz für Satz: Information, Behauptung, offene Frage.",
-        nextStep: "Beginne mit der Passage «Der Notruf» und der Linse Fallrekonstruktion.",
+        title: "Spur A: Notrufzeit 3:31",
+        role: "Aktenstück: Notrufprotokoll. Zu sichern sind Datum, Uhrzeit, Anrufer, Adresse, erste Behauptung und fehlende Tatzeit.",
+        chooseIf: "Verfolge diese Spur, wenn du zuerst wissen willst, welche Fakten überhaupt feststehen.",
+        method: "Lege eine Tabelle mit vier Spalten an: gesichert, behauptet, ungeprüft, fehlt. Trage 25. Dezember, 3:31 Uhr, Ahornweg 8, Einbruch, Geld und Todeszustand einzeln ein.",
+        nextStep: "Sichere zuerst die Passage «Der Notruf» mit dem Werkzeug Fallrekonstruktion.",
         entryId: "frage-01",
         theoryId: "fall-rekonstruktion",
         hints: [
-          "Hinweis 1: Die Uhrzeit wirkt sicher. Der genaue Tatzeitpunkt ist damit aber noch nicht bewiesen.",
-          "Hinweis 2: Achte darauf, wann der Sprecher berichtet und wann er deutet.",
-          "Hinweis 3: Eine gute erste Notiz enthält mindestens eine Lücke, nicht nur eine Zusammenfassung."
+          "Hinweis 1: 3:31 Uhr ist die Zeit des Anrufs, nicht die Tatzeit.",
+          "Hinweis 2: «Bei uns wurde eingebrochen» ist zunächst eine Aussage des Vaters, kein überprüfter Befund.",
+          "Hinweis 3: Die Bettzeit taucht erst später auf. Sie gehört als Lücke in dieselbe Akte."
         ],
-        warning: "Nicht aus dem Schock automatisch Wahrheit ableiten. Auch ein Notruf ist bereits eine sprachliche Darstellung.",
-        writingMove: "Formuliere am Ende: «Gesichert ist ..., nur behauptet wird ..., offen bleibt ...»."
+        warning: "Noch keine Motivdeutung. Erst die Daten sortieren.",
+        writingMove: "Aktennotiz: «Gesichert ist ..., behauptet wird ..., noch fehlt ...»."
       },
       {
         id: "notruf-sprache",
-        title: "Pfad B: Sprache unter Verdacht",
-        role: "Du liest wie eine Sprachermittlerin: Welche Wörter klingen spontan, welche auffällig kontrolliert, welche wiederholen sich zu stark?",
-        chooseIf: "Wähle diesen Pfad, wenn dich Ton, Wiederholung und Wortwahl mehr interessieren als der Ablauf.",
-        method: "Sammle zwei Formulierungen und prüfe ihre Wirkung. Frage nicht sofort: wahr oder falsch, sondern: Welche Version baut die Sprache auf?",
-        nextStep: "Beginne mit «Wiederholung und Schock» und der Linse Sprache und Beweis.",
+        title: "Spur B: Körperhinweise",
+        role: "Aktenstück: Angaben zum Zustand der Kinder. Zu sichern sind «kalt», «blau», Blut aus Sophies Mund und der spätere Befund des Polizisten.",
+        chooseIf: "Verfolge diese Spur, wenn du die Frage klären willst, was über Todeszeit und Reihenfolge wirklich erkennbar ist.",
+        method: "Sammle alle Körperhinweise getrennt nach Quelle: Vater im Notruf, Polizist vor Ort, Sanität/Spurensicherung. Notiere, was jede Quelle sehen kann und was nicht.",
+        nextStep: "Sichere «Wiederholung und Schock» und vergleiche danach Seite 5-7 im PDF.",
         entryId: "frage-02",
         theoryId: "sprache-beweis",
         hints: [
-          "Hinweis 1: Wiederholung kann Schock zeigen, aber auch eine Version stabilisieren.",
-          "Hinweis 2: Ein auffälliges Wort ist ein Hinweis, kein Beweis.",
-          "Hinweis 3: Prüfe, ob die Sprache Nähe erzeugt oder Distanz schafft."
+          "Hinweis 1: «Schon kalt» und «blaue Lippen» sind Beobachtungen im Notruf, aber laienhaft formuliert.",
+          "Hinweis 2: Der Polizist unterscheidet später zwischen dem Jungen und dem Mädchen. Das kann für die Reihenfolge wichtig werden.",
+          "Hinweis 3: Blut, Flecken, Körperwärme und Beatmungsversuch gehören nicht in eine Meinung, sondern in eine Befundliste."
         ],
-        warning: "Psychologisiere nicht vorschnell. Bleibe bei Wortlaut, Reihenfolge und Wirkung.",
-        writingMove: "Schreibe: «Die Formulierung ... wirkt ..., weil ...; beweisen kann sie jedoch nur ...»."
+        warning: "Keine medizinische Diagnose erfinden. Nur Textbefunde und Quellen trennen.",
+        writingMove: "Aktennotiz: «Quelle ..., beobachtet ..., daraus folgt sicher nur ...»."
       },
       {
         id: "notruf-tatortspur",
-        title: "Pfad C: Tatort aus Worten",
-        role: "Du liest wie eine Spurensicherung: Welche Räume und Gegenstände werden überhaupt genannt, bevor jemand sie überprüft?",
-        chooseIf: "Wähle diesen Pfad, wenn du aus Sprache eine erste Tatort-Hypothese entwickeln willst.",
-        method: "Notiere Haustür, Fenster, Rollladen, Treppenhaus und ihre Funktion im behaupteten Ablauf.",
-        nextStep: "Beginne mit «Haus, Fenster, Treppenhaus» und der Linse Fallrekonstruktion.",
+        title: "Spur C: Fenster, Geld, Treppenhaus",
+        role: "Aktenstück: erste Tatortversion. Zu sichern sind aufgebrochenes Fenster, geraubtes Geld, Rollladen oben, berührter Rollladen, offene Haustür, Vera im Treppenhaus.",
+        chooseIf: "Verfolge diese Spur, wenn du die Einbruchsversion Stück für Stück prüfen willst.",
+        method: "Liste jedes Tatortdetail als Puzzleteil. Schreibe daneben: Wer nennt es? Wurde es schon überprüft? Passt es zur Einbruchsversion oder stört es?",
+        nextStep: "Sichere «Haus, Fenster, Treppenhaus» mit dem Werkzeug Fallrekonstruktion.",
         entryId: "frage-03",
         theoryId: "fall-rekonstruktion",
         hints: [
-          "Hinweis 1: Ein Raumdetail kann Sachspur und Erzählspur zugleich sein.",
-          "Hinweis 2: Frage immer: Wer erwähnt dieses Detail, und wozu braucht die Version es?",
-          "Hinweis 3: Deine Hypothese muss offen bleiben, bis ein zweites Indiz dazukommt."
+          "Hinweis 1: Das Fenster wird sofort erwähnt, aber noch nicht überprüft.",
+          "Hinweis 2: Der Rollladen ist oben, obwohl alle Rollläden unten gewesen sein sollen.",
+          "Hinweis 3: «Dummerweise schon angefasst» ist wichtig, weil dadurch eine mögliche Spur verändert wurde."
         ],
-        warning: "Nicht aus räumlicher Anschaulichkeit automatisch Plausibilität machen.",
-        writingMove: "Schliesse mit einer Gegenhypothese: «Dass ... genannt wird, könnte auch bedeuten, dass ...»."
+        warning: "Noch nicht entscheiden, ob Einbruch oder Inszenierung. Erst die Einzelteile prüfen.",
+        writingMove: "Aktennotiz: «Dieses Detail stützt ..., dieses Detail stört ..., offen bleibt ...»."
       }
     ],
     recommendedTheoryIds: ["fall-rekonstruktion", "erzaehltechnik", "sprache-beweis", "indizienprozess"],
@@ -839,63 +839,63 @@ export const lessonSets = [
   {
     id: "lektion-02",
     title: "Tatort sichern: Spuren und Versionen",
-    summary: "Die Einbruchserzählung wird als Hypothese, mögliche Täuschung und Erzählkonstruktion geprüft.",
+    summary: "Die Einbruchsversion wird mit Tatortbefunden geprüft: Fenster ohne Beschädigung, vier Meter Höhe, Tauwiese, fehlende Spuren, berührter Rollladen.",
     moduleIds: ["modul-02"],
     entryIds: ["frage-04", "frage-05", "frage-06"],
     reviewFocus: "Spur, Behauptung, Indizienwert und ethische Lesedistanz sauber trennen.",
     sebPrompt: "Prüfe die Tatortversion am Text und reflektiere die Darstellungsgrenzen.",
-    pathBriefing: "In dieser Lektion entscheidet sich, ob du der Einbruchserzählung zunächst folgst, sie als Konstruktion prüfst oder die ethische Grenze des Tatortlesens markierst. Alle drei Wege sind legitim; keiner darf ohne Textbeleg urteilen.",
+    pathBriefing: "Jetzt treffen erste überprüfbare Tatortbefunde auf die Version aus dem Notruf: Fenster ohne Beschädigung, etwa vier Meter Abstand zum Boden, Tau auf der Wiese, keine sichtbaren Spuren, Elternreaktionen, Wohnung als abgesperrter Tatort. Wähle, welches Puzzleteil du zuerst gegen die Einbruchserzählung legst.",
     pathChoices: [
       {
         id: "tatort-version",
-        title: "Pfad A: Der Version folgen",
-        role: "Du prüfst die Einbruchserzählung von innen: Was müsste stimmen, damit sie tragfähig wäre?",
-        chooseIf: "Wähle diesen Pfad, wenn du eine Hypothese fair testen willst, bevor du sie verwirfst.",
-        method: "Sammle die behaupteten Elemente: Einbruch, Geld, Fenster, Ablauf. Ordne jedem Element zu, ob es Beobachtung, Behauptung oder Schlussfolgerung ist.",
-        nextStep: "Beginne mit «Erste Version» und der Linse Fallrekonstruktion.",
+        title: "Spur A: Einbruchsversion gegen Befund",
+        role: "Aktenstück: Fensterbefund. Behauptet wird ein aufgebrochenes Fenster; vor Ort sieht der Polizist keine Beschädigung.",
+        chooseIf: "Verfolge diese Spur, wenn du den ersten harten Widerspruch prüfen willst.",
+        method: "Lege zwei Spalten an: Notrufversion und Polizeibefund. Trage Fenster, Geld, Einstiegshöhe, Wiese/Tau und fehlende Spuren ein.",
+        nextStep: "Sichere «Erste Version» und danach den Fensterbefund auf Seite 8.",
         entryId: "frage-04",
         theoryId: "fall-rekonstruktion",
         hints: [
-          "Hinweis 1: Eine Version wird nicht falsch, nur weil sie später verdächtig wirkt.",
-          "Hinweis 2: Prüfe die innere Logik, bevor du die moralische Plausibilität bewertest.",
-          "Hinweis 3: Suche mindestens ein Detail, das die Version stützt, und eines, das sie schwächt."
+          "Hinweis 1: «Aufgebrochen» und «stand offen» sind nicht dasselbe.",
+          "Hinweis 2: Vier Meter Höhe und Tau auf der Wiese sind faktische Prüfsteine für einen Einstieg von aussen.",
+          "Hinweis 3: Fehlende sichtbare Spuren beweisen nicht alles, aber sie schwächen eine einfache Einbruchsgeschichte."
         ],
-        warning: "Nicht vom späteren Wissen her alles sofort entlarven. Der Pfad verlangt bewusstes Vorläufigkeitslesen.",
-        writingMove: "Formuliere: «Wenn die Version stimmt, müsste ...; problematisch bleibt ...»."
+        warning: "Nicht «Lüge» schreiben, bevor du Version und Befund sauber nebeneinandergelegt hast.",
+        writingMove: "Aktennotiz: «Die Version behauptet ..., der Befund zeigt ..., deshalb muss geprüft werden ...»."
       },
       {
         id: "tatort-erzaehlspur",
-        title: "Pfad B: Die Erzählspur sichern",
-        role: "Du liest Tatortdetails als rhetorische Spuren: Welche Kleinigkeit lenkt die Aufmerksamkeit?",
-        chooseIf: "Wähle diesen Pfad, wenn du zeigen willst, wie aus Nebensätzen Indizien werden.",
-        method: "Arbeite mit Korrekturen, Einschüben und auffälligen Details. Frage: Warum steht dieses Detail genau hier?",
-        nextStep: "Beginne mit «Tatortdetails» und der Linse Sprache und Beweis.",
+        title: "Spur B: Verhalten der Eltern",
+        role: "Aktenstück: Erstbeobachtungen am Tatort. Vera sitzt im Treppenhaus, wirkt abwesend; Bernhard weint, führt den Polizisten, kommentiert Sophie.",
+        chooseIf: "Verfolge diese Spur, wenn du Reaktionen sammeln willst, ohne sofort Motive zu behaupten.",
+        method: "Trenne sichtbares Verhalten von Deutung. Notiere: Wer beobachtet? Was genau? In welcher Situation? Welche alternative Erklärung bleibt möglich?",
+        nextStep: "Sichere «Tatortdetails» und die Polizeiperspektive auf Seite 6-7.",
         entryId: "frage-05",
         theoryId: "sprache-beweis",
         hints: [
-          "Hinweis 1: Kleine Korrekturen sind oft ergiebiger als grosse Behauptungen.",
-          "Hinweis 2: Unterscheide Sachspur und Erzählspur sehr sauber.",
-          "Hinweis 3: Ein Detail wird erst stark, wenn du seine Funktion im Satz erklären kannst."
+          "Hinweis 1: «Weint nicht» oder «wirkt abwesend» ist keine Schuldspur, sondern zuerst eine Beobachtung.",
+          "Hinweis 2: Bernhards Satz über Sophie fällt auf, weil er eine Täterannahme enthält.",
+          "Hinweis 3: Frühere Verlusterfahrung der Eltern kann eine Motivspur sein, aber sie erklärt noch keine Tat."
         ],
-        warning: "Aus Auffälligkeit allein entsteht noch kein Indizienwert.",
-        writingMove: "Schreibe: «Das Detail ... verschiebt die Aufmerksamkeit, weil ...»."
+        warning: "Keine Psychodiagnose. Nur Verhalten, Quelle und mögliche Lesarten festhalten.",
+        writingMove: "Aktennotiz: «Beobachtet wird ..., auffällig daran ist ..., möglich wäre aber auch ...»."
       },
       {
         id: "tatort-ethik",
-        title: "Pfad C: Die Grenze des Lesens",
-        role: "Du liest mit ethischer Wachheit: Wie kann man eine Gewaltszene genau untersuchen, ohne sie auszuschmücken?",
-        chooseIf: "Wähle diesen Pfad, wenn du die Opferperspektive und die Verantwortung der Darstellung ins Zentrum stellen willst.",
-        method: "Formuliere Regeln für Sprache, Auswahl und Distanz. Prüfe, welche Analyse nötig ist und welche Neugier unangebracht wäre.",
-        nextStep: "Beginne mit «Opfer, Eltern, Einsatzkräfte» und der Linse True-Crime-Ethik.",
+        title: "Spur C: Spuren schützen",
+        role: "Aktenstück: Tatort wird abgesperrt. Nachbarin, Sanität, Polizei und Spurensicherung kommen; die Wohnung wird zum Laboratorium.",
+        chooseIf: "Verfolge diese Spur, wenn du klären willst, welche Informationen verwertbar bleiben und welche schon verändert wurden.",
+        method: "Erstelle eine Kontaminationsliste: Wer betritt die Wohnung? Was wird berührt? Was wird abgesperrt? Welche Spur könnte dadurch unsicher werden?",
+        nextStep: "Sichere «Opfer, Eltern, Einsatzkräfte» und die Beschreibung der Spurensicherung auf Seite 8.",
         entryId: "frage-06",
         theoryId: "true-crime-ethik",
         hints: [
-          "Hinweis 1: Respekt heisst nicht, ungenau zu lesen.",
-          "Hinweis 2: Verzichte auf ausgeschmückte Gewaltbilder; analysiere Darstellungsweise.",
-          "Hinweis 3: Frage, welche Information der Aufklärung dient und welche nur Effekt wäre."
+          "Hinweis 1: Der Rollladen wurde bereits angefasst. Das gehört in die Spurenakte.",
+          "Hinweis 2: Nachbarin und Einsatzkräfte erhöhen die Zahl der Personen am Tatort.",
+          "Hinweis 3: Absperren ist kein Detail am Rand, sondern Voraussetzung für belastbare Spuren."
         ],
-        warning: "Der Pfad darf nicht zur moralischen Floskel werden. Er braucht konkrete Textbeobachtung.",
-        writingMove: "Ende mit einer Regel: «In dieser Szene ist genaues Lesen verantwortbar, wenn ...»."
+        warning: "Nicht ausschmücken. Es geht um Spurenschutz, nicht um Schockwirkung.",
+        writingMove: "Aktennotiz: «Verwertbar scheint ..., unsicher wird ..., weil ...»."
       }
     ],
     recommendedTheoryIds: ["fall-rekonstruktion", "true-crime-ethik", "sprache-beweis", "indizienprozess"],
@@ -919,64 +919,64 @@ export const lessonSets = [
   {
     id: "lektion-03",
     title: "Ermittlungsakte: Tathergang, Motiv, Kontext",
-    summary: "Craft-Material, Autorinnenkontext und Timeline werden zu textnahen Ermittlungsfragen verbunden.",
+    summary: "Zeitkette, Motivspuren und Materialpool werden verbunden: Bettzeit, Notruf, Polizeieintreffen, Befragung, Weihnachtsgeschenke, früherer Kindstod.",
     moduleIds: ["modul-03"],
     entryIds: ["frage-07", "frage-08"],
     reviewFocus: "Zusatzmaterial soll eine Spur schärfen, nicht die Textbeobachtung ersetzen.",
-    sebPrompt: "Nutze Materialpool und Autorinnenkontext, um eine belegbare Ermittlungs-Hypothese zu entwickeln.",
-    pathBriefing: "Jetzt öffnet sich die Ermittlungsakte. Du kannst die Zeit rekonstruieren, Kontextmaterial in eine präzise Frage verwandeln oder eine Indizienhypothese bauen. Entscheidend ist, dass Zusatzmaterial den Text schärft und nicht ersetzt.",
+    sebPrompt: "Nutze Materialpool und Autorinnenkontext nur dort, wo sie eine konkrete Textspur, Motivfrage oder Gegenhypothese schärfen.",
+    pathBriefing: "Die Ermittlungsakte besteht aus Puzzleteilen, die noch nicht zusammenpassen müssen: Bettzeit um etwa 22:45, Notruf 3:31, Polizeieintreffen 3:47, Befragung 5:30, Weihnachtsgeschenke, früherer Kindstod, Geldbehauptung, Fensterbefund. Wähle, welche Kette du zuerst legst.",
     pathChoices: [
       {
         id: "ermittlung-timeline",
-        title: "Pfad A: Die Zeitachse",
-        role: "Du arbeitest chronologisch: Welche Zeitpunkte sind gesichert, welche werden nur behauptet, welche fehlen?",
-        chooseIf: "Wähle diesen Pfad, wenn du Ordnung in den Ablauf bringen willst.",
-        method: "Lege eine Mikro-Timeline an. Markiere jede Lücke ausdrücklich und notiere, welche Deutung von ihr abhängt.",
-        nextStep: "Beginne mit «Chronologie» und der Linse Fallrekonstruktion.",
+        title: "Spur A: Vier Uhrzeiten",
+        role: "Aktenstück: Zeitkette. Zu prüfen sind ca. 22:45, 3:31, 3:47 und 5:30.",
+        chooseIf: "Verfolge diese Spur, wenn du sehen willst, wo der Ablauf Lücken hat.",
+        method: "Ordne jede Uhrzeit einer Quelle zu. Schreibe daneben, was zwischen den Uhrzeiten passiert sein soll und was tatsächlich belegt ist.",
+        nextStep: "Sichere «Chronologie» mit dem Werkzeug Fallrekonstruktion.",
         entryId: "frage-07",
         theoryId: "fall-rekonstruktion",
         hints: [
-          "Hinweis 1: Eine Timeline ist kein Urteil; sie zeigt nur, wo ein Urteil später ansetzen könnte.",
-          "Hinweis 2: Lücken sind keine Fehler deiner Arbeit, sondern genau das Material der Ermittlung.",
-          "Hinweis 3: Notiere bei jedem Zeitpunkt, wer ihn liefert."
+          "Hinweis 1: Die Bettzeit stammt aus der Aussage im Notruf, nicht aus einer unabhängigen Messung.",
+          "Hinweis 2: Zwischen 22:45 und 3:31 liegt die zentrale Lücke.",
+          "Hinweis 3: 3:47 ist wichtig, weil ab hier Polizeibeobachtungen statt Familienaussagen dazukommen."
         ],
-        warning: "Nicht glätten. Eine gute Timeline hält Unsicherheit sichtbar.",
-        writingMove: "Schliesse mit: «Die wichtigste Lücke liegt zwischen ... und ...»."
+        warning: "Keine glatte Nacherzählung. Die Lücken sind der Kern der Spur.",
+        writingMove: "Aktennotiz: «Die Zeitkette steht bis ..., ungesichert bleibt der Abschnitt ...»."
       },
       {
         id: "ermittlung-kontextfrage",
-        title: "Pfad B: Aus Kontext wird Frage",
-        role: "Du nutzt Craft-Material oder Autorinnenkontext als Werkzeug, nicht als Ersatz für Lektüre.",
-        chooseIf: "Wähle diesen Pfad, wenn dich Recherche, True-Crime-Form und Werkprofil interessieren.",
-        method: "Nimm einen Materialimpuls und übersetze ihn in eine prüfbare Frage an eine konkrete Textstelle.",
-        nextStep: "Beginne mit «Craft-Material» und der Materialstation.",
+        title: "Spur B: Motivfragen",
+        role: "Aktenstück: mögliche Motivspuren. Im Text stehen Geld, Weihnachtsstress, früherer Kindstod, Familie, Kontrollverlust und Selbstdarstellung nebeneinander.",
+        chooseIf: "Verfolge diese Spur, wenn du Motiv nicht behaupten, sondern aus Hinweisen zusammensetzen willst.",
+        method: "Erstelle eine Motivtabelle: Hinweis im Text, mögliche Bedeutung, Gegenlesart, noch fehlender Beleg.",
+        nextStep: "Sichere «Craft-Material» und verbinde es mit einer konkreten Textstelle.",
         entryId: "frage-08",
         theoryId: "material-craft",
         resourceId: "material-craft",
         hints: [
-          "Hinweis 1: Kontext ist erst dann stark, wenn er eine Textbeobachtung präziser macht.",
-          "Hinweis 2: Vermeide Sätze wie «Die Autorin will zeigen ...», wenn du keinen Textbeleg hast.",
-          "Hinweis 3: Eine gute Leitfrage enthält Materialbezug und Textbezug."
+          "Hinweis 1: «Geld geraubt» ist zunächst Teil der Einbruchsversion, nicht automatisch ein Motiv.",
+          "Hinweis 2: Der frühere Tod eines Kindes ist eine biografische Belastung, aber kein Tatmotiv ohne weitere Verbindung.",
+          "Hinweis 3: Weihnachtsgeschenke und Familienbild können als Kontrastspur dienen: Was passt nicht zum behaupteten Ablauf?"
         ],
-        warning: "Nicht in Recherchewissen ausweichen. Der Roman bleibt der Hauptgegenstand.",
-        writingMove: "Formuliere: «Der Materialimpuls führt zu folgender Frage an die Passage: ...»."
+        warning: "Motiv ist kein Bauchgefühl. Jede Motivspur braucht Textstelle und Gegenlesart.",
+        writingMove: "Aktennotiz: «Als Motivhinweis kommt ... infrage; dagegen spricht/unklar bleibt ...»."
       },
       {
         id: "ermittlung-indizienhypothese",
-        title: "Pfad C: Die erste Indizienhypothese",
-        role: "Du bündelst Zeit, Sprache und Material zu einer vorsichtigen Hypothese.",
-        chooseIf: "Wähle diesen Pfad, wenn du aus Einzelspuren eine überprüfbare Ermittlungsfrage machen willst.",
-        method: "Verbinde zwei Textspuren mit einem offenen Zweifel. Benenne ausdrücklich, was deine Hypothese noch nicht beweisen kann.",
-        nextStep: "Beginne mit «Chronologie», wechsle danach zur Linse Indizienprozess.",
+        title: "Spur C: Indizienmatrix",
+        role: "Aktenstück: erste Matrix. Belastend, entlastend und mehrdeutig werden nebeneinandergelegt.",
+        chooseIf: "Verfolge diese Spur, wenn du mehrere Hinweise zusammenpuzzeln willst.",
+        method: "Nutze drei Spalten: belastet, entlastet, bleibt doppeldeutig. Trage Fenster, Geld, Körperzustand, Verhalten, Zeitlücke und Spurenschutz ein.",
+        nextStep: "Sichere «Chronologie» und öffne danach das Werkzeug Indizienprozess.",
         entryId: "frage-07",
         theoryId: "indizienprozess",
         hints: [
-          "Hinweis 1: Eine Hypothese ist stärker, wenn sie ihre eigene Schwäche kennt.",
-          "Hinweis 2: Belastend, entlastend und mehrdeutig gehören in dieselbe Akte.",
-          "Hinweis 3: Nutze keine absolute Sprache, solange die Beweislage offen ist."
+          "Hinweis 1: Das Fenster ohne Schäden kann belastend sein, aber nur im Zusammenhang mit der Einbruchsversion.",
+          "Hinweis 2: Trauerreaktionen können mehrdeutig sein. Sie gehören nicht automatisch in die belastende Spalte.",
+          "Hinweis 3: Eine gute Matrix enthält mindestens eine starke Gegenhypothese."
         ],
-        warning: "Dieser Pfad ist anspruchsvoll: Er verlangt Synthese, nicht Verdacht.",
-        writingMove: "Schreibe: «Meine Hypothese lautet ..., gestützt durch ..., begrenzt durch ...»."
+        warning: "Nicht Spuren sammeln, die nur zur eigenen Vermutung passen.",
+        writingMove: "Aktennotiz: «Die stärkste Kette lautet ..., die stärkste Gegenfrage lautet ...»."
       }
     ],
     recommendedTheoryIds: ["material-craft", "fall-rekonstruktion", "autorinnenkontext", "indizienprozess"],
@@ -1006,65 +1006,65 @@ export const lessonSets = [
   {
     id: "lektion-04",
     title: "Vernehmung: Aussagen, Druck, Widersprüche",
-    summary: "Die Teams untersuchen, wie Fragen, Pausen und Widersprüche eine Version destabilisieren und Motive sichtbar machen.",
+    summary: "Die Teams zerlegen Aussagen in Frage, Antwort, Ausweichen, Korrektur, neues Detail und belastbare Gegenfrage.",
     moduleIds: ["modul-04"],
     entryIds: ["frage-10", "frage-11", "frage-12"],
     reviewFocus: "Gesprächsbewegungen als Spur beschreiben: Frage, Ausweichen, Korrektur, Druck, Motiv.",
-    sebPrompt: "Analysiere Verhörsprache mit Beobachtung, Beleg und Deutung.",
-    pathBriefing: "Die Vernehmung ist kein gerader Weg zur Wahrheit. Du entscheidest, ob du Fragen als Werkzeug, brüchige Versionen als Sprachspur oder Stimme und Pause als Hörspur untersuchst.",
+    sebPrompt: "Sichere Vernehmungsschritte mit Frage, Antwort, neuer Information, Widerspruch und offener Gegenfrage.",
+    pathBriefing: "In der Vernehmung werden Aussagen zerlegt: Frage, Antwort, Ausweichen, Korrektur, neues Detail. Wähle, ob du das Protokoll der Fragen, die brüchigen Aussagen oder die Hörspur als Beweispuzzle sicherst.",
     pathChoices: [
       {
         id: "vernehmung-fragen",
-        title: "Pfad A: Fragen als Druckmittel",
-        role: "Du liest Fragen als Instrumente: Welche Frage öffnet, welche fixiert, welche setzt unter Druck?",
-        chooseIf: "Wähle diesen Pfad, wenn dich Gesprächsführung und Macht interessieren.",
-        method: "Notiere Frage, Antwort, Ausweichen und Nachsetzen als kleine Partitur.",
-        nextStep: "Beginne mit «Verhörlogik» und der Linse Verhör und Geständnis.",
+        title: "Spur A: Frage-Antwort-Protokoll",
+        role: "Aktenstück: Vernehmungsprotokoll. Gesichert werden Frage, Antwort, Ausweichen, Nachfragen und neu auftauchende Details.",
+        chooseIf: "Verfolge diese Spur, wenn du wissen willst, welche Aussage wann kippt.",
+        method: "Erstelle eine Vier-Spalten-Liste: Frage, Antwort, neues Detail, offene Anschlussfrage.",
+        nextStep: "Sichere «Verhörlogik» mit dem Werkzeug Verhör und Geständnis.",
         entryId: "frage-10",
         theoryId: "verhoer-gestaendnis",
         resourceId: "verhoer-gestaendnis",
         hints: [
-          "Hinweis 1: Druck entsteht oft durch Wiederholung, nicht nur durch Lautstärke.",
-          "Hinweis 2: Prüfe, ob eine Frage Information sucht oder eine Version testet.",
-          "Hinweis 3: Achte auf den Moment, in dem Antworten kürzer, ungenauer oder defensiver werden."
+          "Hinweis 1: Eine Frage kann Information suchen oder eine frühere Aussage testen.",
+          "Hinweis 2: Wiederholte Fragen sind wichtig, wenn die Antwort sich verändert.",
+          "Hinweis 3: Notiere jede neue Einzelheit sofort neben die Frage, durch die sie ausgelöst wurde."
         ],
-        warning: "Verwechsle literarische Verhörlogik nicht mit einem rechtsstaatlichen Verfahren.",
-        writingMove: "Formuliere: «Die Frage ... verändert die Gesprächslage, weil ...»."
+        warning: "Nicht aus Druck automatisch Wahrheit machen. Entscheidend ist, welche Aussage überprüfbar wird.",
+        writingMove: "Aktennotiz: «Auf die Frage ... folgt ..., neu ist ..., offen bleibt ...»."
       },
       {
         id: "vernehmung-version",
-        title: "Pfad B: Die brüchige Version",
-        role: "Du suchst nach Stellen, an denen eine Darstellung nachgibt, sich korrigiert oder plötzlich anders klingt.",
-        chooseIf: "Wähle diesen Pfad, wenn du sprachliche Risse präzise untersuchen willst.",
-        method: "Arbeite mit Konnektoren, Abschwächungen, Korrekturen und Nebendetails. Erkläre ihre Funktion.",
-        nextStep: "Beginne mit «Aussage und Korrektur» und der Linse Sprache und Beweis.",
+        title: "Spur B: Korrekturen und Widersprüche",
+        role: "Aktenstück: Versionenvergleich. Gesucht werden Stellen, an denen eine Aussage nachträglich korrigiert, abgeschwächt oder durch ein Nebendetail belastet wird.",
+        chooseIf: "Verfolge diese Spur, wenn du Widersprüche nicht behaupten, sondern nachweisen willst.",
+        method: "Schreibe Aussage 1 und Aussage 2 untereinander. Markiere exakt, was gleich bleibt, was sich ändert und was neu dazukommt.",
+        nextStep: "Sichere «Aussage und Korrektur» mit dem Werkzeug Sprache und Beweis.",
         entryId: "frage-11",
         theoryId: "sprache-beweis",
         hints: [
-          "Hinweis 1: Ein «aber» kann wichtiger sein als eine lange Erklärung.",
-          "Hinweis 2: Brüchigkeit zeigt sich im Verhältnis von Detail und Gesamtversion.",
-          "Hinweis 3: Deute nie nur das Wort; deute seine Position im Gespräch."
+          "Hinweis 1: Ein Widerspruch braucht zwei belegte Stellen, nicht nur ein ungutes Gefühl.",
+          "Hinweis 2: Achte auf Abschwächungen wie «eigentlich», «dummerweise», «Moment», «seltsam».",
+          "Hinweis 3: Ein Nebendetail wird wichtig, wenn es eine frühere Version verändert."
         ],
-        warning: "Sprachliche Brüchigkeit ist kein Geständnis. Sie ist ein Prüfauftrag.",
-        writingMove: "Schreibe: «Die Version wird brüchig, als ...; daran ist auffällig, dass ...»."
+        warning: "Nicht jedes Zögern ist ein Widerspruch. Nur belegte Abweichungen zählen.",
+        writingMove: "Aktennotiz: «Aussage 1 lautet ..., später heisst es ..., der Unterschied betrifft ...»."
       },
       {
         id: "vernehmung-hoeren",
-        title: "Pfad C: Die Hörspur",
-        role: "Du vergleichst Text und Hörfassung: Was verändert Stimme, Tempo, Pause, Betonung?",
-        chooseIf: "Wähle diesen Pfad, wenn du medienbewusst arbeiten und die Hörfassung ernst nehmen willst.",
-        method: "Höre eine kurze Stelle zweimal. Notiere erst nur akustische Beobachtungen, dann ihre Wirkung.",
-        nextStep: "Beginne mit «Hörstation» und der Ressource Hörbuch.",
+        title: "Spur C: Hörprotokoll",
+        role: "Aktenstück: Hörfassung. Gesichert werden Pause, Tempo, Betonung und die Stelle im Text, zu der sie gehören.",
+        chooseIf: "Verfolge diese Spur, wenn du prüfen willst, ob eine Aussage gehört anders wirkt als gelesen.",
+        method: "Höre maximal eine Minute. Notiere Zeitmarke, Satz im Text, stimmliches Signal und mögliche Wirkung.",
+        nextStep: "Sichere «Hörstation» mit dem Hörbuchordner.",
         entryId: "frage-12",
         theoryId: "hoerbuch",
         resourceId: "hoerbuch",
         hints: [
-          "Hinweis 1: Beschreibe zuerst hörbar: Pause, Tempo, Betonung, Lautstärke.",
-          "Hinweis 2: Frage danach, ob die Stimme Verdacht verstärkt oder relativiert.",
-          "Hinweis 3: Vergleiche nicht pauschal, sondern an einer einzelnen Frage oder Antwort."
+          "Hinweis 1: Erst hören, dann deuten: Pause, Tempo, Betonung, Lautstärke.",
+          "Hinweis 2: Jede Hörbeobachtung braucht die passende Textstelle.",
+          "Hinweis 3: Eine Stimme kann Verdacht verstärken, aber sie ist kein neues Faktum."
         ],
-        warning: "Die Stimme darf deine Textarbeit nicht ersetzen. Sie erweitert sie.",
-        writingMove: "Formuliere: «Gelesen wirkt die Stelle ..., gehört wirkt sie ..., weil ...»."
+        warning: "Hörwirkung nicht mit Beweis verwechseln.",
+        writingMove: "Aktennotiz: «Bei Zeitmarke ... klingt ..., im Text steht ..., dadurch wirkt ...»."
       }
     ],
     recommendedTheoryIds: ["verhoer-gestaendnis", "sprache-beweis", "hoerbuch", "indizienprozess", "verteidigung-gutachten"],
@@ -1095,66 +1095,66 @@ export const lessonSets = [
   {
     id: "lektion-05",
     title: "Prozessvorbereitung: Geständnis, Anklage, Verteidigung",
-    summary: "Das Geständnis wird als Kipppunkt gelesen, aus dem Anklage- und Verteidigungsnarrative entstehen.",
+    summary: "Geständnis, Indizien, Motivspuren und Rechtsfragen werden für Anklage und Verteidigung gewichtet.",
     moduleIds: ["modul-05"],
     entryIds: ["frage-13", "frage-14", "frage-15"],
     reviewFocus: "Titel, Spannung, Aussage, Indizien und rechtliche Würdigung differenziert zusammendenken.",
     sebPrompt: "Erkläre den Geständnismoment und seine Grenzen als Wahrheits- und Prozessereignis.",
-    pathBriefing: "Vor dem Prozess musst du entscheiden, aus welcher Perspektive du das Geständnis liest: als erzählerischen Kipppunkt, als beweisbedürftige Aussage oder als ethische Zumutung für Angehörige und Öffentlichkeit.",
+    pathBriefing: "Vor dem Prozess werden die Puzzleteile gewichtet: Geständnis, Motivspuren, Indizien, rechtliche Qualifikation, Wirkung auf Angehörige. Wähle, ob du den Weg zum Geständnis, seinen Beweiswert oder die Motiv-/Opferfragen sicherst.",
     pathChoices: [
       {
         id: "prozess-kipppunkt",
-        title: "Pfad A: Der Kipppunkt",
-        role: "Du liest das Geständnis als Moment, in dem eine erzählerische Konstruktion umschlägt.",
-        chooseIf: "Wähle diesen Pfad, wenn dich Aufbau, Titelspannung und dramaturgische Vorbereitung interessieren.",
-        method: "Suche Vorzeichen: frühere Widersprüche, Druckstellen, Wiederholungen, Erwartungen des Titels.",
-        nextStep: "Beginne mit «Geständnismoment» und der Linse Verhör und Geständnis.",
+        title: "Spur A: Weg zum Geständnis",
+        role: "Aktenstück: Vorgeschichte des Geständnisses. Gesucht werden frühere Widersprüche, Druckfragen, Korrekturen und der Moment, an dem eine Version nicht mehr hält.",
+        chooseIf: "Verfolge diese Spur, wenn du rekonstruieren willst, wodurch das Geständnis vorbereitet wird.",
+        method: "Lege eine Kette an: Hinweis vor dem Geständnis, Druckmoment, veränderte Aussage, noch offener Punkt.",
+        nextStep: "Sichere «Geständnismoment» mit dem Werkzeug Verhör und Geständnis.",
         entryId: "frage-13",
         theoryId: "verhoer-gestaendnis",
         resourceId: "verhoer-gestaendnis",
         hints: [
-          "Hinweis 1: Der Titel lenkt die Erwartung; prüfe, wie der Text diese Erwartung verzögert.",
-          "Hinweis 2: Ein Kipppunkt braucht Vorgeschichte. Suche mindestens zwei vorbereitende Spuren.",
-          "Hinweis 3: Frage, was sich rückblickend am Anfang verändert."
+          "Hinweis 1: Ein Geständnis steht nicht allein. Suche mindestens zwei frühere Puzzleteile.",
+          "Hinweis 2: Entscheidend ist, welche Version unmittelbar vorher nicht mehr trägt.",
+          "Hinweis 3: Prüfe rückwärts: Welche Notruf- oder Tatortdetails wirken nach dem Geständnis anders?"
         ],
-        warning: "Nicht so tun, als beginne die Wahrheit erst beim Geständnis.",
-        writingMove: "Schreibe: «Der Kipppunkt ist vorbereitet durch ..., sichtbar wird das an ...»."
+        warning: "Nicht das Geständnis als bequeme Abkürzung nehmen. Der Weg dorthin muss belegbar sein.",
+        writingMove: "Aktennotiz: «Zum Geständnis führen ..., ..., offen bleibt ...»."
       },
       {
         id: "prozess-beweiswert",
-        title: "Pfad B: Geständnis unter Prüfung",
-        role: "Du behandelst das Geständnis als starkes, aber nicht selbstgenügsames Beweisstück.",
-        chooseIf: "Wähle diesen Pfad, wenn du Anklage und Verteidigung sauber vorbereiten willst.",
-        method: "Verbinde Aussage, Motiv, Indizien und Rechtsfrage. Unterscheide erzählerische Überzeugung und juristische Tragfähigkeit.",
-        nextStep: "Beginne mit «Wahrheitsanspruch» und öffne danach das reale Urteil.",
+        title: "Spur B: Beweiswert des Geständnisses",
+        role: "Aktenstück: Geständnis plus Abgleich. Zu prüfen sind Aussageinhalt, passende Indizien, Widersprüche und rechtliche Qualifikation.",
+        chooseIf: "Verfolge diese Spur, wenn du Anklage und Verteidigung faktenbasiert vorbereiten willst.",
+        method: "Baue eine Prüfliste: Was gesteht die Person? Welches Indiz passt dazu? Welches Indiz fehlt? Welche Rechtsfrage bleibt?",
+        nextStep: "Sichere «Wahrheitsanspruch» und öffne danach das reale Urteil.",
         entryId: "frage-14",
         theoryId: "gerichtsurteil",
         resourceId: "gerichtsurteil",
         hints: [
-          "Hinweis 1: Ein Geständnis beantwortet nicht automatisch Qualifikation, Motiv und Strafmass.",
-          "Hinweis 2: Suche, welche Indizien das Geständnis stützen und welche Fragen bleiben.",
-          "Hinweis 3: Trenne Tatfrage, Beweisfrage und Rechtsfrage."
+          "Hinweis 1: Ein Geständnis beantwortet nicht automatisch Mordqualifikation, Motiv und Strafmass.",
+          "Hinweis 2: Jedes Geständnisdetail braucht Abgleich mit einem unabhängigen Hinweis.",
+          "Hinweis 3: Art. 111 und Art. 112 StGB verlangen unterschiedliche Begründungen."
         ],
-        warning: "Dieser Pfad darf literarische Spannung nicht mit rechtlicher Begründung verwechseln.",
-        writingMove: "Formuliere: «Erzählerisch überzeugt ..., juristisch müsste zusätzlich ...»."
+        warning: "Kein Urteil ohne Trennung von Tatfrage, Beweisfrage und Rechtsfrage.",
+        writingMove: "Aktennotiz: «Das Geständnis klärt ..., gestützt wird es durch ..., rechtlich offen bleibt ...»."
       },
       {
         id: "prozess-verantwortung",
-        title: "Pfad C: Nach dem Geständnis",
-        role: "Du fragst, was Aufklärung für Angehörige, Opferperspektive und Öffentlichkeit bedeutet.",
-        chooseIf: "Wähle diesen Pfad, wenn du die ethische Dimension des Falls nicht erst am Ende behandeln willst.",
-        method: "Prüfe, welche Fragen durch das Geständnis beantwortet werden und welche gerade dadurch offen bleiben.",
-        nextStep: "Beginne mit «Nach dem Geständnis» und vergleiche Buch und Podcast.",
+        title: "Spur C: Motiv und Folgen",
+        role: "Aktenstück: Motiv- und Opferperspektive. Zu prüfen sind mögliche Motivhinweise, Angehörigenperspektive, Öffentlichkeit und Darstellung im Podcast.",
+        chooseIf: "Verfolge diese Spur, wenn du wissen willst, was ein Geständnis erklärt und was es nicht erklären kann.",
+        method: "Trenne drei Fragen: Warum? Für wen ist was aufgeklärt? Welche Darstellung ist verantwortbar?",
+        nextStep: "Sichere «Nach dem Geständnis» und vergleiche Buch und Podcast.",
         entryId: "frage-15",
         theoryId: "true-crime-ethik",
         resourceId: "crime-podcast",
         hints: [
-          "Hinweis 1: Aufklärung beendet nicht automatisch Trauer, Öffentlichkeit oder Verantwortung.",
-          "Hinweis 2: Frage, ob eine Darstellung informiert, ordnet oder emotional ausstellt.",
-          "Hinweis 3: Vergleiche Buch und Podcast nicht nur inhaltlich, sondern in ihrer Nähe zum Publikum."
+          "Hinweis 1: Ein Geständnis kann den Ablauf klären, ohne ein Motiv vollständig zu erklären.",
+          "Hinweis 2: Angehörige und Öffentlichkeit haben nicht dieselben Fragen.",
+          "Hinweis 3: Podcast und Buch können dieselben Fakten unterschiedlich gewichten."
         ],
-        warning: "Ethik ist hier keine Schlussfloskel, sondern eine konkrete Leseentscheidung.",
-        writingMove: "Schreibe: «Nach dem Geständnis bleibt offen, wie ... dargestellt werden darf.»"
+        warning: "Motivfragen nicht dramatisieren. Nur Hinweise, Lücken und Folgen benennen.",
+        writingMove: "Aktennotiz: «Das Geständnis beantwortet ..., nicht beantwortet ist ..., für Angehörige bedeutet das ...»."
       }
     ],
     recommendedTheoryIds: ["verhoer-gestaendnis", "sprache-beweis", "true-crime-ethik", "crime-podcast", "rechtsprechung", "gerichtsurteil", "verteidigung-gutachten", "indizienprozess"],
@@ -1225,66 +1225,66 @@ export const lessonSets = [
   {
     id: "lektion-06",
     title: "Gerichtssaal: Plädoyer und Urteil",
-    summary: "Eine eigene, belegte Prozessanalyse verbindet Text, Hörbuch, Podcast, Rechtsprechung und Materialpool.",
+    summary: "Aus denselben Akten entstehen begründete Urteilsvarianten: belastende Kette, Gegenkette, rechtliche Qualifikation und Zweifel.",
     moduleIds: ["modul-06"],
     entryIds: ["frage-16", "frage-17", "frage-18"],
     reviewFocus: "Aus Einzelspuren eine verantwortliche Beweiswürdigung und ein begründetes Urteil entwickeln.",
     sebPrompt: "Bündle Textanalyse, Materialkritik, Rechtsprechung und ethische Reflexion in einem Plädoyer oder Urteil.",
-    pathBriefing: "Im Gerichtssaal wird aus der Lektüre eine begründete Entscheidung. Du wählst, ob du als Anklage, Verteidigung oder Gericht argumentierst. Alle drei Rollen müssen dieselbe Aktenbasis ernst nehmen.",
+    pathBriefing: "Im Gerichtssaal wird aus Puzzleteilen eine Begründung. Du arbeitest mit derselben Aktenbasis, kannst aber drei Wege wählen: belastende Kette, Zweifel/Korrektur oder eigenes Urteil mit Varianten.",
     pathChoices: [
       {
         id: "gericht-anklage",
-        title: "Pfad A: Plädoyer der Anklage",
-        role: "Du bündelst belastende Spuren zu einer tragfähigen Anklagelogik.",
-        chooseIf: "Wähle diesen Pfad, wenn du zeigen willst, wie aus Einzelspuren eine Indizienkette wird.",
-        method: "Ordne Textbelege, Geständnis, Widersprüche und rechtliche Normen zu einer Begründung. Benenne trotzdem die stärkste Gegenfrage.",
-        nextStep: "Beginne mit «Gesamtthese» und der Linse Indizienprozess.",
+        title: "Spur A: Belastende Kette",
+        role: "Aktenstück: Indizienkette. Belastend können Fensterbefund, falsche Version, Zeitlücke, Widersprüche, Motivhinweise und Geständnis werden.",
+        chooseIf: "Verfolge diese Spur, wenn du eine Anklagekette ohne Lückenbehauptung bauen willst.",
+        method: "Ordne jedes Indiz nach Gewicht: stark, mittel, nur ergänzend. Setze zu jedem Indiz die stärkste Gegenfrage.",
+        nextStep: "Sichere «Gesamtthese» mit dem Werkzeug Indizienprozess.",
         entryId: "frage-16",
         theoryId: "indizienprozess",
         resourceId: "indizienprozess",
         hints: [
-          "Hinweis 1: Eine Anklage wird stärker, wenn sie Gegenargumente nicht verschweigt.",
-          "Hinweis 2: Verwende keine moralische Empörung als Ersatz für Beweiswürdigung.",
-          "Hinweis 3: Prüfe, welche Qualifikation du rechtlich begründen kannst."
+          "Hinweis 1: Ein starkes Indiz braucht Quelle, Textstelle und Funktion in der Kette.",
+          "Hinweis 2: Fensterbefund und Geständnis sind unterschiedlich zu gewichten.",
+          "Hinweis 3: Eine Anklagekette muss auch die stärkste Verteidigungsfrage überstehen."
         ],
-        warning: "Nicht maximale Strenge behaupten, ohne Mordqualifikation oder Vorsatz sauber zu begründen.",
-        writingMove: "Formuliere: «Belastend ist ..., entscheidend wird ..., entkräftet werden müsste ...»."
+        warning: "Keine Strafschärfe ohne Begründung von Vorsatz, Qualifikation und Beweiswürdigung.",
+        writingMove: "Aktennotiz: «Belastend sind ..., am stärksten wiegt ..., angegriffen werden könnte ...»."
       },
       {
         id: "gericht-verteidigung",
-        title: "Pfad B: Plädoyer der Verteidigung",
-        role: "Du suchst nicht nach Ausreden, sondern nach begründeten Zweifeln, alternativen Gewichtungen und Verfahrensfragen.",
-        chooseIf: "Wähle diesen Pfad, wenn du die Aktenbasis gegen vorschnelle Eindeutigkeit lesen willst.",
-        method: "Ordne mehrdeutige Spuren, Lücken, Gutachtenfragen und rechtliche Schwellen. Benenne, was bewiesen ist und was nicht.",
-        nextStep: "Beginne mit «Aktenprodukt» und der Ressource Verteidigung/Gutachten.",
+        title: "Spur B: Zweifel und Gegenkette",
+        role: "Aktenstück: Verteidigungsprüfung. Gesucht werden mehrdeutige Hinweise, Beweislücken, Gutachtenfragen und rechtliche Schwellen.",
+        chooseIf: "Verfolge diese Spur, wenn du prüfen willst, wo die Aktenbasis nicht eindeutig trägt.",
+        method: "Lege zu jedem belastenden Indiz eine Gegenfrage an: andere Erklärung, fehlender Beleg, Verfahrensfrage, Gutachtenfrage.",
+        nextStep: "Sichere «Aktenprodukt» und nutze die Ressource Verteidigung/Gutachten.",
         entryId: "frage-17",
         theoryId: "verteidigung-gutachten",
         resourceId: "verteidigung-gutachten",
         hints: [
-          "Hinweis 1: Verteidigung heisst nicht Verharmlosung, sondern Prüfung der Beweislast.",
-          "Hinweis 2: Ein Zweifel muss konkret sein: Woran genau hängt er?",
-          "Hinweis 3: Schuldfähigkeit, Massnahme und Gutachten sind eigene Streitfelder."
+          "Hinweis 1: Ein Zweifel zählt nur, wenn er an einem Aktenstück hängt.",
+          "Hinweis 2: Schuldfähigkeit, Massnahme und Gutachten sind nicht dasselbe wie Tatfrage.",
+          "Hinweis 3: Die Verteidigung kann Qualifikation und Strafmass angreifen, auch wenn der Grundtatbestand nicht bestritten wird."
         ],
-        warning: "Nicht jeden offenen Punkt zum Freispruch aufblasen. Zeige seine rechtliche Relevanz.",
-        writingMove: "Schreibe: «Nicht bestritten ist ..., zweifelhaft bleibt ..., rechtlich folgt daraus ...»."
+        warning: "Nicht jede Lücke entlastet. Zeige, warum sie rechtlich relevant ist.",
+        writingMove: "Aktennotiz: «Nicht bestritten ist ..., zweifelhaft bleibt ..., rechtlich wirkt sich das aus bei ...»."
       },
       {
         id: "gericht-urteil",
-        title: "Pfad C: Gerichtliche Würdigung",
-        role: "Du entscheidest abwägend: Welche Variante trägt, welche scheitert, welche Zweifel müssen im Urteil stehen?",
-        chooseIf: "Wähle diesen Pfad, wenn du am Ende ein eigenes begründetes Urteil oder Minderheitsvotum formulieren willst.",
-        method: "Vergleiche mindestens zwei Urteilsvarianten. Begründe, warum eine überzeugt und eine andere nicht.",
-        nextStep: "Beginne mit «Urteil und Zweifel» und der Urteilswerkstatt.",
+        title: "Spur C: Urteilsvarianten",
+        role: "Aktenstück: Urteilswerkstatt. Möglich sind unterschiedliche Varianten, wenn Qualifikation, Beweiswürdigung oder Zweifel anders gewichtet werden.",
+        chooseIf: "Verfolge diese Spur, wenn du am Ende selbst entscheiden und die Entscheidung begründen willst.",
+        method: "Vergleiche drei Varianten: strenge Qualifikation, mildere rechtliche Würdigung, nicht nachweisbare oder zweifelhafte Variante.",
+        nextStep: "Sichere «Urteil und Zweifel» und öffne die Urteilswerkstatt.",
         entryId: "frage-18",
         theoryId: "urteilswerkstatt",
         resourceId: "urteilswerkstatt",
         hints: [
-          "Hinweis 1: Ein Urteil braucht Gewichtung, nicht bloss Sammlung.",
-          "Hinweis 2: Schreibe die stärkste Gegenposition fair auf, bevor du sie zurückweist.",
-          "Hinweis 3: Unterscheide literarische Plausibilität und juristische Überzeugung."
+          "Hinweis 1: Ein Urteil braucht Reihenfolge: Fakten, Beweise, Recht, Ergebnis.",
+          "Hinweis 2: Die stärkste Gegenposition muss fair dargestellt werden.",
+          "Hinweis 3: Vergleiche dein Ergebnis mit dem realen Urteil, ohne es einfach zu kopieren."
         ],
-        warning: "Das Ziel ist kein richtiges Bauchgefühl, sondern eine nachvollziehbare Begründung.",
-        writingMove: "Formuliere: «Ich entscheide mich für ..., weil ...; die Gegenvariante überzeugt mich nicht, da ...»."
+        warning: "Kein Bauchurteil. Jede Variante braucht Aktenstücke.",
+        writingMove: "Aktennotiz: «Variante A trägt wegen ..., Variante B scheitert an ..., mein Urteil lautet ...»."
       }
     ],
     recommendedTheoryIds: ["true-crime-ethik", "material-craft", "hoerbuch", "autorinnenkontext", "crime-podcast", "rechtsprechung", "gerichtsurteil", "verteidigung-gutachten", "indizienprozess", "urteilswerkstatt"],
@@ -1357,12 +1357,12 @@ export const lessonSets = [
 ];
 
 export const starterPrompt = {
-  title: "Pfadakte",
-  text: "Wähle zuerst einen Ermittlungsweg. Lies dann die passende Passage im PDF und antworte mit Beobachtung, Textanker, Indizienwert und Gegenhypothese.",
+  title: "Spurenakte",
+  text: "Wähle zuerst ein konkretes Puzzleteil. Lies dann die passende Passage im PDF und antworte mit Fakt, Quelle, Hinweiswert, Lücke und Gegenfrage.",
   items: [
-    "Entscheide dich bewusst für einen Pfad: Protokoll, Sprache, Tatortspur, Ethik, Verhörlogik, Beweiswert oder Urteil.",
-    "Folge deinem Pfad zuerst konsequent und sichere mindestens eine Spur mit genauem Wortlaut.",
-    "Prüfe danach gegen: Was sieht dein Pfad gut, was blendet er möglicherweise aus?"
+    "Sichere zuerst Daten, Orte, Personen, Aussagen und sichtbare Befunde.",
+    "Markiere jede Stelle als Fakt, Behauptung, Beobachtung, Motivhinweis oder Lücke.",
+    "Prüfe danach gegen: Welche andere Erklärung passt noch zu denselben Aktenstücken?"
   ]
 };
 
