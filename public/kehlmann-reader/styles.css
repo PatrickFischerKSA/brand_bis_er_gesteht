@@ -1220,18 +1220,6 @@ textarea {
   opacity: 1;
 }
 
-.case-note-foot {
-  display: flex;
-  justify-content: space-between;
-  gap: 12px;
-  flex-wrap: wrap;
-  padding: 10px 16px;
-  border-top: 1px solid rgba(49, 67, 53, 0.16);
-  color: var(--forest);
-  font-size: 0.92rem;
-  font-weight: 700;
-}
-
 .case-note-rule {
   border-radius: 0;
   background: rgba(255, 255, 255, 0.46);
@@ -1442,8 +1430,7 @@ textarea {
   }
 
   .case-note-head,
-  .case-note-body,
-  .case-note-foot {
+  .case-note-body {
     padding-left: 12px;
     padding-right: 12px;
   }

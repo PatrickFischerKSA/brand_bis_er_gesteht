@@ -365,23 +365,7 @@ function renderTaskFeedbackMarkup(task, feedback) {
   `;
 }
 
-function renderCaseNoteFeedback(feedback) {
-  const feedbackSummary = feedback.level === "empty"
-    ? "Noch kein Eintrag."
-    : feedback.level === "strong"
-      ? "Eintrag tragfähig."
-      : feedback.level === "partial"
-        ? "Eintrag noch nachschärfen."
-        : "Eintrag zu allgemein.";
-  const missing = feedback.missing.length ? `Noch prüfen: ${feedback.missing.join(", ")}.` : "Keine Pflichtstelle offen.";
-  return `
-    <span>${escapeHtml(feedbackSummary)}</span>
-    <span>${escapeHtml(missing)}</span>
-  `;
-}
-
 function renderTaskField({ task, value, dataset, label }) {
-  const feedback = evaluateAnswer(value, task);
   const dataAttributes = Object.entries(dataset)
     .map(([key, fieldValue]) => `data-${key}="${escapeHtml(String(fieldValue))}"`)
     .join(" ");
@@ -399,9 +383,6 @@ function renderTaskField({ task, value, dataset, label }) {
         <span>Aktenvermerk</span>
         <textarea ${dataAttributes} aria-label="${escapeHtml(inputLabel)}" placeholder="${escapeHtml(instruction)}">${escapeHtml(value || "")}</textarea>
       </label>
-      <div class="case-note-foot task-feedback--${feedback.level}" data-task-feedback aria-live="polite">
-        ${renderCaseNoteFeedback(feedback)}
-      </div>
     </article>
   `;
 }
@@ -2327,16 +2308,7 @@ function taskForInputElement(element) {
 }
 
 function updateTaskFeedbackForElement(element) {
-  const wrapper = element.closest(".case-note-field");
-  const feedbackBox = wrapper?.querySelector("[data-task-feedback]");
-  const task = taskForInputElement(element);
-  if (!wrapper || !feedbackBox || !task) {
-    return;
-  }
-
-  const feedback = evaluateAnswer(element.value, task);
-  feedbackBox.className = `case-note-foot task-feedback--${feedback.level}`;
-  feedbackBox.innerHTML = renderCaseNoteFeedback(feedback);
+  return;
 }
 
 function updateReviewField(field, value) {
