@@ -1565,18 +1565,36 @@ function isExternalUrl(url) {
   return /^https?:\/\//i.test(String(url || ""));
 }
 
-function externalButtonsFor(resource) {
+function isLocalPdfUrl(url) {
+  return /^\/.*\.pdf(?:$|[?#])/i.test(String(url || ""));
+}
+
+function compactMaterialLabel(label) {
+  const value = String(label || "");
+  if (value.includes("Craft:")) return "Craft";
+  if (value.includes("Dropbox:")) return "Hörbuch";
+  if (value.includes("Christine Brand")) return "Website";
+  if (value.includes("Simplecast:")) return "Podcast";
+  if (value.includes("Strafgesetzbuch")) return "StGB";
+  if (value.includes("Strafprozessordnung")) return "StPO";
+  if (value.includes("Bundesgericht")) return "Bundesgericht";
+  if (value.includes("Gerichte Zürich")) return "Gerichte ZH";
+  if (value.includes("PDF:")) return "PDF öffnen";
+  return value || "Öffnen";
+}
+
+function externalButtonsFor(resource, compact = false) {
   const links = [];
   const seen = new Set();
-  const addLink = (label, url) => {
-    if (!isExternalUrl(url) || seen.has(url)) {
+  const addLink = (label, url, allowLocalPdf = false) => {
+    if (!(isExternalUrl(url) || (allowLocalPdf && isLocalPdfUrl(url))) || seen.has(url)) {
       return;
     }
     seen.add(url);
     links.push({ label, url });
   };
 
-  (resource.externalLinks || []).forEach((link) => addLink(link.label || "Quelle öffnen", link.url));
+  (resource.externalLinks || []).forEach((link) => addLink(link.label || "Quelle öffnen", link.url, true));
   addLink(resource.mediaType === "pdf" ? "PDF extern öffnen" : resource.mediaType === "html" ? "Quelle extern öffnen" : "Medium extern öffnen", resource.openUrl);
   addLink(resource.audioLabel || "Audio extern öffnen", resource.audioUrl);
 
@@ -1586,8 +1604,51 @@ function externalButtonsFor(resource) {
 
   return `
     <div class="chip-row">
-      ${links.map((link) => `<a class="button secondary" href="${escapeHtml(link.url)}" target="_blank" rel="noreferrer">${escapeHtml(link.label)}</a>`).join("")}
+      ${links.map((link) => `<a class="button secondary" href="${escapeHtml(link.url)}" target="_blank" rel="noreferrer">${escapeHtml(compact ? compactMaterialLabel(link.label) : link.label)}</a>`).join("")}
     </div>
+  `;
+}
+
+const visibleMaterialPoolIds = [
+  "material-craft",
+  "hoerbuch",
+  "autorinnenkontext",
+  "crime-podcast",
+  "rechtsprechung",
+  "gerichtsurteil",
+  "verteidigung-gutachten"
+];
+
+function materialPoolResources() {
+  return visibleMaterialPoolIds
+    .map((id) => theoryResources.find((resource) => resource.id === id))
+    .filter(Boolean);
+}
+
+function renderMaterialPool() {
+  const resources = materialPoolResources();
+  if (!resources.length) {
+    return "";
+  }
+
+  return `
+    <section class="material-pool-strip">
+      <div class="section-head">
+        <strong>Materialpool</strong>
+        <span class="status-badge">${escapeHtml(`${resources.length} Quellen`)}</span>
+      </div>
+      <div class="resource-pool-grid">
+        ${resources.map((resource) => `
+          <article class="resource-pool-card">
+            <div>
+              <div class="eyebrow">${escapeHtml(resource.shortTitle)}</div>
+              <strong>${escapeHtml(resource.sourceTitle)}</strong>
+            </div>
+            ${externalButtonsFor(resource, true)}
+          </article>
+        `).join("")}
+      </div>
+    </section>
   `;
 }
 
@@ -1679,7 +1740,8 @@ function renderTheoryPanel(module, entry) {
 
 function renderResourceAssignmentsPanel() {
   const assignments = resourceAssignmentsForLesson();
-  if (!assignments.length) {
+  const materialPool = renderMaterialPool();
+  if (!assignments.length && !materialPool) {
     return "";
   }
 
@@ -1688,11 +1750,20 @@ function renderResourceAssignmentsPanel() {
       <div class="panel-head">
         <div>
           <div class="eyebrow">Materialvermerke</div>
-          <h2>Podcast, Dossiers, Sekundärtexte und Theorie als Arbeitsstationen</h2>
+          <h2>Materialpool und aktuelle Aktenvermerke</h2>
         </div>
       </div>
 
-      <div class="resource-assignment-grid">
+      ${materialPool}
+
+      ${assignments.length ? `
+        <div class="section-head">
+          <strong>Zur aktuellen Passage</strong>
+          <span class="status-badge">${escapeHtml(`${assignments.length} Vermerk${assignments.length === 1 ? "" : "e"}`)}</span>
+        </div>
+      ` : ""}
+
+      ${assignments.length ? `<div class="resource-assignment-grid">
         ${assignments.map((assignment) => {
           const { resource, title, summary, task } = assignment;
           const questionTasks = resourceQuestionTasksFor(assignment);
@@ -1764,7 +1835,7 @@ function renderResourceAssignmentsPanel() {
           </section>
         `;
         }).join("")}
-      </div>
+      </div>` : ""}
     </article>
   `;
 }

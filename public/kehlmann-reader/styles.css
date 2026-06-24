@@ -980,6 +980,46 @@ button {
   gap: 18px;
 }
 
+.material-pool-strip {
+  display: grid;
+  gap: 12px;
+  padding: 16px;
+  border: 1px solid rgba(49, 67, 53, 0.12);
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(12px);
+}
+
+.resource-pool-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 10px;
+}
+
+.resource-pool-card {
+  display: grid;
+  align-content: space-between;
+  gap: 12px;
+  min-height: 138px;
+  padding: 14px;
+  border: 1px solid rgba(49, 67, 53, 0.14);
+  background: rgba(248, 244, 234, 0.08);
+}
+
+.resource-pool-card strong {
+  display: block;
+  line-height: 1.25;
+}
+
+.resource-pool-card .chip-row {
+  gap: 8px;
+}
+
+.resource-pool-card .button {
+  min-height: 42px;
+  padding: 9px 12px;
+  justify-content: center;
+}
+
 .review-layout,
 .review-meta-grid,
 .seb-profile-grid,
