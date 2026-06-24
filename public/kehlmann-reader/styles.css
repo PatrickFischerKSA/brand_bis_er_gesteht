@@ -306,7 +306,116 @@ button {
 
 .focus-work-panel {
   border-color: rgba(55, 109, 115, 0.34);
-  background: rgba(255, 250, 240, 0.72);
+  background: rgba(255, 250, 240, 0.045);
+}
+
+.choose-path-panel {
+  display: grid;
+  gap: 18px;
+  border-color: rgba(55, 109, 115, 0.3);
+}
+
+.path-lead,
+.path-rule {
+  max-width: 1180px;
+  margin: 0;
+}
+
+.path-rule {
+  padding: 12px 14px;
+  border-left: 4px solid var(--accent);
+  border-radius: 0 14px 14px 0;
+  background: rgba(55, 109, 115, 0.07);
+}
+
+.path-choice-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 12px;
+}
+
+.path-choice-card {
+  display: grid;
+  gap: 8px;
+  min-height: 148px;
+  align-content: start;
+  text-align: left;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 20px;
+  padding: 16px;
+  background: rgba(255, 255, 255, 0.025);
+  color: var(--text);
+  backdrop-filter: blur(6px) saturate(1.04);
+  -webkit-backdrop-filter: blur(6px) saturate(1.04);
+}
+
+.path-choice-card strong {
+  color: var(--forest);
+  font-size: 1.06rem;
+}
+
+.path-choice-card span:not(.module-card-kicker) {
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.path-choice-card.is-active {
+  border-color: rgba(55, 109, 115, 0.48);
+  background: rgba(55, 109, 115, 0.09);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), 0 12px 28px rgba(16, 24, 20, 0.08);
+}
+
+.path-guidance-card {
+  display: grid;
+  gap: 16px;
+  border: 1px solid rgba(55, 109, 115, 0.24);
+  border-radius: 22px;
+  padding: 18px;
+  background: rgba(255, 255, 255, 0.03);
+  backdrop-filter: blur(6px) saturate(1.04);
+  -webkit-backdrop-filter: blur(6px) saturate(1.04);
+}
+
+.path-guidance-card h3 {
+  margin: 0 0 8px;
+}
+
+.path-guidance-card p {
+  margin: 0;
+}
+
+.path-guidance-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 12px;
+}
+
+.path-guidance-grid > div,
+.path-warning,
+.path-hints p {
+  border: 1px solid rgba(49, 67, 53, 0.12);
+  border-radius: 16px;
+  padding: 14px;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.path-target-line {
+  color: var(--forest) !important;
+  font-weight: 700;
+}
+
+.path-hints {
+  display: grid;
+  gap: 8px;
+}
+
+.path-warning {
+  border-color: rgba(55, 109, 115, 0.28);
+  background: rgba(55, 109, 115, 0.07);
+}
+
+.path-sidebar-task {
+  border-left: 4px solid var(--accent);
 }
 
 .focus-work-grid {
@@ -1027,6 +1136,7 @@ textarea {
   .status-strip,
   .review-layout,
   .review-meta-grid,
+  .path-guidance-grid,
   .seb-profile-grid,
   .seb-feedback-columns,
   .criteria-grid {
@@ -1059,12 +1169,15 @@ textarea {
 
   .core-modules,
   .deepening-modules,
+  .path-choice-grid,
   .focus-work-grid {
     grid-template-columns: minmax(0, 1fr);
   }
 
   .top-module-card,
   .deepening-module-card,
+  .path-choice-card,
+  .path-guidance-card,
   .question-answer-block,
   .question-task-card {
     border-radius: 18px;

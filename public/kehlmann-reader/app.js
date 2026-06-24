@@ -1,4 +1,4 @@
-import { buildTask, pdfSource, readerModules, starterPrompt, theoryResources, lessonSets } from "./data.js";
+import { buildTask, pdfSource, readerModules, starterPrompt, theoryResources, lessonSets, pathGuide } from "./data.js";
 import { buildParcoursMarkdown } from "./export.js";
 
 const mode = window.KEHLMANN_READER_MODE || "open";
@@ -6,6 +6,7 @@ const modeLabel = window.KEHLMANN_READER_MODE_LABEL || "Offene Version";
 const config = window.KEHLMANN_READER_CONFIG || {};
 const app = document.body;
 const AUDIOBOOK_URL = "https://www.dropbox.com/scl/fo/467llo67rclpn002zrbpw/AAHU6ZP-t97_2N8GIRiz3xU?rlkey=lcw7jj6yctljum7g2bbodb6x0&st=o5up4o4p&dl=0";
+const PATH_SELECTION_NOTE_KEY = "__chooseYourPathSelections";
 
 const reviewLevels = [
   { value: "stark", label: "stark" },
@@ -726,6 +727,55 @@ function resourceAssignmentsForLesson(lesson = currentLesson()) {
     .filter(Boolean);
 }
 
+function pathSelections() {
+  return state.notes[PATH_SELECTION_NOTE_KEY] || {};
+}
+
+function pathChoicesForLesson(lesson = currentLesson()) {
+  return Array.isArray(lesson?.pathChoices) ? lesson.pathChoices : [];
+}
+
+function selectedPathIdForLesson(lesson = currentLesson()) {
+  const choices = pathChoicesForLesson(lesson);
+  if (!choices.length) {
+    return "";
+  }
+  return pathSelections()[lesson.id] || choices[0].id;
+}
+
+function currentPathChoice(lesson = currentLesson()) {
+  const choices = pathChoicesForLesson(lesson);
+  return choices.find((choice) => choice.id === selectedPathIdForLesson(lesson)) || choices[0] || null;
+}
+
+function storePathSelection(lessonId, pathId) {
+  state.notes[PATH_SELECTION_NOTE_KEY] = {
+    ...pathSelections(),
+    [lessonId]: pathId
+  };
+  state.saveStatus = "idle";
+}
+
+function applyPathChoice(choice, lesson = currentLesson()) {
+  if (!choice) {
+    return;
+  }
+
+  storePathSelection(lesson.id, choice.id);
+
+  if (choice.entryId && entryIndex.has(choice.entryId)) {
+    state.entryId = choice.entryId;
+    state.moduleId = entryIndex.get(choice.entryId)?.module.id || state.moduleId;
+  }
+
+  const targetTheoryId = choice.theoryId || choice.resourceId;
+  if (targetTheoryId && theoryResources.some((resource) => resource.id === targetTheoryId)) {
+    state.theoryId = targetTheoryId;
+  }
+
+  ensureSelection();
+}
+
 function resourceResponseKey(lessonId, resourceId) {
   return `lesson-resource::${lessonId}::${resourceId}`;
 }
@@ -1097,6 +1147,78 @@ function renderSignalWords(entry) {
 
 function renderPromptList() {
   return starterPrompt.items.map((item) => `<li>${escapeHtml(item)}</li>`).join("");
+}
+
+function renderChoosePathPanel(lesson = currentLesson()) {
+  const choices = pathChoicesForLesson(lesson);
+  if (!choices.length) {
+    return "";
+  }
+
+  const selected = currentPathChoice(lesson);
+  const targetEntry = selected?.entryId ? entryIndex.get(selected.entryId)?.entry : null;
+  const targetTheory = selected?.theoryId ? theoryResources.find((resource) => resource.id === selected.theoryId) : null;
+  const targetResource = selected?.resourceId ? theoryResources.find((resource) => resource.id === selected.resourceId) : null;
+
+  return `
+    <section class="panel choose-path-panel">
+      <div class="panel-head">
+        <div>
+          <div class="eyebrow">${escapeHtml(pathGuide.title)}</div>
+          <h2>Wähle deinen Ermittlungsweg</h2>
+        </div>
+        <span class="status-badge">${escapeHtml(selected?.title || "Pfad wählen")}</span>
+      </div>
+      <p class="path-lead">${escapeHtml(lesson.pathBriefing || pathGuide.instruction)}</p>
+      <p class="path-rule">${escapeHtml(pathGuide.warning)}</p>
+
+      <div class="path-choice-grid">
+        ${choices.map((choice) => `
+          <button class="path-choice-card ${choice.id === selected?.id ? "is-active" : ""}" data-action="select-path" data-path-id="${escapeHtml(choice.id)}">
+            <span class="module-card-kicker">${escapeHtml(choice.title.split(":")[0] || "Pfad")}</span>
+            <strong>${escapeHtml(choice.title.includes(":") ? choice.title.split(":").slice(1).join(":").trim() : choice.title)}</strong>
+            <span>${escapeHtml(choice.chooseIf)}</span>
+          </button>
+        `).join("")}
+      </div>
+
+      ${selected ? `
+        <article class="path-guidance-card">
+          <div>
+            <div class="eyebrow">Aktiver Pfad</div>
+            <h3>${escapeHtml(selected.title)}</h3>
+            <p>${escapeHtml(selected.role)}</p>
+          </div>
+          <div class="path-guidance-grid">
+            <div>
+              <strong>Vorgehen</strong>
+              <p>${escapeHtml(selected.method)}</p>
+            </div>
+            <div>
+              <strong>Nächster Schritt</strong>
+              <p>${escapeHtml(selected.nextStep)}</p>
+              <p class="path-target-line">${escapeHtml([
+                targetEntry ? `Passage: ${targetEntry.passageLabel}` : "",
+                targetTheory ? `Linse: ${targetTheory.shortTitle}` : "",
+                targetResource && targetResource.id !== targetTheory?.id ? `Material: ${targetResource.shortTitle}` : ""
+              ].filter(Boolean).join(" · "))}</p>
+            </div>
+            <div>
+              <strong>Schreibbewegung</strong>
+              <p>${escapeHtml(selected.writingMove)}</p>
+            </div>
+          </div>
+          <div class="path-hints">
+            ${(selected.hints || []).map((hint) => `<p>${escapeHtml(hint)}</p>`).join("")}
+          </div>
+          <div class="path-warning">
+            <strong>Achtung</strong>
+            <p>${escapeHtml(selected.warning)}</p>
+          </div>
+        </article>
+      ` : ""}
+    </section>
+  `;
 }
 
 function renderLessonMediaPanel(lesson = currentLesson()) {
@@ -1939,6 +2061,8 @@ function render() {
 
       ${state.error ? `<section class="panel"><p>${escapeHtml(state.error)}</p></section>` : ""}
 
+      ${renderChoosePathPanel(lesson)}
+
       ${renderFocusWorkPanel(entry)}
 
       <section class="layout">
@@ -1956,6 +2080,14 @@ function render() {
             <p>${escapeHtml(mode === "seb" ? lesson.sebPrompt : lesson.summary)}</p>
             <p>${escapeHtml(`Seitenkorridor: ${pageRangeForLesson(lesson)} · ${entriesForLesson(lesson).length} Passagen`)}</p>
           </div>
+
+          ${currentPathChoice(lesson) ? `
+            <div class="sidebar-task path-sidebar-task">
+              <strong>${escapeHtml("Gewählter Pfad")}</strong>
+              <p>${escapeHtml(currentPathChoice(lesson).title)}</p>
+              <p>${escapeHtml(currentPathChoice(lesson).nextStep)}</p>
+            </div>
+          ` : ""}
 
           <div data-progress-slot>${renderProgressBox()}</div>
 
@@ -2410,6 +2542,15 @@ document.addEventListener("click", (event) => {
 
   if (action === "select-theory") {
     state.theoryId = target.dataset.theoryId;
+    render();
+    queueSave();
+    queueSebFeedback();
+  }
+
+  if (action === "select-path") {
+    const lesson = currentLesson();
+    const choice = pathChoicesForLesson(lesson).find((item) => item.id === target.dataset.pathId);
+    applyPathChoice(choice, lesson);
     render();
     queueSave();
     queueSebFeedback();
