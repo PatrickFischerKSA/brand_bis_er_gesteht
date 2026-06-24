@@ -68,7 +68,7 @@ export function buildParcoursMarkdown({
       lines.push(`Theoriebezug: ${displayValue(entry.answers?.theory)}`);
       lines.push(`Revision / nächster Schritt: ${displayValue(entry.answers?.revision)}`);
       lines.push(`Signalwörter der Passage: ${(entry.signalWords || []).join(", ")}`);
-      lines.push(`Satzstarter: ${entry.writingFrame || "-"}`);
+      lines.push(`Formulierungshilfe: ${entry.writingFrame || "-"}`);
       lines.push("");
 
       for (const theory of entry.theorySections || []) {

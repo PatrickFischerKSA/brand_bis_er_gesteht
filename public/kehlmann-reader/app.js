@@ -1555,16 +1555,11 @@ function renderPdfPanel(entry, module) {
         </div>
       </div>
 
-      <div class="pdf-focus-box">
-        <strong>Arbeitsfokus</strong>
-        <p>${escapeHtml(module.briefing)}</p>
-      </div>
-
       ${renderLessonMediaPanel(lesson)}
 
       <div class="lesson-passages-box">
-        <strong>Relevante Passagen dieser Lektion</strong>
-        <p>${escapeHtml(`${lesson.title} führt durch ${entriesForLesson(lesson).length} gezielt ausgewählte Passagen im Seitenkorridor ${pageRangeForLesson(lesson)}.`)}</p>
+        <strong>Passagen der Fallakte</strong>
+        <p>${escapeHtml(`${entriesForLesson(lesson).length} Passagen im Seitenkorridor ${pageRangeForLesson(lesson)}.`)}</p>
       </div>
 
       <div class="passage-nav">
@@ -2104,68 +2099,9 @@ function render() {
       ${renderFocusWorkPanel(entry)}
 
       <section class="layout">
-        <aside class="panel sidebar">
-          <div class="panel-head">
-            <div>
-              <div class="eyebrow">${escapeHtml(starterPrompt.title)}</div>
-              <h2>Aktuelle Orientierung</h2>
-            </div>
-          </div>
-          <ul class="prompt-list">${renderPromptList()}</ul>
-
-          <div class="sidebar-task">
-            <strong>${escapeHtml(lesson.title)}</strong>
-            <p>${escapeHtml(mode === "seb" ? lesson.sebPrompt : lesson.summary)}</p>
-            <p>${escapeHtml(`Seitenkorridor: ${pageRangeForLesson(lesson)} · ${entriesForLesson(lesson).length} Passagen`)}</p>
-          </div>
-
-          ${currentPathChoice(lesson) ? `
-            <div class="sidebar-task path-sidebar-task">
-              <strong>${escapeHtml("Aktuelle Prüfung")}</strong>
-              <p>${escapeHtml(currentPathChoice(lesson).title)}</p>
-              <p>${escapeHtml(currentPathChoice(lesson).nextStep)}</p>
-            </div>
-          ` : ""}
-
-          <div data-progress-slot>${renderProgressBox()}</div>
-
-          <div class="sidebar-task">
-            <strong>${escapeHtml(module.title)}</strong>
-            <p>${escapeHtml(module.task)}</p>
-          </div>
-
-          <section class="theory-sidebar">
-            <div class="eyebrow">Interdisziplinäre Linsen</div>
-            <div class="theory-pill-list">
-              ${renderTheorySelector(module, entry)}
-            </div>
-          </section>
-        </aside>
-
         ${renderPdfPanel(entry, module)}
 
         <section class="content-column">
-          <article class="panel scene-panel">
-            <div class="panel-head">
-              <div>
-                <div class="eyebrow">${escapeHtml(module.lens)}</div>
-                <h2>${escapeHtml(entry.title)}</h2>
-              </div>
-              <span class="status-badge">${escapeHtml(entry.pageHint)}</span>
-            </div>
-
-            <div class="entry-tabs">${renderEntryTabs(module)}</div>
-            <div class="scene-card">
-              <h3>${escapeHtml(entry.passageLabel)}</h3>
-              <p>${escapeHtml(entry.context)}</p>
-              <div class="signal-grid">${renderSignalWords(entry)}</div>
-              <div class="writing-frame-box">
-                <strong>Satzstarter</strong>
-                <p>${escapeHtml(entry.writingFrame)}</p>
-              </div>
-            </div>
-          </article>
-
           ${renderTheoryPanel(module, entry)}
           ${renderResourceAssignmentsPanel()}
           ${renderNotebook(entry)}
