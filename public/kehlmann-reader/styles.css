@@ -328,6 +328,51 @@ button {
   background: rgba(55, 109, 115, 0.07);
 }
 
+.protocol-steps {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.protocol-steps li {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  column-gap: 10px;
+  row-gap: 2px;
+  align-items: start;
+  border: 1px solid rgba(49, 67, 53, 0.14);
+  border-radius: 12px;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.025);
+}
+
+.protocol-steps span {
+  display: inline-grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: rgba(55, 109, 115, 0.18);
+  color: var(--forest);
+  font-weight: 800;
+  font-size: 0.86rem;
+}
+
+.protocol-steps strong {
+  color: var(--forest);
+  line-height: 1.2;
+}
+
+.protocol-steps em {
+  grid-column: 2;
+  color: var(--muted);
+  font-style: normal;
+  line-height: 1.35;
+}
+
 .path-choice-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -1169,6 +1214,7 @@ textarea {
 
   .core-modules,
   .deepening-modules,
+  .protocol-steps,
   .path-choice-grid,
   .focus-work-grid {
     grid-template-columns: minmax(0, 1fr);

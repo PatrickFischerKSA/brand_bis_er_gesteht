@@ -1165,12 +1165,18 @@ function renderChoosePathPanel(lesson = currentLesson()) {
       <div class="panel-head">
         <div>
           <div class="eyebrow">${escapeHtml(pathGuide.title)}</div>
-          <h2>Welche Spur verfolgst du zuerst?</h2>
+          <h2>Einsatzauftrag wählen</h2>
         </div>
-        <span class="status-badge">${escapeHtml(selected?.title || "Spur wählen")}</span>
+        <span class="status-badge">${escapeHtml(selected?.title || "Auftrag wählen")}</span>
       </div>
       <p class="path-lead">${escapeHtml(lesson.pathBriefing || pathGuide.instruction)}</p>
       <p class="path-rule">${escapeHtml(pathGuide.warning)}</p>
+      <ol class="protocol-steps" aria-label="Bedienung des Ermittlungsprotokolls">
+        <li><span>1</span><strong>Auftrag wählen</strong><em>Eine der drei Karten anklicken.</em></li>
+        <li><span>2</span><strong>Fundstelle öffnen</strong><em>Die genannte PDF-Passage oder Ressource prüfen.</em></li>
+        <li><span>3</span><strong>Befund eintragen</strong><em>Nur Wortlaut, Quelle, Ort, Zeit und sichtbare Spur notieren.</em></li>
+        <li><span>4</span><strong>Massnahme setzen</strong><em>Offene Frage, Gegenprüfung oder nächsten Prüfauftrag festhalten.</em></li>
+      </ol>
 
       <div class="path-choice-grid">
         ${choices.map((choice) => `
@@ -1185,17 +1191,17 @@ function renderChoosePathPanel(lesson = currentLesson()) {
       ${selected ? `
         <article class="path-guidance-card">
           <div>
-            <div class="eyebrow">Aktuelle Spur</div>
+            <div class="eyebrow">Aktueller Auftrag</div>
             <h3>${escapeHtml(selected.title)}</h3>
             <p>${escapeHtml(selected.role)}</p>
           </div>
           <div class="path-guidance-grid">
             <div>
-              <strong>Puzzelschritte</strong>
+              <strong>Ermittlungsschritte</strong>
               <p>${escapeHtml(selected.method)}</p>
             </div>
             <div>
-              <strong>Jetzt sichern</strong>
+              <strong>Fundstelle</strong>
               <p>${escapeHtml(selected.nextStep)}</p>
               <p class="path-target-line">${escapeHtml([
                 targetEntry ? `Passage: ${targetEntry.passageLabel}` : "",
@@ -1204,7 +1210,7 @@ function renderChoosePathPanel(lesson = currentLesson()) {
               ].filter(Boolean).join(" · "))}</p>
             </div>
             <div>
-              <strong>Aktennotiz</strong>
+              <strong>Protokolleintrag</strong>
               <p>${escapeHtml(selected.writingMove)}</p>
             </div>
           </div>
@@ -1212,7 +1218,7 @@ function renderChoosePathPanel(lesson = currentLesson()) {
             ${(selected.hints || []).map((hint) => `<p>${escapeHtml(hint)}</p>`).join("")}
           </div>
           <div class="path-warning">
-            <strong>Achtung</strong>
+            <strong>Prüfanordnung</strong>
             <p>${escapeHtml(selected.warning)}</p>
           </div>
         </article>
@@ -2083,7 +2089,7 @@ function render() {
 
           ${currentPathChoice(lesson) ? `
             <div class="sidebar-task path-sidebar-task">
-              <strong>${escapeHtml("Aktuelle Spur")}</strong>
+              <strong>${escapeHtml("Aktueller Auftrag")}</strong>
               <p>${escapeHtml(currentPathChoice(lesson).title)}</p>
               <p>${escapeHtml(currentPathChoice(lesson).nextStep)}</p>
             </div>
