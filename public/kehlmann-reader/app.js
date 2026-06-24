@@ -1167,13 +1167,13 @@ function renderChoosePathPanel(lesson = currentLesson()) {
     <section class="panel choose-path-panel">
       <div class="protocol-header">
         <div>
-          <div class="protocol-agency">Zürcher Polizeien · Dokumentenablage</div>
+          <div class="protocol-agency">Aktenformular · Dokumentenablage</div>
           <h2>${escapeHtml(pathGuide.title)}</h2>
           <p>${escapeHtml(pathGuide.subtitle)}</p>
         </div>
         <div class="protocol-download-badge">
           <span>Dokumentstatus</span>
-          <strong>${escapeHtml(selected?.title || "Auftrag wählen")}</strong>
+          <strong>${escapeHtml(selected?.title || "Prüfauftrag wählen")}</strong>
         </div>
       </div>
 
@@ -1196,7 +1196,7 @@ function renderChoosePathPanel(lesson = currentLesson()) {
       </div>
 
       <ol class="protocol-steps" aria-label="Bedienung des Ermittlungsprotokolls">
-        <li><span>1</span><strong>Auftrag wählen</strong><em>Eine der drei Karten anklicken.</em></li>
+        <li><span>1</span><strong>Prüfauftrag wählen</strong><em>Eine der drei Optionen öffnen.</em></li>
         <li><span>2</span><strong>Fundstelle öffnen</strong><em>Die genannte PDF-Passage oder Ressource prüfen.</em></li>
         <li><span>3</span><strong>Befund eintragen</strong><em>Nur Wortlaut, Quelle, Ort, Zeit und sichtbare Spur notieren.</em></li>
         <li><span>4</span><strong>Massnahme setzen</strong><em>Offene Frage, Gegenprüfung oder nächsten Prüfauftrag festhalten.</em></li>
@@ -2042,12 +2042,12 @@ function renderAudiobookPanel() {
     <section class="panel audiobook-panel">
       <div class="panel-head">
         <div>
-          <div class="eyebrow">Hörspur</div>
+          <div class="eyebrow">Hörfassung</div>
           <h2>Bis er gesteht hören</h2>
         </div>
         <a class="button audiobook" href="${AUDIOBOOK_URL}" target="_blank" rel="noreferrer">Hörbuchordner öffnen</a>
       </div>
-      <p>Nutze das Hörbuch als Hörspur: Öffne den Dropbox-Ordner, stoppe an einer auffälligen Stelle und sichere danach Beobachtung, Textanker, Indizienwert und mögliche Gegenhypothese.</p>
+      <p>Nutze das Hörbuch als Vergleichsfassung: Öffne den Dropbox-Ordner, stoppe an einer auffälligen Stelle und sichere danach Beobachtung, Textanker, Indizienwert und mögliche Gegenhypothese.</p>
     </section>
   `;
 }
@@ -2073,15 +2073,15 @@ function render() {
       <section class="hero">
         <div>
           <div class="eyebrow">Christine Brand · Bis er gesteht · ${escapeHtml(modeLabel)}</div>
-          <h1>Literarische Spurensicherung</h1>
+          <h1>Bis er gesteht: Text- und Aktenarbeit</h1>
           <p>
             ${mode === "seb"
-              ? "Diese SEB-Fassung führt dich als Detektiv*in durch Fallakte, Tatort, Vernehmung, Prozessvorbereitung und Urteil."
-              : "Du arbeitest als Detektiv*in: Du sicherst Textspuren, rekonstruierst Tathergang und Motive, prüfst Akten und führst den Fall am Ende in den Gerichtssaal mit mehreren möglichen Urteilsvarianten."}
+              ? "Diese SEB-Fassung führt durch Fallakte, Tatortbefund, Vernehmung, Prozessvorbereitung und Urteil."
+              : "Die Arbeitsfassung verbindet Textbefund, Tathergang, Motive, Aktenprüfung und mehrere begründbare Urteilsvarianten."}
           </p>
         </div>
         <div class="hero-actions">
-          <a class="button audiobook" href="#hoerbuch">Hörspur starten</a>
+          <a class="button audiobook" href="#hoerbuch">Hörfassung öffnen</a>
           <span class="status-badge">${escapeHtml(modeLabel)}</span>
           <span class="status-badge">${lessonSets.length} Lektionen</span>
           <span class="status-badge">${escapeHtml(lesson.reviewFocus)}</span>

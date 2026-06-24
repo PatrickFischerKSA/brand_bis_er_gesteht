@@ -427,7 +427,7 @@ export const theoryResources = [
     embedUrl: "/reader/assets/brand-verteidigung-gutachten.html",
     summary: "Die Dissertation wird als Vertiefung zur Verteidigungsposition genutzt: Teilnahmerecht, EMRK, psychiatrische Exploration, Schuldfähigkeit und Massnahmenindikation.",
     keyIdeas: ["Verteidigung", "Exploration", "Schuldfähigkeit", "EMRK"],
-    questions: ["Welche Rolle spielen psychiatrische Gutachten für Schuldfähigkeit und Massnahmen?", "Warum ist das Teilnahmerecht der Verteidigung verfahrensrechtlich bedeutsam?"],
+    questions: ["Welche Bedeutung haben psychiatrische Gutachten für Schuldfähigkeit und Massnahmen?", "Warum ist das Teilnahmerecht der Verteidigung verfahrensrechtlich bedeutsam?"],
     transferPrompts: ["Verbinde die Massnahmenfrage im Urteil mit dem Recht auf Verteidigung.", "Prüfe, wie Gutachten zwischen Medizin, Recht und Prozessstrategie stehen."],
     writingFrame: "Mit Blick auf Verteidigung und Gutachten wird sichtbar, dass ...",
     externalLinks: [
@@ -471,7 +471,7 @@ const rawReaderModules = [
   {
     id: "modul-01",
     title: "Spurensicherung I: Der Notruf",
-    summary: "Die Detektiv*innen sichern den ersten Zugriff: Notruf, Zeitmarken, Raumdetails und sprachliche Auffälligkeiten.",
+    summary: "Der erste Zugriff sichert Notruf, Zeitmarken, Raumdetails und sprachliche Auffälligkeiten.",
     relatedTheoryIds: ["fall-rekonstruktion", "erzaehltechnik", "sprache-beweis", "indizienprozess"],
     entries: [
       {
@@ -526,7 +526,7 @@ const rawReaderModules = [
         title: "Die Einbruchserzählung",
         passageLabel: "Erste Version",
         pageNumber: 5,
-        context: "Die frühe Erklärung lautet: Einbruch, geraubtes Geld, aufgebrochenes Fenster. Die Detektiv*innen prüfen, ob daraus eine tragfähige Tatortversion wird.",
+        context: "Die frühe Erklärung lautet: Einbruch, geraubtes Geld, aufgebrochenes Fenster. Zu prüfen ist, ob daraus eine tragfähige Tatortversion wird.",
         signalWords: ["eingebrochen", "Geld", "geraubt", "Fenster"],
         relatedTheoryIds: ["fall-rekonstruktion", "sprache-beweis"],
         prompts: [
@@ -565,7 +565,7 @@ const rawReaderModules = [
   {
     id: "modul-03",
     title: "Ermittlungsakte: Tathergang und Hypothesen",
-    summary: "Die Teams ordnen Informationen, bauen eine Zeitleiste, prüfen Hypothesen und führen Zusatzmaterial als Aktenbeilage.",
+    summary: "Informationen werden geordnet, eine Zeitleiste wird angelegt, Hypothesen werden geprüft, Zusatzmaterial wird als Aktenbeilage geführt.",
     relatedTheoryIds: ["fall-rekonstruktion", "material-craft", "autorinnenkontext", "indizienprozess"],
     entries: [
       {
@@ -599,7 +599,7 @@ const rawReaderModules = [
   {
     id: "modul-04",
     title: "Vernehmung: Aussagen, Widersprüche, Motive",
-    summary: "Die Teams untersuchen Fragen, Ausweichen, Widersprüche und mögliche Motive als sprachliche Bewegung.",
+    summary: "Fragen, Ausweichen, Widersprüche und mögliche Motive werden als sprachliche Bewegung untersucht.",
     relatedTheoryIds: ["verhoer-gestaendnis", "sprache-beweis", "erzaehltechnik", "indizienprozess", "verteidigung-gutachten"],
     entries: [
       {
@@ -612,7 +612,7 @@ const rawReaderModules = [
         relatedTheoryIds: ["verhoer-gestaendnis", "verteidigung-gutachten"],
         prompts: [
           "Wie kann eine Frage Druck erzeugen, ohne offen aggressiv zu sein?",
-          "Welche Rolle spielen Wiederholung und Präzisierung für ein mögliches Geständnis?"
+          "Welche Funktion haben Wiederholung und Präzisierung für ein mögliches Geständnis?"
         ]
       },
       {
@@ -693,7 +693,7 @@ const rawReaderModules = [
   {
     id: "modul-06",
     title: "Gerichtssaal: Plädoyer, Urteil, Minderheitsvotum",
-    summary: "Die Schlusslektion führt in den Prozess: Die Teams formulieren Plädoyers und begründen unterschiedliche Urteilsvarianten auf derselben Aktenbasis.",
+    summary: "Die Schlusslektion führt in den Prozess: Plädoyers und unterschiedliche Urteilsvarianten werden auf derselben Aktenbasis begründet.",
     relatedTheoryIds: ["true-crime-ethik", "material-craft", "hoerbuch", "autorinnenkontext", "crime-podcast", "rechtsprechung", "gerichtsurteil", "verteidigung-gutachten", "urteilswerkstatt", "indizienprozess"],
     entries: [
       {
@@ -714,7 +714,7 @@ const rawReaderModules = [
         title: "Aktenprodukt",
         passageLabel: "Plädoyer und Urteil",
         pageNumber: 210,
-        context: "Die Teams erstellen aus Craft-Impuls, Hörstation, Podcast, Rechtsprechungsstation und Textanalyse ein eigenes Aktenprodukt.",
+        context: "Aus Craft-Impuls, Hörstation, Podcast, Rechtsprechungsstation und Textanalyse entsteht ein eigenes Aktenprodukt.",
         signalWords: ["Craft", "Hörbuch", "Podcast", "Textanalyse"],
         relatedTheoryIds: ["material-craft", "hoerbuch", "autorinnenkontext", "crime-podcast", "rechtsprechung", "urteilswerkstatt"],
         prompts: [
@@ -731,7 +731,7 @@ const rawReaderModules = [
         signalWords: ["Genre", "Grenze", "Erkenntnis", "Respekt"],
         relatedTheoryIds: ["true-crime-ethik", "crime-podcast", "rechtsprechung", "urteilswerkstatt"],
         prompts: [
-          "Was kann eine literarische Spurensicherung im Unterricht leisten, wenn sie sorgfältig arbeitet?",
+          "Was kann eine text- und aktenbasierte Fallarbeit leisten, wenn sie sorgfältig arbeitet?",
           "Welche Grenze würdest du für Urteil, Prozesssimulation und Darstellung realer Gewalt ziehen?"
         ]
       }
@@ -756,7 +756,7 @@ export const readerModules = rawReaderModules.map((module) => ({
 export const pathGuide = {
   title: "Ermittlungsprotokoll",
   subtitle: "Jeder Auftrag erzeugt einen Aktenvermerk: Fundstelle, gesicherter Befund, Aussage, offene Massnahme.",
-  instruction: "Wähle einen Einsatzauftrag. Öffne die angegebene PDF-Stelle. Trage nur ein, was im Text steht: Zeit, Ort, Person, Aussage, sichtbarer Befund, Widerspruch, offene Frage.",
+  instruction: "Wähle einen Prüfauftrag. Öffne die angegebene PDF-Stelle. Trage nur ein, was im Text steht: Zeit, Ort, Person, Aussage, sichtbarer Befund, Widerspruch, offene Frage.",
   warning: "Dienstregel: Keine Vermutung ohne Fundstelle. Jeder Eintrag unterscheidet Befund, Aussage, Schlussfolgerung und offene Massnahme."
 };
 
@@ -764,7 +764,7 @@ export const lessonSets = [
   {
     id: "lektion-01",
     title: "Fallakte öffnen: Der Notruf",
-    summary: "Die Detektiv*innen sichern die ersten Daten: 25. Dezember, 3:31 Uhr, Ahornweg 8, zwei tote Kinder, Einbruchsversion, Fenster, Geld, Körperhinweise.",
+    summary: "Die ersten Daten werden gesichert: 25. Dezember, 3:31 Uhr, Ahornweg 8, zwei tote Kinder, Einbruchsversion, Fenster, Geld, Körperhinweise.",
     moduleIds: ["modul-01"],
     entryIds: ["frage-01", "frage-02", "frage-03"],
     reviewFocus: "Textnah zwischen gesicherter Information, behaupteter Version, Indiz und sprachlicher Wirkung unterscheiden.",
@@ -1006,7 +1006,7 @@ export const lessonSets = [
   {
     id: "lektion-04",
     title: "Vernehmung: Aussagen, Druck, Widersprüche",
-    summary: "Die Teams zerlegen Aussagen in Frage, Antwort, Ausweichen, Korrektur, neues Detail und belastbare Gegenfrage.",
+    summary: "Aussagen werden in Frage, Antwort, Ausweichen, Korrektur, neues Detail und belastbare Gegenfrage zerlegt.",
     moduleIds: ["modul-04"],
     entryIds: ["frage-10", "frage-11", "frage-12"],
     reviewFocus: "Gesprächsbewegungen als Spur beschreiben: Frage, Ausweichen, Korrektur, Druck, Motiv.",
@@ -1204,7 +1204,7 @@ export const lessonSets = [
         title: "Reales Urteil: Anträge und Streitpunkt",
         summary: "Das Bezirksgerichtsurteil zeigt, dass Anklage und Verteidigung besonders über Qualifikation, Massnahme und Strafmass stritten.",
         task: "Arbeite aus den Seiten 5-6 und 38-54 die Streitlinien heraus: Was verlangten Staatsanwaltschaft, Privatklägerschaft und Verteidigung?",
-        questionTasks: ["Welche Schuldsprüche beantragte die Staatsanwaltschaft?", "Welche Qualifikation beantragte die Verteidigung?", "Welche Rolle spielen Art. 111 und Art. 112 StGB?", "Wo verändert das reale Urteil deine eigene Urteilsvariante?"],
+        questionTasks: ["Welche Schuldsprüche beantragte die Staatsanwaltschaft?", "Welche Qualifikation beantragte die Verteidigung?", "Welche Bedeutung haben Art. 111 und Art. 112 StGB?", "Wo verändert das reale Urteil deine eigene Urteilsvariante?"],
         taskGuide: "Eine gute Antwort benennt die Differenz zwischen mehrfacher Mordqualifikation und mehrfacher vorsätzlicher Tötung und zeigt, dass das Gericht diese Differenz begründen musste.",
         answerGuides: [
           "Die Staatsanwaltschaft beantragte Schuldsprüche wegen mehrfachen Mordes nach Art. 112 StGB sowie vorsätzlicher Tötung nach Art. 111 StGB und eine lebenslängliche Freiheitsstrafe.",
@@ -1300,7 +1300,7 @@ export const lessonSets = [
         resourceId: "true-crime-ethik",
         title: "Ethisches Prozessprotokoll",
         summary: "Die Einheit endet mit einem begründeten Urteil zu True Crime, Prozesssimulation und Verantwortung.",
-        task: "Beurteile, unter welchen Bedingungen eine literarische Spurensicherung im Unterricht sinnvoll ist.",
+        task: "Beurteile, unter welchen Bedingungen text- und aktenbasierte Fallarbeit sinnvoll ist.",
         questionTasks: ["Welcher Erkenntnisgewinn entsteht?", "Welche Risiken bleiben?", "Welche Regel würdest du für weitere Einheiten festhalten?"]
       },
       {
@@ -1327,7 +1327,7 @@ export const lessonSets = [
       {
         resourceId: "indizienprozess",
         title: "Indizienkette und Zweifel",
-        summary: "Die Teams bauen aus denselben Akten unterschiedliche Beweisbilder.",
+        summary: "Aus denselben Akten entstehen unterschiedliche Beweisbilder.",
         task: "Erstelle eine Indizienmatrix mit belastenden, entlastenden und mehrdeutigen Spuren.",
         questionTasks: ["Welche drei Indizien tragen deine Urteilsvariante?", "Welche Gegenhypothese ist am stärksten?", "Wo müsste ein Gericht Zweifel ausdrücklich würdigen?"]
       },
@@ -1350,7 +1350,7 @@ export const lessonSets = [
         title: "Buch, Hörbuch, Podcast: Medienvergleich",
         summary: "Zum Schluss werden Buch, Hörbuch und Podcast als unterschiedliche Formen der Fallvermittlung verglichen.",
         task: "Beurteile, welches Medium den Fall am verantwortungsvollsten vermittelt und begründe dein Urteil mit konkreten Beobachtungen.",
-        questionTasks: ["Was kann das Buch besser als der Podcast?", "Was kann der Podcast besser als der Buchtext?", "Welche Rolle spielen Stimme, Schnitt und Quellenhinweise?"]
+        questionTasks: ["Was kann das Buch besser als der Podcast?", "Was kann der Podcast besser als der Buchtext?", "Welche Funktion haben Stimme, Schnitt und Quellenhinweise?"]
       }
     ]
   }
@@ -1358,7 +1358,7 @@ export const lessonSets = [
 
 export const starterPrompt = {
   title: "Spurenakte",
-  text: "Wähle zuerst einen Einsatzauftrag. Lies dann die angegebene PDF-Stelle und antworte mit Fakt, Quelle, Befund, Lücke und nächster Massnahme.",
+  text: "Wähle zuerst einen Prüfauftrag. Lies dann die angegebene PDF-Stelle und antworte mit Fakt, Quelle, Befund, Lücke und nächster Massnahme.",
   items: [
     "Sichere zuerst Daten, Orte, Personen, Aussagen und sichtbare Befunde.",
     "Markiere jede Stelle als Fakt, Behauptung, Beobachtung, Motivhinweis oder Lücke.",
