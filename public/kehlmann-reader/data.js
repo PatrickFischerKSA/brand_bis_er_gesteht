@@ -132,7 +132,7 @@ function operatorProfile(prompt = "") {
   if (/^(wo|wodurch|woran|welche|welcher|welches|nenne|benenne)/.test(text)) {
     return { label: "Benennen", sentenceCount: "2-3", action: "Benenne zuerst das Textsignal und erkläre dann knapp seine Funktion" };
   }
-  return { label: "Ausarbeiten", sentenceCount: "3-4", action: "Arbeite die Frage in präzisen, textnahen Sätzen aus" };
+  return { label: "Vermerken", sentenceCount: "3-4", action: "Halte die Frage in präzisen, textnahen Sätzen fest" };
 }
 
 function focusTerms(prompt = "", context = "", extras = []) {
@@ -172,8 +172,8 @@ function modelAnswerForTask({ prompt, context, signalWords = [], keyIdeas = [], 
 function instructionForTask(prompt, { signalWords = [], relatedTheoryIds = [], kind = "question" } = {}) {
   const operator = operatorProfile(prompt);
   const evidencePart = signalWords.length
-    ? `Arbeite mit mindestens einem genauen Signalwort, zum Beispiel ${signalWords.slice(0, 2).map((word) => `"${word}"`).join(" oder ")}.`
-    : "Arbeite mit mindestens einem genauen Textdetail oder Wortlaut.";
+    ? `Mindestens ein genaues Signalwort sichern, zum Beispiel ${signalWords.slice(0, 2).map((word) => `"${word}"`).join(" oder ")}.`
+    : "Mindestens ein genaues Textdetail oder einen Wortlaut sichern.";
   const theoryPart = relatedTheoryIds.length
     ? `Verbinde deine Beobachtung am Schluss mit ${relatedTheoryIds.map((id) => theoryProfiles[id]?.label).filter(Boolean).slice(0, 2).join(" oder ")}.`
     : "Schliesse mit einer klaren Deutung oder Funktionsaussage.";
@@ -182,7 +182,7 @@ function instructionForTask(prompt, { signalWords = [], relatedTheoryIds = [], k
     : kind === "resource"
       ? "Nutze das Material als Leselinse und bleibe eng am Romanausschnitt"
       : operator.action;
-  return `Antworte in ${operator.sentenceCount} Sätzen. ${opening}. ${evidencePart} ${theoryPart}`;
+  return `Aktenvermerk in ${operator.sentenceCount} Sätzen. ${opening}. ${evidencePart} ${theoryPart}`;
 }
 
 function checklistForTask(prompt, { signalWords = [], relatedTheoryIds = [] } = {}) {
@@ -1203,7 +1203,7 @@ export const lessonSets = [
         resourceId: "gerichtsurteil",
         title: "Reales Urteil: Anträge und Streitpunkt",
         summary: "Das Bezirksgerichtsurteil zeigt, dass Anklage und Verteidigung besonders über Qualifikation, Massnahme und Strafmass stritten.",
-        task: "Arbeite aus den Seiten 5-6 und 38-54 die Streitlinien heraus: Was verlangten Staatsanwaltschaft, Privatklägerschaft und Verteidigung?",
+        task: "Streitlinien aus den Seiten 5-6 und 38-54 erfassen: Was verlangten Staatsanwaltschaft, Privatklägerschaft und Verteidigung?",
         questionTasks: ["Welche Schuldsprüche beantragte die Staatsanwaltschaft?", "Welche Qualifikation beantragte die Verteidigung?", "Welche Bedeutung haben Art. 111 und Art. 112 StGB?", "Wo verändert das reale Urteil deine eigene Urteilsvariante?"],
         taskGuide: "Eine gute Antwort benennt die Differenz zwischen mehrfacher Mordqualifikation und mehrfacher vorsätzlicher Tötung und zeigt, dass das Gericht diese Differenz begründen musste.",
         answerGuides: [

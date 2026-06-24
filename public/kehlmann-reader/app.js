@@ -118,7 +118,7 @@ function promptOperator(prompt = "") {
   if (/^(beschreibe|bestimme|wähle|waehle)/.test(text)) {
     return "Präzisieren";
   }
-  return "Ausarbeiten";
+  return "Vermerken";
 }
 
 function responseLabel(base, index, prompt) {
@@ -127,19 +127,18 @@ function responseLabel(base, index, prompt) {
 
 function responsePlaceholder(prompt = "") {
   const operator = promptOperator(prompt);
-  if (operator === "Benennen") {
-    return "Antworte knapp und präzise. Nenne die Beobachtung und sichere sie am Wortlaut.";
-  }
-  if (operator === "Erklären") {
-    return "Erkläre in 2-4 Sätzen: Beobachtung, Textsignal, Wirkung.";
-  }
-  if (operator === "Zeigen") {
-    return "Zeige die Aussage am Text: nenne ein Signal und leite daraus eine Deutung ab.";
-  }
-  if (operator === "Prüfen") {
-    return "Prüfe die Möglichkeit genau und entscheide dich begründet.";
-  }
-  return "Arbeite die Frage in 2-4 präzisen, textnahen Sätzen aus.";
+  const actionLine = operator === "Benennen"
+    ? "Befund:"
+    : operator === "Prüfen"
+      ? "Prüfung:"
+      : "Feststellung:";
+  return [
+    "Fundstelle:",
+    "Wortlaut / Detail:",
+    actionLine,
+    "Folgerung:",
+    "Offen / nächste Abklärung:"
+  ].join("\n");
 }
 
 function taskPrompt(task) {
@@ -169,8 +168,9 @@ function guidingTasksFor(theory = currentTheory()) {
 }
 
 function transferTasksFor(entry = currentEntry(), theory = currentTheory()) {
+  const lensLabel = String(theory.title || theory.shortTitle || "").replace(/^Dossier:\s*/i, "").trim() || theory.shortTitle;
   const prompts = [
-    `Beziehe "${entry.passageLabel}" gezielt auf ${theory.shortTitle.toLowerCase()} und sichere deine Aussage mit mindestens zwei Wörtern aus dem Text.`,
+    `Beziehe "${entry.passageLabel}" gezielt auf die Linse «${lensLabel}» und sichere deine Aussage mit mindestens zwei Wörtern aus dem Text.`,
     ...(theory.transferPrompts || []).slice(0, 2)
   ];
 
@@ -340,17 +340,11 @@ function responseMask(task) {
   ];
 }
 
-function renderTaskPreview(task, index, baseLabel = "Aufgabe") {
+function renderTaskPreview(task, index, baseLabel = "Frage") {
   return `
-    <article class="question-task-card">
-      <div class="section-head">
-        <strong>${escapeHtml(`${baseLabel} ${index + 1} · ${task.operatorLabel || promptOperator(taskPrompt(task))}`)}</strong>
-      </div>
-      <p class="field-prompt">${escapeHtml(taskPrompt(task))}</p>
-      <p class="task-instruction">${escapeHtml(task.instruction || responsePlaceholder(taskPrompt(task)))}</p>
-      <ul class="task-checklist">
-        ${(task.checklist || []).map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
-      </ul>
+    <article class="question-task-card compact-record">
+      <strong>${escapeHtml(`${baseLabel} ${index + 1}`)}</strong>
+      <p>${escapeHtml(taskPrompt(task))}</p>
     </article>
   `;
 }
@@ -371,6 +365,21 @@ function renderTaskFeedbackMarkup(task, feedback) {
   `;
 }
 
+function renderCaseNoteFeedback(feedback) {
+  const feedbackSummary = feedback.level === "empty"
+    ? "Noch kein Eintrag."
+    : feedback.level === "strong"
+      ? "Eintrag tragfähig."
+      : feedback.level === "partial"
+        ? "Eintrag noch nachschärfen."
+        : "Eintrag zu allgemein.";
+  const missing = feedback.missing.length ? `Noch prüfen: ${feedback.missing.join(", ")}.` : "Keine Pflichtstelle offen.";
+  return `
+    <span>${escapeHtml(feedbackSummary)}</span>
+    <span>${escapeHtml(missing)}</span>
+  `;
+}
+
 function renderTaskField({ task, value, dataset, label }) {
   const feedback = evaluateAnswer(value, task);
   const dataAttributes = Object.entries(dataset)
@@ -378,36 +387,21 @@ function renderTaskField({ task, value, dataset, label }) {
     .join(" ");
   const inputLabel = String(label || "");
   const prompt = taskPrompt(task);
-  const instruction = task.instruction || responsePlaceholder(prompt);
-  const maskLines = responseMask(task);
+  const instruction = responsePlaceholder(prompt);
 
   return `
-    <article class="question-answer-block">
-      <div class="section-head">
-        <strong class="question-answer-label">${escapeHtml(inputLabel)}</strong>
-        <span class="status-badge">${escapeHtml(task.operatorLabel || promptOperator(prompt))}</span>
+    <article class="case-note-field">
+      <div class="case-note-head">
+        <span>${escapeHtml(inputLabel)}</span>
+        <strong>${escapeHtml(prompt)}</strong>
       </div>
-      <p class="field-prompt">${escapeHtml(prompt)}</p>
-      <div class="answer-mask" aria-hidden="true">
-        <strong>Eingabemaske</strong>
-        <ol class="answer-mask-list">
-          ${maskLines.map((line) => `<li>${escapeHtml(line)}</li>`).join("")}
-        </ol>
+      <label class="case-note-body">
+        <span>Aktenvermerk</span>
+        <textarea ${dataAttributes} aria-label="${escapeHtml(inputLabel)}" placeholder="${escapeHtml(instruction)}">${escapeHtml(value || "")}</textarea>
+      </label>
+      <div class="case-note-foot task-feedback--${feedback.level}" data-task-feedback aria-live="polite">
+        ${renderCaseNoteFeedback(feedback)}
       </div>
-      <textarea ${dataAttributes} aria-label="${escapeHtml(inputLabel)}" placeholder="${escapeHtml(instruction)}">${escapeHtml(value || "")}</textarea>
-      <div class="task-feedback task-feedback--${feedback.level}" data-task-feedback aria-live="polite">
-        ${renderTaskFeedbackMarkup(task, feedback)}
-      </div>
-      <details class="task-guidance">
-        <summary>Hilfen aufklappen</summary>
-        <p class="task-instruction">${escapeHtml(instruction)}</p>
-        <ul class="task-checklist">
-          ${(task.checklist || []).map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
-        </ul>
-        <div class="model-answer">
-          <p><strong>Musterlösung:</strong> ${escapeHtml(task.modelAnswer || "")}</p>
-        </div>
-      </details>
     </article>
   `;
 }
@@ -997,7 +991,7 @@ function feedbackFor(note, module, entry) {
     positives.push("Du gehst teilweise schon an sprachliche oder erzählerische Präzision heran, statt nur allgemein zu urteilen.");
   } else {
     cautions.push("Die Deutung bleibt noch zu allgemein. Im Moment fehlen noch klar benannte Signale wie Wortwahl, Liste, Dialog, Perspektive, Kontrast oder Körperwahrnehmung.");
-    steps.push("Arbeite nicht nur mit Wertungen. Benenne genauer Wortwahl, Liste, Perspektive, Kontrast, Geruch, Temperatur oder Körperreaktion.");
+    steps.push("Nicht nur Wertungen aufnehmen: Wortwahl, Liste, Perspektive, Kontrast, Geruch, Temperatur oder Körperreaktion genauer benennen.");
   }
 
   if (entry.relatedTheoryIds?.includes("archiv-biografie")) {
@@ -1637,10 +1631,10 @@ function renderTheoryPanel(module, entry) {
         </div>
       </div>
 
-      <div class="theory-grid">
-        <div class="theory-card">
+      <div class="case-work-grid">
+        <section class="structured-section">
           <div class="section-head">
-            <strong>Verbindliche Leitfragen</strong>
+            <strong>Linsenblatt</strong>
             <span class="status-badge" data-doc-count="guiding">${escapeHtml(`${theoryResponses.guidingAnswers.filter((value) => trimmed(value)).length}/${guidingTasks.length}`)}</span>
           </div>
           <div class="question-task-list">
@@ -1651,10 +1645,10 @@ function renderTheoryPanel(module, entry) {
               label: responseLabel("Leitfrage", index, taskPrompt(task))
             })).join("")}
           </div>
-        </div>
-        <div class="theory-card">
+        </section>
+        <section class="structured-section">
           <div class="section-head">
-            <strong>Transfer zur Passage</strong>
+            <strong>Abgleich mit der Passage</strong>
             <span class="status-badge" data-doc-count="transfer">${escapeHtml(`${theoryResponses.transferAnswers.filter((value) => trimmed(value)).length}/${transferTasks.length}`)}</span>
           </div>
           <div class="question-task-list">
@@ -1665,11 +1659,11 @@ function renderTheoryPanel(module, entry) {
               label: responseLabel("Transfer", index, taskPrompt(task))
             })).join("")}
           </div>
-        </div>
+        </section>
       </div>
 
-      <div class="writing-frame-box">
-        <strong>Schreibhilfe</strong>
+      <div class="writing-frame-box case-note-rule">
+        <strong>Formulierung für den Aktenvermerk</strong>
         <p>${escapeHtml(theory.writingFrame)}</p>
       </div>
 
@@ -1717,7 +1711,16 @@ function renderResourceAssignmentsPanel() {
               </div>
             </div>
 
-            <p>${escapeHtml(summary)}</p>
+            <div class="resource-record-head">
+              <div>
+                <strong>Materialbezug</strong>
+                <p>${escapeHtml(summary)}</p>
+              </div>
+              <div>
+                <strong>Aktenwert</strong>
+                <p>${escapeHtml(resource.summary)}</p>
+              </div>
+            </div>
 
             <div class="documentation-status-box ${documentation.missing.length ? "is-warning" : "is-complete"}" data-doc-box="resource" data-resource-id="${resource.id}">
               <strong data-doc-summary="resource">${escapeHtml(`Dokumentationsstand: ${documentation.completed}/${documentation.total}`)}</strong>
@@ -1727,27 +1730,9 @@ function renderResourceAssignmentsPanel() {
               }</p>
             </div>
 
-            <div class="resource-task-box">
-              <strong>Eintrag ins Materialblatt</strong>
-              <p>${escapeHtml(task)}</p>
-            </div>
-
-            <div class="theory-grid">
-              <div class="theory-card">
-                <strong>Verbindliche Materialfragen</strong>
-                <div class="question-task-list">
-                  ${questionTasks.map((questionTask, index) => renderTaskPreview(questionTask, index, "Materialfrage")).join("")}
-                </div>
-              </div>
-              <div class="theory-card">
-                <strong>Warum dieses Material hier wichtig ist</strong>
-                <p>${escapeHtml(resource.summary)}</p>
-              </div>
-            </div>
-
             <section class="structured-section">
               <div class="section-head">
-                <strong>Materialvermerk schriftlich erfassen</strong>
+                <strong>Materialblatt</strong>
               </div>
               ${renderTaskField({
                 task: resourceMainTaskFor({ ...assignment, resource, title, summary, task }),
@@ -1759,7 +1744,7 @@ function renderResourceAssignmentsPanel() {
 
             <section class="structured-section">
               <div class="section-head">
-                <strong>Leitfragen schriftlich beantworten</strong>
+                <strong>Prüffragen im Materialblatt</strong>
                 <span class="status-badge" data-doc-count="resource-questions" data-resource-id="${resource.id}">${escapeHtml(`${response.questionAnswers.filter((value) => trimmed(value)).length}/${questionTasks.length}`)}</span>
               </div>
               ${questionTasks.map((questionTask, index) => renderTaskField({
@@ -2044,11 +2029,11 @@ function renderParcoursExportPanel() {
           <div class="eyebrow">Parcours-Export</div>
           <h2>${complete ? "Parcours abgeschlossen" : "Parcours dokumentieren"}</h2>
         </div>
-        <button class="button secondary" data-action="export-notes">${complete ? "Fragen und Antworten exportieren" : "Zwischenstand exportieren"}</button>
+        <button class="button secondary" data-action="export-notes">${complete ? "Parcoursakte exportieren" : "Zwischenstand exportieren"}</button>
       </div>
       <div class="notice-box">
         <strong>${complete ? "Alle Stationen sind bearbeitet." : "Export bereits jetzt möglich."}</strong>
-        <p>${escapeHtml(`Der Export enthält alle Lektionen, Fokusfragen und die dazu eingetragenen Antworten. Aktuell sind ${answered} von ${total} Passagen bearbeitet.`)}</p>
+        <p>${escapeHtml(`Der Export enthält alle Lektionen, Leitfragen und eingetragenen Aktenvermerke. Aktuell sind ${answered} von ${total} Passagen bearbeitet.`)}</p>
       </div>
     </section>
   `;
@@ -2389,7 +2374,7 @@ function taskForInputElement(element) {
 }
 
 function updateTaskFeedbackForElement(element) {
-  const wrapper = element.closest(".question-answer-block");
+  const wrapper = element.closest(".case-note-field");
   const feedbackBox = wrapper?.querySelector("[data-task-feedback]");
   const task = taskForInputElement(element);
   if (!wrapper || !feedbackBox || !task) {
@@ -2397,8 +2382,8 @@ function updateTaskFeedbackForElement(element) {
   }
 
   const feedback = evaluateAnswer(element.value, task);
-  feedbackBox.className = `task-feedback task-feedback--${feedback.level}`;
-  feedbackBox.innerHTML = renderTaskFeedbackMarkup(task, feedback);
+  feedbackBox.className = `case-note-foot task-feedback--${feedback.level}`;
+  feedbackBox.innerHTML = renderCaseNoteFeedback(feedback);
 }
 
 function updateReviewField(field, value) {
