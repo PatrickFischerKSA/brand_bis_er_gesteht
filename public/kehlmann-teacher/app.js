@@ -143,7 +143,7 @@ function renderStudentMaterialAnswers(material) {
         <div class="row">
           ${material.openUrl ? `<a class="button secondary" href="${escapeHtml(material.openUrl)}" target="_blank" rel="noreferrer">Material öffnen</a>` : ""}
         </div>
-        ${answerLine("Arbeitsauftrag", material.taskResponse)}
+        ${answerLine("Materialvermerk", material.taskResponse)}
         ${answeredQuestions.length ? `
           <h4>Materialfragen</h4>
           ${answeredQuestions.map((item) => `

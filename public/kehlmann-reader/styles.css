@@ -560,50 +560,53 @@ button {
   color: #000;
 }
 
-.path-guidance-grid {
+.protocol-entry-form {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.18);
+  background: #fff;
 }
 
-.path-guidance-grid > div,
-.path-warning,
-.path-hints p {
-  border: 0;
+.protocol-entry-form label {
+  display: grid;
+  grid-template-rows: auto minmax(150px, 1fr);
+  gap: 8px;
   border-right: 1px solid rgba(0, 0, 0, 0.18);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.18);
   border-radius: 0;
   padding: 14px;
   background: #fff;
 }
 
-.path-guidance-grid > div:last-child {
+.protocol-entry-form label:nth-child(3n) {
   border-right: 0;
 }
 
-.path-target-line {
-  color: #000 !important;
-  font-weight: 700;
+.protocol-entry-form span {
+  color: #000;
+  font-weight: 800;
 }
 
-.path-hints {
-  display: grid;
-  gap: 0;
+.protocol-entry-form textarea {
+  width: 100%;
+  min-height: 150px;
+  resize: vertical;
+  border: 1px solid rgba(0, 0, 0, 0.24);
+  border-radius: 0;
+  padding: 10px 12px;
+  background: #fff;
+  color: #111;
+  line-height: 1.5;
 }
 
-.path-hints p {
-  border-right: 0;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.18);
+.protocol-entry-form textarea::placeholder {
+  color: #777;
+  opacity: 1;
 }
 
-.path-warning {
-  border-right: 0;
-  background: #f7f7f7;
-}
-
-.path-warning {
-  border-color: rgba(55, 109, 115, 0.28);
-  background: rgba(55, 109, 115, 0.07);
+.protocol-entry-form textarea:focus {
+  outline: 3px solid rgba(0, 118, 189, 0.22);
+  border-color: #0076bd;
 }
 
 .path-sidebar-task {
@@ -1328,7 +1331,7 @@ textarea {
   .status-strip,
   .review-layout,
   .review-meta-grid,
-  .path-guidance-grid,
+  .protocol-entry-form,
   .seb-profile-grid,
   .seb-feedback-columns,
   .criteria-grid {
@@ -1361,12 +1364,14 @@ textarea {
 
   .protocol-header,
   .protocol-meta-grid,
-  .protocol-record-head {
+  .protocol-record-head,
+  .protocol-entry-form {
     grid-template-columns: minmax(0, 1fr);
   }
 
   .protocol-meta-grid > div,
-  .protocol-steps li {
+  .protocol-steps li,
+  .protocol-entry-form label {
     border-right: 0;
     border-bottom: 1px solid rgba(0, 0, 0, 0.18);
   }

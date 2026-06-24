@@ -87,15 +87,15 @@ export function buildParcoursMarkdown({
     }
 
     if (lesson.resources?.length) {
-      lines.push("### Materialaufträge");
+      lines.push("### Materialvermerke");
       lines.push("");
 
       for (const resource of lesson.resources) {
         lines.push(`#### ${resource.title}`);
         lines.push(`Material: ${resource.sourceTitle || "-"}`);
         lines.push(`Einordnung: ${resource.summary || "-"}`);
-        lines.push(`Arbeitsauftrag: ${resource.task || "-"}`);
-        lines.push(`Schriftliche Antwort: ${displayValue(resource.taskResponse)}`);
+        lines.push(`Leitfrage: ${resource.task || "-"}`);
+        lines.push(`Schriftlicher Vermerk: ${displayValue(resource.taskResponse)}`);
         lines.push("");
         pushQuestionBlock(lines, "Materialfragen und Antworten:", resource.questions || []);
         if (resource.documentation) {

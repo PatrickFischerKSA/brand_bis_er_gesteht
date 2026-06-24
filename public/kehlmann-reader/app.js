@@ -7,6 +7,7 @@ const config = window.KEHLMANN_READER_CONFIG || {};
 const app = document.body;
 const AUDIOBOOK_URL = "https://www.dropbox.com/scl/fo/467llo67rclpn002zrbpw/AAHU6ZP-t97_2N8GIRiz3xU?rlkey=lcw7jj6yctljum7g2bbodb6x0&st=o5up4o4p&dl=0";
 const PATH_SELECTION_NOTE_KEY = "__chooseYourPathSelections";
+const PROTOCOL_NOTE_PREFIX = "protocol-sheet::";
 
 const reviewLevels = [
   { value: "stark", label: "stark" },
@@ -756,6 +757,17 @@ function storePathSelection(lessonId, pathId) {
   state.saveStatus = "idle";
 }
 
+function protocolResponseKey(lessonId, pathId) {
+  return `${PROTOCOL_NOTE_PREFIX}${lessonId}::${pathId}`;
+}
+
+function protocolResponseFor(choice, lesson = currentLesson()) {
+  if (!choice) {
+    return {};
+  }
+  return state.notes[protocolResponseKey(lesson.id, choice.id)] || {};
+}
+
 function applyPathChoice(choice, lesson = currentLesson()) {
   if (!choice) {
     return;
@@ -862,7 +874,7 @@ function documentationStatusForAssignment(assignment, lesson = currentLesson()) 
   const response = resourceResponseForAssignment(assignment, lesson);
   const questionTasks = resourceQuestionTasksFor(assignment);
   const checks = [
-    { label: "Arbeitsauftrag schriftlich beantworten", complete: Boolean(trimmed(response.taskResponse)) },
+    { label: "Materialvermerk schriftlich erfassen", complete: Boolean(trimmed(response.taskResponse)) },
     ...questionTasks.map((task, index) => ({
       label: `Materialfrage ${index + 1}: ${taskPrompt(task)}`,
       complete: Boolean(trimmed(response.questionAnswers[index]))
@@ -1162,6 +1174,7 @@ function renderChoosePathPanel(lesson = currentLesson()) {
   const lessonIndex = lessonSets.findIndex((item) => item.id === lesson.id) + 1;
   const selectedIndex = Math.max(0, choices.findIndex((choice) => choice.id === selected?.id));
   const businessNumber = `BRAND-${String(Math.max(lessonIndex, 1)).padStart(2, "0")}-${String(selectedIndex + 1).padStart(2, "0")}`;
+  const protocol = protocolResponseFor(selected, lesson);
 
   return `
     <section class="panel choose-path-panel">
@@ -1171,10 +1184,10 @@ function renderChoosePathPanel(lesson = currentLesson()) {
           <h2>${escapeHtml(pathGuide.title)}</h2>
           <p>${escapeHtml(pathGuide.subtitle)}</p>
         </div>
-        <div class="protocol-download-badge">
-          <span>Dokumentstatus</span>
-          <strong>${escapeHtml(selected?.title || "Prüfauftrag wählen")}</strong>
-        </div>
+          <div class="protocol-download-badge">
+            <span>Dokumentstatus</span>
+          <strong>${escapeHtml(selected?.title || "Prüfung wählen")}</strong>
+          </div>
       </div>
 
       <div class="protocol-meta-grid">
@@ -1196,10 +1209,10 @@ function renderChoosePathPanel(lesson = currentLesson()) {
       </div>
 
       <ol class="protocol-steps" aria-label="Bedienung des Ermittlungsprotokolls">
-        <li><span>1</span><strong>Prüfauftrag wählen</strong><em>Eine der drei Optionen öffnen.</em></li>
+        <li><span>1</span><strong>Prüfung wählen</strong><em>Eine der drei Optionen öffnen.</em></li>
         <li><span>2</span><strong>Fundstelle öffnen</strong><em>Die genannte PDF-Passage oder Ressource prüfen.</em></li>
-        <li><span>3</span><strong>Befund eintragen</strong><em>Nur Wortlaut, Quelle, Ort, Zeit und sichtbare Spur notieren.</em></li>
-        <li><span>4</span><strong>Massnahme setzen</strong><em>Offene Frage, Gegenprüfung oder nächsten Prüfauftrag festhalten.</em></li>
+        <li><span>3</span><strong>Befund eintragen</strong><em>Direkt in die Felder schreiben.</em></li>
+        <li><span>4</span><strong>Massnahme setzen</strong><em>Offene Frage, Gegenprüfung oder nächste Abklärung festhalten.</em></li>
       </ol>
 
       <div class="path-choice-grid">
@@ -1216,7 +1229,7 @@ function renderChoosePathPanel(lesson = currentLesson()) {
         <article class="path-guidance-card">
           <div class="protocol-record-head">
             <div>
-              <div class="eyebrow">Aktueller Auftrag</div>
+              <div class="eyebrow">Aktuelle Prüfung</div>
               <h3>${escapeHtml(selected.title)}</h3>
               <p>${escapeHtml(selected.role)}</p>
             </div>
@@ -1225,32 +1238,36 @@ function renderChoosePathPanel(lesson = currentLesson()) {
               <strong>${escapeHtml(businessNumber)}</strong>
             </div>
           </div>
-          <div class="path-guidance-grid">
-            <div>
-              <strong>Ermittlungsschritte</strong>
-              <p>${escapeHtml(selected.method)}</p>
-            </div>
-            <div>
-              <strong>Fundstelle</strong>
-              <p>${escapeHtml(selected.nextStep)}</p>
-              <p class="path-target-line">${escapeHtml([
-                targetEntry ? `Passage: ${targetEntry.passageLabel}` : "",
+          <form class="protocol-entry-form" data-protocol-form data-lesson-id="${escapeHtml(lesson.id)}" data-path-id="${escapeHtml(selected.id)}">
+            <label>
+              <span>Fundstelle</span>
+              <textarea data-protocol-field="source" placeholder="${escapeHtml([
+                targetEntry ? `Passage: ${targetEntry.passageLabel}` : "PDF-Passage",
                 targetTheory ? `Werkzeug: ${targetTheory.shortTitle}` : "",
                 targetResource && targetResource.id !== targetTheory?.id ? `Material: ${targetResource.shortTitle}` : ""
-              ].filter(Boolean).join(" · "))}</p>
-            </div>
-            <div>
-              <strong>Protokolleintrag</strong>
-              <p>${escapeHtml(selected.writingMove)}</p>
-            </div>
-          </div>
-          <div class="path-hints">
-            ${(selected.hints || []).map((hint) => `<p>${escapeHtml(hint)}</p>`).join("")}
-          </div>
-          <div class="path-warning">
-            <strong>Prüfanordnung</strong>
-            <p>${escapeHtml(selected.warning)}</p>
-          </div>
+              ].filter(Boolean).join(" · "))}">${escapeHtml(protocol.source || "")}</textarea>
+            </label>
+            <label>
+              <span>Gesicherter Befund</span>
+              <textarea data-protocol-field="finding" placeholder="${escapeHtml(selected.role)}">${escapeHtml(protocol.finding || "")}</textarea>
+            </label>
+            <label>
+              <span>Aussage / Meldung</span>
+              <textarea data-protocol-field="statement" placeholder="${escapeHtml(selected.method)}">${escapeHtml(protocol.statement || "")}</textarea>
+            </label>
+            <label>
+              <span>Abgleich / Widerspruch</span>
+              <textarea data-protocol-field="comparison" placeholder="${escapeHtml((selected.hints || []).join(" "))}">${escapeHtml(protocol.comparison || "")}</textarea>
+            </label>
+            <label>
+              <span>Vermerk</span>
+              <textarea data-protocol-field="record" placeholder="${escapeHtml(selected.writingMove)}">${escapeHtml(protocol.record || "")}</textarea>
+            </label>
+            <label>
+              <span>Nächste Massnahme</span>
+              <textarea data-protocol-field="nextMeasure" placeholder="${escapeHtml(selected.warning)}">${escapeHtml(protocol.nextMeasure || "")}</textarea>
+            </label>
+          </form>
         </article>
       ` : ""}
     </section>
@@ -1303,7 +1320,7 @@ function renderFocusQuestions(entry) {
     task,
     value: focusAnswers[index],
     dataset: { "note-array": "focusAnswers", index },
-    label: responseLabel("Fokusauftrag", index, taskPrompt(task))
+    label: responseLabel("Leitfrage", index, taskPrompt(task))
   })).join("");
 }
 
@@ -1312,7 +1329,7 @@ function renderFocusPreview(entry) {
     <div class="question-task-list compact">
       ${focusTasksFor(entry).map((task, index) => `
         <article class="question-task-card compact">
-          <strong>${escapeHtml(`Fokusauftrag ${index + 1}`)}</strong>
+          <strong>${escapeHtml(`Leitfrage ${index + 1}`)}</strong>
           <p>${escapeHtml(taskPrompt(task))}</p>
         </article>
       `).join("")}
@@ -1325,12 +1342,12 @@ function renderFocusWorkPanel(entry) {
     <section class="panel focus-work-panel">
       <div class="panel-head">
         <div>
-          <div class="eyebrow">Arbeitsaufträge zur aktuellen Passage</div>
-          <h2>Fokusaufträge schriftlich bearbeiten</h2>
+          <div class="eyebrow">Schriftliche Bearbeitung zur aktuellen Passage</div>
+          <h2>Passage schriftlich bearbeiten</h2>
         </div>
         <span class="status-badge" data-doc-count="focus">${escapeHtml(`${focusAnswersFor(entry).filter((value) => trimmed(value)).length}/${focusTasksFor(entry).length}`)}</span>
       </div>
-      <p class="focus-work-intro">${escapeHtml(`Aktuelle Passage: ${entry.passageLabel}. Bearbeite diese Aufträge nicht nebenbei, sondern als eigenen Schritt vor Notizbuch, Materialarbeit und Überarbeitung.`)}</p>
+      <p class="focus-work-intro">${escapeHtml(`Aktuelle Passage: ${entry.passageLabel}. Trage Befund, Beleg und offene Stelle direkt in die Felder ein; erst danach folgen Notizbuch, Materialarbeit und Überarbeitung.`)}</p>
       <div class="focus-work-grid">
         ${renderFocusQuestions(entry)}
       </div>
@@ -1511,7 +1528,7 @@ function renderSebFeedbackPanel() {
 
       <div class="seb-feedback-columns">
         <article class="seb-feedback-card">
-          <h3>Konkrete Revisionsaufträge</h3>
+          <h3>Konkrete Revisionsschritte</h3>
           <ol class="question-list seb-feedback-steps">
             ${feedback.nextMoves.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}
           </ol>
@@ -1623,7 +1640,7 @@ function renderTheoryPanel(module, entry) {
       <div class="theory-grid">
         <div class="theory-card">
           <div class="section-head">
-            <strong>Verbindliche Leitaufträge</strong>
+            <strong>Verbindliche Leitfragen</strong>
             <span class="status-badge" data-doc-count="guiding">${escapeHtml(`${theoryResponses.guidingAnswers.filter((value) => trimmed(value)).length}/${guidingTasks.length}`)}</span>
           </div>
           <div class="question-task-list">
@@ -1631,7 +1648,7 @@ function renderTheoryPanel(module, entry) {
               task,
               value: theoryResponses.guidingAnswers[index],
               dataset: { "note-theory-section": "guidingAnswers", index },
-              label: responseLabel("Leitauftrag", index, taskPrompt(task))
+              label: responseLabel("Leitfrage", index, taskPrompt(task))
             })).join("")}
           </div>
         </div>
@@ -1645,7 +1662,7 @@ function renderTheoryPanel(module, entry) {
               task,
               value: theoryResponses.transferAnswers[index],
               dataset: { "note-theory-section": "transferAnswers", index },
-              label: responseLabel("Transferauftrag", index, taskPrompt(task))
+              label: responseLabel("Transfer", index, taskPrompt(task))
             })).join("")}
           </div>
         </div>
@@ -1673,7 +1690,7 @@ function renderResourceAssignmentsPanel() {
     <article class="panel resource-assignment-panel">
       <div class="panel-head">
         <div>
-          <div class="eyebrow">Materialaufträge</div>
+          <div class="eyebrow">Materialvermerke</div>
           <h2>Podcast, Dossiers, Sekundärtexte und Theorie als Arbeitsstationen</h2>
         </div>
       </div>
@@ -1706,12 +1723,12 @@ function renderResourceAssignmentsPanel() {
               <strong data-doc-summary="resource">${escapeHtml(`Dokumentationsstand: ${documentation.completed}/${documentation.total}`)}</strong>
               <p data-doc-missing="resource">${documentation.missing.length
                 ? escapeHtml(`Noch offen: ${documentation.missing.join(" · ")}`)
-                : "Der Materialauftrag ist vollständig schriftlich dokumentiert."
+                : "Der Materialvermerk ist vollständig schriftlich dokumentiert."
               }</p>
             </div>
 
             <div class="resource-task-box">
-              <strong>Konkreter Arbeitsauftrag</strong>
+              <strong>Eintrag ins Materialblatt</strong>
               <p>${escapeHtml(task)}</p>
             </div>
 
@@ -1730,7 +1747,7 @@ function renderResourceAssignmentsPanel() {
 
             <section class="structured-section">
               <div class="section-head">
-                <strong>Arbeitsauftrag schriftlich beantworten</strong>
+                <strong>Materialvermerk schriftlich erfassen</strong>
               </div>
               ${renderTaskField({
                 task: resourceMainTaskFor({ ...assignment, resource, title, summary, task }),
@@ -1841,7 +1858,7 @@ function renderPeerReviewPanel() {
             <h2>Derzeit keine Zuweisungen</h2>
           </div>
         </div>
-        <div class="empty-box">Sobald weitere Schüler*innen arbeiten oder Peer Review aktiviert ist, erscheinen hier deine Review-Aufträge.</div>
+        <div class="empty-box">Sobald weitere Schüler*innen arbeiten oder Peer Review aktiviert ist, erscheinen hier deine Review-Fälle.</div>
       </section>
     `;
   }
@@ -2119,7 +2136,7 @@ function render() {
 
           ${currentPathChoice(lesson) ? `
             <div class="sidebar-task path-sidebar-task">
-              <strong>${escapeHtml("Aktueller Auftrag")}</strong>
+              <strong>${escapeHtml("Aktuelle Prüfung")}</strong>
               <p>${escapeHtml(currentPathChoice(lesson).title)}</p>
               <p>${escapeHtml(currentPathChoice(lesson).nextStep)}</p>
             </div>
@@ -2157,13 +2174,6 @@ function render() {
               <h3>${escapeHtml(entry.passageLabel)}</h3>
               <p>${escapeHtml(entry.context)}</p>
               <div class="signal-grid">${renderSignalWords(entry)}</div>
-              <div class="prompt-box">
-                <div class="section-head">
-                  <strong>Fokus der Passage</strong>
-                  <span class="status-badge">${escapeHtml(`${focusTasksFor(entry).length} Aufträge`)}</span>
-                </div>
-                ${renderFocusPreview(entry)}
-              </div>
               <div class="writing-frame-box">
                 <strong>Satzstarter</strong>
                 <p>${escapeHtml(entry.writingFrame)}</p>
@@ -2247,6 +2257,15 @@ function updateResourceResponse(resourceId, field, index, value) {
   state.saveStatus = "idle";
 }
 
+function updateProtocolResponse(lessonId, pathId, field, value) {
+  const key = protocolResponseKey(lessonId, pathId);
+  state.notes[key] = {
+    ...(state.notes[key] || {}),
+    [field]: value
+  };
+  state.saveStatus = "idle";
+}
+
 function updateLiveDocumentation() {
   const entry = currentEntry();
   const theory = currentTheory();
@@ -2307,7 +2326,7 @@ function updateLiveDocumentation() {
     if (missing) {
       missing.textContent = documentation.missing.length
         ? `Noch offen: ${documentation.missing.join(" · ")}`
-        : "Der Materialauftrag ist vollständig schriftlich dokumentiert.";
+        : "Der Materialvermerk ist vollständig schriftlich dokumentiert.";
     }
 
     if (box) {
@@ -2627,6 +2646,15 @@ document.addEventListener("click", (event) => {
 });
 
 document.addEventListener("input", (event) => {
+  if (event.target.dataset.protocolField) {
+    const form = event.target.closest("[data-protocol-form]");
+    if (form) {
+      updateProtocolResponse(form.dataset.lessonId, form.dataset.pathId, event.target.dataset.protocolField, event.target.value);
+      queueSave();
+      return;
+    }
+  }
+
   if (event.target.dataset.noteArray) {
     updateNoteArrayField(event.target.dataset.noteArray, Number(event.target.dataset.index || 0), event.target.value);
     updateTaskFeedbackForElement(event.target);

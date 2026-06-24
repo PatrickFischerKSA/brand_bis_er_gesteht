@@ -293,7 +293,7 @@ export const theoryResources = [
     mediaType: "html",
     openUrl: "/reader/assets/brand-craft-material.html",
     embedUrl: "/reader/assets/brand-craft-material.html",
-    summary: "Die Craft-Ressourcen werden als Materialpool genutzt: Recherchehinweise, Kontext, Beobachtungsaufträge und mögliche Vergleichsimpulse werden in prüfbare Leseaufgaben übersetzt.",
+    summary: "Die Craft-Ressourcen werden als Materialpool genutzt: Recherchehinweise, Kontext, Beobachtungshinweise und mögliche Vergleichsimpulse werden in prüfbare Leseaufgaben übersetzt.",
     keyIdeas: ["Materialpool", "Kontext", "Recherche", "Vergleich"],
     questions: ["Welche Ressource schärft eine konkrete Textbeobachtung?", "Wo muss Kontextwissen vorsichtig bleiben?"],
     transferPrompts: ["Wähle einen Craft-Impuls und formuliere daraus eine textnahe These.", "Trenne Zusatzwissen, Vermutung und belegte Textbeobachtung."],
@@ -755,8 +755,8 @@ export const readerModules = rawReaderModules.map((module) => ({
 
 export const pathGuide = {
   title: "Ermittlungsprotokoll",
-  subtitle: "Jeder Auftrag erzeugt einen Aktenvermerk: Fundstelle, gesicherter Befund, Aussage, offene Massnahme.",
-  instruction: "Wähle einen Prüfauftrag. Öffne die angegebene PDF-Stelle. Trage nur ein, was im Text steht: Zeit, Ort, Person, Aussage, sichtbarer Befund, Widerspruch, offene Frage.",
+  subtitle: "Jedes Blatt erzeugt einen Aktenvermerk: Fundstelle, gesicherter Befund, Aussage, offene Massnahme.",
+  instruction: "Prüfblatt wählen, PDF-Stelle öffnen, direkt ins Blatt eintragen. Nur aufnehmen, was im Text steht: Zeit, Ort, Person, Aussage, sichtbarer Befund, Widerspruch, offene Frage.",
   warning: "Dienstregel: Keine Vermutung ohne Fundstelle. Jeder Eintrag unterscheidet Befund, Aussage, Schlussfolgerung und offene Massnahme."
 };
 
@@ -769,13 +769,13 @@ export const lessonSets = [
     entryIds: ["frage-01", "frage-02", "frage-03"],
     reviewFocus: "Textnah zwischen gesicherter Information, behaupteter Version, Indiz und sprachlicher Wirkung unterscheiden.",
     sebPrompt: "Sichere den Notruf präzise: Wer ruft an, was wird behauptet, was ist beobachtet, welche Tatzeit fehlt?",
-    pathBriefing: "Lage 01: Notruf vom 25. Dezember, 3:31 Uhr. Anrufer: Bernhard Scherrer. Ort: Ahornweg 8. Gemeldet werden zwei tote Kinder, Einbruch, Fenster, Geld. Auftrag: Einen ersten Protokollvermerk anlegen, ohne die Meldung bereits als Tatsache zu behandeln.",
+    pathBriefing: "Lage 01: Notruf vom 25. Dezember, 3:31 Uhr. Anrufer: Bernhard Scherrer. Ort: Ahornweg 8. Gemeldet werden zwei tote Kinder, Einbruch, Fenster, Geld. Ziel: Einen ersten Protokollvermerk anlegen, ohne die Meldung bereits als Tatsache zu behandeln.",
     pathChoices: [
       {
         id: "notruf-protokoll",
-        title: "Auftrag A: Notruf 03:31 erfassen",
+        title: "Blatt A: Notruf 03:31 erfassen",
         role: "Protokollblatt 01. Zu erfassen: Datum, Uhrzeit des Anrufs, Anrufer, Adresse, Wortlaut der Meldung, fehlende Tatzeit.",
-        chooseIf: "Wähle diesen Auftrag, wenn zuerst ein sauberes Erstprotokoll entstehen soll.",
+        chooseIf: "Öffne dieses Blatt, wenn zuerst ein sauberes Erstprotokoll entstehen soll.",
         method: "1. PDF-Passage «Der Notruf» öffnen. 2. Vier Rubriken anlegen: gesichert / gemeldet / ungeprüft / fehlt. 3. 25. Dezember, 3:31 Uhr, Bernhard Scherrer, Ahornweg 8, Einbruch, Geld, Todeszustand einzeln eintragen. 4. Nicht ergänzen, was der Text nicht nennt.",
         nextStep: "Fundstelle: «Der Notruf». Arbeitsmittel: Fallrekonstruktion.",
         entryId: "frage-01",
@@ -790,9 +790,9 @@ export const lessonSets = [
       },
       {
         id: "notruf-sprache",
-        title: "Auftrag B: Körperbefunde trennen",
+        title: "Blatt B: Körperbefunde trennen",
         role: "Protokollblatt 02. Zu erfassen: «kalt», «blau», Blut aus Sophies Mund, späterer Sichtbefund des Polizisten.",
-        chooseIf: "Wähle diesen Auftrag, wenn Todeszeit und Reihenfolge nur über konkrete Befunde geprüft werden sollen.",
+        chooseIf: "Öffne dieses Blatt, wenn Todeszeit und Reihenfolge nur über konkrete Befunde geprüft werden sollen.",
         method: "1. Körperangaben aus dem Notruf notieren. 2. Daneben die spätere Polizeibeobachtung auf Seite 5-7 eintragen. 3. Jede Angabe einer Quelle zuordnen: Vater / Polizei / Sanität. 4. In einer letzten Zeile festhalten, was daraus noch nicht geschlossen werden darf.",
         nextStep: "Fundstelle: «Wiederholung und Schock», danach Seiten 5-7 im PDF.",
         entryId: "frage-02",
@@ -807,9 +807,9 @@ export const lessonSets = [
       },
       {
         id: "notruf-tatortspur",
-        title: "Auftrag C: Einbruchsmeldung aufnehmen",
+        title: "Blatt C: Einbruchsmeldung aufnehmen",
         role: "Protokollblatt 03. Zu erfassen: Fenster, Geld, Rollladen, Haustür, Treppenhaus, Position von Vera.",
-        chooseIf: "Wähle diesen Auftrag, wenn die Einbruchsversion für die spätere Tatortprüfung vorbereitet werden soll.",
+        chooseIf: "Öffne dieses Blatt, wenn die Einbruchsversion für die spätere Tatortprüfung vorbereitet werden soll.",
         method: "1. Jedes genannte Tatortdetail einzeln erfassen. 2. Neben jedes Detail schreiben: Wer nennt es? Ist es Meldung oder Sichtbefund? 3. Späteren Prüfbedarf notieren: Fensterrahmen, Einstiegshöhe, Wiese, Rollladen, Geld.",
         nextStep: "Fundstelle: «Haus, Fenster, Treppenhaus». Arbeitsmittel: Fallrekonstruktion.",
         entryId: "frage-03",
@@ -819,7 +819,7 @@ export const lessonSets = [
           "Prüfvermerk 2: Rollladen oben widerspricht der Angabe, alle Rollläden seien unten gewesen.",
           "Prüfvermerk 3: «Dummerweise schon angefasst» ist als mögliche Spurenveränderung aufzunehmen."
         ],
-        warning: "Keine Einstufung als Einbruch oder Inszenierung. Zuerst Prüfauftrag für jedes Detail festhalten.",
+        warning: "Keine Einstufung als Einbruch oder Inszenierung. Zuerst Prüfpunkt für jedes Detail festhalten.",
         writingMove: "Protokollsatz: «Gemeldet wird ..., geprüft werden muss ..., auffällig ist ...»."
       }
     ],
@@ -828,7 +828,7 @@ export const lessonSets = [
       {
         resourceId: "fall-rekonstruktion",
         title: "Mikro-Timeline des Notrufs",
-        summary: "Die Aufgabe trennt Uhrzeiten, behauptete Abläufe und Lücken.",
+        summary: "Die Station trennt Uhrzeiten, behauptete Abläufe und Lücken.",
         task: "Erstelle eine Mikro-Timeline des Einstiegs und markiere mindestens zwei Unsicherheiten.",
         questionTasks: ["Welche Zeitangaben sind ausdrücklich genannt?", "Welche Abläufe werden nur behauptet?", "Welche Lücke erzeugt die stärkste Spannung?"],
         taskGuide: "Eine starke Antwort trennt die Uhrzeit des Notrufs, die Schlafenszeit, den behaupteten Einbruch und die ungesicherte Tatzeit.",
@@ -844,13 +844,13 @@ export const lessonSets = [
     entryIds: ["frage-04", "frage-05", "frage-06"],
     reviewFocus: "Spur, Behauptung, Indizienwert und ethische Lesedistanz sauber trennen.",
     sebPrompt: "Prüfe die Tatortversion am Text und reflektiere die Darstellungsgrenzen.",
-    pathBriefing: "Lage 02: Erste Tatortprüfung. Gemeldet war ein Einbruch. Vor Ort stehen dagegen Fenster ohne Beschädigung, rund vier Meter Höhe, Tauwiese ohne sichtbare Spuren, berührter Rollladen und eine zu sichernde Wohnung. Auftrag: Meldung und Befund streng getrennt protokollieren.",
+    pathBriefing: "Lage 02: Erste Tatortprüfung. Gemeldet war ein Einbruch. Vor Ort stehen dagegen Fenster ohne Beschädigung, rund vier Meter Höhe, Tauwiese ohne sichtbare Spuren, berührter Rollladen und eine zu sichernde Wohnung. Ziel: Meldung und Befund streng getrennt protokollieren.",
     pathChoices: [
       {
         id: "tatort-version",
-        title: "Auftrag A: Fensterbefund prüfen",
+        title: "Blatt A: Fensterbefund prüfen",
         role: "Tatortblatt 01. Gegenüberzustellen sind Meldung «aufgebrochen» und Polizeibefund «keine Beschädigung».",
-        chooseIf: "Wähle diesen Auftrag, wenn der erste materielle Widerspruch aktenfest werden soll.",
+        chooseIf: "Öffne dieses Blatt, wenn der erste materielle Widerspruch aktenfest werden soll.",
         method: "1. Spalte «Meldung» anlegen: Einbruch, Fenster, Geld. 2. Spalte «Befund» anlegen: Rahmen, Öffnungszustand, Höhe, Wiese/Tau, sichtbare Spuren. 3. Am Schluss einen Prüfbedarf formulieren: Was muss die Spurensicherung bestätigen oder ausschliessen?",
         nextStep: "Fundstelle: «Erste Version», danach Fensterbefund auf Seite 8.",
         entryId: "frage-04",
@@ -865,9 +865,9 @@ export const lessonSets = [
       },
       {
         id: "tatort-erzaehlspur",
-        title: "Auftrag B: Erstbeobachtung Personen",
+        title: "Blatt B: Erstbeobachtung Personen",
         role: "Personenblatt 01. Zu erfassen sind Standort, sichtbares Verhalten und wörtliche Äusserungen von Vera und Bernhard.",
-        chooseIf: "Wähle diesen Auftrag, wenn Reaktionen protokolliert werden sollen, ohne daraus schon Schuld oder Motiv abzuleiten.",
+        chooseIf: "Öffne dieses Blatt, wenn Reaktionen protokolliert werden sollen, ohne daraus schon Schuld oder Motiv abzuleiten.",
         method: "1. Für jede Person eine Zeile anlegen. 2. Eintragen: Ort, Körperhaltung, Handlung, Wortlaut, beobachtende Instanz. 3. Keine Diagnose, keine Charakterisierung. 4. Eine neutrale Gegenmöglichkeit notieren.",
         nextStep: "Fundstelle: «Tatortdetails» und Polizeiperspektive auf Seite 6-7.",
         entryId: "frage-05",
@@ -882,9 +882,9 @@ export const lessonSets = [
       },
       {
         id: "tatort-ethik",
-        title: "Auftrag C: Tatortschutz dokumentieren",
+        title: "Blatt C: Tatortschutz dokumentieren",
         role: "Sicherungsblatt 01. Zu erfassen sind Zutritte, Berührungen, Absperrung, Spurenschutz und mögliche Kontamination.",
-        chooseIf: "Wähle diesen Auftrag, wenn geklärt werden soll, welche Spuren verwertbar bleiben.",
+        chooseIf: "Öffne dieses Blatt, wenn geklärt werden soll, welche Spuren verwertbar bleiben.",
         method: "1. Liste der Personen am Tatort erstellen: Eltern, Polizei, Sanität, Nachbarin, Spurensicherung. 2. Jede Berührung oder Veränderung eintragen. 3. Absperrmassnahmen notieren. 4. Unsichere Spuren markieren.",
         nextStep: "Fundstelle: «Opfer, Eltern, Einsatzkräfte» und Spurensicherung auf Seite 8.",
         entryId: "frage-06",
@@ -903,7 +903,7 @@ export const lessonSets = [
       {
         resourceId: "true-crime-ethik",
         title: "Sorgfältig lesen",
-        summary: "Die Aufgabe entwickelt Regeln für respektvolle Analyse realer Gewalt.",
+        summary: "Die Station entwickelt Regeln für respektvolle Analyse realer Gewalt.",
         task: "Formuliere drei Regeln, wie ihr die Tatortpassagen analytisch und respektvoll bearbeitet.",
         questionTasks: ["Was soll analysiert werden?", "Was soll nicht ausgeschmückt werden?", "Wie bleibt die Opferperspektive sichtbar?"]
       },
@@ -924,13 +924,13 @@ export const lessonSets = [
     entryIds: ["frage-07", "frage-08"],
     reviewFocus: "Zusatzmaterial soll eine Spur schärfen, nicht die Textbeobachtung ersetzen.",
     sebPrompt: "Nutze Materialpool und Autorinnenkontext nur dort, wo sie eine konkrete Textspur, Motivfrage oder Gegenhypothese schärfen.",
-    pathBriefing: "Lage 03: Aktenabgleich. Vorliegen: Bettzeit ca. 22:45, Notruf 3:31, Polizeieintreffen 3:47, Befragung 5:30, Weihnachtsgeschenke, früherer Kindstod, Geldmeldung, Fensterbefund. Auftrag: Zeit, Motivhinweise und Indizien getrennt abgleichen.",
+    pathBriefing: "Lage 03: Aktenabgleich. Vorliegen: Bettzeit ca. 22:45, Notruf 3:31, Polizeieintreffen 3:47, Befragung 5:30, Weihnachtsgeschenke, früherer Kindstod, Geldmeldung, Fensterbefund. Ziel: Zeit, Motivhinweise und Indizien getrennt abgleichen.",
     pathChoices: [
       {
         id: "ermittlung-timeline",
-        title: "Auftrag A: Zeitkette anlegen",
+        title: "Blatt A: Zeitkette anlegen",
         role: "Chronologieblatt 01. Zu prüfen sind ca. 22:45, 3:31, 3:47 und 5:30.",
-        chooseIf: "Wähle diesen Auftrag, wenn zuerst die zeitlichen Lücken aktenfest werden sollen.",
+        chooseIf: "Öffne dieses Blatt, wenn zuerst die zeitlichen Lücken aktenfest werden sollen.",
         method: "1. Uhrzeit eintragen. 2. Quelle daneben setzen. 3. Festhalten, was zu diesem Zeitpunkt gesichert ist. 4. Zwischenräume markieren: 22:45-3:31, 3:31-3:47, 3:47-5:30.",
         nextStep: "Fundstelle: «Chronologie». Arbeitsmittel: Fallrekonstruktion.",
         entryId: "frage-07",
@@ -945,9 +945,9 @@ export const lessonSets = [
       },
       {
         id: "ermittlung-kontextfrage",
-        title: "Auftrag B: Motivhinweise registrieren",
+        title: "Blatt B: Motivhinweise registrieren",
         role: "Motivblatt 01. Zu erfassen sind Geld, Weihnachtsstress, früherer Kindstod, Familie, Kontrollverlust und Selbstdarstellung als mögliche Hinweise.",
-        chooseIf: "Wähle diesen Auftrag, wenn Motiv nicht behauptet, sondern aus einzelnen Fundstellen geprüft werden soll.",
+        chooseIf: "Öffne dieses Blatt, wenn Motiv nicht behauptet, sondern aus einzelnen Fundstellen geprüft werden soll.",
         method: "1. Fundstelle notieren. 2. Hinweis benennen. 3. Mögliche Bedeutung knapp formulieren. 4. Gegenmöglichkeit und fehlenden Beleg eintragen.",
         nextStep: "Sichere «Craft-Material» und verbinde es mit einer konkreten Textstelle.",
         entryId: "frage-08",
@@ -963,9 +963,9 @@ export const lessonSets = [
       },
       {
         id: "ermittlung-indizienhypothese",
-        title: "Auftrag C: Indizienblatt eröffnen",
+        title: "Blatt C: Indizienblatt eröffnen",
         role: "Indizienblatt 01. Belastende, entlastende und mehrdeutige Spuren werden getrennt eingetragen.",
-        chooseIf: "Wähle diesen Auftrag, wenn mehrere Aktenstücke zusammengeführt werden sollen.",
+        chooseIf: "Öffne dieses Blatt, wenn mehrere Aktenstücke zusammengeführt werden sollen.",
         method: "1. Drei Spalten anlegen: belastend / entlastend / mehrdeutig. 2. Fenster, Geld, Körperzustand, Verhalten, Zeitlücke, Spurenschutz eintragen. 3. Zu jedem Eintrag eine Gegenfrage notieren.",
         nextStep: "Sichere «Chronologie» und öffne danach das Werkzeug Indizienprozess.",
         entryId: "frage-07",
@@ -984,7 +984,7 @@ export const lessonSets = [
       {
         resourceId: "material-craft",
         title: "Aus Material wird Frage",
-        summary: "Die Craft-Sammlung wird in konkrete Leseaufträge übersetzt.",
+        summary: "Die Craft-Sammlung wird in konkrete Lesevermerke übersetzt.",
         task: "Wähle einen Craft-Impuls und mache daraus eine Leitfrage mit Textbezug.",
         questionTasks: ["Welcher Impuls ist ergiebig?", "Welche Textstelle passt dazu?", "Welche Vermutung bleibt offen?"]
       },
@@ -1011,13 +1011,13 @@ export const lessonSets = [
     entryIds: ["frage-10", "frage-11", "frage-12"],
     reviewFocus: "Gesprächsbewegungen als Spur beschreiben: Frage, Ausweichen, Korrektur, Druck, Motiv.",
     sebPrompt: "Sichere Vernehmungsschritte mit Frage, Antwort, neuer Information, Widerspruch und offener Gegenfrage.",
-    pathBriefing: "Lage 04: Vernehmungsauswertung. Vorliegen: Fragen, Antworten, Ausweichbewegungen, Korrekturen, neue Details. Auftrag: Aussagebewegungen protokollieren, Widersprüche nur mit zwei Fundstellen erfassen.",
+    pathBriefing: "Lage 04: Vernehmungsauswertung. Vorliegen: Fragen, Antworten, Ausweichbewegungen, Korrekturen, neue Details. Ziel: Aussagebewegungen protokollieren, Widersprüche nur mit zwei Fundstellen erfassen.",
     pathChoices: [
       {
         id: "vernehmung-fragen",
-        title: "Auftrag A: Vernehmungsprotokoll führen",
+        title: "Blatt A: Vernehmungsprotokoll führen",
         role: "Vernehmungsblatt 01. Zu erfassen sind Frage, Antwort, Ausweichen, Nachfrage und neu auftauchende Einzelheit.",
-        chooseIf: "Wähle diesen Auftrag, wenn sichtbar werden soll, an welcher Stelle eine Aussage kippt.",
+        chooseIf: "Öffne dieses Blatt, wenn sichtbar werden soll, an welcher Stelle eine Aussage kippt.",
         method: "1. Frage wörtlich oder sinngenau erfassen. 2. Antwort daneben setzen. 3. Neu auftauchendes Detail markieren. 4. Anschlussfrage notieren, die sich daraus ergibt.",
         nextStep: "Fundstelle: «Verhörlogik». Arbeitsmittel: Verhör und Geständnis.",
         entryId: "frage-10",
@@ -1033,9 +1033,9 @@ export const lessonSets = [
       },
       {
         id: "vernehmung-version",
-        title: "Auftrag B: Widerspruchsblatt anlegen",
+        title: "Blatt B: Widerspruchsblatt anlegen",
         role: "Versionenblatt 01. Erfasst werden Korrekturen, Abschwächungen, Nebendetails und belegte Abweichungen.",
-        chooseIf: "Wähle diesen Auftrag, wenn ein Widerspruch erst nachgewiesen und nicht bloss behauptet werden soll.",
+        chooseIf: "Öffne dieses Blatt, wenn ein Widerspruch erst nachgewiesen und nicht bloss behauptet werden soll.",
         method: "1. Aussage 1 mit Fundstelle notieren. 2. Aussage 2 mit Fundstelle daruntersetzen. 3. Gleichbleibendes, Geändertes und Neues getrennt markieren. 4. Indizienwert kurz einstufen.",
         nextStep: "Fundstelle: «Aussage und Korrektur». Arbeitsmittel: Sprache und Beweis.",
         entryId: "frage-11",
@@ -1050,9 +1050,9 @@ export const lessonSets = [
       },
       {
         id: "vernehmung-hoeren",
-        title: "Auftrag C: Hörvermerk erstellen",
+        title: "Blatt C: Hörvermerk erstellen",
         role: "Hörblatt 01. Zu erfassen sind Zeitmarke, Textstelle, Pause, Tempo, Betonung und Wirkung auf die Aussage.",
-        chooseIf: "Wähle diesen Auftrag, wenn die Hörfassung als Zusatzvermerk zur Aussage geprüft werden soll.",
+        chooseIf: "Öffne dieses Blatt, wenn die Hörfassung als Zusatzvermerk zur Aussage geprüft werden soll.",
         method: "1. Maximal eine Minute hören. 2. Zeitmarke eintragen. 3. Passenden Satz im Text daneben setzen. 4. Nur hörbare Signale notieren: Pause, Tempo, Betonung, Lautstärke.",
         nextStep: "Fundstelle: «Hörstation». Material: Hörbuchordner.",
         entryId: "frage-12",
@@ -1100,13 +1100,13 @@ export const lessonSets = [
     entryIds: ["frage-13", "frage-14", "frage-15"],
     reviewFocus: "Titel, Spannung, Aussage, Indizien und rechtliche Würdigung differenziert zusammendenken.",
     sebPrompt: "Erkläre den Geständnismoment und seine Grenzen als Wahrheits- und Prozessereignis.",
-    pathBriefing: "Lage 05: Prozessvorbereitung. Zu gewichten sind Geständnis, frühere Widersprüche, Motivhinweise, Indizienabgleich, Rechtsfrage und Folgen für Angehörige. Auftrag: Beweiswert und offene Punkte getrennt festhalten.",
+    pathBriefing: "Lage 05: Prozessvorbereitung. Zu gewichten sind Geständnis, frühere Widersprüche, Motivhinweise, Indizienabgleich, Rechtsfrage und Folgen für Angehörige. Ziel: Beweiswert und offene Punkte getrennt festhalten.",
     pathChoices: [
       {
         id: "prozess-kipppunkt",
-        title: "Auftrag A: Geständnisweg rekonstruieren",
+        title: "Blatt A: Geständnisweg rekonstruieren",
         role: "Geständnisblatt 01. Erfasst werden Vorzeichen: frühere Widersprüche, Druckfragen, Korrekturen und der Kipppunkt der Version.",
-        chooseIf: "Wähle diesen Auftrag, wenn die Entstehung des Geständnisses aus der Akte rekonstruiert werden soll.",
+        chooseIf: "Öffne dieses Blatt, wenn die Entstehung des Geständnisses aus der Akte rekonstruiert werden soll.",
         method: "1. Zwei frühere Aktenstücke nennen. 2. Druckmoment oder Nachfrage festhalten. 3. Veränderte Aussage eintragen. 4. Offenen Punkt stehen lassen.",
         nextStep: "Fundstelle: «Geständnismoment». Arbeitsmittel: Verhör und Geständnis.",
         entryId: "frage-13",
@@ -1122,9 +1122,9 @@ export const lessonSets = [
       },
       {
         id: "prozess-beweiswert",
-        title: "Auftrag B: Geständnis abgleichen",
+        title: "Blatt B: Geständnis abgleichen",
         role: "Beweisblatt 01. Geprüft werden Geständnisinhalt, passende Indizien, fehlende Indizien und Rechtsfrage.",
-        chooseIf: "Wähle diesen Auftrag, wenn Anklage und Verteidigung aus derselben Beweislage vorbereitet werden sollen.",
+        chooseIf: "Öffne dieses Blatt, wenn Anklage und Verteidigung aus derselben Beweislage vorbereitet werden sollen.",
         method: "1. Genaue Aussage des Geständnisses eintragen. 2. Stützende Indizien daneben setzen. 3. Fehlende oder widersprechende Indizien markieren. 4. Rechtsfrage Art. 111/112 StGB offen ausweisen.",
         nextStep: "Fundstelle: «Wahrheitsanspruch». Danach reales Urteil öffnen.",
         entryId: "frage-14",
@@ -1140,9 +1140,9 @@ export const lessonSets = [
       },
       {
         id: "prozess-verantwortung",
-        title: "Auftrag C: Motiv- und Folgenblatt",
+        title: "Blatt C: Motiv- und Folgenblatt",
         role: "Folgenblatt 01. Zu prüfen sind Motivhinweise, Angehörigenperspektive, Öffentlichkeit und Darstellung in Buch/Podcast.",
-        chooseIf: "Wähle diesen Auftrag, wenn festgehalten werden soll, was ein Geständnis erklärt und was offen bleibt.",
+        chooseIf: "Öffne dieses Blatt, wenn festgehalten werden soll, was ein Geständnis erklärt und was offen bleibt.",
         method: "1. Geklärte Punkte notieren. 2. Nicht geklärte Motivfragen notieren. 3. Angehörigen- und Öffentlichkeitsfragen getrennt erfassen. 4. Podcast/Buch nur mit konkreter Fundstelle vergleichen.",
         nextStep: "Sichere «Nach dem Geständnis» und vergleiche Buch und Podcast.",
         entryId: "frage-15",
@@ -1230,13 +1230,13 @@ export const lessonSets = [
     entryIds: ["frage-16", "frage-17", "frage-18"],
     reviewFocus: "Aus Einzelspuren eine verantwortliche Beweiswürdigung und ein begründetes Urteil entwickeln.",
     sebPrompt: "Bündle Textanalyse, Materialkritik, Rechtsprechung und ethische Reflexion in einem Plädoyer oder Urteil.",
-    pathBriefing: "Lage 06: Gerichtsakte. Dieselbe Aktenbasis kann belastend, entlastend oder unterschiedlich rechtlich gewürdigt werden. Auftrag: Beweiswürdigung, Gegenfrage und Urteilssatz strikt trennen.",
+    pathBriefing: "Lage 06: Gerichtsakte. Dieselbe Aktenbasis kann belastend, entlastend oder unterschiedlich rechtlich gewürdigt werden. Ziel: Beweiswürdigung, Gegenfrage und Urteilssatz strikt trennen.",
     pathChoices: [
       {
         id: "gericht-anklage",
-        title: "Auftrag A: Belastungskette prüfen",
+        title: "Blatt A: Belastungskette prüfen",
         role: "Anklageblatt 01. Mögliche Belastung: Fensterbefund, falsche Version, Zeitlücke, Widersprüche, Motivhinweise, Geständnis.",
-        chooseIf: "Wähle diesen Auftrag, wenn eine belastende Kette mit Aktenfundstellen aufgebaut werden soll.",
+        chooseIf: "Öffne dieses Blatt, wenn eine belastende Kette mit Aktenfundstellen aufgebaut werden soll.",
         method: "1. Jedes Indiz mit Fundstelle eintragen. 2. Gewicht festlegen: stark / mittel / ergänzend. 3. Zu jedem Indiz die stärkste Gegenfrage notieren. 4. Erst danach einen Antrag formulieren.",
         nextStep: "Fundstelle: «Gesamtthese». Arbeitsmittel: Indizienprozess.",
         entryId: "frage-16",
@@ -1252,9 +1252,9 @@ export const lessonSets = [
       },
       {
         id: "gericht-verteidigung",
-        title: "Auftrag B: Zweifel vermerken",
+        title: "Blatt B: Zweifel vermerken",
         role: "Verteidigungsblatt 01. Zu prüfen sind mehrdeutige Hinweise, Beweislücken, Gutachtenfragen und rechtliche Schwellen.",
-        chooseIf: "Wähle diesen Auftrag, wenn geprüft werden soll, wo die Aktenbasis nicht eindeutig trägt.",
+        chooseIf: "Öffne dieses Blatt, wenn geprüft werden soll, wo die Aktenbasis nicht eindeutig trägt.",
         method: "1. Belastendes Indiz übernehmen. 2. Konkrete Gegenfrage formulieren: andere Erklärung, fehlender Beleg, Verfahrensfrage, Gutachtenfrage. 3. Rechtliche Relevanz markieren.",
         nextStep: "Sichere «Aktenprodukt» und nutze die Ressource Verteidigung/Gutachten.",
         entryId: "frage-17",
@@ -1270,9 +1270,9 @@ export const lessonSets = [
       },
       {
         id: "gericht-urteil",
-        title: "Auftrag C: Urteilssatz vorbereiten",
+        title: "Blatt C: Urteilssatz vorbereiten",
         role: "Urteilsblatt 01. Varianten entstehen aus unterschiedlicher Gewichtung von Qualifikation, Beweiswürdigung und Zweifel.",
-        chooseIf: "Wähle diesen Auftrag, wenn aus der Akte ein begründeter Urteilssatz entstehen soll.",
+        chooseIf: "Öffne dieses Blatt, wenn aus der Akte ein begründeter Urteilssatz entstehen soll.",
         method: "1. Variante A: strenge Qualifikation. 2. Variante B: mildere rechtliche Würdigung. 3. Variante C: nicht nachweisbar oder zweifelhaft. 4. Für jede Variante zwei tragende Aktenstücke und eine Schwäche notieren.",
         nextStep: "Sichere «Urteil und Zweifel» und öffne die Urteilswerkstatt.",
         entryId: "frage-18",
@@ -1358,7 +1358,7 @@ export const lessonSets = [
 
 export const starterPrompt = {
   title: "Spurenakte",
-  text: "Wähle zuerst einen Prüfauftrag. Lies dann die angegebene PDF-Stelle und antworte mit Fakt, Quelle, Befund, Lücke und nächster Massnahme.",
+  text: "Wähle zuerst ein Prüfblatt. Lies dann die angegebene PDF-Stelle und halte Fakt, Quelle, Befund, Lücke und nächste Massnahme fest.",
   items: [
     "Sichere zuerst Daten, Orte, Personen, Aussagen und sichtbare Befunde.",
     "Markiere jede Stelle als Fakt, Behauptung, Beobachtung, Motivhinweis oder Lücke.",
