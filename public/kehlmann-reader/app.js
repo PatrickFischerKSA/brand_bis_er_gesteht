@@ -1377,14 +1377,14 @@ function renderNotebook(entry) {
   const documentation = documentationStatusForEntry(entry, theory);
 
   return `
-    <section class="panel notebook">
-      <div class="panel-head">
-        <div>
-          <div class="eyebrow">Notizbuch</div>
-          <h2>${escapeHtml(entry.title)}</h2>
-        </div>
-        <button class="button secondary" data-action="export-notes">Markdown exportieren</button>
-      </div>
+    <details class="panel fold-panel notebook">
+      <summary class="fold-summary">
+        <span>
+          <span class="eyebrow">Notizbuch</span>
+          <strong>${escapeHtml(entry.title)}</strong>
+        </span>
+        <span class="status-badge">${escapeHtml(`${documentation.completed}/${documentation.total}`)}</span>
+      </summary>
 
       <div class="documentation-status-box ${documentation.missing.length ? "is-warning" : "is-complete"}">
         <strong data-doc-summary="entry">${escapeHtml(`Dokumentationsstand: ${documentation.completed}/${documentation.total}`)}</strong>
@@ -1422,7 +1422,10 @@ function renderNotebook(entry) {
           ${renderNotebookFeedbackMarkup(note, currentModule(), entry)}
         </div>
       `}
-    </section>
+      <div class="row">
+        <button class="button secondary" data-action="export-notes">Markdown exportieren</button>
+      </div>
+    </details>
   `;
 }
 
@@ -1830,17 +1833,7 @@ function renderPeerReviewPanel() {
   }
 
   if (!state.peerReview.assignments?.length) {
-    return `
-      <section class="panel review-panel">
-        <div class="panel-head">
-          <div>
-            <div class="eyebrow">Peer Review</div>
-            <h2>Derzeit keine Zuweisungen</h2>
-          </div>
-        </div>
-        <div class="empty-box">Sobald weitere Schüler*innen arbeiten oder Peer Review aktiviert ist, erscheinen hier deine Review-Fälle.</div>
-      </section>
-    `;
+    return "";
   }
 
   const review = currentReviewAssignment();
@@ -1852,14 +1845,14 @@ function renderPeerReviewPanel() {
   }[state.reviewSaveStatus] || "";
 
   return `
-    <section class="panel review-panel">
-      <div class="panel-head">
-        <div>
-          <div class="eyebrow">Peer Review</div>
-          <h2>Zugewiesene Rückmeldungen</h2>
-        </div>
+    <details class="panel fold-panel review-panel">
+      <summary class="fold-summary">
+        <span>
+          <span class="eyebrow">Peer Review</span>
+          <strong>Zugewiesene Rückmeldungen</strong>
+        </span>
         <span class="status-badge">${escapeHtml(`${state.peerReview.stats.completedAssignedCount}/${state.peerReview.stats.assignedCount} abgeschlossen`)}</span>
-      </div>
+      </summary>
 
       <div class="notice-box">
         <strong>Arbeitsrahmen</strong>
@@ -1929,7 +1922,7 @@ function renderPeerReviewPanel() {
           </form>
         </div>
       </div>
-    </section>
+    </details>
   `;
 }
 
@@ -2018,19 +2011,46 @@ function renderParcoursExportPanel() {
   const total = state.progress?.totalEntries || 0;
 
   return `
-    <section class="panel">
-      <div class="panel-head">
-        <div>
-          <div class="eyebrow">Parcours-Export</div>
-          <h2>${complete ? "Parcours abgeschlossen" : "Parcours dokumentieren"}</h2>
-        </div>
-        <button class="button secondary" data-action="export-notes">${complete ? "Parcoursakte exportieren" : "Zwischenstand exportieren"}</button>
-      </div>
+    <details class="panel fold-panel">
+      <summary class="fold-summary">
+        <span>
+          <span class="eyebrow">Parcours-Export</span>
+          <strong>${complete ? "Parcours abgeschlossen" : "Parcours dokumentieren"}</strong>
+        </span>
+        <span class="status-badge">${escapeHtml(`${answered}/${total}`)}</span>
+      </summary>
       <div class="notice-box">
         <strong>${complete ? "Alle Stationen sind bearbeitet." : "Export bereits jetzt möglich."}</strong>
         <p>${escapeHtml(`Der Export enthält alle Lektionen, Leitfragen und eingetragenen Aktenvermerke. Aktuell sind ${answered} von ${total} Passagen bearbeitet.`)}</p>
       </div>
-    </section>
+      <div class="row">
+        <button class="button secondary" data-action="export-notes">${complete ? "Parcoursakte exportieren" : "Zwischenstand exportieren"}</button>
+      </div>
+    </details>
+  `;
+}
+
+function renderUtilityDrawer(entry) {
+  const progress = progressForCurrentLesson();
+  const peerCount = state.peerReview?.stats?.assignedCount || 0;
+  const completed = progress ? `${progress.completedEntries}/${progress.totalEntries}` : "-";
+
+  return `
+    <details class="panel fold-panel utility-drawer">
+      <summary class="fold-summary">
+        <span>
+          <span class="eyebrow">Ablage</span>
+          <strong>Notizbuch, Review, Export</strong>
+        </span>
+        <span class="status-badge">${escapeHtml(`${completed} · Peer ${peerCount}`)}</span>
+      </summary>
+      <div class="utility-drawer-body">
+        ${renderNotebook(entry)}
+        <div data-seb-feedback-slot>${renderSebFeedbackPanel()}</div>
+        ${renderPeerReviewPanel()}
+        <div data-export-slot>${renderParcoursExportPanel()}</div>
+      </div>
+    </details>
   `;
 }
 
@@ -2104,10 +2124,7 @@ function render() {
         <section class="content-column">
           ${renderTheoryPanel(module, entry)}
           ${renderResourceAssignmentsPanel()}
-          ${renderNotebook(entry)}
-          <div data-seb-feedback-slot>${renderSebFeedbackPanel()}</div>
-          ${renderPeerReviewPanel()}
-          <div data-export-slot>${renderParcoursExportPanel()}</div>
+          ${renderUtilityDrawer(entry)}
         </section>
       </section>
     </main>

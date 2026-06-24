@@ -640,6 +640,73 @@ button {
   margin-bottom: 16px;
 }
 
+.fold-panel {
+  padding: 0;
+  overflow: hidden;
+}
+
+.fold-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 14px;
+  padding: 18px 22px;
+  cursor: pointer;
+  list-style: none;
+}
+
+.fold-summary::-webkit-details-marker {
+  display: none;
+}
+
+.fold-summary::after {
+  content: "+";
+  width: 34px;
+  height: 34px;
+  display: inline-grid;
+  place-items: center;
+  border-radius: 999px;
+  border: 1px solid rgba(49, 67, 53, 0.18);
+  color: var(--forest);
+  font-weight: 800;
+}
+
+.fold-panel[open] > .fold-summary {
+  border-bottom: 1px solid rgba(49, 67, 53, 0.12);
+}
+
+.fold-panel[open] > .fold-summary::after {
+  content: "-";
+}
+
+.fold-summary > span:first-child {
+  display: grid;
+  gap: 4px;
+}
+
+.fold-summary strong {
+  font-size: 1.2rem;
+}
+
+.fold-panel > :not(summary) {
+  margin: 18px 22px;
+}
+
+.utility-drawer > .utility-drawer-body {
+  display: grid;
+  gap: 12px;
+}
+
+.utility-drawer .fold-panel {
+  box-shadow: none;
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.utility-drawer .fold-summary {
+  padding: 14px 16px;
+}
+
 .prompt-list,
 .question-list {
   margin: 0;
