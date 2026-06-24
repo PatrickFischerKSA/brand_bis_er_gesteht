@@ -1561,6 +1561,36 @@ function renderPdfPanel(entry, module) {
   `;
 }
 
+function isExternalUrl(url) {
+  return /^https?:\/\//i.test(String(url || ""));
+}
+
+function externalButtonsFor(resource) {
+  const links = [];
+  const seen = new Set();
+  const addLink = (label, url) => {
+    if (!isExternalUrl(url) || seen.has(url)) {
+      return;
+    }
+    seen.add(url);
+    links.push({ label, url });
+  };
+
+  (resource.externalLinks || []).forEach((link) => addLink(link.label || "Quelle öffnen", link.url));
+  addLink(resource.mediaType === "pdf" ? "PDF extern öffnen" : resource.mediaType === "html" ? "Quelle extern öffnen" : "Medium extern öffnen", resource.openUrl);
+  addLink(resource.audioLabel || "Audio extern öffnen", resource.audioUrl);
+
+  if (!links.length) {
+    return "";
+  }
+
+  return `
+    <div class="chip-row">
+      ${links.map((link) => `<a class="button secondary" href="${escapeHtml(link.url)}" target="_blank" rel="noreferrer">${escapeHtml(link.label)}</a>`).join("")}
+    </div>
+  `;
+}
+
 function renderTheoryPanel(module, entry) {
   const theory = currentTheory();
   const guidingTasks = guidingTasksFor(theory);
@@ -1598,13 +1628,7 @@ function renderTheoryPanel(module, entry) {
           <div class="eyebrow">Interdisziplinäre Linse</div>
           <h2>${escapeHtml(theory.title)}</h2>
         </div>
-        <div class="chip-row">
-          <a class="button secondary" href="${escapeHtml(theory.openUrl)}" target="_blank" rel="noreferrer">${theory.mediaType === "pdf" ? "PDF extern öffnen" : theory.mediaType === "html" ? "Quelle extern öffnen" : "Video extern öffnen"}</a>
-          ${theory.audioUrl
-            ? `<a class="button secondary" href="${escapeHtml(theory.audioUrl)}" target="_blank" rel="noreferrer">${escapeHtml(theory.audioLabel || "Audio extern öffnen")}</a>`
-            : ""
-          }
-        </div>
+        ${externalButtonsFor(theory)}
       </div>
 
       <div class="theory-summary">
@@ -1681,13 +1705,7 @@ function renderResourceAssignmentsPanel() {
                 <div class="eyebrow">${escapeHtml(resource.sourceTitle)}</div>
                 <h3>${escapeHtml(title)}</h3>
               </div>
-              <div class="chip-row">
-                <a class="button secondary" href="${escapeHtml(resource.openUrl)}" target="_blank" rel="noreferrer">${resource.mediaType === "pdf" ? "PDF extern öffnen" : resource.mediaType === "html" ? "Quelle extern öffnen" : "Medium extern öffnen"}</a>
-                ${resource.audioUrl
-                  ? `<a class="button secondary" href="${escapeHtml(resource.audioUrl)}" target="_blank" rel="noreferrer">${escapeHtml(resource.audioLabel || "Audio extern öffnen")}</a>`
-                  : ""
-                }
-              </div>
+              ${externalButtonsFor(resource)}
             </div>
 
             <div class="resource-record-head">
